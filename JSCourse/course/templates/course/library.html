@@ -1,0 +1,69 @@
+{% extends './layout.html' %}
+
+{% block title %}
+  Library
+{% endblock %}
+
+{% block body %}
+
+<header>
+  <h1>
+    Library 
+  </h1>
+</header>
+
+
+<div id="library-wrapper">
+  
+  <div id="add-button-container">
+    <button
+      id   ="add-button">
+      New book
+    </button>
+  </div>
+
+  <div id="library-form-container">
+    <form id="library-form">
+      <input 
+        type="text" 
+        name="title"
+        id  ="form-title"
+        placeholder="Title"
+      >
+      <input 
+        type="text"
+        name="author"
+        id  ="form-author"
+        placeholder="Author"
+      >
+      <input
+        type="number"
+        name="pages"
+        id  ="form-pages"
+        placeholder="Pages"
+      >
+      <button
+        name="close"
+        id  ="form-close">
+        Close
+      </button>
+      <input
+        type="submit"
+        name="submit"
+        id  ="form-submit"
+        value="Add book"
+      >
+    </form>
+  </div>
+  
+
+  <div id="library-container">
+  
+  </div>
+
+</div>
+
+
+
+
+{% endblock %}

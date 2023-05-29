@@ -17279,27 +17279,67 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-html {
-  background: #111;
+html, body {
+  background: #110d25;
   color: ghostwhite;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 
+body {
+  margin-top: 50px;
+}
+
+div {
+  background: #110d25;
+}
+
 article {
-  background: #333;
+  background: #1d224b;
+  border: 1px solid #1d2044;
   border-radius: 21.37px;
   color: ghostwhite;
+  padding: 15px;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-  background: #111;
+  background: #110d25;
   color: ghostwhite;
   text-align: center;
 }
 
-#library-form {
+#library-wrapper {
+  max-width: 1000px;
+  margin: auto;
+}
+
+#library-form-container {
   display: none;
+  margin: 20px;
+}
+
+.book-cover {
+  margin: 10px;
+}
+
+.book-data {
+  background: #1d224b;
+}
+
+.library-form-input {
+  display: block;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: ghostwhite;
+  height: 50px;
+  padding-top: 20px;
+  border-bottom: 2px solid #3c6473;
+  resize: none;
+}
+.library-form-input:focus, .library-form-input:hover {
+  outline: none;
+  border-bottom: 2px solid #b7d1da;
 }
 
 * {

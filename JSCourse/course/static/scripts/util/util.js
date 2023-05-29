@@ -1,4 +1,6 @@
 const Util = (function() {
+
+  const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   
   const generateIndex = (function() {
     let index = 0;
@@ -60,6 +62,8 @@ const Util = (function() {
   }
 
   return {
+    capitalize   : capitalize,
+    generateIndex: generateIndex,
     getCookie    : getCookie,
     getPath      : getPath,
     getRoute     : getRoute,

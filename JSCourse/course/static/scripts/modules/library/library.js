@@ -1,4 +1,5 @@
-import View  from "./view.js"
+import View       from "./view.js"
+import createBook from "./book.js";
 
 const Library = (function() {
   const run = () => {
@@ -8,55 +9,64 @@ const Library = (function() {
   }
 
   let books = [];
+  let currentBookId = 0;
+
+
+  function setBooks(callback) {
+    books = callback;
+  }
+
+  const setBookId = () => currentBookId++;
+
+  const bookHandlers = {
+    delete: handleDeleteBook
+  }
 
   function addBook(data) {
     return {
+        id    : setBookId(),
         title : data.title,
         author: data.author,
         pages : data.pages
     }
   }
 
-  function createBook(book) {
-    const cover = document.createElement('article');
+  
 
-    const title  = document.createElement('div');
-    const author = document.createElement('div');
-    const pages  = document.createElement('div');
-
-    cover.classList.add('book-cover');
-
-    title .classList.add('book-title' );
-    author.classList.add('book-author');
-    pages .classList.add('book-pages' );
-
-    title .innerText = `Title: ${book.title}`;
-    author.innerText = `Author: ${book.author}`;
-    pages .innerText = `Pages: ${book.pages}`;
-
-    cover.append(title);
-    cover.append(author);
-    cover.append(pages);
-
-    return cover;
-  }
 
   function handleAddBook() {
-    View.show(View.form)
+    View.show(View.formContainer);
+    View.hide(View.addBookBtn);
   }
 
+
   function handleCloseForm() {
-    View.hide(form);
     View.clearForm();
+    View.hide(View.formContainer);
+    View.show(View.addBookBtn);
   }
+
+
+  function handleDeleteBook(event) {
+    event.stopPropagation();
+    const bookId = parseInt(event.target.dataset.bookId);
+
+    console.log(`Delete clicked for book #${bookId}.`);
+    console.log(books);
+
+    setBooks(books.filter(b => b.id !== bookId));
+    console.log(books);
+    updateLibrary();
+  }
+
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    books = [
-      ...books,
-      addBook(View.getBookData()) 
-    ];
+    setBooks([
+      addBook(View.getBookData()), 
+      ...books
+    ]);
     updateLibrary();
   }
 
@@ -64,9 +74,12 @@ const Library = (function() {
   function updateLibrary() {
     View.clearLibrary();
 
-    View.library.append(books.map(book => createBook(book)))
-  }
+    books.map(book => {
+      View.library.append(createBook(book, bookHandlers))
+    })
 
+    View.clearForm();
+  }
 
 
 

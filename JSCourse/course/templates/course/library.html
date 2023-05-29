@@ -6,55 +6,64 @@
 
 {% block body %}
 
-<header>
-  <h1>
-    Library 
-  </h1>
-</header>
-
-
 <div id="library-wrapper">
+  <header>
+    <h1>
+      Library 
+    </h1>
+  </header>
   
   <div id="add-button-container">
     <button
-      id   ="add-button">
+      id   ="add-button"
+      class="btn btn-outline-primary">
       New book
     </button>
   </div>
 
-  <div id="library-form-container">
-    <form id="library-form">
+  <article id="library-form-container">
+    <form  id="library-form">
       <input 
-        type="text" 
-        name="title"
-        id  ="form-title"
+        type ="text" 
+        name ="title"
+        id   ="form-title"
+        class="library-form-input"
         placeholder="Title"
+        required
       >
       <input 
-        type="text"
-        name="author"
-        id  ="form-author"
+        type ="text"
+        name ="author"
+        id   ="form-author"
+        class="library-form-input"
         placeholder="Author"
+        required
       >
       <input
-        type="number"
-        name="pages"
-        id  ="form-pages"
+        type ="number"
+        name ="pages"
+        id   ="form-pages"
+        class="library-form-input"
         placeholder="Pages"
+        required
       >
       <button
-        name="close"
-        id  ="form-close">
+        name ="close"
+        id   ="form-close"
+        class="btn btn-outline-warning">
         Close
       </button>
-      <input
-        type="submit"
-        name="submit"
-        id  ="form-submit"
+      <button
+        type ="submit"
+        name ="submit"
+        role ="submit"
+        id   ="form-submit"
         value="Add book"
-      >
+        class="btn btn-outline-success"
+      >Add book
+      </button>
     </form>
-  </div>
+  </article>
   
 
   <div id="library-container">

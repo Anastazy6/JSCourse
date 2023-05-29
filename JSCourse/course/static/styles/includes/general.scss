@@ -1,21 +1,32 @@
-$article-backgroud-color: #333;
-$background-color: #111;
+$article-backgroud-color: #1d224b;
+$background-color: #110d25;
 $text-color: ghostwhite;
 
 $font-main: Helvetica, Arial, sans-serif;
 
 
-html {
+html, body {
   background : $background-color;
   color      : $text-color;
   font-family: $font-main;
   font-size  : 16px;
 }
 
+body {
+  margin-top: 50px;
+}
+
+
+div {
+  background: $background-color;
+}
+
 article {
   background   : $article-backgroud-color;
+  border       : 1px solid #1d2044;
   border-radius: 21.37px;
   color        : $text-color;
+  padding      : 15px;
 }
 
 h1, h2, h3, h4, h5, h6 {

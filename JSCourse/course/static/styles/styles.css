@@ -17313,17 +17313,48 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin: auto;
 }
 
-#library-form-container {
-  display: none;
-  margin: 20px;
-}
-
 .book-cover {
   margin: 10px;
 }
 
 .book-data {
   background: #1d224b;
+}
+
+#form-title {
+  grid-area: title;
+}
+
+#form-author {
+  grid-area: author;
+}
+
+#form-pages {
+  grid-area: pages;
+}
+
+#form-read {
+  grid-area: read;
+}
+
+#form-close {
+  grid-area: close;
+}
+
+#form-submit {
+  grid-area: submit;
+}
+
+#library-form {
+  background: #1d224b;
+  border-radius: 21.37px;
+  display: none;
+  gap: 20px;
+  margin: auto;
+  padding: 20px;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "title  title  title  title " "author author author author" "pages  read   close  submit";
 }
 
 .library-form-input {
@@ -17342,6 +17373,26 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   border-bottom: 2px solid #b7d1da;
 }
 
+@media screen and (max-width: 440px) {
+  #library-form {
+    width: 320px;
+  }
+}
+@media screen and (max-width: 666px) {
+  #library-form {
+    width: 420px;
+  }
+}
+@media screen and (max-width: 800px) {
+  #library-form {
+    width: 666px;
+  }
+}
+@media screen and (min-width: 801px) {
+  #library-form {
+    width: 750px;
+  }
+}
 * {
   box-sizing: border-box !important;
 }

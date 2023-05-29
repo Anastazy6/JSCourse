@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 
 const main = () => {
-  const modulePath = Util.getModulePath(routes);
+  const modulePath = Util.Path.getModulePath(routes);
   if   (modulePath)  loadModule(modulePath);
 }
 

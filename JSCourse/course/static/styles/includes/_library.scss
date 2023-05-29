@@ -1,0 +1,85 @@
+#library-wrapper {
+  max-width: 1000px;
+  margin   : auto;
+  
+}
+
+.book-cover {
+  margin: 10px;
+}
+
+.book-data {
+  background: $article-backgroud-color;
+}
+
+
+#form-title  { grid-area: title ; }
+#form-author { grid-area: author; }
+#form-pages  { grid-area: pages ; }
+#form-read   { grid-area: read  ; }
+#form-close  { grid-area: close ; }
+#form-submit { grid-area: submit; }
+
+#library-form {
+  background   : $article-backgroud-color;
+  border-radius: 21.37px;
+  display      : none; // Hidden by default, grid when active
+  gap          : 20px;
+  margin       : auto; 
+  padding      : 20px;
+
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  grid-template-rows   : 1fr 1fr 1fr;
+  grid-template-areas  : 
+    'title  title  title  title '
+    'author author author author'
+    'pages  read   close  submit';
+}
+
+
+
+
+.library-form-input {
+  display: block;
+
+  background   : transparent;
+  border       : none;
+  border-radius: 0;
+  color        : $text-color;
+  height       : 50px;
+  padding-top  : 20px;
+  border-bottom: 2px solid map-get($theme-colors, "lleuad");
+  resize       : none;
+
+  &:focus, &:hover {
+    outline      : none;
+    border-bottom: 2px solid map-get($theme-colors, "lleuad-lawn");
+  }
+}
+
+
+
+
+@media screen and (max-width: 440px) {
+  #library-form {
+    width: 320px;
+  }
+}
+
+@media screen and (max-width: 666px) {
+  #library-form {
+    width: 420px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #library-form {
+    width: 666px;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  #library-form {
+    width: 750px;
+  }
+}

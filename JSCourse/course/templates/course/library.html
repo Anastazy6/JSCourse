@@ -21,7 +21,6 @@
     </button>
   </div>
 
-  <article id="library-form-container">
     <form  id="library-form">
       <input 
         type ="text" 
@@ -47,12 +46,29 @@
         placeholder="Pages"
         required
       >
+
+      <div
+        class="library-form-input"
+        id   ="form-read"
+      >
+        <input
+          type ="checkbox"
+          name ="read"
+          id   ="form-read-box"
+          value="read"
+        >
+        <label for="form-read-bocx">
+          Read
+        </label>  
+      </div>
+
       <button
         name ="close"
         id   ="form-close"
         class="btn btn-outline-warning">
         Close
       </button>
+      
       <button
         type ="submit"
         name ="submit"
@@ -63,7 +79,6 @@
       >Add book
       </button>
     </form>
-  </article>
   
 
   <div id="library-container">

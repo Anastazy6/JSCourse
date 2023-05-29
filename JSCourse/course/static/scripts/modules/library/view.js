@@ -1,21 +1,21 @@
 const View = (function() {
-  const library       = document.getElementById('library-container')
+  const library    = document.getElementById('library-container');
+  const form       = document.getElementById('library-form'     );
   
-  const addBookBtn    = document.getElementById('add-button' );
-  
-  const formContainer = document.getElementById('library-form-container')  ;
-  const form          = document.getElementById('library-form');
-  const close         = document.getElementById('form-close'  );
+  const addBookBtn = document.getElementById('add-button'   );
+  const closeBtn   = document.getElementById('form-close'   );
 
-  const title         = document.getElementById('form-title' );
-  const author        = document.getElementById('form-author');
-  const pages         = document.getElementById('form-pages' );
+  const title      = document.getElementById('form-title'   );
+  const author     = document.getElementById('form-author'  );
+  const pages      = document.getElementById('form-pages'   );
+  const read       = document.getElementById('form-read-box');
 
   
   function clearForm() {
-    title .value = '';
-    author.value = '';
-    pages .value = '';
+    title .value   = '';
+    author.value   = '';
+    pages .value   = '';
+    read  .checked = false;
   }
 
   function clearLibrary() {
@@ -26,30 +26,21 @@ const View = (function() {
     return {
       title : title .value,
       author: author.value,
-      pages : parseInt(pages.value)
+      pages : parseInt(pages.value),
+      read  : read.checked
     }
   }
 
-  function show(element) {
-    element.style.display = "block";
-  }
-
-  function hide(element) {
-    element.style.display = "none";
-  }
 
 
   return {
     addBookBtn    : addBookBtn,
     clearForm     : clearForm,
     clearLibrary  : clearLibrary,
-    close         : close,
+    closeBtn      : closeBtn,
     form          : form,
-    formContainer : formContainer,
     getBookData   : getBookData,
-    hide          : hide,
     library       : library,
-    show          : show
   }
 })()
 

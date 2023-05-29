@@ -1,4 +1,4 @@
-import Util from "../../util/util.js";
+import Util from "../../../util/util.js";
 
 function createBook(book, handlers) {
   const cover = document.createElement('article');
@@ -8,7 +8,8 @@ function createBook(book, handlers) {
     cover.append(createBookPart(book, `${part}`))
   });
 
-  cover.append(createDeleteBtn(book.id, handlers.delete));
+  cover.append(createReadBtn  (book, handlers.read  ));
+  cover.append(createDeleteBtn(book, handlers.delete));
 
   return cover;
 }
@@ -25,16 +26,41 @@ function createBookPart(book, partName) {
   return part
 }
 
-function createDeleteBtn(bookId, handleDelete) {
+
+function createDeleteBtn(book, handleDelete) {
   const button = document.createElement('button');
   
   button.classList.add('btn', 'btn-outline-danger');
-  button.innerHTML = 'Delete';
-  button.dataset.bookId = bookId;
+  button.innerText      = 'Delete';
+  button.dataset.bookId = book.id;
 
   button.onclick = handleDelete;
 
   return button;
 }
+
+
+function createReadBtn(book, handleRead) {
+  const button = document.createElement('button');
+
+  let style, text;
+  if (book.read) {
+    style = 'warning';
+    text = 'Unread';
+  } else {
+    style = 'success'
+    text = 'Read';
+  }
+    
+  button.classList.add('btn', `btn-outline-${style}`);
+  button.innerText      = text;
+  button.dataset.bookID = book.id;
+
+  button.onclick = handleRead;
+
+  return button;
+}
+
+
 
 export default createBook;

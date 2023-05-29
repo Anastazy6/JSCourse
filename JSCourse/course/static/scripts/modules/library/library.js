@@ -1,62 +1,80 @@
+import createBook from "./components/book.js";
+import Util       from "../../util/util.js";
 import View       from "./view.js"
-import createBook from "./book.js";
+
+
 
 const Library = (function() {
   const run = () => {
-    View.addBookBtn.onclick = handleAddBook;
-    View.close.onclick      = handleCloseForm;
-    View.form.onsubmit      = handleSubmit;
+    View.addBookBtn.onclick  = handleAddBook;
+    View.closeBtn  .onclick  = handleCloseForm;
+    View.form      .onsubmit = handleSubmit;
+  }
+
+  class Book {
+    constructor(data) {
+      this.id     = setBookId(),
+      this.title  = data.title,
+      this.author = data.author,
+      this.pages  = data.pages,
+      this.read   = data.read
+    }
+  }
+
+  const bookHandlers = {
+    delete: handleDeleteBook,
+    read  : handleRead
   }
 
   let books = [];
   let currentBookId = 0;
-
+  
+  // Prefix increment so that the IDs start from 1 and are equal to
+  //   all the books that have been added so far (including deleted books)
+  const setBookId = () => ++currentBookId;
 
   function setBooks(callback) {
     books = callback;
   }
 
-  const setBookId = () => currentBookId++;
-
-  const bookHandlers = {
-    delete: handleDeleteBook
-  }
-
-  function addBook(data) {
-    return {
-        id    : setBookId(),
-        title : data.title,
-        author: data.author,
-        pages : data.pages
-    }
-  }
-
-  
-
 
   function handleAddBook() {
-    View.show(View.formContainer);
-    View.hide(View.addBookBtn);
+    Util.View.show(View.form, 'grid');
+    Util.View.hide(View.addBookBtn);
   }
 
 
   function handleCloseForm() {
     View.clearForm();
-    View.hide(View.formContainer);
-    View.show(View.addBookBtn);
+    Util.View.hide(View.form);
+    Util.View.show(View.addBookBtn);
   }
 
 
   function handleDeleteBook(event) {
     event.stopPropagation();
-    const bookId = parseInt(event.target.dataset.bookId);
-
-    console.log(`Delete clicked for book #${bookId}.`);
-    console.log(books);
-
-    setBooks(books.filter(b => b.id !== bookId));
-    console.log(books);
+    
+    setBooks(books.filter(b => b.id !== getBookBtnId(event)));
     updateLibrary();
+  }
+
+  function handleRead(event) {
+    event.stopPropagation();
+
+    
+    setBooks(books.map(b => {
+      console.log(b);
+      if (b.id !== getBookBtnId(event)) {
+        console.log(getBookBtnId(event));
+        console.log("Not this book")
+        return b;
+      }
+
+      console.log("This book");
+      let read = !(b.read);
+
+      return new Book(...b, read=read);
+    }))
   }
 
 
@@ -64,11 +82,13 @@ const Library = (function() {
     event.preventDefault();
 
     setBooks([
-      addBook(View.getBookData()), 
+      new Book(View.getBookData()), 
       ...books
     ]);
     updateLibrary();
   }
+
+  const getBookBtnId = event => parseInt(event.target.dataset.bookID);
 
 
   function updateLibrary() {
@@ -88,6 +108,23 @@ const Library = (function() {
   }
 })()
 
+
+
+
+
+
+
+
+
+
+
+
+/** 
+ * Allows dynamically importing the module and running it like this:
+ *   import("path/to/this/module")
+ *   .then(module => module.default())
+ *   .catch(<error handling goes here>) // optional line
+ */
 const App = () => {
   Library.run();
 }

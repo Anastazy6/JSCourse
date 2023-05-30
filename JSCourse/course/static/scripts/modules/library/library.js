@@ -6,19 +6,21 @@ import View       from "./view.js"
 
 const Library = (function() {
   const run = () => {
-    View.addBookBtn.onclick  = handleAddBook;
-    View.closeBtn  .onclick  = handleCloseForm;
-    View.form      .onsubmit = handleSubmit;
+    View.addBookBtn.onclick   = handleAddBook;
+    View.closeBtn  .onclick   = handleCloseForm;
+    View.form      .onsubmit  = handleSubmit;
+    View.pages     .onkeydown = handleNumericInput;
   }
 
 
   class Book {
     constructor(data) {
-      this.id     = data.id || setBookId(),
-      this.title  = data.title,
-      this.author = data.author,
-      this.pages  = data.pages,
-      this.read   = data.read
+      this.id       = data.id || setBookId(),
+      this.title    = data.title,
+      this.author   = data.author,
+      this.language = data.language,
+      this.pages    = data.pages,
+      this.read     = data.read
     }
   }
 
@@ -64,28 +66,27 @@ const Library = (function() {
     updateLibrary();
   }
 
+
+  function handleNumericInput(event) {
+    const keyCode = event.keyCode || event.which;
+
+    if (!(Util.isKeyNumeric(keyCode))) event.preventDefault();
+  }
+
+
   function handleRead(event) {
     event.stopPropagation();
     
     setBooks(books.map(b => {
       console.log(b);
-      if (b.id !== getBookBtnId(event)) {
-        console.log(getBookBtnId(event));
-        console.log("Not this book")
-        return b;
-      }
+      if (b.id !== getBookBtnId(event)) { return b; }
 
-      console.log("This book");
-      let data = {
+      return new Book({
         ...b,
         read: !b.read
-      }
-      console.log(data);
-      let xd = new Book(data);
-      console.log(xd);
-
-      return new Book(data);
+      });
     }))
+
     updateLibrary();
   }
 
@@ -117,12 +118,6 @@ const Library = (function() {
     run: run,
   }
 })()
-
-
-
-
-
-
 
 
 

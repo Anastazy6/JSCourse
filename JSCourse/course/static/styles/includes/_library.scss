@@ -9,35 +9,48 @@
 }
 
 .book-data {
-  background: $article-backgroud-color;
+  background: $article-background-color;
 }
 
 
 #form-title  { grid-area: title ; }
 #form-author { grid-area: author; }
 #form-pages  { grid-area: pages ; }
+#form-lang   { grid-area: lang  ; }
 #form-read   { grid-area: read  ; }
 #form-close  { grid-area: close ; }
 #form-submit { grid-area: submit; }
 
 #library-form {
-  background   : $article-backgroud-color;
+  background   : $article-background-color;
   border-radius: 21.37px;
   display      : none; // Hidden by default, grid when active
   gap          : 20px;
   margin       : auto; 
   padding      : 20px;
 
-  grid-template-columns: 3fr 1fr 1fr 1fr;
-  grid-template-rows   : 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  grid-template-rows   : 1fr 1fr 1fr 1fr;
   grid-template-areas  : 
-    'title  title  title  title '
-    'author author author author'
-    'pages  read   close  submit';
+    'title  title  title  title  title '
+    'author author author author author'
+    'lang   lang   pages  pages  read  '
+    'close  .      .      submit submit';
 }
 
 
+#form-lang {
+  background: $article-background-color;
+  border    : 0px solid transparent;
 
+
+  select, 
+  select:hover,
+  select:active,
+  select:focus {
+    border: 0px solid transparent;
+  }
+}
 
 .library-form-input {
   display: block;
@@ -56,6 +69,35 @@
     border-bottom: 2px solid map-get($theme-colors, "lleuad-lawn");
   }
 }
+
+
+.book-id         { grid-area: id    ; }
+.book-title      { grid-area: title ; }
+.book-author     { grid-area: author; }
+.book-language   { grid-area: lang  ; }
+.book-pages      { grid-area: pages ; }
+.book-read       { grid-area: read  ; }
+.book-read-btn   { grid-area: readbt; }
+.book-delete-btn { grid-area: delete; }
+
+.book-cover {
+  display: grid;
+
+  width: 300px;
+  gap  : 10px;
+
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows   : 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas  :
+  'id     .     '
+  'title  title '
+  'author author'
+  'lang   lang  '
+  'pages  pages '
+  'read   read  '
+  'readbt delete';
+}
+
 
 
 

@@ -7,6 +7,7 @@ const View = (function() {
 
   const title      = document.getElementById('form-title'   );
   const author     = document.getElementById('form-author'  );
+  const lang       = document.getElementById('form-lang'    );
   const pages      = document.getElementById('form-pages'   );
   const read       = document.getElementById('form-read-box');
 
@@ -14,6 +15,7 @@ const View = (function() {
   function clearForm() {
     title .value   = '';
     author.value   = '';
+    lang  .value   = 'EN';
     pages .value   = '';
     read  .checked = false;
   }
@@ -26,23 +28,25 @@ const View = (function() {
 
   function getBookData() {
     return {
-      title : title .value,
-      author: author.value,
-      pages : parseInt(pages.value),
-      read  : read.checked
+      title   : title .value,
+      author  : author.value,
+      language: lang  .value,
+      pages   : parseInt(pages.value),
+      read    : read.checked
     }
   }
 
 
 
   return {
-    addBookBtn    : addBookBtn,
-    clearForm     : clearForm,
-    clearLibrary  : clearLibrary,
-    closeBtn      : closeBtn,
-    form          : form,
-    getBookData   : getBookData,
-    library       : library,
+    addBookBtn  : addBookBtn,
+    clearForm   : clearForm,
+    clearLibrary: clearLibrary,
+    closeBtn    : closeBtn,
+    form        : form,
+    getBookData : getBookData,
+    library     : library,
+    pages       : pages
   }
 })()
 

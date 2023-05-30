@@ -17333,6 +17333,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   grid-area: pages;
 }
 
+#form-lang {
+  grid-area: lang;
+}
+
 #form-read {
   grid-area: read;
 }
@@ -17352,9 +17356,20 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   gap: 20px;
   margin: auto;
   padding: 20px;
-  grid-template-columns: 3fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas: "title  title  title  title " "author author author author" "pages  read   close  submit";
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-areas: "title  title  title  title  title " "author author author author author" "lang   lang   pages  pages  read  " "close  .      .      submit submit";
+}
+
+#form-lang {
+  background: #1d224b;
+  border: 0px solid transparent;
+}
+#form-lang select,
+#form-lang select:hover,
+#form-lang select:active,
+#form-lang select:focus {
+  border: 0px solid transparent;
 }
 
 .library-form-input {
@@ -17371,6 +17386,47 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .library-form-input:focus, .library-form-input:hover {
   outline: none;
   border-bottom: 2px solid #b7d1da;
+}
+
+.book-id {
+  grid-area: id;
+}
+
+.book-title {
+  grid-area: title;
+}
+
+.book-author {
+  grid-area: author;
+}
+
+.book-language {
+  grid-area: lang;
+}
+
+.book-pages {
+  grid-area: pages;
+}
+
+.book-read {
+  grid-area: read;
+}
+
+.book-read-btn {
+  grid-area: readbt;
+}
+
+.book-delete-btn {
+  grid-area: delete;
+}
+
+.book-cover {
+  display: grid;
+  width: 300px;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "id     .     " "title  title " "author author" "lang   lang  " "pages  pages " "read   read  " "readbt delete";
 }
 
 @media screen and (max-width: 440px) {

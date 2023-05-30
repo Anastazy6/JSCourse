@@ -27,6 +27,7 @@
         name ="title"
         id   ="form-title"
         class="library-form-input"
+        maxlength  ="128"
         placeholder="Title"
         required
       >
@@ -35,17 +36,29 @@
         name ="author"
         id   ="form-author"
         class="library-form-input"
+        maxlength  ="128"
         placeholder="Author"
         required
       >
+      <!-- Let's agree upon 'min=0' standing for a book with cover but no pages... -->
       <input
         type ="number"
         name ="pages"
         id   ="form-pages"
         class="library-form-input"
+        min  = 0
+        max  = 692137420
         placeholder="Pages"
         required
       >
+
+      <select
+        name ="lang"
+        id   ="form-lang"
+        class="library-form-input"
+      >
+        {% include './language_picker.html' %}
+      </select>
 
       <div
         class="library-form-input"

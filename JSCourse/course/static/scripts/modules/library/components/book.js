@@ -14,6 +14,7 @@ function createBook(book, handlers) {
   return cover;
 }
 
+
 function createBookPart(book, partName) {
   const part  = document.createElement('div');
   part.classList.add('book-data', `book-${partName}`);

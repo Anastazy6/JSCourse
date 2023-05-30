@@ -10,7 +10,7 @@ const View = (function() {
   const pages      = document.getElementById('form-pages'   );
   const read       = document.getElementById('form-read-box');
 
-  
+
   function clearForm() {
     title .value   = '';
     author.value   = '';
@@ -18,9 +18,11 @@ const View = (function() {
     read  .checked = false;
   }
 
+
   function clearLibrary() {
     library.innerHTML = '';
   }
+
 
   function getBookData() {
     return {

@@ -11,9 +11,10 @@ const Library = (function() {
     View.form      .onsubmit = handleSubmit;
   }
 
+
   class Book {
     constructor(data) {
-      this.id     = setBookId(),
+      this.id     = data.id || setBookId(),
       this.title  = data.title,
       this.author = data.author,
       this.pages  = data.pages,
@@ -21,10 +22,12 @@ const Library = (function() {
     }
   }
 
+
   const bookHandlers = {
     delete: handleDeleteBook,
     read  : handleRead
   }
+
 
   let books = [];
   let currentBookId = 0;
@@ -32,7 +35,10 @@ const Library = (function() {
   // Prefix increment so that the IDs start from 1 and are equal to
   //   all the books that have been added so far (including deleted books)
   const setBookId = () => ++currentBookId;
+  
+  const getBookBtnId = event => parseInt(event.target.dataset.bookID);
 
+  
   function setBooks(callback) {
     books = callback;
   }
@@ -60,7 +66,6 @@ const Library = (function() {
 
   function handleRead(event) {
     event.stopPropagation();
-
     
     setBooks(books.map(b => {
       console.log(b);
@@ -71,10 +76,17 @@ const Library = (function() {
       }
 
       console.log("This book");
-      let read = !(b.read);
+      let data = {
+        ...b,
+        read: !b.read
+      }
+      console.log(data);
+      let xd = new Book(data);
+      console.log(xd);
 
-      return new Book(...b, read=read);
+      return new Book(data);
     }))
+    updateLibrary();
   }
 
 
@@ -87,8 +99,6 @@ const Library = (function() {
     ]);
     updateLibrary();
   }
-
-  const getBookBtnId = event => parseInt(event.target.dataset.bookID);
 
 
   function updateLibrary() {
@@ -121,9 +131,12 @@ const Library = (function() {
 
 /** 
  * Allows dynamically importing the module and running it like this:
- *   import("path/to/this/module")
- *   .then(module => module.default())
- *   .catch(<error handling goes here>) // optional line
+ * 
+ *   import("path/to/this/module") 
+ * 
+ *   .then(module => module.default()) 
+ * 
+ *   .catch([error handling goes here]) // optional line
  */
 const App = () => {
   Library.run();

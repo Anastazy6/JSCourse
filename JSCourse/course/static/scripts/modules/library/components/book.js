@@ -8,8 +8,8 @@ function createBook(book, handlers) {
     cover.append(createBookPart(book, `${part}`))
   });
 
-  cover.append(createReadBtn  (book, handlers.read  ));
-  cover.append(createDeleteBtn(book, handlers.delete));
+  cover.append(createButton('read'  , handlers.read,   book));
+  cover.append(createButton('delete', handlers.delete, book));
 
   return cover;
 }
@@ -21,47 +21,72 @@ function createBookPart(book, partName) {
   const label = Util.capitalize(`${partName}`);
   const value = book[`${partName}`];
 
+  part.append(createPartCell('label', label));
+  part.append(createPartCell('value', value));
+
   part.classList.add('book-data', `book-${partName}`);
-  part.innerText = `${label}: ${value}`;
 
   return part
 }
 
 
-function createDeleteBtn(book, handleDelete) {
-  const button = document.createElement('button');
-  
-  button.classList.add('btn', 'btn-outline-danger', 'book-delete-btn');
-  button.innerText      = 'Delete';
-  button.dataset.bookId = book.id;
+function createPartCell(type, value) {
+  const cell = document.createElement('div');
 
-  button.onclick = handleDelete;
+  let textContent = Util.capitalize(`${value}`);
+  if (type === 'label') textContent += ':';     // Only add ':' for the label;
 
-  return button;
+  cell.classList.add(`book-data-${type}`);
+  cell.innerText = textContent;
+  return cell;
 }
 
-// TODO: Consider refactoring, as most of the code looks like createDeleteBtn.
-function createReadBtn(book, handleRead) {
-  const button = document.createElement('button');
 
-  let style, text;
-  if (book.read) {
-    style = 'warning';
-    text = 'Unread';
-  } else {
-    style = 'success'
-    text = 'Read';
+function assertProperButtonType(type) {
+  const buttonTypes = ['delete', 'read'];
+
+  if (!(buttonTypes.includes(type))) {
+    throw `Invalid button type: ${type}.`;
   }
-    
-  button.classList.add('btn', `btn-outline-${style}`, 'book-read-btn');
-  button.innerText      = text;
-  button.dataset.bookID = book.id;
+}
 
-  button.onclick = handleRead;
+
+const buttonStyle = (type, book) => {
+  assertProperButtonType(type);
+
+  if (type === 'delete') return 'danger';
+
+  return book.read ? 'warning' : 'success';
+}
+
+
+const buttonText = (type, book) => {
+  assertProperButtonType(type);
+
+  if (type === 'delete') return 'Delete';
+
+  return book.read ? 'Unread' : 'Read';
+}
+
+
+function createButton(type, handler, book) {
+  const button = document.createElement('button');
+
+  const style = buttonStyle(type, book);
+  const text  = buttonText (type, book);
+
+  button.classList.add(
+    'btn',
+    `btn-outline-${style}`,
+    `book-${type}-btn`
+  )
+
+  button.innerText      = text;
+  button.dataset.bookId = book.id;
+  button.onclick        = handler
 
   return button;
 }
-
 
 
 export default createBook;

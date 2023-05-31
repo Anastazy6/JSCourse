@@ -1,11 +1,17 @@
 #library-wrapper {
-  max-width: 1000px;
-  margin   : auto;
-  
+  max-width    : 1000px;
+  margin       : auto;
 }
 
-.book-cover {
-  margin: 10px;
+#add-button-container {
+  text-align   : center;
+  margin       : auto;
+  margin-top   : 30px;
+  margin-bottom: 30px;
+}
+
+#add-button {
+  margin: auto;
 }
 
 .book-data {
@@ -28,6 +34,7 @@
   gap          : 20px;
   margin       : auto; 
   padding      : 20px;
+  margin-bottom: 20px;
 
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   grid-template-rows   : 1fr 1fr 1fr 1fr;
@@ -87,24 +94,57 @@
   gap  : 10px;
 
   grid-template-columns: 1fr 1fr;
-  grid-template-rows   : 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows   : 2fr 2fr 2fr 2fr 2fr 2fr 3fr;
   grid-template-areas  :
-  'id     .     '
-  'title  title '
-  'author author'
-  'lang   lang  '
-  'pages  pages '
-  'read   read  '
-  'readbt delete';
+    'id     id    '
+    'title  title '
+    'author author'
+    'lang   lang  '
+    'pages  pages '
+    'read   read  '
+    'readbt delete';
 }
 
 
+.book-data-label { grid-area: label; }
+.book-data-value { grid-area: value; }
 
+.book-data {
+  display   : grid;
+
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows   : 1fr;
+  grid-template-areas  :
+    'label value';
+}
+
+.book-data,
+.book-data-label,
+.book-data-value {
+  background: $article-background-color;
+}
+
+.book-data-value {
+  text-align: right;
+}
+
+
+#library-container {
+  display        : flex;
+  flex-wrap      : wrap;
+  gap            : 20px;
+  justify-content: center;
+  margin         : auto;
+}
 
 
 @media screen and (max-width: 440px) {
   #library-form {
     width: 320px;
+  }
+
+  #library-container {
+    max-width: 420px;
   }
 }
 
@@ -112,16 +152,37 @@
   #library-form {
     width: 420px;
   }
-}
 
-@media screen and (max-width: 800px) {
-  #library-form {
-    width: 666px;
+  #library-container {
+    max-width: 640px;
   }
 }
 
-@media screen and (min-width: 801px) {
+@media screen and (max-width: 800px) {
+  #library-form{
+    width: 666px;
+  }
+
+  #library-container {
+    max-width: 780px;
+  }
+}
+
+@media screen and (max-width: 999px) {
   #library-form {
     width: 750px;
+  }
+
+  #library-container {
+    max-width: 950px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  #library-form {
+    width: 750px;
+  }
+
+  #library-container {
+    max-width: 1000px;
   }
 }

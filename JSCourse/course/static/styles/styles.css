@@ -17288,6 +17288,7 @@ html, body {
 
 body {
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 div {
@@ -17313,8 +17314,15 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin: auto;
 }
 
-.book-cover {
-  margin: 10px;
+#add-button-container {
+  text-align: center;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#add-button {
+  margin: auto;
 }
 
 .book-data {
@@ -17356,6 +17364,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   gap: 20px;
   margin: auto;
   padding: 20px;
+  margin-bottom: 20px;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-areas: "title  title  title  title  title " "author author author author author" "lang   lang   pages  pages  read  " "close  .      .      submit submit";
@@ -17425,28 +17434,86 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   width: 300px;
   gap: 10px;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: "id     .     " "title  title " "author author" "lang   lang  " "pages  pages " "read   read  " "readbt delete";
+  grid-template-rows: 2fr 2fr 2fr 2fr 2fr 2fr 3fr;
+  grid-template-areas: "id     id    " "title  title " "author author" "lang   lang  " "pages  pages " "read   read  " "readbt delete";
+}
+
+.book-data-label {
+  grid-area: label;
+}
+
+.book-data-value {
+  grid-area: value;
+}
+
+.book-data {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "label value";
+}
+
+.book-data,
+.book-data-label,
+.book-data-value {
+  background: #1d224b;
+}
+
+.book-data-value {
+  text-align: right;
+}
+
+#library-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: auto;
 }
 
 @media screen and (max-width: 440px) {
   #library-form {
     width: 320px;
   }
+
+  #library-container {
+    max-width: 420px;
+  }
 }
 @media screen and (max-width: 666px) {
   #library-form {
     width: 420px;
+  }
+
+  #library-container {
+    max-width: 640px;
   }
 }
 @media screen and (max-width: 800px) {
   #library-form {
     width: 666px;
   }
+
+  #library-container {
+    max-width: 780px;
+  }
 }
-@media screen and (min-width: 801px) {
+@media screen and (max-width: 999px) {
   #library-form {
     width: 750px;
+  }
+
+  #library-container {
+    max-width: 950px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  #library-form {
+    width: 750px;
+  }
+
+  #library-container {
+    max-width: 1000px;
   }
 }
 * {

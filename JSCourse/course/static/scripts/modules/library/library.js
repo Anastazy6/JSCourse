@@ -38,7 +38,7 @@ const Library = (function() {
   //   all the books that have been added so far (including deleted books)
   const setBookId = () => ++currentBookId;
   
-  const getBookBtnId = event => parseInt(event.target.dataset.bookID);
+  const getBookBtnId = event => parseInt(event.target.dataset.bookId);
 
   
   function setBooks(callback) {
@@ -78,8 +78,7 @@ const Library = (function() {
     event.stopPropagation();
     
     setBooks(books.map(b => {
-      console.log(b);
-      if (b.id !== getBookBtnId(event)) { return b; }
+      if (b.id !== getBookBtnId(event)) return b;
 
       return new Book({
         ...b,
@@ -103,13 +102,15 @@ const Library = (function() {
 
 
   function updateLibrary() {
-    View.clearLibrary();
+    const fragment = document.createDocumentFragment();
 
     books.map(book => {
-      View.library.append(createBook(book, bookHandlers))
+      fragment.append(createBook(book, bookHandlers));
     })
 
+    View.clearLibrary();
     View.clearForm();
+    View.library.append(fragment);
   }
 
 

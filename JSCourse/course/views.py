@@ -6,3 +6,6 @@ def index(request):
 
 def library(request):
     return render(request, 'course/library.html')
+
+def tictactoe(request):
+    return render(request, 'course/tictactoe.html')

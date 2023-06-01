@@ -1,6 +1,6 @@
-import createBook from "./components/book.js";
-import Util       from "../../util/util.js";
-import View       from "./view.js"
+import Cover from "./components/cover.js";
+import Util  from "../../util/util.js";
+import View  from "./view.js"
 
 
 
@@ -105,7 +105,7 @@ const Library = (function() {
     const fragment = document.createDocumentFragment();
 
     books.map(book => {
-      fragment.append(createBook(book, bookHandlers));
+      fragment.append(Cover.create(book, bookHandlers));
     })
 
     View.clearLibrary();

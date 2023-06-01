@@ -7,7 +7,12 @@ const routes = [
   {
     route : simplePattern("library"),
     module: app("library")
+  }, {
+    route : simplePattern("tictactoe"),
+    module: app("tictactoe")
   }
+
+
 ]
 
 export default routes;

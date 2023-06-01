@@ -10,6 +10,10 @@ urlpatterns = [
     path(  'library',
             views.library,
             name='library'
+    ),
+    path(  'tictactoe',
+            views.tictactoe,
+            name='tictactoe'
     )
 
 ]

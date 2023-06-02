@@ -1,12 +1,12 @@
-import routes from "./routes.js";
-import Util   from "./util/util.js";
+import routes    from "./routes.js";
+import PathUtils from "./Utilities/pathUtils.js";
 
 document.addEventListener('DOMContentLoaded', function() {
   main()
 })
 
 const main = () => {
-  const modulePath = Util.Path.getModulePath(routes);
+  const modulePath = PathUtils.getModulePath(routes);
   if   (modulePath)  loadModule(modulePath);
 }
 

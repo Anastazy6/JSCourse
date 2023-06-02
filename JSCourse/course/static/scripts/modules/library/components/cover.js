@@ -1,4 +1,4 @@
-import Util from "../../../util/util.js";
+import Util from "../../../Utilities/util.js";
 
 const Cover = (function() {
   function create(book, handlers) {

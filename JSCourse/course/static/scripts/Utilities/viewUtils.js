@@ -1,7 +1,7 @@
 /** 
  * Namespace for View utilities and common methods for Views.
  */
-const View = (function() {
+const ViewUtils = (function() {
   function show(element, type='block') {
     element.style.display = 'grid';
   }
@@ -17,4 +17,4 @@ const View = (function() {
   }
 })()
 
-export default View;
+export default ViewUtils;

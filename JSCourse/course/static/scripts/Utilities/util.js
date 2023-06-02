@@ -1,5 +1,5 @@
-import View from "./View.js";
-import Path from "./Path.js";
+import View from "./ViewUtils.js";
+import Path from "./pathUtils.js";
 
 const Util = (function() {
 
@@ -51,9 +51,6 @@ const Util = (function() {
     generateIndex: generateIndex,
     getCookie    : getCookie,
     isKeyNumeric : isKeyNumeric,
-
-    Path         : Path,
-    View         : View
   }
 
 })()

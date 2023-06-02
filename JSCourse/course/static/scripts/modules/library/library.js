@@ -1,6 +1,6 @@
-import Cover from "./components/cover.js";
-import Util  from "../../util/util.js";
-import View  from "./view.js"
+import Cover     from "./components/cover.js";
+import ViewUtils from "../../Utilities/viewUtils.js";
+import View      from "./view.js"
 
 
 
@@ -47,15 +47,15 @@ const Library = (function() {
 
 
   function handleAddBook() {
-    Util.View.show(View.form, 'grid');
-    Util.View.hide(View.addBookBtn);
+    ViewUtils.show(View.form, 'grid');
+    ViewUtils.hide(View.addBookBtn);
   }
 
 
   function handleCloseForm() {
     View.clearForm();
-    Util.View.hide(View.form);
-    Util.View.show(View.addBookBtn);
+    ViewUtils.hide(View.form);
+    ViewUtils.show(View.addBookBtn);
   }
 
 

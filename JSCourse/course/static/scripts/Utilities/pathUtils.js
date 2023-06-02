@@ -1,7 +1,7 @@
 /**
  *  Namespace for Path utilities.
  */ 
-const Path = (function() {
+const PathUtils = (function() {
 
   const getPath  = () => window.location.pathname;
   const getRoute = (path=getPath()) => path.slice(1).split("/");
@@ -45,4 +45,4 @@ const Path = (function() {
   }
 })()
 
-export default Path;
+export default PathUtils;

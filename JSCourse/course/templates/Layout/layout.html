@@ -27,7 +27,26 @@
 
 
   <body>
-    {% block body %}
-    {% endblock %}
-  </body>
+    <aside
+      id="body-left-panel"
+    >
+      {% block body-left %}
+      {% endblock %}
+    </aside>
+
+    <main 
+      role="main"
+      id="body-mid-panel"
+    >
+      {% block body-mid %}
+      {% endblock %}
+    </main>
+
+    <aside 
+      id="body-right-panel"
+    >
+      {% block body-right %}
+      {% endblock %}
+    </aside>
+  </div>
 </html>

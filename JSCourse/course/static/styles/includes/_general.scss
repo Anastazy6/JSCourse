@@ -12,7 +12,7 @@ html, body {
   font-size  : 16px;
 }
 
-body {
+main {
   margin-top   : 50px;
   margin-bottom: 50px;  
 }
@@ -34,4 +34,59 @@ h1, h2, h3, h4, h5, h6 {
   background: $background-color;
   color     : $text-color;
   text-align: center;
+}
+
+
+#body-left-panel  { grid-area: body-left ; }
+#body-mid-panel   { grid-area: body-mid  ; }
+#body-right-panel { grid-area: body-right; }
+
+
+@media screen and (max-width: 1199px) {
+  #body-left-panel,
+  #body-right-panel {
+    display: none;
+  }
+
+  body {
+    display: contents;
+  }
+
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    display: grid;
+    gap    : 10px;
+
+    grid-template-columns: 200px 1fr;
+    grid-template-rows   : 1fr;
+    grid-template-areas  :
+      'body-left body-mid';
+  }
+
+  #body-left-panel {
+    display: block;
+  }
+
+  #body-right-panel {
+    display: none;
+  }
+}
+
+@media screen and(min-width: 1500px) {
+  body {
+    display: grid;
+    gap    : 10px;
+
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows   : 1fr;
+    grid-template-areas  :
+      'body-left body-mid body-right';
+  }
+
+  #body-left-panel,
+  #body-right-panel {
+    display: block;
+  }
 }

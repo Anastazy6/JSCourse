@@ -1,4 +1,4 @@
-import View from "./ViewUtils.js";
+import View from "./viewUtils.js";
 import Path from "./pathUtils.js";
 
 const Util = (function() {

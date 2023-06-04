@@ -1,10 +1,12 @@
-{% extends './layout.html' %}
+{% extends 'Layout/layout.html' %}
 
 {% block title %}
   Library
 {% endblock %}
 
-{% block body %}
+{% block body-mid %}
+
+
 
 <div id="library-wrapper">
   <header>
@@ -57,7 +59,7 @@
         id   ="form-lang"
         class="library-form-input"
       >
-        {% include './language_picker.html' %}
+        {% include 'Includes/language_picker.html' %}
       </select>
 
       <div

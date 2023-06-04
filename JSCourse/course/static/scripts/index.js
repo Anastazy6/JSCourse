@@ -1,5 +1,6 @@
 import routes    from "./routes.js";
 import PathUtils from "./Utilities/pathUtils.js";
+import Sidebar   from "./Utilities/sidebar.js";
 
 document.addEventListener('DOMContentLoaded', function() {
   main()
@@ -8,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const main = () => {
   const modulePath = PathUtils.getModulePath(routes);
   if   (modulePath)  loadModule(modulePath);
+  Sidebar.render();
 }
 
 const loadModule = (modulePath) => {

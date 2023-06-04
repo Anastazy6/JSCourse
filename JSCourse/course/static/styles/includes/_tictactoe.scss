@@ -1,0 +1,40 @@
+#launcher {
+  max-width: 600px;
+  margin   : auto;
+}
+
+
+#player-1-name   { grid-area: p1-name; }
+#player-1-symbol { grid-area: p1-symb; }
+#player-1-type   { grid-area: p1-type; }
+
+#player-2-name   { grid-area: p2-name; }
+#player-2-symbol { grid-area: p2-symb; }
+#player-2-type   { grid-area: p2-type; }
+
+#start-TTT       { grid-area: start  ; }
+
+
+#launcher-form {
+  display: grid;
+  gap    : 10px 20px;
+
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows   : 1fr 1fr 1fr 1fr; 
+  grid-template-areas  :
+    'p1-name p1-name p2-name p2-name'
+    'p1-symb p1-symb p2-symb p2-symb'
+    'p1-type p1-type p2-type p2-type'
+    '.       start   start   .      ';
+}
+
+
+#gameboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows   : 1fr 1fr 1fr;
+  grid-template-areas  :
+    'LG NG CG'
+    'LN NN CN'
+    'LE NE CE';
+}

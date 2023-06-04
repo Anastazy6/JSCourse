@@ -1,0 +1,43 @@
+<form id='launcher-form'>
+
+  {% for ID in players %}
+
+      <input
+        id         ='player-{{ ID }}-name'
+        type       ='text'
+        name       ='player-{{ ID }}-name'
+        maxlength  =32
+        value      ='Player {{ ID }}'
+        placeholder='Player {{ ID }} name'
+        required
+      >
+      <input
+        id         ='player-{{ ID }}-symbol'
+        type       ='text'
+        name       ='player-{{ ID }}-symbol'
+        maxlength  = 8
+        placeholder='Player {{ ID }} symbol'
+        required
+
+        {% if ID == 1 %}
+          value='O'
+        {% else %}
+          value='X'
+        {% endif %}
+      >
+      <select
+        id='player-{{ ID }}-type'
+      >
+        {% include './player-type.html' %}
+      </select>
+
+  {% endfor %}
+
+  <button
+    role ='submit'
+    id   ='start-TTT'
+    class='btn btn-outline-primary'
+  >
+    Start game
+  </button>
+</form>

@@ -36,6 +36,40 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
+input {
+  display: block;
+
+  background   : transparent;
+  border       : none;
+  border-radius: 0;
+  color        : $text-color;
+  border-bottom: 2px solid map-get($theme-colors, "lleuad");
+  resize       : none;
+
+  &:focus, &:hover {
+    outline      : none;
+    border-bottom: 2px solid map-get($theme-colors, "lleuad-lawn");
+  }
+}
+
+select {
+  height: 35px;
+  color : $text-color;
+  background-color: $article-background-color;
+  border          : 0px solid transparent;
+  
+  select, 
+  select:hover,
+  select:active,
+  select:focus {
+    border: 0px solid transparent;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
 
 #body-left-panel  { grid-area: body-left ; }
 #body-mid-panel   { grid-area: body-mid  ; }

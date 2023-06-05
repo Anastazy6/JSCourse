@@ -2,9 +2,15 @@ const Gameboard = (function() {
   let gameboard = {};
   
   function render() {
-    // Rendering logic goes here
-    console.log("Rendering is not yet implemented");
+    const fragment = document.createDocumentFragment();
+
+    gameboard.map(alignment => {
+      fragment.append(_createCell(alignment));
+    })
+
+    return fragment;
   }
+
 
   function reset() {
     gameboard = {
@@ -12,14 +18,33 @@ const Gameboard = (function() {
       'LN': null, 'NN': null, 'CN': null,
       'LE': null, 'NE': null, 'CE': null
     }
-    render();
   }
+
 
   function setOwnership(field, player) {
     if (! (gameboard[field] === null)) return; // Prevent action if a cell is occupied;
 
     gameboard[field] = player;
   }
+
+
+
+
+
+  function _createCell(alignment) {
+    const owner = gameboard.alignment;
+    const cell  = document.createElement('div');
+    
+    cell.classList.add(
+      `cell-${alignment}`,
+      'gameboard-cell'
+    );
+    cell.innerText = owner.symbol || '';
+
+    return cell;
+  }
+
+
 
 
   return {

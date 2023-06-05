@@ -17309,6 +17309,37 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   text-align: center;
 }
 
+input {
+  display: block;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: ghostwhite;
+  border-bottom: 2px solid #3c6473;
+  resize: none;
+}
+input:focus, input:hover {
+  outline: none;
+  border-bottom: 2px solid #b7d1da;
+}
+
+select {
+  height: 35px;
+  color: ghostwhite;
+  background-color: #1d224b;
+  border: 0px solid transparent;
+}
+select select,
+select select:hover,
+select select:active,
+select select:focus {
+  border: 0px solid transparent;
+}
+
+.text-right {
+  text-align: right;
+}
+
 #body-left-panel {
   grid-area: body-left;
 }
@@ -17574,12 +17605,48 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin: auto;
 }
 
+#player-1-name-label {
+  grid-area: l1-name;
+}
+
+#player-1-symbol-label {
+  grid-area: l1-symb;
+}
+
+#player-1-color-label {
+  grid-area: l1-clr;
+}
+
+#player-1-type-label {
+  grid-area: l1-type;
+}
+
+#player-2-name-label {
+  grid-area: l2-name;
+}
+
+#player-2-symbol-label {
+  grid-area: l2-symb;
+}
+
+#player-2-color-label {
+  grid-area: l2-clr;
+}
+
+#player-2-type-label {
+  grid-area: l2-type;
+}
+
 #player-1-name {
   grid-area: p1-name;
 }
 
 #player-1-symbol {
   grid-area: p1-symb;
+}
+
+#player-1-color {
+  grid-area: p1-clr;
 }
 
 #player-1-type {
@@ -17594,6 +17661,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   grid-area: p2-symb;
 }
 
+#player-2-color {
+  grid-area: p2-clr;
+}
+
 #player-2-type {
   grid-area: p2-type;
 }
@@ -17606,8 +17677,32 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   display: grid;
   gap: 10px 20px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-template-areas: "p1-name p1-name p2-name p2-name" "p1-symb p1-symb p2-symb p2-symb" "p1-type p1-type p2-type p2-type" ".       start   start   .      ";
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "l1-name p1-name p2-name l2-name" "l1-symb p1-symb p2-symb l2-symb" "l1-clr  p1-clr  p2-clr  l2-clr " "l1-type p1-type p2-type l2-type" ".       start   start   .      ";
+}
+
+.player-info-input,
+.player-color-input,
+.player-type-input {
+  min-width: 50px;
+}
+
+.player-form-label {
+  padding-top: 15px;
+}
+
+#player-1-color,
+#player-2-color {
+  border: none;
+  width: 100%;
+  position: relative;
+  top: 10px;
+}
+
+#player-2-name,
+#player-2-symbol,
+#player-2-type {
+  text-align: right;
 }
 
 #gameboard {

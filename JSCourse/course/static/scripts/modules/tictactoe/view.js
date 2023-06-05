@@ -6,6 +6,7 @@ const View = (function() {
   
   
   return {
+    gameboard   : gameboard,  
     launcherForm: launcherForm
   }
 })()

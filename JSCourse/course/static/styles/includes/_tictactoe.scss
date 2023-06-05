@@ -3,13 +3,26 @@
   margin   : auto;
 }
 
+// Labels
+#player-1-name-label   { grid-area: l1-name; }
+#player-1-symbol-label { grid-area: l1-symb; }
+#player-1-color-label  { grid-area: l1-clr ; }
+#player-1-type-label   { grid-area: l1-type; }
 
+#player-2-name-label   { grid-area: l2-name; }
+#player-2-symbol-label { grid-area: l2-symb; }
+#player-2-color-label  { grid-area: l2-clr ; }
+#player-2-type-label   { grid-area: l2-type; }
+
+// Input fields
 #player-1-name   { grid-area: p1-name; }
 #player-1-symbol { grid-area: p1-symb; }
+#player-1-color  { grid-area: p1-clr ; }
 #player-1-type   { grid-area: p1-type; }
 
 #player-2-name   { grid-area: p2-name; }
 #player-2-symbol { grid-area: p2-symb; }
+#player-2-color  { grid-area: p2-clr ; }
 #player-2-type   { grid-area: p2-type; }
 
 #start-TTT       { grid-area: start  ; }
@@ -20,12 +33,38 @@
   gap    : 10px 20px;
 
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows   : 1fr 1fr 1fr 1fr; 
+  grid-template-rows   : 1fr 1fr 1fr 1fr 1fr; 
   grid-template-areas  :
-    'p1-name p1-name p2-name p2-name'
-    'p1-symb p1-symb p2-symb p2-symb'
-    'p1-type p1-type p2-type p2-type'
+    'l1-name p1-name p2-name l2-name'
+    'l1-symb p1-symb p2-symb l2-symb'
+    'l1-clr  p1-clr  p2-clr  l2-clr '
+    'l1-type p1-type p2-type l2-type'
     '.       start   start   .      ';
+}
+
+
+.player-info-input,
+.player-color-input,
+.player-type-input {
+  min-width: 50px;
+}
+
+.player-form-label {
+  padding-top: 15px;
+}
+
+#player-1-color,
+#player-2-color {
+  border  : none;
+  width   : 100%;
+  position: relative;
+  top     : 10px;
+}
+
+#player-2-name,
+#player-2-symbol,
+#player-2-type {
+  text-align: right;
 }
 
 

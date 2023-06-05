@@ -2,31 +2,79 @@
 
   {% for ID in players %}
 
+      <label
+        class ='player-form-label
+                {% if ID == 1 %} text-right {% endif %}'
+        id    ='player-{{ ID }}-name-label'
+        for   ='player-{{ ID }}-name'
+      >
+        Player {{ ID }} name
+      </label>
       <input
-        id         ='player-{{ ID }}-name'
-        type       ='text'
-        name       ='player-{{ ID }}-name'
-        maxlength  =32
-        value      ='Player {{ ID }}'
-        placeholder='Player {{ ID }} name'
+        class       ='player-info-input
+                      {% if ID == 2 %} text-right {% endif %}'
+        id          ='player-{{ ID }}-name'
+        type        ='text'
+        name        ='player-{{ ID }}-name'
+        maxlength   =32
+        value       ='Player {{ ID }}'
+        placeholder ='Player {{ ID }} name'
         required
       >
+
+      <label
+        class ='player-form-label
+                {% if ID == 1 %} text-right {% endif %}'
+        id    ='player-{{ ID }}-symbol-label'
+        for   ='player-{{ ID }}-symbol'
+      >
+        Player {{ ID }} symbol
+      </label>
+      
+      <!-- Contains default symbols: O for player 1, X for player 2 -->
       <input
-        id         ='player-{{ ID }}-symbol'
-        type       ='text'
-        name       ='player-{{ ID }}-symbol'
-        maxlength  = 8
-        placeholder='Player {{ ID }} symbol'
+        class       ='player-info-input
+                      {% if ID == 2 %} text-right {% endif %}'
+        id          ='player-{{ ID }}-symbol'
+        type        ='text'
+        name        ='player-{{ ID }}-symbol'
+        maxlength   = 8
+        placeholder ='Player {{ ID }} symbol'
         required
 
+        
         {% if ID == 1 %}
           value='O'
         {% else %}
           value='X'
         {% endif %}
       >
+
+      <label 
+        class ='player-form-label
+                {% if ID == 1 %} text-right {% endif %}'
+        for   ='player-{{ ID }}-color'
+      >
+        Player {{ ID }} color
+      </label>
+      <input
+        class ='player-color-input
+                {% if ID == 2 %} text-right {% endif %}'
+        id    ='player-{{ ID }}-color'
+        type  ='color'
+      >
+
+      <label
+        class ='player-form-label
+                {% if ID == 1 %} text-right {% endif %}'
+        id    ='player-{{ ID }}-type-label'
+        for   ='player-{{ ID }}-type'
+      >
+        Player {{ ID }} type
+      </label>
       <select
-        id='player-{{ ID }}-type'
+        class='player-type-input'
+        id   ='player-{{ ID }}-type'
       >
         {% include './player-type.html' %}
       </select>
@@ -36,7 +84,7 @@
   <button
     role ='submit'
     id   ='start-TTT'
-    class='btn btn-outline-primary'
+    class='btn btn-outline-lleuad-lawn'
   >
     Start game
   </button>

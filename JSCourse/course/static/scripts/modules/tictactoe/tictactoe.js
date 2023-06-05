@@ -12,11 +12,19 @@ const TicTacToe = (function() {
 
   function _handleStartGame(event) {
     event.preventDefault();
+    Gameboard.reset();
+    _updateGameboard();
 
     console.log("Game started, functionality not yet implemented");
   }
 
-  
+
+  function _updateGameboard() {
+    View.gameboard.innerHTML = ''; 
+    View.gameboard.append(Gameboard.render());
+  }
+
+
   return {
     run: run
   }

@@ -17699,17 +17699,113 @@ select select:focus {
   top: 10px;
 }
 
-#player-2-name,
-#player-2-symbol,
-#player-2-type {
+#p1-name {
+  grid-area: p1n;
+}
+
+#p1-symbol {
+  grid-area: p1s;
+}
+
+#p1-wins {
+  grid-area: p1w;
+}
+
+#separator {
+  grid-area: sep;
+}
+
+#p2-wins {
+  grid-area: p2w;
+}
+
+#p2-symbol {
+  grid-area: p2s;
+}
+
+#p2-name {
+  grid-area: p2n;
+}
+
+#current-player-symbol {
+  grid-area: cps;
+}
+
+#game-state {
+  display: grid;
+  width: 300px;
+  margin: auto;
+  margin-bottom: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "p1n p1s p1w sep p2w p2s p2n" ".   .   .   cps .   .   .  ";
+}
+
+#p1-name,
+#p2-wins {
+  text-align: left;
+}
+
+#p1-symbol,
+#p2-symbol,
+#separator {
+  text-align: center;
+}
+
+#p1-wins,
+#p2-name {
   text-align: right;
+}
+
+.cell-LG {
+  grid-area: LG;
+}
+
+.cell-NG {
+  grid-area: NG;
+}
+
+.cell-CG {
+  grid-area: CG;
+}
+
+.cell-LN {
+  grid-area: LN;
+}
+
+.cell-NN {
+  grid-area: NN;
+}
+
+.cell-CN {
+  grid-area: CN;
+}
+
+.cell-LE {
+  grid-area: LE;
+}
+
+.cell-NE {
+  grid-area: NE;
+}
+
+.cell-CE {
+  grid-area: CE;
 }
 
 #gameboard {
   display: grid;
+  margin: auto;
+  height: 300px;
+  width: 300px;
+  gap: 10px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas: "LG NG CG" "LN NN CN" "LE NE CE";
+}
+
+.gameboard-cell {
+  background-color: blue;
 }
 
 * {

@@ -61,7 +61,9 @@
         class ='player-color-input
                 {% if ID == 2 %} text-right {% endif %}'
         id    ='player-{{ ID }}-color'
+        name  ='player-{{ ID }}-color'
         type  ='color'
+        value ='#F8F8FF'
       >
 
       <label
@@ -75,6 +77,7 @@
       <select
         class='player-type-input'
         id   ='player-{{ ID }}-type'
+        name ='player-{{ ID }}-type'
       >
         {% include './player-type.html' %}
       </select>

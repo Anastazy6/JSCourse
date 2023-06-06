@@ -5,24 +5,39 @@ import Gameboard from "./gameboard.js";
 
 const TicTacToe = (function() {
   function run() {
-    console.log("Kółko i krzyżyk");
     View.launcherForm.onsubmit = _handleStartGame;
   }
 
 
   function _handleStartGame(event) {
     event.preventDefault();
+
+    const newGameData = new FormData(View.launcherForm);
+    
+    _startGame(newGameData);
+
+
     Gameboard.reset();
-    _updateGameboard();
-
-    console.log("Game started, functionality not yet implemented");
+    View.updateGameboard(Gameboard.render());
   }
 
+  function _startGame(gameData) { 
+    const player1 = _createPlayer(gameData, 1);
+    const player2 = _createPlayer(gameData, 2);
 
-  function _updateGameboard() {
-    View.gameboard.innerHTML = ''; 
-    View.gameboard.append(Gameboard.render());
+    console.log(player1.to_s());
+    console.log(player2.to_s());
   }
+
+  function _createPlayer(gameData, playerID) {
+    return Player(
+      gameData.get(`player-${playerID}-name`  ),
+      gameData.get(`player-${playerID}-symbol`),
+      gameData.get(`player-${playerID}-color` ),
+      gameData.get(`player-${playerID}-type`  )
+    )
+  }
+
 
 
   return {

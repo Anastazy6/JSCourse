@@ -4,7 +4,7 @@ const Gameboard = (function() {
   function render() {
     const fragment = document.createDocumentFragment();
 
-    gameboard.map(alignment => {
+    Object.keys(gameboard).map(alignment => {
       fragment.append(_createCell(alignment));
     })
 
@@ -39,7 +39,7 @@ const Gameboard = (function() {
       `cell-${alignment}`,
       'gameboard-cell'
     );
-    cell.innerText = owner.symbol || '';
+    cell.innerText = owner ? owner.symbol : '';
 
     return cell;
   }

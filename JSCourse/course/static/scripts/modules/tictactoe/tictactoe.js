@@ -1,24 +1,23 @@
 // import Util from "../../util/util.js";
-import Player    from "./player.js";
-import View      from "./view.js";
-import Gameboard from "./gameboard.js";
+import Player    from "./Models/player.js";
+import View      from "./Views/view.js";
+import Gameboard from "./Models/gameboard.js";
 
 const TicTacToe = (function() {
   function run() {
-    View.launcherForm.onsubmit = _handleStartGame;
+    View.Launcher.form.onsubmit = _handleStartGame;
   }
 
 
   function _handleStartGame(event) {
     event.preventDefault();
 
-    const newGameData = new FormData(View.launcherForm);
+    const newGameData = new FormData(View.Launcher.form);
     
     _startGame(newGameData);
 
-
     Gameboard.reset();
-    View.updateGameboard(Gameboard.render());
+    View.Gameboard.update(Gameboard.getState());
   }
 
   function _startGame(gameData) { 

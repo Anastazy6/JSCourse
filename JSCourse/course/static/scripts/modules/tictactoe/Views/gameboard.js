@@ -1,7 +1,18 @@
+/**
+ * Namespace for the Gameboard part of the view.
+ */
 const Gameboard = (function() {
-  let gameboard = {};
-  
-  function render() {
+  const gameboard = document.getElementById('gameboard');
+
+  function update(currentState){
+    _clear();
+    const fragment = _render(currentState);
+
+    gameboard.append(fragment);
+  }
+
+
+  function _render(gameboard) {
     const fragment = document.createDocumentFragment();
 
     Object.keys(gameboard).map(alignment => {
@@ -12,23 +23,9 @@ const Gameboard = (function() {
   }
 
 
-  function reset() {
-    gameboard = {
-      'LG': null, 'NG': null, 'CG': null,
-      'LN': null, 'NN': null, 'CN': null,
-      'LE': null, 'NE': null, 'CE': null
-    }
+  function _clear() {
+    gameboard.innerHTML = '';
   }
-
-
-  function setOwnership(field, player) {
-    if (! (gameboard[field] === null)) return; // Prevent action if a cell is occupied;
-
-    gameboard[field] = player;
-  }
-
-
-
 
 
   function _createCell(alignment) {
@@ -45,12 +42,9 @@ const Gameboard = (function() {
   }
 
 
-
-
   return {
-    render      : render,
-    reset       : reset,
-    setOwnership: setOwnership
+    gameboard   : gameboard,
+    update      : update
   }
 })()
 

@@ -13,10 +13,13 @@ const Gameboard = (function() {
   }
 
 
-  function setOwnership(field, player) {
-    if (! (gameboard[field] === null)) return; // Prevent action if a cell is occupied;
 
-    gameboard[field] = player;
+
+
+  function setOwnership(alignment, player) {
+    if (! (gameboard[alignment] === null)) return; // Prevent action if a cell is occupied;
+
+    gameboard[alignment] = player;
   }
 
 

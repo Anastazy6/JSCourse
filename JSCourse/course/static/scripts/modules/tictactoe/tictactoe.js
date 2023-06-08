@@ -1,32 +1,56 @@
 // import Util from "../../util/util.js";
+import Game      from "./Models/game.js";
 import Player    from "./Models/player.js";
-import View      from "./Views/view.js";
 import Gameboard from "./Models/gameboard.js";
 
+import View      from "./Views/view.js";
 const TicTacToe = (function() {
   function run() {
-    View.Launcher.form.onsubmit = _handleStartGame;
+    View.Launcher.form.onsubmit = handlers.startGame;
+  }
+
+
+  const handlers = {
+    startGame: _handleStartGame,
+    setOwner : _handleSetOwner
   }
 
 
   function _handleStartGame(event) {
     event.preventDefault();
 
-    const newGameData = new FormData(View.Launcher.form);
-    
-    _startGame(newGameData);
+    _startGame();
+
+    const players = Game.getPlayers();
 
     Gameboard.reset();
-    View.Gameboard.update(Gameboard.getState());
+    _updateGameboard()
+    View.State.initialize(players);
   }
 
-  function _startGame(gameData) { 
-    const player1 = _createPlayer(gameData, 1);
-    const player2 = _createPlayer(gameData, 2);
 
-    console.log(player1.to_s());
-    console.log(player2.to_s());
+  function _handleSetOwner(event) {
+    event.stopPropagation();
+
+    const alignment = event.target.dataset.Id;
+    const owner     = Game.getCurrentPlayer();
+    
+    Gameboard.setOwnership(alignment, owner);
+    Game.setCurrentPlayer();
+    _updateGameboard();
   }
+
+
+  function _startGame() { 
+    const newGameData = new FormData(View.Launcher.form);
+
+    const player1 = _createPlayer(newGameData, 1);
+    const player2 = _createPlayer(newGameData, 2);
+
+    Game.setPlayers(player1, player2);
+    Game.setCurrentPlayer();
+  }
+
 
   function _createPlayer(gameData, playerID) {
     return Player(
@@ -37,6 +61,10 @@ const TicTacToe = (function() {
     )
   }
 
+
+  function _updateGameboard() {
+    View.Gameboard.update(Gameboard.getState(), handlers);
+  }
 
 
   return {

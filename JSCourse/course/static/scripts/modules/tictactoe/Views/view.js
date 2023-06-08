@@ -4,7 +4,7 @@ import State     from "./state.js";
 
 
 const View = (function() {
-  const summary      = document.getElementById('summary'      );
+  const summary = document.getElementById('summary');
 
 
   return {

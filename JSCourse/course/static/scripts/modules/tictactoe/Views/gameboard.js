@@ -2,21 +2,25 @@
  * Namespace for the Gameboard part of the view.
  */
 const Gameboard = (function() {
-  const gameboard = document.getElementById('gameboard');
+  const _gameboard = document.getElementById('gameboard');
 
-  function update(currentState){
+  function update(currentState, handlers){
     _clear();
-    const fragment = _render(currentState);
 
-    gameboard.append(fragment);
+    console.log(currentState);
+
+    const fragment = _render(currentState, handlers);
+
+    _gameboard.append(fragment);
   }
 
 
-  function _render(gameboard) {
+  function _render(gameboard, handlers) {
     const fragment = document.createDocumentFragment();
 
     Object.keys(gameboard).map(alignment => {
-      fragment.append(_createCell(alignment));
+      const owner = gameboard[alignment];
+      fragment.append(_createCell(alignment, owner, handlers));
     })
 
     return fragment;
@@ -24,27 +28,32 @@ const Gameboard = (function() {
 
 
   function _clear() {
-    gameboard.innerHTML = '';
+    _gameboard.innerHTML = '';
   }
 
 
-  function _createCell(alignment) {
-    const owner = gameboard.alignment;
+  function _createCell(alignment, owner, handlers) {
     const cell  = document.createElement('div');
+  //  console.log(`New cell...`);
+  //  console.log(`Alignment: ${alignment}`);
+  //  console.log(`Owner:\n${owner}`);
     
     cell.classList.add(
       `cell-${alignment}`,
       'gameboard-cell'
     );
-    cell.innerText = owner ? owner.symbol : '';
+
+    cell.style.color = owner ? owner.getColor()  : '#f8f8ff';
+    cell.innerText   = owner ? owner.getSymbol() : '';
+    cell.dataset.Id  = alignment;
+    cell.onclick     = handlers.setOwner;
 
     return cell;
   }
 
 
   return {
-    gameboard   : gameboard,
-    update      : update
+    update   : update
   }
 })()
 

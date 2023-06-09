@@ -1,9 +1,10 @@
-// import Util from "../../util/util.js";
 import Game      from "./Models/game.js";
 import Player    from "./Models/player.js";
 import Gameboard from "./Models/gameboard.js";
 
 import View      from "./Views/view.js";
+
+
 const TicTacToe = (function() {
   function run() {
     View.Launcher.form.onsubmit = handlers.startGame;
@@ -51,21 +52,22 @@ const TicTacToe = (function() {
   function _startGame() { 
     const newGameData = new FormData(View.Launcher.form);
 
-    const player1 = _createPlayer(newGameData, 1);
-    const player2 = _createPlayer(newGameData, 2);
-
-    Game.setPlayers(player1, player2);
+    Game.setPlayers(
+      _createPlayer(1, newGameData),
+      _createPlayer(2, newGameData)
+    );
     Game.setCurrentPlayer();
   }
 
 
-  function _createPlayer(gameData, playerID) {
+  function _createPlayer(id, gameData) {
+    const attributes = ['name', 'symbol', 'color', 'type'];
+    
     return Player(
-      playerID,
-      gameData.get(`player-${playerID}-name`  ),
-      gameData.get(`player-${playerID}-symbol`),
-      gameData.get(`player-${playerID}-color` ),
-      gameData.get(`player-${playerID}-type`  )
+      id,
+      ...attributes.map(attr => (
+        gameData.get(`player-${id}-${attr}`)
+      )),      
     )
   }
 
@@ -79,8 +81,7 @@ const TicTacToe = (function() {
   function _isGameOver(winner) {
     if (winner) return true; // There's a winner;
 
-    const draw = Gameboard.allCellsOccupied();
-    return draw; // True if it's a draw, else false;
+    return Gameboard.allCellsOccupied(); // True if it's a draw, else false;
   }
 
 

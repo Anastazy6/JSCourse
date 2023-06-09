@@ -1,22 +1,23 @@
 const Player = (id, name, symbol, color, type) => {
   let wins = 0;
-
-  const getId     = () => id;
-
-  const getName   = () => name;
-
-  const setSymbol = newSymbol => symbol = newSymbol;
-  const getSymbol = () => symbol || '?';
-
-  const getWins   = () => wins;
-  const win       = () => wins =+ 1;
-
+  
   const getColor  = () => color;
+  const getId     = () => id;
+  const getName   = () => name;
+  const getSymbol = () => symbol || '?';
   const getType   = () => type;
-
-  const to_s = () => (
-    `Name  : ${name}\nSymbol: ${symbol}\nColor : ${color}\nType  : ${type}\nWins  : ${wins}`
+  const getWins   = () => wins;
+  const win       = () => wins++;
+  
+  const to_s      = () => (
+    `Id    : ${id}\n`     +
+    `Name  : ${name}\n`   + 
+    `Symbol: ${symbol}\n` +
+    `Color : ${color}\n`  +
+    `Type  : ${type}\n`   +
+    `Wins  : ${wins}`
   )
+
 
   return {
     getColor : getColor,
@@ -25,7 +26,6 @@ const Player = (id, name, symbol, color, type) => {
     getSymbol: getSymbol,
     getType  : getType,
     getWins  : getWins,
-    setSymbol: setSymbol,
     to_s     : to_s,
     win      : win
   }

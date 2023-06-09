@@ -6,12 +6,19 @@ const Gameboard = (function() {
 
   const DEFAULT_COLOR = '#f8f8ff'; // ghostwhite
 
+
+
   function update(currentState, handlers){
     const fragment = _render(currentState, handlers);
     
     _clear();
     _gameboard.append(fragment);
   }
+
+  
+  /*****************************************************************************
+  *********************************** Private **********************************
+  *****************************************************************************/
 
 
   function _render(gameboard, handlers) {

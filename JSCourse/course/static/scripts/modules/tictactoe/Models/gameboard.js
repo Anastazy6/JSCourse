@@ -54,7 +54,7 @@ const Gameboard = (function() {
 
 
   /*****************************************************************************
-  ********************************** Private **********************************
+  *********************************** Private **********************************
   *****************************************************************************/
 
 
@@ -95,23 +95,20 @@ const Gameboard = (function() {
 
 
   function _rowIsVictorious(row) {
-    let first  = _getOwnerId(row[0]);
-    let second = _getOwnerId(row[1]);
-    let third  = _getOwnerId(row[2]);
+    let cells = [
+      _getOwnerId(row[0]),
+      _getOwnerId(row[1]),
+      _getOwnerId(row[2])
+    ]
 
-    let neitherIsFalse = (
-      first  !== false && // Surely one of them would be enough due to the
-      second !== false && //   "allAreTheSame" condition, but better safe
-      third  !== false    //   than sorry...
+    const neitherIsFalse = () => cells.every(cell => cell !== false);
+
+    const allAreTheSame = () => (
+      cells[0] === cells[1] &&
+      cells[0] === cells[2]
     );
 
-    let allAreTheSame = (
-      first  === second &&
-      first  === third  &&
-      second === third
-    )
-
-    return neitherIsFalse && allAreTheSame;
+    return neitherIsFalse() && allAreTheSame();
   }
 
 

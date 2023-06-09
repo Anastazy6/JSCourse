@@ -1,7 +1,9 @@
-const Player = (name, symbol, color, type) => {
+const Player = (id, name, symbol, color, type) => {
   let wins = 0;
 
-  const getName = () => name;
+  const getId     = () => id;
+
+  const getName   = () => name;
 
   const setSymbol = newSymbol => symbol = newSymbol;
   const getSymbol = () => symbol || '?';
@@ -18,6 +20,7 @@ const Player = (name, symbol, color, type) => {
 
   return {
     getColor : getColor,
+    getId    : getId,
     getName  : getName,
     getSymbol: getSymbol,
     getType  : getType,

@@ -28,6 +28,15 @@ const State = (function() {
   }
 
 
+  function update(players) {
+    p1Wins.innerText = players.p1.getWins();
+    p2Wins.innerText = players.p2.getWins();
+
+    currentPlayerSymbol.innerText   = players.current.getSymbol();
+    currentPlayerSymbol.style.color = players.current.getColor();
+  }
+
+  
   function _setColorOfSymbols(players) {
     p1Symbol.style.color = players.p1.getColor();
     p2Symbol.style.color = players.p2.getColor();
@@ -37,7 +46,8 @@ const State = (function() {
 
 
   return {
-    initialize: initialize
+    initialize: initialize,
+    update    : update
   }
 })()
 

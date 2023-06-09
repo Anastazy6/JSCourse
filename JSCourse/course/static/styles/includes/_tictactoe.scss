@@ -84,7 +84,7 @@
   grid-template-rows   : 1fr 1fr;
   grid-template-areas  :
     'p1n p1s p1w sep p2w p2s p2n'
-    '.   .   .   cps .   .   .  ';
+    'cps cps cps cps cps cps cps';
 }
 
 #p1-name,
@@ -120,8 +120,8 @@
   display: grid;
 
   margin : auto;
-  height : 300px;
-  width  : 300px;
+  height : 400px;
+  width  : 400px;
 
   gap    : 10px; 
 
@@ -134,10 +134,13 @@
 }
 
 .gameboard-cell {
-  background    : inherit;
-  border        : 2px solid ghostwhite;
-  text-align    : center;
-  vertical-align: middle;
+  align-items    : center;
+  background     : inherit;
+  border         : 2px solid ghostwhite;
+  display        : flex;
+  font-size      : 25px;
+  justify-content: center;
+
 
 
   &:hover {

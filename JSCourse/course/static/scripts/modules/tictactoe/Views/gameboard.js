@@ -4,13 +4,12 @@
 const Gameboard = (function() {
   const _gameboard = document.getElementById('gameboard');
 
+  const DEFAULT_COLOR = '#f8f8ff'; // ghostwhite
+
   function update(currentState, handlers){
-    _clear();
-
-    console.log(currentState);
-
     const fragment = _render(currentState, handlers);
-
+    
+    _clear();
     _gameboard.append(fragment);
   }
 
@@ -34,16 +33,13 @@ const Gameboard = (function() {
 
   function _createCell(alignment, owner, handlers) {
     const cell  = document.createElement('div');
-  //  console.log(`New cell...`);
-  //  console.log(`Alignment: ${alignment}`);
-  //  console.log(`Owner:\n${owner}`);
     
     cell.classList.add(
       `cell-${alignment}`,
       'gameboard-cell'
     );
 
-    cell.style.color = owner ? owner.getColor()  : '#f8f8ff';
+    cell.style.color = owner ? owner.getColor()  : DEFAULT_COLOR;
     cell.innerText   = owner ? owner.getSymbol() : '';
     cell.dataset.Id  = alignment;
     cell.onclick     = handlers.setOwner;

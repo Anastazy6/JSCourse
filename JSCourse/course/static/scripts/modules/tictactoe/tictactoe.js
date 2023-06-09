@@ -36,8 +36,15 @@ const TicTacToe = (function() {
     const owner     = Game.getCurrentPlayer();
     
     Gameboard.setOwnership(alignment, owner);
-    Game.setCurrentPlayer();
+    
+    let winner = Gameboard.findWinner();
+    
     _updateGameboard();
+    if (_isGameOver(winner)) {
+      _finishGame(winner);
+    } else {
+      _continueGame()
+    }
   }
 
 
@@ -54,6 +61,7 @@ const TicTacToe = (function() {
 
   function _createPlayer(gameData, playerID) {
     return Player(
+      playerID,
       gameData.get(`player-${playerID}-name`  ),
       gameData.get(`player-${playerID}-symbol`),
       gameData.get(`player-${playerID}-color` ),
@@ -64,8 +72,43 @@ const TicTacToe = (function() {
 
   function _updateGameboard() {
     View.Gameboard.update(Gameboard.getState(), handlers);
+    View.State    .update(Game.getPlayers());
   }
 
+
+  function _isGameOver(winner) {
+    if (winner) return true; // There's a winner;
+
+    const draw = Gameboard.allCellsOccupied();
+    return draw; // True if it's a draw, else false;
+  }
+
+
+  function _finishGame(winner) {
+    _updateGameboard();
+
+    if (winner) {
+      alert(`${winner.getName()} wins!`);
+      winner.win();
+    } else {
+      alert("It's a draw!");
+    }
+
+    _reset();
+  }
+
+
+  function _continueGame() {
+    Game.setCurrentPlayer();
+  }
+
+
+  function _reset(){
+    Game.reset();
+    Gameboard.reset();
+
+    _updateGameboard();
+  }
 
   return {
     run: run

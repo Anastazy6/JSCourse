@@ -6,6 +6,7 @@ const PathUtils = (function() {
   const getPath  = () => window.location.pathname;
   const getRoute = (path=getPath()) => path.slice(1).split("/");
 
+  
   const getModulePath = (routes) => {
     const path         = getPath();
     const currentRoute = routes.filter(r => r.route.test(path));

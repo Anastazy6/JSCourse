@@ -22,6 +22,11 @@ const Game = (function() {
   }
 
 
+  function reset(){
+    currentPlayer = false;
+  }
+
+
   function setPlayers(newPlayer1, newPlayer2) {
     player1 = newPlayer1;
     player2 = newPlayer2;
@@ -31,6 +36,8 @@ const Game = (function() {
   return {
     getCurrentPlayer: getCurrentPlayer,
     setCurrentPlayer: setCurrentPlayer,
+
+    reset           : reset,
 
     getPlayers      : getPlayers,
     setPlayers      : setPlayers

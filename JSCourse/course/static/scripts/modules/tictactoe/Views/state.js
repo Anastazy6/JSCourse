@@ -10,7 +10,7 @@ const State = (function() {
   const _p2Symbol = document.getElementById("p2-symbol");
   const _p2Name   = document.getElementById("p2-name"  );
 
-  const currentPlayerSymbol = document.getElementById("current-player-symbol");
+  const _currentPlayerSymbol = document.getElementById("current-player-symbol");
 
 
   function initialize(players) {
@@ -22,7 +22,7 @@ const State = (function() {
     _p2Symbol.innerText = players.p2.getSymbol();
     _p2Name  .innerText = players.p2.getName();
 
-    currentPlayerSymbol.innerText = players.current.getSymbol();
+    _currentPlayerSymbol.innerText = players.current.getSymbol();
 
     _setColorOfSymbols(players);
   }
@@ -32,8 +32,8 @@ const State = (function() {
     _p1Wins.innerText = players.p1.getWins();
     _p2Wins.innerText = players.p2.getWins();
 
-    currentPlayerSymbol.innerText   = players.current.getSymbol();
-    currentPlayerSymbol.style.color = players.current.getColor();
+    _currentPlayerSymbol.innerText   = players.current.getSymbol();
+    _currentPlayerSymbol.style.color = players.current.getColor();
   }
 
   
@@ -41,7 +41,7 @@ const State = (function() {
     _p1Symbol.style.color = players.p1.getColor();
     _p2Symbol.style.color = players.p2.getColor();
 
-    currentPlayerSymbol.style.color = players.current.getColor();
+    _currentPlayerSymbol.style.color = players.current.getColor();
   }
 
 

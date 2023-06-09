@@ -1,9 +1,11 @@
+import Util      from "../../Utilities/util.js";
+
 import Game      from "./Models/game.js";
 import Player    from "./Models/player.js";
 import Gameboard from "./Models/gameboard.js";
 
 import View      from "./Views/view.js";
-
+import ViewUtils from "../../Utilities/viewUtils.js";
 
 const TicTacToe = (function() {
   function run() {
@@ -12,8 +14,10 @@ const TicTacToe = (function() {
 
 
   const handlers = {
-    startGame: _handleStartGame,
-    setOwner : _handleSetOwner
+    clickCell  : _handleClickCell,
+    pickOptimal: _handlePickOptimal,
+    pickRandom : _handlePickRandom,
+    startGame  : _handleStartGame,
   }
 
 
@@ -21,23 +25,29 @@ const TicTacToe = (function() {
     event.preventDefault();
 
     _startGame();
-
-    const players = Game.getPlayers();
-
     Gameboard.reset();
     _updateView()
-    View.State.initialize(players);
+
+    View.State.initialize(Game.getPlayers());
   }
 
-
-  function _handleSetOwner(event) {
+  /**
+   *  Handles HUMAN users' clicks on the cells in the gameboard.
+   * 
+   */
+  function _handleClickCell(event) {
     event.stopPropagation();
 
     const alignment = event.target.dataset.Id;
     const owner     = Game.getCurrentPlayer();
+
+    console.log(`Human clicked: ${owner.isHuman()}`);
+    console.log(`Cell is empty: ${Gameboard.isCellOccupied(alignment)}`);
     
-    // Prevent any changes if clicked on an already occupied cell.
-    if (Gameboard.isCellOccupied(alignment)) return;
+    // Prevent any changes if:
+    //   a human player tries to click on behalf an AI player
+    //   or clicked on an already occupied cell.
+    if ( !(owner.isHuman()) || Gameboard.isCellOccupied(alignment)) return;
     
     _updateGameboard(alignment, owner);
   }
@@ -50,7 +60,8 @@ const TicTacToe = (function() {
       _createPlayer(1, newGameData),
       _createPlayer(2, newGameData)
     );
-    Game.nextTurn();
+
+    Game.nextTurn(handlers);
   }
 
 
@@ -74,10 +85,9 @@ const TicTacToe = (function() {
     
     if (_isGameOver(winner)) {
       // Delay finishing the game to allow the last clicked cell show its owner.
-      //   
       setTimeout(() => _finishGame(winner), 0);
     } else {
-      Game.nextTurn();
+      Game.nextTurn(handlers);
     }
   }
 
@@ -117,6 +127,46 @@ const TicTacToe = (function() {
 
     _updateView();
   }
+
+
+
+
+  function _handlePickRandom() {
+    const player = Game.getCurrentPlayer();
+
+    // Ensure this function is only available to the random AI player.
+    if ( !(player.isRandom()) ) {
+      throw "Only random AI player may use this function."; 
+    }
+
+    const legalCells = Gameboard.getEmptyCells();
+    console.log(legalCells);
+    const chosenCell = Util.arraySample(legalCells);
+
+    
+    setTimeout(() => _updateGameboard(chosenCell, player), 1000);
+  }
+
+
+  function _handlePickOptimal() {
+    const player = Game.getCurrentPlayer();
+
+    // Ensure this function is only available to the unbeatable AI player.
+    if ( !(player.isUnbeatable()) ) {
+      throw "Only unbeatable AI player may use this function."; 
+    }
+
+    // TODO: write algorithm for the unbeatable AI player.
+
+    // Temporary solution (unbeatable AI picks random legal cells)
+    const legalCells = Gameboard.getEmptyCells();
+    console.log(legalCells)
+    const chosenCell = Util.arraySample(legalCells);
+
+    setTimeout(() => _updateGameboard(chosenCell, player), 1000);
+  }
+
+
 
   return {
     run: run

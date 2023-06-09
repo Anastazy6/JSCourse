@@ -9,10 +9,12 @@ const Game = (function() {
 
   const getCurrentPlayer = () => currentPlayer;
 
-  function nextTurn() {
+  function nextTurn(handlers) {
     currentPlayer = currentPlayer === player1 ?
       player2 :
       player1 ;
+
+    if ( !(currentPlayer.isHuman()) ) _performAIMove(handlers);
   }
 
 
@@ -39,6 +41,20 @@ const Game = (function() {
     player2 = newPlayer2;
 
     startingPlayer = player1;
+  }
+
+
+  function _performAIMove(handlers) {
+    switch (currentPlayer.getType()) {
+      case 'AI-random':
+        handlers.pickRandom();
+        break;
+      case 'AI-unbeatable':
+        handlers.pickOptimal();
+        break;
+      default:
+        throw `Invalid player type for AI move picker: ${currentPlayer.getType()}`;
+    }
   }
 
 

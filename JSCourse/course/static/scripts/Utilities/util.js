@@ -1,5 +1,16 @@
 const Util = (function() {
 
+  /**
+   * @param {Array} array 
+   * @returns Random item from the array passed as the only parameter.
+   */
+  const arraySample = array => {
+    const index = Math.floor(Math.random() * array.length);
+
+    return array[index];
+  }
+
+
   const capitalize = str => (
     str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
   );
@@ -28,7 +39,10 @@ const Util = (function() {
   }
 
   
+
+
   return {
+    arraySample  : arraySample,
     capitalize   : capitalize,
     generateIndex: generateIndex,
     isKeyNumeric : isKeyNumeric,

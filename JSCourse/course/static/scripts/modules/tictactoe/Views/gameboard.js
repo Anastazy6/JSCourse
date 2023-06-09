@@ -15,7 +15,7 @@ const Gameboard = (function() {
     _gameboard.append(fragment);
   }
 
-  
+
   /*****************************************************************************
   *********************************** Private **********************************
   *****************************************************************************/
@@ -49,7 +49,7 @@ const Gameboard = (function() {
     cell.style.color = owner ? owner.getColor()  : DEFAULT_COLOR;
     cell.innerText   = owner ? owner.getSymbol() : '';
     cell.dataset.Id  = alignment;
-    cell.onclick     = handlers.setOwner;
+    cell.onclick     = handlers.clickCell;
 
     return cell;
   }

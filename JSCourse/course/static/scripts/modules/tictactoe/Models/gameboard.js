@@ -26,7 +26,7 @@ const Gameboard = (function() {
 
 
   function findWinner() {
-    let victoryRows = _winningRows.filter(row => _rowIsVictorious(row));
+    let victoryRows = _winningRows.filter(row => _isRowVictorious(row));
 
     if (victoryRows.length === 0) return false; // Winner not found;
 
@@ -47,9 +47,18 @@ const Gameboard = (function() {
 
 
   function setOwnership(alignment, player) {
-    if (! (gameboard[alignment] === null)) return; // Prevent action if a cell is occupied;
+    if (isCellOccupied(alignment)) {
+      throw "Attempt at reoccupying a cell has NOT been blocked successfully!"
+    }
 
     gameboard[alignment] = player;
+  }
+
+
+  function isCellOccupied(alignment) {
+    return (gameboard[alignment] === null) ?
+      false :
+      true ;
   }
 
 
@@ -94,7 +103,7 @@ const Gameboard = (function() {
   }
 
 
-  function _rowIsVictorious(row) {
+  function _isRowVictorious(row) {
     let cells = [
       _getOwnerId(row[0]),
       _getOwnerId(row[1]),
@@ -115,8 +124,9 @@ const Gameboard = (function() {
 
   return {
     allCellsOccupied: allCellsOccupied,
-    getState        : getState,
     findWinner      : findWinner,
+    getState        : getState,
+    isCellOccupied  : isCellOccupied,
     reset           : reset,
     setOwnership    : setOwnership
   }

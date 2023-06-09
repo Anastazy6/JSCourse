@@ -9,7 +9,7 @@ const Game = (function() {
 
   const getCurrentPlayer = () => currentPlayer;
 
-  function setCurrentPlayer() {
+  function nextTurn() {
     currentPlayer = currentPlayer === player1 ?
       player2 :
       player1 ;
@@ -44,11 +44,9 @@ const Game = (function() {
 
   return {
     getCurrentPlayer: getCurrentPlayer,
-    setCurrentPlayer: setCurrentPlayer,
-
-    reset           : reset,
-
     getPlayers      : getPlayers,
+    nextTurn        : nextTurn,
+    reset           : reset,
     setPlayers      : setPlayers
   }
 })()

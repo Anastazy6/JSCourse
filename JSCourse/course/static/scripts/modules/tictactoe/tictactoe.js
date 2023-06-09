@@ -25,7 +25,7 @@ const TicTacToe = (function() {
     const players = Game.getPlayers();
 
     Gameboard.reset();
-    _updateGameboard()
+    _updateView()
     View.State.initialize(players);
   }
 
@@ -36,16 +36,10 @@ const TicTacToe = (function() {
     const alignment = event.target.dataset.Id;
     const owner     = Game.getCurrentPlayer();
     
-    Gameboard.setOwnership(alignment, owner);
+    // Prevent any changes if clicked on an already occupied cell.
+    if (Gameboard.isCellOccupied(alignment)) return;
     
-    let winner = Gameboard.findWinner();
-    
-    _updateGameboard();
-    if (_isGameOver(winner)) {
-      _finishGame(winner);
-    } else {
-      _continueGame()
-    }
+    _updateGameboard(alignment, owner);
   }
 
 
@@ -56,7 +50,7 @@ const TicTacToe = (function() {
       _createPlayer(1, newGameData),
       _createPlayer(2, newGameData)
     );
-    Game.setCurrentPlayer();
+    Game.nextTurn();
   }
 
 
@@ -72,7 +66,23 @@ const TicTacToe = (function() {
   }
 
 
-  function _updateGameboard() {
+  function _updateGameboard(alignment, owner) {
+    Gameboard.setOwnership(alignment, owner);
+    _updateView();
+    
+    let winner = Gameboard.findWinner();
+    
+    if (_isGameOver(winner)) {
+      // Delay finishing the game to allow the last clicked cell show its owner.
+      //   
+      setTimeout(() => _finishGame(winner), 0);
+    } else {
+      Game.nextTurn();
+    }
+  }
+
+
+  function _updateView() {
     View.Gameboard.update(Gameboard.getState(), handlers);
     View.State    .update(Game.getPlayers());
   }
@@ -86,7 +96,7 @@ const TicTacToe = (function() {
 
 
   function _finishGame(winner) {
-    _updateGameboard();
+    _updateView();
 
     if (winner) {
       alert(`${winner.getName()} wins!`);
@@ -99,16 +109,13 @@ const TicTacToe = (function() {
   }
 
 
-  function _continueGame() {
-    Game.setCurrentPlayer();
-  }
 
 
   function _reset(){
     Game.reset();
     Gameboard.reset();
 
-    _updateGameboard();
+    _updateView();
   }
 
   return {

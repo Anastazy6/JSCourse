@@ -25,17 +25,14 @@ const Util = (function() {
 
   const isKeyNumeric = keyCode => {
     if ( 
-      !(
-        keyCode === 8  || // Backspace
-        keyCode === 9  || // Tab
-        keyCode === 46 || // Delete
-        (keyCode >= 48 && keyCode <= 57 ) || // Numeric keys on top of the keyboard
-        (keyCode >= 96 && keyCode <= 105)    // Numeric keys on the numpad
-      )
-    ) {
-      return false;
-    }
-    return true;
+      keyCode === 8  || // Backspace
+      keyCode === 9  || // Tab
+      keyCode === 46 || // Delete
+      (keyCode >= 48 && keyCode <= 57 ) || // Numeric keys on top of the keyboard
+      (keyCode >= 96 && keyCode <= 105)    // Numeric keys on the numpad
+    ) return true;
+    
+    return false;
   }
 
   

@@ -4,6 +4,10 @@ const Game = (function() {
   
   let player1;
   let player2;
+
+  let over   = false
+  let isOver = () => over;
+  let finish = () => over = true;
   
 
 
@@ -33,6 +37,7 @@ const Game = (function() {
     player1 ;
 
     currentPlayer = startingPlayer;
+    isOver        = false;
   }
 
 
@@ -45,6 +50,8 @@ const Game = (function() {
 
 
   function _performAIMove(handlers) {
+    if (isOver) return;
+
     switch (currentPlayer.getType()) {
       case 'AI-random':
         handlers.pickRandom();
@@ -59,8 +66,10 @@ const Game = (function() {
 
 
   return {
+    finish          : finish,
     getCurrentPlayer: getCurrentPlayer,
     getPlayers      : getPlayers,
+    isOver          : isOver,
     nextTurn        : nextTurn,
     reset           : reset,
     setPlayers      : setPlayers

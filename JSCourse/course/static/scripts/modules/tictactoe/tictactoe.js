@@ -5,10 +5,11 @@ import Player    from "./Models/player.js";
 import Gameboard from "./Models/gameboard.js";
 
 import View      from "./Views/view.js";
-import ViewUtils from "../../Utilities/viewUtils.js";
+
 
 const TicTacToe = (function() {
   function run() {
+    View.show('launcher');
     View.Launcher.form.onsubmit = handlers.startGame;
   }
 
@@ -39,17 +40,20 @@ const TicTacToe = (function() {
     event.stopPropagation();
 
     const alignment = event.target.dataset.Id;
-    const owner     = Game.getCurrentPlayer();
+    const player    = Game.getCurrentPlayer();
 
-    console.log(`Human clicked: ${owner.isHuman()}`);
-    console.log(`Cell is empty: ${Gameboard.isCellOccupied(alignment)}`);
+    if ( !(_isClickLegal(player, alignment))) return;
     
-    // Prevent any changes if:
-    //   a human player tries to click on behalf an AI player
-    //   or clicked on an already occupied cell.
-    if ( !(owner.isHuman()) || Gameboard.isCellOccupied(alignment)) return;
-    
-    _updateGameboard(alignment, owner);
+    _updateGameboard(alignment, player);
+  }
+
+
+    function _isClickLegal(player, alignment) {
+    if (Game     .isOver()                 ||
+      !(player   .isHuman())               ||
+        Gameboard.isCellOccupied(alignment)
+      ) return false;
+    return true;
   }
 
 
@@ -79,7 +83,8 @@ const TicTacToe = (function() {
 
   function _updateGameboard(alignment, owner) {
     Gameboard.setOwnership(alignment, owner);
-    _updateView();
+    Game.nextTurn(handlers);
+    View.update(handlers);
     
     let winner = Gameboard.findWinner();
     
@@ -87,15 +92,12 @@ const TicTacToe = (function() {
       // Delay finishing the game to allow the last clicked cell show its owner.
       setTimeout(() => _finishGame(winner), 0);
     } else {
-      Game.nextTurn(handlers);
+      
     }
+
   }
 
 
-  function _updateView() {
-    View.Gameboard.update(Gameboard.getState(), handlers);
-    View.State    .update(Game.getPlayers());
-  }
 
 
   function _isGameOver(winner) {
@@ -127,6 +129,7 @@ const TicTacToe = (function() {
 
     _updateView();
   }
+
 
 
 

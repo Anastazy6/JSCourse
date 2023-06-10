@@ -3,7 +3,7 @@
  */
 const ViewUtils = (function() {
   function show(element, type='block') {
-    element.style.display = 'grid';
+    element.style.display = type;
   }
 
   function hide(element) {

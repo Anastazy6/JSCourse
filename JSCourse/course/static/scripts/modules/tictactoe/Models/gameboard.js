@@ -14,8 +14,8 @@ const Gameboard = (function() {
 
 
   const _winningRows = [
-    ..._singleAxisWin(_social, _moral),
-    ..._singleAxisWin(_moral, _social),
+    ..._singleAxisWin(_social),
+    ..._singleAxisWin(_moral),
     ..._diagonalWin
   ];
   
@@ -84,16 +84,17 @@ const Gameboard = (function() {
 
 
 
-  function _singleAxisWin(primary, secondary) {
-    let rows = [];
+  function _singleAxisWin(axis) {
+    const cells = axis === _social ? _moral : _social
+    let rows    = [];
     
-    primary.map(s => {
+    axis.map(a => {
       let newRow = [];
       
-      secondary.map(m => {
-        let alignment = primary === _social ?
-          s + m :
-          m + s ; 
+      cells.map(c => {
+        let alignment = axis === _social ?
+          a + c :
+          c + a ; 
 
         newRow = [...newRow, alignment];
       })

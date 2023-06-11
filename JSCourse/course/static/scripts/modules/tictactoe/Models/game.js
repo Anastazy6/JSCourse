@@ -19,8 +19,8 @@ const Game = (function() {
 
   function nextTurn(handlers) {
     currentPlayer = currentPlayer === player1 ?
-      player2 :
-      player1 ;
+        player2 :
+        player1 ;
 
     if ( !(currentPlayer.isHuman()) ) _performAIMove(handlers);
   }
@@ -37,11 +37,11 @@ const Game = (function() {
 
   function reset(){
     startingPlayer = startingPlayer === player1 ?
-    player2 :
-    player1 ;
+        player2 :
+        player1 ;
 
     currentPlayer = startingPlayer;
-    isOver        = false;
+    over          = false;
   }
 
 
@@ -54,7 +54,7 @@ const Game = (function() {
 
 
   function _performAIMove(handlers) {
-    if (isOver) return;
+    if (isOver()) return;
 
     switch (currentPlayer.getType()) {
       case 'AI-random':

@@ -28,7 +28,7 @@ const State = (function() {
   }
 
 
-  function update(players) {
+  function update(players) {  
     _p1Wins.innerText = players.p1.getWins();
     _p2Wins.innerText = players.p2.getWins();
 

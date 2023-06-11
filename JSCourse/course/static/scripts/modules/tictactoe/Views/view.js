@@ -15,8 +15,9 @@ const View = (function() {
   const _gameContainer = document.getElementById("game-container");
 
   const _views = {
-    'launcher': Launcher.wrapper,
-    'game'    : _gameContainer
+    'launcher': Launcher.container,
+    'game'    : _gameContainer,
+    'summary' : Summary.container
   }
 
 
@@ -31,6 +32,13 @@ const View = (function() {
   function update(handlers) {
     Gameboard.update(Board.getState(), handlers);
     State    .update(Game.getPlayers());
+  }
+
+
+  function showSummary(handlers) {
+    show('summary');
+    Summary.showResults(Board.getState());
+    Summary.enableButtons(handlers)
   }
 
 

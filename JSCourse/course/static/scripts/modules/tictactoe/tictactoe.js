@@ -16,9 +16,12 @@ const TicTacToe = (function() {
 
   const handlers = {
     clickCell  : _handleClickCell,
+    nextRound  : _handleNextRound,
     pickOptimal: _handlePickOptimal,
     pickRandom : _handlePickRandom,
+    restart    : _handleRestart,
     startGame  : _handleStartGame,
+    
   }
 
 
@@ -90,10 +93,7 @@ const TicTacToe = (function() {
     if (_isGameOver(winner)) {
       // Delay finishing the game to allow the last clicked cell show its owner.
       setTimeout(() => _finishGame(winner), 0);
-    } else {
-      
-    }
-
+    } 
   }
 
 
@@ -131,7 +131,13 @@ const TicTacToe = (function() {
   }
 
 
+  function _handleRestart() {
+    View.show('launcher');
+  }
 
+  function _handleNextRound() {
+
+  }
 
 
   function _handlePickRandom() {
@@ -142,12 +148,12 @@ const TicTacToe = (function() {
       throw "Only random AI player may use this function."; 
     }
 
-    const legalCells = Gameboard.getEmptyCells();
-    console.log(legalCells);
-    const chosenCell = Util.arraySample(legalCells);
-
-    
-    setTimeout(() => _updateGameboard(chosenCell, player), 1000);
+    setTimeout(() => {
+      const legalCells = Gameboard.getEmptyCells();
+      const chosenCell = Util.arraySample(legalCells);
+      
+      _updateGameboard(chosenCell, player);
+    }, 1000)
   }
 
 
@@ -163,7 +169,6 @@ const TicTacToe = (function() {
 
     // Temporary solution (unbeatable AI picks random legal cells)
     const legalCells = Gameboard.getEmptyCells();
-    console.log(legalCells)
     const chosenCell = Util.arraySample(legalCells);
 
     setTimeout(() => _updateGameboard(chosenCell, player), 1000);

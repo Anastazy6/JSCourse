@@ -19,6 +19,14 @@ const View = (function() {
   }
 
 
+  function startGame(handlers) {
+    State.initialize(Game.getPlayers());
+    Gameboard.update(GameboardModel.getState(), handlers)
+
+    show('game');
+  }
+
+
   function update(handlers) {
     Gameboard.update(GameboardModel.getState(), handlers);
     State    .update(Game.getPlayers());
@@ -28,9 +36,9 @@ const View = (function() {
   function show(currentView, display='block') {
     _catchWrongViewName(currentView);
     
-    Object.keys(_views).map(view => ViewUtils.hide(view));
+    Object.keys(_views).map(view => ViewUtils.hide(_views[view]));
 
-    ViewUtils.show(currentView, display)
+    ViewUtils.show(_views[currentView], display)
   }
 
 
@@ -53,8 +61,9 @@ const View = (function() {
     Launcher : Launcher,
     State    : State,
 
-    show  : show,
-    update: update
+    startGame: startGame,
+    show     : show,
+    update   : update
   }
 })()
 

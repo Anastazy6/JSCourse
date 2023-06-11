@@ -5,10 +5,14 @@ const Game = (function() {
   let player1;
   let player2;
 
+  let draws = 0;
+
   let over   = false
-  let isOver = () => over;
-  let finish = () => over = true;
   
+  const draw   = () => draws++;
+  const isOver = () => over;
+  const finish = () => over = true;
+
 
 
   const getCurrentPlayer = () => currentPlayer;
@@ -66,6 +70,7 @@ const Game = (function() {
 
 
   return {
+    draw            : draw,
     finish          : finish,
     getCurrentPlayer: getCurrentPlayer,
     getPlayers      : getPlayers,

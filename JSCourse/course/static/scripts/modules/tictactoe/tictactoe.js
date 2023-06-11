@@ -27,9 +27,8 @@ const TicTacToe = (function() {
 
     _startGame();
     Gameboard.reset();
-    _updateView()
-
-    View.State.initialize(Game.getPlayers());
+    
+    View.startGame(handlers);
   }
 
   /**
@@ -108,12 +107,13 @@ const TicTacToe = (function() {
 
 
   function _finishGame(winner) {
-    _updateView();
+    View.update(handlers);
 
     if (winner) {
       alert(`${winner.getName()} wins!`);
       winner.win();
     } else {
+      Game.draw();
       alert("It's a draw!");
     }
 
@@ -127,7 +127,7 @@ const TicTacToe = (function() {
     Game.reset();
     Gameboard.reset();
 
-    _updateView();
+    View.update(handlers);
   }
 
 

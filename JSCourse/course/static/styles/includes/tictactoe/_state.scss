@@ -1,0 +1,39 @@
+#p1-name   { grid-area: p1n; }
+#p1-symbol { grid-area: p1s; }
+#p1-wins   { grid-area: p1w; }
+#separator { grid-area: sep; }
+#p2-wins   { grid-area: p2w; }
+#p2-symbol { grid-area: p2s; }
+#p2-name   { grid-area: p2n; }
+
+#current-player-symbol { grid-area: cps; }
+
+#game-state {
+  display: grid;
+  width  : 400px;
+  margin : auto;
+  margin-bottom: 20px;
+  
+  grid-template-columns: 3fr 2fr 1fr 1fr 1fr 2fr 3fr;
+  grid-template-rows   : 1fr 1fr;
+  grid-template-areas  :
+    'p1n p1s p1w sep p2w p2s p2n'
+    'cps cps cps cps cps cps cps';
+}
+
+#p1-name,
+#p2-wins {
+  text-align: left;
+}
+
+#p1-symbol,
+#p2-symbol,
+#separator,
+#current-player-symbol {
+  text-align: center;
+}
+
+#p1-wins,
+#p2-name {
+  text-align: right;
+}

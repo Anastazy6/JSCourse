@@ -1,0 +1,21 @@
+#launcher {
+  display  : none;  // Changed to 'block' with JS
+  max-width: 600px;
+  margin   : auto;
+}
+
+#game-container {
+  display: none;
+}
+
+
+#summary-container {
+  display: none;
+}
+
+
+
+@import './board';
+@import './launcher';
+@import './state';
+@import './summary';

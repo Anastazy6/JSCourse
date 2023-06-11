@@ -70,8 +70,8 @@ $utilities: map-merge(
 @import "./includes/general";
 
 
-@import "./includes/library";
-@import "./includes/tictactoe";
+@import "./includes/library/library";
+@import "./includes/tictactoe/tictactoe";
 
 
 // Add temporary solutions to the file imported below

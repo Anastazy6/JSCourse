@@ -3,12 +3,13 @@ import ViewUtils from "../../../Utilities/viewUtils.js";
 import Gameboard from "./gameboard.js";
 import Launcher  from "./launcher.js";
 import State     from "./state.js";
-
+import Summary   from "./summary.js";
 
 import Game      from "../Models/game.js";
 import Player    from "../Models/player.js";
+import Board     from "../Models/gameboard.js";
 
-import GameboardModel from "../Models/gameboard.js";
+
 
 const View = (function() {
   const _gameContainer = document.getElementById("game-container");
@@ -21,14 +22,14 @@ const View = (function() {
 
   function startGame(handlers) {
     State.initialize(Game.getPlayers());
-    Gameboard.update(GameboardModel.getState(), handlers)
+    Gameboard.update(Board.getState(), handlers)
 
     show('game');
   }
 
 
   function update(handlers) {
-    Gameboard.update(GameboardModel.getState(), handlers);
+    Gameboard.update(Board.getState(), handlers);
     State    .update(Game.getPlayers());
   }
 
@@ -56,10 +57,13 @@ const View = (function() {
     }
   }
 
+
+
   return {
     Gameboard: Gameboard,
     Launcher : Launcher,
     State    : State,
+    Summary  : Summary,
 
     startGame: startGame,
     show     : show,

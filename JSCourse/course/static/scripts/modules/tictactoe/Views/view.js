@@ -6,7 +6,6 @@ import State     from "./state.js";
 import Summary   from "./summary.js";
 
 import Game      from "../Models/game.js";
-import Player    from "../Models/player.js";
 import Board     from "../Models/gameboard.js";
 
 
@@ -37,7 +36,7 @@ const View = (function() {
 
   function showSummary(handlers) {
     show('summary');
-    Summary.showResults(Board.getState());
+    Summary.showResults(Game.getState());
     Summary.enableButtons(handlers)
   }
 
@@ -73,9 +72,10 @@ const View = (function() {
     State    : State,
     Summary  : Summary,
 
-    startGame: startGame,
-    show     : show,
-    update   : update
+    startGame  : startGame,
+    show       : show,
+    showSummary: showSummary,
+    update     : update
   }
 })()
 

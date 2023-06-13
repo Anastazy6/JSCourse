@@ -27,8 +27,16 @@ const Summary = (function() {
   }
 
 
-  function showResults(state) {
-
+  function showResults(results) {
+    const p1 = results.player1;
+    const p2 = results.player2;
+    
+    winner .innerText = results.winner     ?
+        `${resultsWinner.getName()} wins!` :
+        "It's a draw!";
+    
+    p1score.innerText = `${p1.getName()}'s score: ${p1.getWins()}`;
+    p2score.innerText = `${p2.getName()}'s score: ${p2.getWins()}`;
   }
 
   return {

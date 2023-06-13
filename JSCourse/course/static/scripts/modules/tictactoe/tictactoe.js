@@ -109,13 +109,9 @@ const TicTacToe = (function() {
   function _finishGame(winner) {
     View.update(handlers);
 
-    if (winner) {
-      alert(`${winner.getName()} wins!`);
-      winner.win();
-    } else {
-      Game.draw();
-      alert("It's a draw!");
-    }
+    winner ? winner.win() : Game.draw();
+
+    View.showSummary();
 
     _reset();
   }

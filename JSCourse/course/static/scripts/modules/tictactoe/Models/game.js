@@ -7,15 +7,22 @@ const Game = (function() {
 
   let draws = 0;
 
-  let over   = false
+  let over   = false;
+  let winner = null;
   
   const draw   = () => draws++;
   const isOver = () => over;
-  const finish = () => over = true;
-
-
+  const setWinner = newWinner => winner = newWinner;
 
   const getCurrentPlayer = () => currentPlayer;
+
+
+  function finishRound(roundWinner=null) {
+    over   = true;
+    winner = roundWinner;
+    if (roundWinner === null) draw();
+  }
+
 
   function nextTurn(handlers) {
     currentPlayer = currentPlayer === player1 ?
@@ -31,6 +38,17 @@ const Game = (function() {
       p1: player1,
       p2: player2,
       current: currentPlayer
+    }
+  }
+
+
+  function getState() {
+    return {
+      player1: player1,
+      player2: player2,
+      over   : over,
+      winner : winner,
+      draws  : draws
     }
   }
 
@@ -58,11 +76,9 @@ const Game = (function() {
 
     switch (currentPlayer.getType()) {
       case 'AI-random':
-        handlers.pickRandom();
-        break;
+        return handlers.pickRandom();
       case 'AI-unbeatable':
-        handlers.pickOptimal();
-        break;
+        return handlers.pickOptimal();
       default:
         throw `Invalid player type for AI move picker: ${currentPlayer.getType()}`;
     }
@@ -71,13 +87,15 @@ const Game = (function() {
 
   return {
     draw            : draw,
-    finish          : finish,
+    finishRound     : finishRound,
     getCurrentPlayer: getCurrentPlayer,
     getPlayers      : getPlayers,
+    getState        : getState,
     isOver          : isOver,
     nextTurn        : nextTurn,
     reset           : reset,
-    setPlayers      : setPlayers
+    setPlayers      : setPlayers,
+    setWinner       : setWinner
   }
 })()
 

@@ -1,9 +1,3 @@
-#launcher {
-  display  : none;  // Changed to 'block' with JS
-  max-width: 600px;
-  margin   : auto;
-}
-
 // Labels
 #player-1-name-label   { grid-area: l1-name; }
 #player-1-symbol-label { grid-area: l1-symb; }

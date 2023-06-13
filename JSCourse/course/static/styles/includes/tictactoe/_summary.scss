@@ -1,4 +1,5 @@
 #winner            { grid-area: winner ; }
+#draws             { grid-area: draws  ; }
 #player1-score     { grid-area: p1score; }
 #player2-score     { grid-area: p2score; }
 #restart-button    { grid-area: restart; }
@@ -6,11 +7,24 @@
 
 
 #summary {
-  display: grid;
+  display  : grid;
+  margin   : auto;
+  max-width: 600px;
 
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows   : 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows   : 1fr 1fr 1fr;
   grid-template-areas  : 
-    'p1score p1score winner  winner  p2score p2score'
-    'restart restart restart nextrnd nextrnd nextrnd';
+    '.       winner   .      '
+    'p1score draws    p2score'
+    'restart .        nextrnd';
+}
+
+
+#winner,
+#draws {
+  text-align: center;
+}
+
+#player2-score {
+  text-align: right;
 }

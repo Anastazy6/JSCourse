@@ -35,6 +35,7 @@ const View = (function() {
 
 
   function showSummary(handlers) {
+    console.log(handlers);
     show('summary');
     Summary.showResults(Game.getState());
     Summary.enableButtons(handlers)

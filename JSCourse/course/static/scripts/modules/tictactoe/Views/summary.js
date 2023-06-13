@@ -2,6 +2,7 @@ const Summary = (function() {
 
   const container    = document.getElementById("summary-container");
   const winner       = document.getElementById("winner"           );
+  const draws        = document.getElementById("draws"            );
   const p1score      = document.getElementById("player1-score"    );
   const p2score      = document.getElementById("player2-score"    );
   const restartBtn   = document.getElementById("restart-button"   );
@@ -35,8 +36,10 @@ const Summary = (function() {
         `${resultsWinner.getName()} wins!` :
         "It's a draw!";
     
-    p1score.innerText = `${p1.getName()}'s score: ${p1.getWins()}`;
-    p2score.innerText = `${p2.getName()}'s score: ${p2.getWins()}`;
+    draws  .innerText = `Draws: ${results.draws}`
+
+    p1score.innerText = `${p1.getName()} score: ${p1.getWins()}`;
+    p2score.innerText = `${p2.getName()} score: ${p2.getWins()}`;
   }
 
   return {

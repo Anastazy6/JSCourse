@@ -88,32 +88,23 @@ const TicTacToe = (function() {
     Game.nextTurn(handlers);
     View.update(handlers);
     
-    let winner = Gameboard.findWinner();
+    Game.setWinner(Gameboard.findWinner());
     
-    if (_isGameOver(winner)) {
+    if (Game.isOver()) {
       // Delay finishing the game to allow the last clicked cell show its owner.
-      setTimeout(() => _finishGame(winner), 0);
+      setTimeout(() => _finishGame(), 0);
     } 
   }
 
 
 
 
-  function _isGameOver(winner) {
-    if (winner) return true; // There's a winner;
-
-    return Gameboard.allCellsOccupied(); // True if it's a draw, else false;
-  }
-
-
-  function _finishGame(winner) {
-    View.update(handlers);
-
+  function _finishGame() {
+    const winner = Game.getWinner();
     winner ? winner.win() : Game.draw();
 
-    View.showSummary();
-
-    _reset();
+    View.update(handlers);
+    View.showSummary(handlers);
   }
 
 
@@ -132,7 +123,8 @@ const TicTacToe = (function() {
   }
 
   function _handleNextRound() {
-
+    View.show('game');
+    _reset();
   }
 
 

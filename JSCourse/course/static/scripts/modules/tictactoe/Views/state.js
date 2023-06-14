@@ -13,35 +13,35 @@ const State = (function() {
   const _currentPlayerSymbol = document.getElementById("current-player-symbol");
 
 
-  function initialize(players) {
-    _p1Name  .innerText = players.p1.getName();
-    _p1Symbol.innerText = players.p1.getSymbol();
-    _p1Wins  .innerText = players.p1.getWins();
+  function initialize(game) {
+    _p1Name  .innerText = game.player1.getName();
+    _p1Symbol.innerText = game.player1.getSymbol();
+    _p1Wins  .innerText = game.player1.getWins();
 
-    _p2Wins  .innerText = players.p2.getWins();
-    _p2Symbol.innerText = players.p2.getSymbol();
-    _p2Name  .innerText = players.p2.getName();
+    _p2Wins  .innerText = game.player2.getWins();
+    _p2Symbol.innerText = game.player2.getSymbol();
+    _p2Name  .innerText = game.player2.getName();
 
-    _currentPlayerSymbol.innerText = players.current.getSymbol();
+    _currentPlayerSymbol.innerText = game.current.getSymbol();
 
-    _setColorOfSymbols(players);
+    _setColorOfSymbols(game);
   }
 
 
-  function update(players) {  
-    _p1Wins.innerText = players.p1.getWins();
-    _p2Wins.innerText = players.p2.getWins();
+  function update(game) {  
+    _p1Wins.innerText = game.player1.getWins();
+    _p2Wins.innerText = game.player2.getWins();
 
-    _currentPlayerSymbol.innerText   = players.current.getSymbol();
-    _currentPlayerSymbol.style.color = players.current.getColor();
+    _currentPlayerSymbol.innerText   = game.current.getSymbol();
+    _currentPlayerSymbol.style.color = game.current.getColor();
   }
 
   
-  function _setColorOfSymbols(players) {
-    _p1Symbol.style.color = players.p1.getColor();
-    _p2Symbol.style.color = players.p2.getColor();
+  function _setColorOfSymbols(game) {
+    _p1Symbol.style.color = game.player1.getColor();
+    _p2Symbol.style.color = game.player2.getColor();
 
-    _currentPlayerSymbol.style.color = players.current.getColor();
+    _currentPlayerSymbol.style.color = game.current.getColor();
   }
 
 

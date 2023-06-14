@@ -1,20 +1,17 @@
 const Util = (function() {
-
-  const applyCSS = (element, styles) => {
-    Object.keys(styles).map(prop => element.style[prop]  = styles[prop]);
-
-    return element;
-  }
-
-
   /**
    * @param {Array} array 
    * @returns Random item from the array passed as the only parameter.
    */
-  const arraySample = array => {
+  function arraySample() {
     const index = Math.floor(Math.random() * array.length);
 
     return array[index];
+  }
+
+
+  function randint(max, min=0) {
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
 
@@ -30,7 +27,7 @@ const Util = (function() {
 
 
 
-  const isKeyNumeric = keyCode => {
+  function isKeyNumeric(keyCode) {
     if ( 
       keyCode === 8  || // Backspace
       keyCode === 9  || // Tab
@@ -46,11 +43,11 @@ const Util = (function() {
 
 
   return {
-    applyCSS     : applyCSS,
     arraySample  : arraySample,
     capitalize   : capitalize,
     generateIndex: generateIndex,
     isKeyNumeric : isKeyNumeric,
+    randint      : randint
   }
 
 })()

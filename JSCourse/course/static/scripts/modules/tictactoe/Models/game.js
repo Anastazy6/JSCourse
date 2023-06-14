@@ -1,18 +1,15 @@
 const Game = (function() {
   let currentPlayer;
   let startingPlayer;
-  
   let player1;
   let player2;
 
-  let draws = 0;
-
+  let draws  = 0;
   let over   = false;
-  let winner = false;
+  let winner = null;
   
   const draw   = () => draws++;
   const isOver = () => over;
-  const getWinner = () => winner;
   const setWinner = newWinner => winner = newWinner;
 
   const getCurrentPlayer = () => currentPlayer;
@@ -34,19 +31,11 @@ const Game = (function() {
   }
 
 
-  function getPlayers() {
-    return {
-      p1: player1,
-      p2: player2,
-      current: currentPlayer
-    }
-  }
-
-
   function getState() {
     return {
       player1: player1,
       player2: player2,
+      current: currentPlayer,
       over   : over,
       winner : winner,
       draws  : draws
@@ -90,9 +79,7 @@ const Game = (function() {
     draw            : draw,
     finishRound     : finishRound,
     getCurrentPlayer: getCurrentPlayer,
-    getPlayers      : getPlayers,
     getState        : getState,
-    getWinner       : getWinner,
     isOver          : isOver,
     nextTurn        : nextTurn,
     reset           : reset,

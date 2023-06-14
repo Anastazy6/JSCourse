@@ -21,7 +21,7 @@ const View = (function() {
 
 
   function startGame(handlers) {
-    State.initialize(Game.getPlayers());
+    State.initialize(Game.getState());
     Gameboard.update(Board.getState(), handlers)
 
     show('game');
@@ -30,7 +30,7 @@ const View = (function() {
 
   function update(handlers) {
     Gameboard.update(Board.getState(), handlers);
-    State    .update(Game.getPlayers());
+    State    .update(Game.getState());
   }
 
 

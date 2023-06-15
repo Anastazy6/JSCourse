@@ -3,7 +3,7 @@ const Util = (function() {
    * @param {Array} array 
    * @returns Random item from the array passed as the only parameter.
    */
-  function arraySample() {
+  function arraySample(array) {
     const index = Math.floor(Math.random() * array.length);
 
     return array[index];

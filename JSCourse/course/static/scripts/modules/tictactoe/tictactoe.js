@@ -42,7 +42,7 @@ const TicTacToe = (function() {
     event.stopPropagation();
 
     const alignment = event.target.dataset.Id;
-    const player    = Game.getCurrentPlayer();
+    const player    = Game.getState().current;
 
     if ( !(_isClickLegal(player, alignment))) return;
     
@@ -51,7 +51,7 @@ const TicTacToe = (function() {
 
 
     function _isClickLegal(player, alignment) {
-    if (Game     .isOver()                 ||
+    if (Game     .getState().over          ||
       !(player   .isHuman())               ||
         Gameboard.isCellOccupied(alignment)
       ) return false;
@@ -90,9 +90,9 @@ const TicTacToe = (function() {
     
     Game.setWinner(Gameboard.findWinner());
     
-    if (Game.isOver()) {
+    if (Game.getState().over || Gameboard.allCellsOccupied()) {
       // Delay finishing the game to allow the last clicked cell show its owner.
-      setTimeout(() => _finishGame(), 0);
+      setTimeout(() => _finishGame(), 1000);
     } 
   }
 
@@ -100,7 +100,7 @@ const TicTacToe = (function() {
 
 
   function _finishGame() {
-    const winner = Game.getWinner();
+    const winner = Game.getState().winner;
     winner ? winner.win() : Game.draw();
 
     View.update(handlers);
@@ -129,10 +129,10 @@ const TicTacToe = (function() {
 
 
   function _handlePickRandom() {
-    const player = Game.getCurrentPlayer();
+    const player = Game.getState().current;
 
     // Ensure this function is only available to the random AI player.
-    if ( !(player.isRandom()) ) {
+    if ( !(player.isRandomAI()) ) {
       throw "Only random AI player may use this function."; 
     }
 
@@ -146,10 +146,10 @@ const TicTacToe = (function() {
 
 
   function _handlePickOptimal() {
-    const player = Game.getCurrentPlayer();
+    const player = Game.getState().current;
 
     // Ensure this function is only available to the unbeatable AI player.
-    if ( !(player.isUnbeatable()) ) {
+    if ( !(player.isUnbeatableAI()) ) {
       throw "Only unbeatable AI player may use this function."; 
     }
 

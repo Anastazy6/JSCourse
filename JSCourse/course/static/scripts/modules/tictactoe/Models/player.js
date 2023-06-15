@@ -9,9 +9,9 @@ const Player = (id, name, symbol, color, type) => {
   const getWins   = () => wins;
   
 
-  const isHuman      = () => type === 'human';
-  const isRandom     = () => type === 'AI-random';
-  const isUnbeatable = () => type === 'AI-unbeatable';
+  const isHuman        = () => type === 'human';
+  const isRandomAI     = () => type === 'AI-random';
+  const isUnbeatableAI = () => type === 'AI-unbeatable';
 
 
   const win  = () => wins++;
@@ -34,9 +34,9 @@ const Player = (id, name, symbol, color, type) => {
     getType  : getType,
     getWins  : getWins,
 
-    isHuman     : isHuman,
-    isRandom    : isRandom,
-    isUnbeatable: isUnbeatable,
+    isHuman       : isHuman,
+    isRandomAI    : isRandomAI,
+    isUnbeatableAI: isUnbeatableAI,
 
     to_s: to_s,
     win : win

@@ -33,7 +33,7 @@ const Summary = (function() {
     const p2 = results.player2;
     
     winner .innerText = results.winner     ?
-        `${resultsWinner.getName()} wins!` :
+        `${results.winner.getName()} wins!` :
         "It's a draw!";
     
     draws  .innerText = `Draws: ${results.draws}`

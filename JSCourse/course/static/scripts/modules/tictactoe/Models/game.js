@@ -9,11 +9,13 @@ const Game = (function() {
   let winner = null;
   
   const draw   = () => draws++;
-  const isOver = () => over;
-  const setWinner = newWinner => winner = newWinner;
 
-  const getCurrentPlayer = () => currentPlayer;
 
+  function setWinner(newWinner) {
+    winner = newWinner;
+
+    if (!!winner) over = true;
+  }
 
   function finishRound(roundWinner=null) {
     over   = true;
@@ -62,7 +64,7 @@ const Game = (function() {
 
 
   function _performAIMove(handlers) {
-    if (isOver()) return;
+    if (over) return;
 
     switch (currentPlayer.getType()) {
       case 'AI-random':
@@ -76,15 +78,13 @@ const Game = (function() {
 
 
   return {
-    draw            : draw,
-    finishRound     : finishRound,
-    getCurrentPlayer: getCurrentPlayer,
-    getState        : getState,
-    isOver          : isOver,
-    nextTurn        : nextTurn,
-    reset           : reset,
-    setPlayers      : setPlayers,
-    setWinner       : setWinner
+    draw       : draw,
+    finishRound: finishRound,
+    getState   : getState,
+    nextTurn   : nextTurn,
+    reset      : reset,
+    setPlayers : setPlayers,
+    setWinner  : setWinner
   }
 })()
 

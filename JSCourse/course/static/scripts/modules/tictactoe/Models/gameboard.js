@@ -41,6 +41,7 @@ const Gameboard = (function() {
 
     // Assert that there can only be one winner.
     if (victoryRows.some(row => gameboard[row[0]] !== winner)) {
+      console.error(victoryRows);
       throw 'There cannot be 2 winners. The hell is going on?';
     }
 
@@ -61,10 +62,8 @@ const Gameboard = (function() {
 
 
   function setOwnership(alignment, player) {
-    console.log(`Chosen cell: ${alignment}`);
-
     if (isCellOccupied(alignment)) {
-      throw "Attempt at reoccupying a cell has NOT been blocked successfully!"
+      throw `Attempt at reoccupying a cell (${alignment}) has NOT been blocked successfully!`
     }
 
     gameboard[alignment] = player;

@@ -42,6 +42,7 @@ const Util = (function() {
   
 
 
+
   return {
     arraySample  : arraySample,
     capitalize   : capitalize,

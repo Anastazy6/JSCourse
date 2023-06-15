@@ -9,8 +9,13 @@ import Game      from "../Models/game.js";
 import Board     from "../Models/gameboard.js";
 
 
-
 const View = (function() {
+  let handlers;
+
+  function setHandlers(newHandlers) {
+    handlers = newHandlers;
+  }
+
   const _gameContainer = document.getElementById("game-container");
 
   const _views = {
@@ -20,7 +25,7 @@ const View = (function() {
   }
 
 
-  function startGame(handlers) {
+  function startGame() {
     State.initialize(Game.getState());
     Gameboard.update(Board.getState(), handlers)
 
@@ -28,14 +33,13 @@ const View = (function() {
   }
 
 
-  function update(handlers) {
+  function update() {
     Gameboard.update(Board.getState(), handlers);
     State    .update(Game.getState());
   }
 
 
-  function showSummary(handlers) {
-    console.log(handlers);
+  function showSummary() {
     show('summary');
     Summary.showResults(Game.getState());
     Summary.enableButtons(handlers)
@@ -68,6 +72,8 @@ const View = (function() {
 
 
   return {
+    setHandlers: setHandlers,
+    
     Gameboard: Gameboard,
     Launcher : Launcher,
     State    : State,

@@ -11,6 +11,7 @@ const TicTacToe = (function() {
   function run() {
     View.show('launcher');
     View.Launcher.form.onsubmit = handlers.startGame;
+    _setHandlers();
   }
 
 
@@ -62,14 +63,20 @@ const TicTacToe = (function() {
   function _startGame() { 
     const newGameData = new FormData(View.Launcher.form);
 
+
     Game.setPlayers(
       _createPlayer(1, newGameData),
       _createPlayer(2, newGameData)
     );
 
-    Game.nextTurn(handlers);
+    Game.nextTurn();
   }
 
+
+  function _setHandlers() {
+    Game.setHandlers(handlers);
+    View.setHandlers(handlers);
+  }
 
   function _createPlayer(id, gameData) {
     const attributes = ['name', 'symbol', 'color', 'type'];
@@ -85,8 +92,8 @@ const TicTacToe = (function() {
 
   function _updateGameboard(alignment, owner) {
     Gameboard.setOwnership(alignment, owner);
-    Game.nextTurn(handlers);
-    View.update(handlers);
+    Game.nextTurn();
+    View.update();
     
     Game.setWinner(Gameboard.findWinner());
     
@@ -103,8 +110,8 @@ const TicTacToe = (function() {
     const winner = Game.getState().winner;
     winner ? winner.win() : Game.draw();
 
-    View.update(handlers);
-    View.showSummary(handlers);
+    View.update();
+    View.showSummary();
   }
 
 
@@ -114,7 +121,7 @@ const TicTacToe = (function() {
     Game.reset();
     Gameboard.reset();
 
-    View.update(handlers);
+    View.update();
   }
 
 

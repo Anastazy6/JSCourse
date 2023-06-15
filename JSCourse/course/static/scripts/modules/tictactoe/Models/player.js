@@ -14,7 +14,10 @@ const Player = (id, name, symbol, color, type) => {
   const isUnbeatableAI = () => type === 'AI-unbeatable';
 
 
-  const win  = () => wins++;
+  const win  = () => {
+    console.log(`${name} wins!`);
+    wins++;
+  }
   
   const to_s = () => (
     `Id    : ${id}\n`     +

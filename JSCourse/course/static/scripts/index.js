@@ -1,3 +1,5 @@
+"use strict";
+
 import routes    from "./routes.js";
 import PathUtils from "./Utilities/pathUtils.js";
 import Sidebar   from "./Utilities/sidebar.js";

@@ -1,4 +1,11 @@
 const Game = (function() {
+  let handlers;
+
+  function setHandlers(newHandlers) {
+    handlers = newHandlers;
+  }
+
+
   let currentPlayer;
   let startingPlayer;
   let player1;
@@ -24,12 +31,12 @@ const Game = (function() {
   }
 
 
-  function nextTurn(handlers) {
+  function nextTurn() {
     currentPlayer = currentPlayer === player1 ?
         player2 :
         player1 ;
 
-    if ( !(currentPlayer.isHuman()) ) _performAIMove(handlers);
+    if ( !(currentPlayer.isHuman()) ) _performAIMove();
   }
 
 
@@ -46,12 +53,13 @@ const Game = (function() {
 
 
   function reset(){
+    over = false;
     startingPlayer = startingPlayer === player1 ?
         player2 :
         player1 ;
 
     currentPlayer = startingPlayer;
-    over          = false;
+    if ( !(currentPlayer.isHuman()) ) _performAIMove();
   }
 
 
@@ -63,7 +71,7 @@ const Game = (function() {
   }
 
 
-  function _performAIMove(handlers) {
+  function _performAIMove() {
     if (over) return;
 
     switch (currentPlayer.getType()) {
@@ -78,6 +86,8 @@ const Game = (function() {
 
 
   return {
+    setHandlers: setHandlers,
+
     draw       : draw,
     finishRound: finishRound,
     getState   : getState,

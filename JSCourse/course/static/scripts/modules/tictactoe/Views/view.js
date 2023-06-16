@@ -14,6 +14,7 @@ const View = (function() {
 
   function setHandlers(newHandlers) {
     handlers = newHandlers;
+    Launcher.form.onsubmit = handlers.startGame;
   }
 
   const _gameContainer = document.getElementById("game-container");

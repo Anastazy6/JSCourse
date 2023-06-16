@@ -1,3 +1,6 @@
+import Player    from "./player.js";
+import Gameboard from "./gameboard.js";
+
 const Game = (function() {
   let handlers;
 
@@ -18,20 +21,53 @@ const Game = (function() {
   const draw   = () => draws++;
 
 
-  function setWinner(newWinner) {
-    winner = newWinner;
+  function startNewGame(gameData) {
+    _reset();
 
-    if (!!winner) over = true;
+    _setPlayers(
+      _createPlayer(1, gameData),
+      _createPlayer(2, gameData)
+    )
+    
+    startNewRound();
   }
 
-  function finishRound(roundWinner=null) {
-    over   = true;
-    winner = roundWinner;
-    if (roundWinner === null) draw();
+  function startNewRound() {
+    over = false;
+    Gameboard.reset();
+
+    // Remember who's moved first this round so as to let the other player
+    //   move first in the next round
+    startingPlayer = startingPlayer === player1 ?
+        player2 :
+        player1 ;
+
+    currentPlayer = startingPlayer;
+    if ( !(currentPlayer.isHuman()) ) _performAIMove();
+  }
+
+
+  function registerMove(cell, player) {
+    Gameboard.setOwnership(cell, player);
+
+    setWinner();
+    if (!!winner || Gameboard.allCellsOccupied()) over = true;
+  }
+
+
+  function setWinner() {
+    winner = Gameboard.findWinner();
+  }
+
+
+  function finishRound() {
+    winner ? winner.win() : draw();
   }
 
 
   function nextTurn() {
+    if (over) finishRound();
+
     currentPlayer = currentPlayer === player1 ?
         player2 :
         player1 ;
@@ -52,18 +88,29 @@ const Game = (function() {
   }
 
 
-  function reset(){
-    over = false;
-    startingPlayer = startingPlayer === player1 ?
-        player2 :
-        player1 ;
 
-    currentPlayer = startingPlayer;
-    if ( !(currentPlayer.isHuman()) ) _performAIMove();
+
+
+  /*****************************************************************************
+  *********************************** Private **********************************
+  *****************************************************************************/
+
+
+
+  function _reset() {
+    player1 = null;
+    player2 = null;
+
+    currentPlayer  = null;
+    startingPlayer = null;
+
+    draws  = 0
+    winner = null;
+    over   = false;
   }
 
 
-  function setPlayers(newPlayer1, newPlayer2) {
+  function _setPlayers(newPlayer1, newPlayer2) {
     player1 = newPlayer1;
     player2 = newPlayer2;
 
@@ -71,6 +118,18 @@ const Game = (function() {
   }
 
 
+  function _createPlayer(id, gameData) {
+    const attributes = ['name', 'symbol', 'color', 'type'];
+    
+    return Player(
+      id,
+      ...attributes.map(attr => (
+        gameData.get(`player-${id}-${attr}`)
+      )),      
+    )
+  }
+
+  
   function _performAIMove() {
     if (over) return;
 
@@ -85,16 +144,18 @@ const Game = (function() {
   }
 
 
-  return {
-    setHandlers: setHandlers,
 
-    draw       : draw,
-    finishRound: finishRound,
-    getState   : getState,
-    nextTurn   : nextTurn,
-    reset      : reset,
-    setPlayers : setPlayers,
-    setWinner  : setWinner
+  return {
+    setHandlers  : setHandlers,
+    startNewGame : startNewGame,
+    startNewRound: startNewRound,
+
+    draw        : draw,
+    finishRound : finishRound,
+    getState    : getState,
+    nextTurn    : nextTurn,
+    registerMove: registerMove,
+    setWinner   : setWinner
   }
 })()
 

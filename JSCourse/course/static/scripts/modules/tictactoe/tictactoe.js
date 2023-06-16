@@ -1,7 +1,6 @@
 import Util      from "../../Utilities/util.js";
 
 import Game      from "./Models/game.js";
-import Player    from "./Models/player.js";
 import Gameboard from "./Models/gameboard.js";
 
 import View      from "./Views/view.js";
@@ -9,9 +8,8 @@ import View      from "./Views/view.js";
 
 const TicTacToe = (function() {
   function run() {
+    [Game, View].map(module => module.setHandlers(handlers));
     View.show('launcher');
-    View.Launcher.form.onsubmit = handlers.startGame;
-    _setHandlers();
   }
 
 
@@ -29,10 +27,12 @@ const TicTacToe = (function() {
   function _handleStartGame(event) {
     event.preventDefault();
 
-    _startGame();
+    const newGameData = new FormData(View.Launcher.form);
+
+    Game.startNewGame(newGameData);
     Gameboard.reset();
     
-    View.startGame(handlers);
+    View.startGame();
   }
 
   /**
@@ -42,86 +42,34 @@ const TicTacToe = (function() {
   function _handleClickCell(event) {
     event.stopPropagation();
 
-    const alignment = event.target.dataset.Id;
-    const player    = Game.getState().current;
+    const cell   = event.target.dataset.Id;
+    const player = Game.getState().current;
 
-    if ( !(_isClickLegal(player, alignment))) return;
+    if ( !(_isClickLegal(cell, player))) return;
     
-    _updateGameboard(alignment, player);
+    _performMove(cell, player);
   }
 
 
-    function _isClickLegal(player, alignment) {
+    function _isClickLegal(cell, player) {
     if (Game     .getState().over          ||
       !(player   .isHuman())               ||
-        Gameboard.isCellOccupied(alignment)
+        Gameboard.isCellOccupied(cell)
       ) return false;
     return true;
   }
 
 
-  function _startGame() { 
-    const newGameData = new FormData(View.Launcher.form);
 
-
-    Game.setPlayers(
-      _createPlayer(1, newGameData),
-      _createPlayer(2, newGameData)
-    );
-
-    Game.nextTurn();
-  }
-
-
-  function _setHandlers() {
-    Game.setHandlers(handlers);
-    View.setHandlers(handlers);
-  }
-
-  function _createPlayer(id, gameData) {
-    const attributes = ['name', 'symbol', 'color', 'type'];
-    
-    return Player(
-      id,
-      ...attributes.map(attr => (
-        gameData.get(`player-${id}-${attr}`)
-      )),      
-    )
-  }
-
-
-  function _updateGameboard(alignment, owner) {
-    Gameboard.setOwnership(alignment, owner);
+  function _performMove(cell, player) {
+    Game.registerMove(cell, player);
     Game.nextTurn();
     View.update();
     
-    Game.setWinner(Gameboard.findWinner());
-    
-    if (Game.getState().over || Gameboard.allCellsOccupied()) {
+    if (Game.getState().over) {
       // Delay finishing the game to allow the last clicked cell show its owner.
-      setTimeout(() => _finishGame(), 1000);
+      setTimeout(() => View.showSummary(), 1000);
     } 
-  }
-
-
-
-
-  function _finishGame() {
-    const winner = Game.getState().winner;
-    winner ? winner.win() : Game.draw();
-
-    View.update();
-    View.showSummary();
-  }
-
-
-
-
-  function _reset(){
-    Game.reset();
-    Gameboard.reset();
-
-    View.update();
   }
 
 
@@ -130,8 +78,9 @@ const TicTacToe = (function() {
   }
 
   function _handleNextRound() {
-    View.show('game');
-    _reset();
+    Game.startNewRound();
+    View.show('game');    
+    View.update();
   }
 
 
@@ -147,7 +96,7 @@ const TicTacToe = (function() {
       const legalCells = Gameboard.getEmptyCells();
       const chosenCell = Util.arraySample(legalCells);
       
-      _updateGameboard(chosenCell, player);
+      _performMove(chosenCell, player);
     }, 1000)
   }
 
@@ -166,7 +115,7 @@ const TicTacToe = (function() {
     const legalCells = Gameboard.getEmptyCells();
     const chosenCell = Util.arraySample(legalCells);
 
-    setTimeout(() => _updateGameboard(chosenCell, player), 1000);
+    setTimeout(() => _performMove(chosenCell, player), 1000);
   }
 
 

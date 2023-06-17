@@ -97,7 +97,7 @@ const TicTacToe = (function() {
       const chosenCell = Util.arraySample(legalCells);
       
       _performMove(chosenCell, player);
-    }, 1000)
+    }, 666)
   }
 
 
@@ -115,7 +115,7 @@ const TicTacToe = (function() {
     const legalCells = Gameboard.getEmptyCells();
     const chosenCell = Util.arraySample(legalCells);
 
-    setTimeout(() => _performMove(chosenCell, player), 1000);
+    setTimeout(() => _performMove(chosenCell, player), 666);
   }
 
 

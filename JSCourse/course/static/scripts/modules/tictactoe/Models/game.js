@@ -28,7 +28,7 @@ const Game = (function() {
       _createPlayer(1, gameData),
       _createPlayer(2, gameData)
     )
-    
+
     startNewRound();
   }
 
@@ -43,6 +43,7 @@ const Game = (function() {
         player1 ;
 
     currentPlayer = startingPlayer;
+
     if ( !(currentPlayer.isHuman()) ) _performAIMove();
   }
 
@@ -113,8 +114,6 @@ const Game = (function() {
   function _setPlayers(newPlayer1, newPlayer2) {
     player1 = newPlayer1;
     player2 = newPlayer2;
-
-    startingPlayer = player1;
   }
 
 

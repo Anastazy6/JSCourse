@@ -1,5 +1,5 @@
-import Player    from "./player.js";
-import Gameboard from "./gameboard.js";
+import Player from "./player.js";
+import Board  from "./board.js";
 
 const Game = (function() {
   let handlers;
@@ -34,7 +34,7 @@ const Game = (function() {
 
   function startNewRound() {
     over = false;
-    Gameboard.reset();
+    Board.reset();
 
     // Remember who's moved first this round so as to let the other player
     //   move first in the next round
@@ -49,15 +49,15 @@ const Game = (function() {
 
 
   function registerMove(cell, player) {
-    Gameboard.setOwnership(cell, player);
+    Board.setOwnership(cell, player);
 
     setWinner();
-    if (!!winner || Gameboard.allCellsOccupied()) over = true;
+    if (!!winner || Board.allCellsOccupied()) over = true;
   }
 
 
   function setWinner() {
-    winner = Gameboard.findWinner();
+    winner = Board.findWinner();
   }
 
 

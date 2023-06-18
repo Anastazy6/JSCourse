@@ -1,9 +1,13 @@
-import Util      from "../../Utilities/util.js";
+import Util from "../../Utilities/util.js";
 
-import Game      from "./Models/game.js";
-import Gameboard from "./Models/gameboard.js";
+import Game  from "./Models/game.js";
+import Board from "./Models/board.js";
+import View  from "./Views/view.js";
 
-import View      from "./Views/view.js";
+import UnbeatableAI from "./AI/unbeatable.js";
+import RandomAI     from "./AI/random.js";
+
+
 
 
 const TicTacToe = (function() {
@@ -26,17 +30,15 @@ const TicTacToe = (function() {
 
   function _handleStartGame(event) {
     event.preventDefault();
-
     const newGameData = new FormData(View.Launcher.form);
-
-    Game.startNewGame(newGameData);
-    Gameboard.reset();
     
-    View.startGame();
+    Board.reset();
+    Game .startNewGame(newGameData);
+    View .startGame();
   }
 
   /**
-   *  Handles HUMAN users' clicks on the cells in the gameboard.
+   *  Handles HUMAN users' clicks on the cells in the Board.
    * 
    */
   function _handleClickCell(event) {
@@ -54,7 +56,7 @@ const TicTacToe = (function() {
     function _isClickLegal(cell, player) {
     if (Game     .getState().over          ||
       !(player   .isHuman())               ||
-        Gameboard.isCellOccupied(cell)
+        Board.isCellOccupied(cell)
       ) return false;
     return true;
   }
@@ -85,34 +87,18 @@ const TicTacToe = (function() {
 
 
   function _handlePickRandom() {
-    const player = Game.getState().current;
-
-    // Ensure this function is only available to the random AI player.
-    if ( !(player.isRandomAI()) ) {
-      throw "Only random AI player may use this function."; 
-    }
-
-      const legalCells = Gameboard.getEmptyCells();
-      const chosenCell = Util.arraySample(legalCells);
+    const player     = Game.getState().current;
+    const chosenCell = RandomAI.move(player);
       
-      setTimeout(() => _performMove(chosenCell, player), 666);
+    setTimeout(() => _performMove(chosenCell, player), 666);
   }
 
 
   function _handlePickOptimal() {
-    const player = Game.getState().current;
-
-    // Ensure this function is only available to the unbeatable AI player.
-    if ( !(player.isUnbeatableAI()) ) {
-      throw "Only unbeatable AI player may use this function."; 
-    }
+    const player     = Game.getState().current;
+    const chosenCell = UnbeatableAI.move(player);
 
     // TODO: write algorithm for the unbeatable AI player.
-
-    // Temporary solution (unbeatable AI picks random legal cells)
-    const legalCells = Gameboard.getEmptyCells();
-    const chosenCell = Util.arraySample(legalCells);
-
     setTimeout(() => _performMove(chosenCell, player), 666);
   }
 

@@ -6,7 +6,7 @@ import State     from "./state.js";
 import Summary   from "./summary.js";
 
 import Game      from "../Models/game.js";
-import Board     from "../Models/gameboard.js";
+import Board     from "../Models/board.js";
 
 
 const View = (function() {

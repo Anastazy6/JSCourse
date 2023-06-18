@@ -92,12 +92,10 @@ const TicTacToe = (function() {
       throw "Only random AI player may use this function."; 
     }
 
-    setTimeout(() => {
       const legalCells = Gameboard.getEmptyCells();
       const chosenCell = Util.arraySample(legalCells);
       
-      _performMove(chosenCell, player);
-    }, 666)
+      setTimeout(() => _performMove(chosenCell, player), 666);
   }
 
 

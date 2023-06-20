@@ -15,7 +15,6 @@ const Player = (id, name, symbol, color, type) => {
 
 
   const win  = () => {
-    console.log(`${name} wins!`);
     wins++;
   }
   

@@ -18,21 +18,25 @@ const UnbeatableAI = (function() {
 
     const isMaximizingPlayer = _isMaximizing(player);
 
-    return _findBestMove();
+    return _findBestMove(isMaximizingPlayer);
   }
 
-  function _findBestMove() {
+  function _findBestMove(isMaximizingPlayer) {
     const legalMoves = Board.getEmptyCells();
     let bestMove = null;
 
-    legalMoves.forEach(move => bestMove = _betterOf(bestMove, move));
+    legalMoves.forEach(move => (
+      bestMove = _betterOf(bestMove, move, isMaximizingPlayer)
+    ));
 
     return bestMove;
   }
 
 
-  function _betterOf(bestMove, newMove) {
-    if (newMove.value > bestMove.value) return newMove;
+  function _betterOf(bestMove, newMove, isMaximizingPlayer) {
+    if (bestMove === null ||
+        _better(newMove, bestMove, isMaximizingPlayer)
+    ) return newMove;
 
     return bestMove;
   }
@@ -79,6 +83,12 @@ const UnbeatableAI = (function() {
       const futureBoard = {...board};
       Board.setOwnership(cell, player, futureBoard);  
       let value = _minmax(futureBoard, depth + 1, !isMaximizingPlayer);
+
+      console.log(
+        `Board: ${board}\n` +
+        `Cell: ${cell}\n`   +
+        `Value: ${value}` 
+      )
       
       if (_better(value, bestValue)) {
         bestMove  = cell;
@@ -96,11 +106,6 @@ const UnbeatableAI = (function() {
       value < bestValue ;
   }
 
-  function _best(value, bestValue, isMaximizingPlayer) {
-    isMaximizingPlayer      ?
-      max(value, bestValue) :
-      min(value, bestValue) ;
-  }
 
 
   function _isTerminalState(board) {

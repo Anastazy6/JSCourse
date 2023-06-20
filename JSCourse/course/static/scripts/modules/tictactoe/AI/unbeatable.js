@@ -2,9 +2,14 @@ import Board from "../Models/board.js";
 import Game  from "../Models/game.js";
 
 const Move = function(cell, value) {
+  function to_s() {
+    return `Cell: ${cell}\nValue: ${value}\n`
+  }
+
   return {
     cell,
-    value
+    value,
+    to_s
   }
 }
 
@@ -25,9 +30,11 @@ const UnbeatableAI = (function() {
     const legalMoves = Board.getEmptyCells();
     let bestMove = null;
 
-    legalMoves.forEach(move => (
+    legalMoves.forEach(cell => {
+      let move = Move(cell, _minmax(Board.getState(), 0, isMaximizingPlayer));
       bestMove = _betterOf(bestMove, move, isMaximizingPlayer)
-    ));
+      console.log(`${move}, ${bestMove}`);
+  });
 
     return bestMove;
   }
@@ -35,7 +42,7 @@ const UnbeatableAI = (function() {
 
   function _betterOf(bestMove, newMove, isMaximizingPlayer) {
     if (bestMove === null ||
-        _better(newMove, bestMove, isMaximizingPlayer)
+        _better(newMove.value, bestMove.value, isMaximizingPlayer)
     ) return newMove;
 
     return bestMove;
@@ -66,6 +73,18 @@ const UnbeatableAI = (function() {
   function _minmax(board, depth, isMaximizingPlayer) {
     if (_isTerminalState()) return _evaluate(board, depth);
 
+    console.log(`Depth: ${depth}`);
+    if (depth > _getMaxDepth()) {
+
+      console.log(board);
+
+      throw new RangeError(
+        `Maximum recursion depth reached: max depth is ${_getMaxDepth()}`
+        );
+    }
+
+    
+
     return _performFutureMove(board, depth, isMaximizingPlayer);
   }
 
@@ -91,12 +110,12 @@ const UnbeatableAI = (function() {
       )
       
       if (_better(value, bestValue)) {
-        bestMove  = cell;
+      //  bestMove  = cell;
         bestValue = value;
       }
     })
-
-    return Move(bestMove, bestValue);
+      return bestValue;
+   // return Move(bestMove, bestValue);
   }
 
 
@@ -106,6 +125,9 @@ const UnbeatableAI = (function() {
       value < bestValue ;
   }
 
+  function _getMaxDepth() {
+    return Board.getEmptyCells().length;
+  }
 
 
   function _isTerminalState(board) {

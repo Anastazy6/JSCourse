@@ -1,7 +1,6 @@
-import Util from "../../Utilities/util.js";
+// import Util from "../../Utilities/util.js";
 
 import Game  from "./Models/game.js";
-import Board from "./Models/board.js";
 import View  from "./Views/view.js";
 
 import UnbeatableAI from "./AI/unbeatable.js";
@@ -20,11 +19,11 @@ const TicTacToe = (function() {
   const handlers = {
     clickCell  : _handleClickCell,
     nextRound  : _handleNextRound,
-    pickOptimal: _handlePickOptimal,
-    pickRandom : _handlePickRandom,
     restart    : _handleRestart,
     startGame  : _handleStartGame,
     
+    pickOptimal: () => _handleAIMove(UnbeatableAI),
+    pickRandom : () => _handleAIMove(RandomAI),
   }
 
 
@@ -87,19 +86,10 @@ const TicTacToe = (function() {
   }
 
 
-  function _handlePickRandom() {
-    const player     = Game.getState().current;
-    const chosenCell = RandomAI.move(player);
-      
-    setTimeout(() => _performMove(chosenCell, player), 666);
-  }
+  function _handleAIMove(AIModule) {
+    const player = Game.getState().current;
+    const chosenCell = AIModule.move(player);
 
-
-  function _handlePickOptimal() {
-    const player     = Game.getState().current;
-    const chosenCell = UnbeatableAI.move(player);
-
-    // TODO: write algorithm for the unbeatable AI player.
     setTimeout(() => _performMove(chosenCell, player), 666);
   }
 

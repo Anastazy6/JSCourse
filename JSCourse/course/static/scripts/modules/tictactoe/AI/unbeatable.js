@@ -1,3 +1,5 @@
+import Asserts from "../asserts.js";
+
 import Board from "../Models/board.js";
 import Game  from "../Models/game.js";
 
@@ -14,41 +16,37 @@ const Move = function(cell, value) {
 }
 
 const UnbeatableAI = (function() {
-  const mainBoard = Game.getState().mainBoard;
-  let counter = 0;
+  const mainBoard = () => Game.getState().board;
+  let   counter   = 0;
+
 
   function move(player) {
-    // Ensure this function is only available to the unbeatable AI player.
-    if ( !(player.isUnbeatableAI()) ) {
-      throw "Only unbeatable AI player may use this function."; 
-    }
+    Asserts.playerIsUnbeatableAI(player);
 
-    const isMaximizingPlayer = _isMaximizing(player);
-
-    return _findBestMove(mainBoard.getState(), 0, isMaximizingPlayer);
+    return _findBestMove(mainBoard(), 0, _isMaximizing(player)).cell;
   }
 
-  function _findBestMove(mainBoard, depth, isMaximizingPlayer) {
+
+  function _findBestMove(board, depth, isMaximizingPlayer) {
     counter++;
+    console.log('In find best move');
+    console.log(board);
     console.log(counter);
-    const legalMoves = mainBoard.getEmptyCells();
+    const legalMoves = board.getEmptyCells();
     let bestMove = null;
-  //  console.log(`Current mainBoard:`);
-  //  console.log();
 
     legalMoves.forEach(cell => {
-      let move = Move(cell, _minmax(mainBoard, depth, isMaximizingPlayer));
-      bestMove = _betterOf(bestMove, move, isMaximizingPlayer)
-   //   console.log(`${move}, ${bestMove}`);
-  });
+      let move = Move(cell, _minmax(board, depth, isMaximizingPlayer));
+      bestMove = _betterMove(bestMove, move, isMaximizingPlayer)
+    });
 
     return bestMove;
   }
 
 
-  function _betterOf(bestMove, newMove, isMaximizingPlayer) {
+  function _betterMove(bestMove, newMove, isMaximizingPlayer) {
     if (bestMove === null ||
-        _better(newMove.value, bestMove.value, isMaximizingPlayer)
+        _betterValue(newMove.value, bestMove.value, isMaximizingPlayer)
     ) return newMove;
 
     return bestMove;
@@ -76,52 +74,41 @@ const UnbeatableAI = (function() {
 
 
 
-  function _minmax(mainBoard, depth, isMaximizingPlayer) {
-    //console.log(`Is terminal: ${_isTerminalState()}`);
-    if (_isTerminalState()) return _evaluate(mainBoard, depth);
+  function _minmax(board, depth, isMaximizingPlayer) {
+    console.log('In minmax');
+    console.log(`Is terminal: ${_isTerminalState()}`);
+    if (_isTerminalState(board)) return _evaluate(board, depth);
 
-    //console.log(`Depth: ${depth}`);
-    //console.log(mainBoard.getEmptyCells());
-    if (depth > _getMaxDepth()) {
+    console.log(`Depth: ${depth}`);
+    console.log(board.getEmptyCells());
+    Asserts.maxRecursionDepthNotExceeded(depth, _getMaxDepth());
 
-      console.log();
-
-      throw new RangeError(
-        `Maximum recursion depth reached: max depth is ${_getMaxDepth()}`
-        );
-    }
-
-    
-
-    return _performFutureMove(mainBoard, depth, isMaximizingPlayer);
+    return _performFutureMove(board, depth, isMaximizingPlayer);
   }
 
 
-  function _performFutureMove(mainBoard, depth, isMaximizingPlayer) {
-    const player = isMaximizingPlayer ? 
-      Game.getState().player1 :
-      Game.getState().player2;
+  function _performFutureMove(board, depth, isMaximizingPlayer) {
+    console.log('In perform future move');
+    const player = _getFuturePlayer(isMaximizingPlayer);
 
-    
     let bestValue = isMaximizingPlayer ? -2137 : 2137;
     
-    mainBoard.getEmptyCells().forEach(cell => {
-      const futuremainBoard = {...mainBoard};
-      //console.log(cell);
-      //console.log();
-      //console.log(futuremainBoard);
+    board.getEmptyCells().forEach(cell => {
+      const futureBoard = Board({...board});
+      console.log(cell);
+      console.log(futureBoard);
 
-      mainBoard.setOwnership(cell, player, futuremainBoard);
-      //console.log(futuremainBoard[cell].to_s());
-      let value = _findBestMove(futuremainBoard, depth + 1, !isMaximizingPlayer);
+      futureBoard.setOwnership(cell, player);
+      console.log(futureBoard[cell].to_s());
+      let value = _findBestMove(futureBoard, depth + 1, !isMaximizingPlayer);
 
-      /*console.log(
+      console.log(
         `mainBoard: ${mainBoard}\n` +
-        `Cell: ${cell}\n`   +
-        `Value: ${value}` 
-      )*/
+        `Cell     : ${cell}\n`   +
+        `Value    : ${value}` 
+      )
       
-      if (_better(value, bestValue)) {
+      if (_betterValue(value, bestValue)) {
         bestValue = value;
       }
     })
@@ -129,27 +116,36 @@ const UnbeatableAI = (function() {
   }
 
 
-  function _better(value, bestValue, isMaximizingPlayer) {
-    return isMaximizingPlayer      ?
+  function _betterValue(value, bestValue, isMaximizingPlayer) {
+    return isMaximizingPlayer ?
       value > bestValue :
       value < bestValue ;
   }
 
+
   function _getMaxDepth() {
-    return mainBoard.getEmptyCells().length;
+    return mainBoard().getEmptyCells().length;
   }
 
 
-  function _isTerminalState() {
-    if (  mainBoard.allCellsOccupied() ||
-          mainBoard.findWinner      ()
+  function _isTerminalState(board) {
+    console.log(board);
+    if (  board.allCellsOccupied() ||
+          board.findWinner()
     ) return true;
     return false
   }
 
 
-  function _evaluate(mainBoard, depth) {
-    const winner  = mainBoard.findWinner();
+  function _getFuturePlayer(isMaximizingPlayer) {
+    return isMaximizingPlayer ? 
+      Game.getState().player1 :
+      Game.getState().player2 ;
+  }
+
+
+  function _evaluate(board, depth) {
+    const winner  = board.findWinner();
     const player1 = Game.getState().player1;
     const player2 = Game.getState().player2;
     
@@ -157,7 +153,7 @@ const UnbeatableAI = (function() {
     if (winner === player1) return  10 - depth;
     if (winner === player2) return -10 + depth;
 
-    throw Error("Invalid game resolution");
+    throw new RangeError("Invalid game resolution");
   }
 
 
@@ -165,5 +161,6 @@ const UnbeatableAI = (function() {
     move: move
   }
 })()
+
 
 export default UnbeatableAI;

@@ -1,6 +1,4 @@
-const Board = function() {
-  let gameboard = {};
-
+const Board = function(gameboard={}) {
   const getState = () => gameboard;
 
   const _social = ['L', 'N', 'C'];

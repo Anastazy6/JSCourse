@@ -13,6 +13,8 @@ const Move = function(cell, value) {
   }
 }
 
+let counter = 0;
+
 const UnbeatableAI = (function() {
 
   function move(player) {
@@ -23,17 +25,21 @@ const UnbeatableAI = (function() {
 
     const isMaximizingPlayer = _isMaximizing(player);
 
-    return _findBestMove(isMaximizingPlayer);
+    return _findBestMove(Board.getState(), 0, isMaximizingPlayer);
   }
 
-  function _findBestMove(isMaximizingPlayer) {
-    const legalMoves = Board.getEmptyCells();
+  function _findBestMove(board, depth, isMaximizingPlayer) {
+    counter++;
+    console.log(counter);
+    const legalMoves = Board.getEmptyCells(board);
     let bestMove = null;
+  //  console.log(`Current board:`);
+  //  console.log(board);
 
     legalMoves.forEach(cell => {
-      let move = Move(cell, _minmax(Board.getState(), 0, isMaximizingPlayer));
+      let move = Move(cell, _minmax(board, depth, isMaximizingPlayer));
       bestMove = _betterOf(bestMove, move, isMaximizingPlayer)
-      console.log(`${move}, ${bestMove}`);
+   //   console.log(`${move}, ${bestMove}`);
   });
 
     return bestMove;
@@ -71,9 +77,11 @@ const UnbeatableAI = (function() {
 
 
   function _minmax(board, depth, isMaximizingPlayer) {
-    if (_isTerminalState()) return _evaluate(board, depth);
+    //console.log(`Is terminal: ${_isTerminalState()}`);
+    if (_isTerminalState(board)) return _evaluate(board, depth);
 
-    console.log(`Depth: ${depth}`);
+    //console.log(`Depth: ${depth}`);
+    //console.log(Board.getEmptyCells(board));
     if (depth > _getMaxDepth()) {
 
       console.log(board);
@@ -95,27 +103,29 @@ const UnbeatableAI = (function() {
       Game.getState().player2;
 
     
-    let bestMove  = null; 
     let bestValue = isMaximizingPlayer ? -2137 : 2137;
     
-    Board.getEmptyCells().forEach(cell => {
+    Board.getEmptyCells(board).forEach(cell => {
       const futureBoard = {...board};
-      Board.setOwnership(cell, player, futureBoard);  
-      let value = _minmax(futureBoard, depth + 1, !isMaximizingPlayer);
+      //console.log(cell);
+      //console.log(board);
+      //console.log(futureBoard);
 
-      console.log(
+      Board.setOwnership(cell, player, futureBoard);
+      //console.log(futureBoard[cell].to_s());
+      let value = _findBestMove(futureBoard, depth + 1, !isMaximizingPlayer);
+
+      /*console.log(
         `Board: ${board}\n` +
         `Cell: ${cell}\n`   +
         `Value: ${value}` 
-      )
+      )*/
       
       if (_better(value, bestValue)) {
-      //  bestMove  = cell;
         bestValue = value;
       }
     })
       return bestValue;
-   // return Move(bestMove, bestValue);
   }
 
 

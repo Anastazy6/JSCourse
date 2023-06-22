@@ -79,7 +79,7 @@ const Board = (function() {
 
 
   function setOwnership(cell, player, board=gameboard) {
-    if (isCellOccupied(cell)) {
+    if (isCellOccupied(cell, board)) {
       throw `Attempt at reoccupying a cell (${cell}) has NOT been blocked successfully!`
     }
 

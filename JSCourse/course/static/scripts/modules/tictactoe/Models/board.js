@@ -1,4 +1,4 @@
-const Board = (function() {
+const Board = function() {
   let gameboard = {};
 
   const getState = () => gameboard;
@@ -33,62 +33,52 @@ const Board = (function() {
 
   /**
    * 
-   * @param {gameboard} gameboard - any gameboard Object holding current (default)
-   *   or future state of the game (only used for advanced AI behaviour).
-   *   Keep the gameboard parameter default unless evaluating possible future states
-   *    of the game is required.
    * @returns {Player} player object representing the player, who has won the round
    *   if there's a winner, else returns false
    */
-  function findWinner(board=gameboard) {
-    let victoryRows = _winningRows.filter(row => _isRowVictorious(row));
-
+  function findWinner() {
+    let victoryRows = _findVictoryRows();
     if (victoryRows.length === 0) return false; // Winner not found;
 
-    let winner = board[victoryRows[0][0]];
-
-    // Assert that there can only be one winner.
-    if (victoryRows.some(row => board[row[0]] !== winner)) {
-      console.error(victoryRows);
-      throw 'There cannot be 2 winners. The hell is going on?';
-    }
+    let winner = gameboard[victoryRows[0][0]];
+    _assertOneWinner(victoryRows, winner);
 
     return winner;
   }
 
 
-  function getEmptyCells(board=gameboard) {
-    return Object.keys(board).filter(cell => (
-      board[cell] === null
+  function getEmptyCells() {
+    return Object.keys(gameboard).filter(cell => (
+      gameboard[cell] === null
     ));
   }
 
 
   /**
    * 
-   * @param {gameboard} board - any gameboard Object holding current (default)
+   * @param {gameboard} gameboard - any gameboard Object holding current (default)
    *   or future state of the game (only used for advanced AI behaviour).
    *   Keep the gameboard parameter default unless evaluating possible future states
    *   of the game is required.
    * @returns true if all the cells are occupied, i.e. there are no moves left;
    *   else returns false
    */
-  function allCellsOccupied(board=gameboard) {
-    return Object.keys(board).every(cell => board[cell]);
+  function allCellsOccupied() {
+    return Object.keys(gameboard).every(cell => gameboard[cell]);
   }
 
 
-  function setOwnership(cell, player, board=gameboard) {
-    if (isCellOccupied(cell, board)) {
+  function setOwnership(cell, player) {
+    if (isCellOccupied(cell)) {
       throw `Attempt at reoccupying a cell (${cell}) has NOT been blocked successfully!`
     }
 
-    board[cell] = player;
+    gameboard[cell] = player;
   }
 
 
-  function isCellOccupied(cell, board=gameboard) {
-    return (board[cell] === null) ?
+  function isCellOccupied(cell) {
+    return (gameboard[cell] === null) ?
       false :
       true  ;
   }
@@ -98,6 +88,18 @@ const Board = (function() {
   *********************************** Private **********************************
   *****************************************************************************/
 
+
+  function _assertOneWinner(victoryRows, winner) {
+    if (victoryRows.some(row => gameboard[row[0]] !== winner)) {
+      victoryRows.map(row => console.error(gameboard[row[0]], winner));
+      throw new Error('There cannot be 2 winners. The hell is going on?');
+    }
+  }
+
+
+  function _findVictoryRows() {
+    return _winningRows.filter(row => _isRowVictorious(row));
+  }
 
 
   function _singleAxisWin(axis) {
@@ -121,8 +123,8 @@ const Board = (function() {
   }
 
 
-  function _getOwnerId(cell, board=gameboard) {
-    return board[cell] ? board[cell].getId() : false;
+  function _getOwnerId(cell) {
+    return gameboard[cell] ? gameboard[cell].getId() : false;
   }
 
 
@@ -156,6 +158,6 @@ const Board = (function() {
     reset           : reset,
     setOwnership    : setOwnership
   }
-})()
+}
 
 export default Board;

@@ -13,9 +13,9 @@ const Move = function(cell, value) {
   }
 }
 
-let counter = 0;
-
 const UnbeatableAI = (function() {
+  const mainBoard = Game.getState().mainBoard;
+  let counter = 0;
 
   function move(player) {
     // Ensure this function is only available to the unbeatable AI player.
@@ -25,19 +25,19 @@ const UnbeatableAI = (function() {
 
     const isMaximizingPlayer = _isMaximizing(player);
 
-    return _findBestMove(Board.getState(), 0, isMaximizingPlayer);
+    return _findBestMove(mainBoard.getState(), 0, isMaximizingPlayer);
   }
 
-  function _findBestMove(board, depth, isMaximizingPlayer) {
+  function _findBestMove(mainBoard, depth, isMaximizingPlayer) {
     counter++;
     console.log(counter);
-    const legalMoves = Board.getEmptyCells(board);
+    const legalMoves = mainBoard.getEmptyCells();
     let bestMove = null;
-  //  console.log(`Current board:`);
-  //  console.log(board);
+  //  console.log(`Current mainBoard:`);
+  //  console.log();
 
     legalMoves.forEach(cell => {
-      let move = Move(cell, _minmax(board, depth, isMaximizingPlayer));
+      let move = Move(cell, _minmax(mainBoard, depth, isMaximizingPlayer));
       bestMove = _betterOf(bestMove, move, isMaximizingPlayer)
    //   console.log(`${move}, ${bestMove}`);
   });
@@ -76,15 +76,15 @@ const UnbeatableAI = (function() {
 
 
 
-  function _minmax(board, depth, isMaximizingPlayer) {
+  function _minmax(mainBoard, depth, isMaximizingPlayer) {
     //console.log(`Is terminal: ${_isTerminalState()}`);
-    if (_isTerminalState(board)) return _evaluate(board, depth);
+    if (_isTerminalState()) return _evaluate(mainBoard, depth);
 
     //console.log(`Depth: ${depth}`);
-    //console.log(Board.getEmptyCells(board));
+    //console.log(mainBoard.getEmptyCells());
     if (depth > _getMaxDepth()) {
 
-      console.log(board);
+      console.log();
 
       throw new RangeError(
         `Maximum recursion depth reached: max depth is ${_getMaxDepth()}`
@@ -93,11 +93,11 @@ const UnbeatableAI = (function() {
 
     
 
-    return _performFutureMove(board, depth, isMaximizingPlayer);
+    return _performFutureMove(mainBoard, depth, isMaximizingPlayer);
   }
 
 
-  function _performFutureMove(board, depth, isMaximizingPlayer) {
+  function _performFutureMove(mainBoard, depth, isMaximizingPlayer) {
     const player = isMaximizingPlayer ? 
       Game.getState().player1 :
       Game.getState().player2;
@@ -105,18 +105,18 @@ const UnbeatableAI = (function() {
     
     let bestValue = isMaximizingPlayer ? -2137 : 2137;
     
-    Board.getEmptyCells(board).forEach(cell => {
-      const futureBoard = {...board};
+    mainBoard.getEmptyCells().forEach(cell => {
+      const futuremainBoard = {...mainBoard};
       //console.log(cell);
-      //console.log(board);
-      //console.log(futureBoard);
+      //console.log();
+      //console.log(futuremainBoard);
 
-      Board.setOwnership(cell, player, futureBoard);
-      //console.log(futureBoard[cell].to_s());
-      let value = _findBestMove(futureBoard, depth + 1, !isMaximizingPlayer);
+      mainBoard.setOwnership(cell, player, futuremainBoard);
+      //console.log(futuremainBoard[cell].to_s());
+      let value = _findBestMove(futuremainBoard, depth + 1, !isMaximizingPlayer);
 
       /*console.log(
-        `Board: ${board}\n` +
+        `mainBoard: ${mainBoard}\n` +
         `Cell: ${cell}\n`   +
         `Value: ${value}` 
       )*/
@@ -136,20 +136,20 @@ const UnbeatableAI = (function() {
   }
 
   function _getMaxDepth() {
-    return Board.getEmptyCells().length;
+    return mainBoard.getEmptyCells().length;
   }
 
 
-  function _isTerminalState(board) {
-    if (  Board.allCellsOccupied(board) ||
-          Board.findWinner      (board)
+  function _isTerminalState() {
+    if (  mainBoard.allCellsOccupied() ||
+          mainBoard.findWinner      ()
     ) return true;
     return false
   }
 
 
-  function _evaluate(board, depth) {
-    const winner  = Board.findWinner(board);
+  function _evaluate(mainBoard, depth) {
+    const winner  = mainBoard.findWinner();
     const player1 = Game.getState().player1;
     const player2 = Game.getState().player2;
     

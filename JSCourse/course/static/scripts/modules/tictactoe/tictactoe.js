@@ -32,7 +32,6 @@ const TicTacToe = (function() {
     event.preventDefault();
     const newGameData = new FormData(View.Launcher.form);
     
-    Board.reset();
     Game .startNewGame(newGameData);
     View .startGame();
   }
@@ -54,9 +53,11 @@ const TicTacToe = (function() {
 
 
     function _isClickLegal(cell, player) {
-    if (Game     .getState().over          ||
-      !(player   .isHuman())               ||
-        Board.isCellOccupied(cell)
+      const state = Game.getState();
+
+    if (state.over        ||
+      !(player.isHuman()) ||
+        state.board.isCellOccupied(cell)
       ) return false;
     return true;
   }

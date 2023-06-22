@@ -6,11 +6,14 @@ import State     from "./state.js";
 import Summary   from "./summary.js";
 
 import Game      from "../Models/game.js";
-import Board     from "../Models/board.js";
 
 
 const View = (function() {
   let handlers;
+
+  function getBoard() {
+    return Game.getState().board.getState();
+  }
 
   function setHandlers(newHandlers) {
     handlers = newHandlers;
@@ -28,14 +31,14 @@ const View = (function() {
 
   function startGame() {
     State.initialize(Game.getState());
-    Gameboard.update(Board.getState(), handlers)
+    Gameboard.update(getBoard(), handlers)
 
     show('game');
   }
 
 
   function update() {
-    Gameboard.update(Board.getState(), handlers);
+    Gameboard.update(getBoard(), handlers);
     State    .update(Game.getState());
   }
 

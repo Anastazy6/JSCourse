@@ -8,6 +8,7 @@ const Game = (function() {
     handlers = newHandlers;
   }
 
+  let board;
 
   let currentPlayer;
   let startingPlayer;
@@ -19,6 +20,13 @@ const Game = (function() {
   let winner = null;
   
   const draw   = () => draws++;
+
+  function setMainBoard() {
+    if (!!board) return board.reset();
+
+    board = Board();
+    board.reset();
+  }
 
 
   function startNewGame(gameData) {
@@ -34,7 +42,7 @@ const Game = (function() {
 
   function startNewRound() {
     over = false;
-    Board.reset();
+    board.reset();
 
     // Remember who's moved first this round so as to let the other player
     //   move first in the next round
@@ -49,15 +57,15 @@ const Game = (function() {
 
 
   function registerMove(cell, player) {
-    Board.setOwnership(cell, player);
+    board.setOwnership(cell, player);
 
     setWinner();
-    if (!!winner || Board.allCellsOccupied()) over = true;
+    if (!!winner || board.allCellsOccupied()) over = true;
   }
 
 
   function setWinner() {
-    winner = Board.findWinner();
+    winner = board.findWinner();
   }
 
 
@@ -79,6 +87,7 @@ const Game = (function() {
 
   function getState() {
     return {
+      board  : board,
       player1: player1,
       player2: player2,
       current: currentPlayer,
@@ -108,6 +117,7 @@ const Game = (function() {
     draws  = 0
     winner = null;
     over   = false;
+    setMainBoard();
   }
 
 

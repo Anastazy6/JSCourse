@@ -19,7 +19,6 @@ const UnbeatableAI = (function() {
   const mainBoard = () => Game.getState().board;
   let   counter   = 0;
 
-
   function move(player) {
     Asserts.playerIsUnbeatableAI(player);
 
@@ -29,9 +28,9 @@ const UnbeatableAI = (function() {
 
   function _findBestMove(board, depth, isMaximizingPlayer) {
     counter++;
-    console.log('In find best move');
-    console.log(board);
-    console.log(counter);
+    //console.log('In find best move');
+    //console.log(board);
+    //console.log(`Counter: ${counter}`);
     const legalMoves = board.getEmptyCells();
     let bestMove = null;
 
@@ -75,38 +74,47 @@ const UnbeatableAI = (function() {
 
 
   function _minmax(board, depth, isMaximizingPlayer) {
-    console.log('In minmax');
-    console.log(`Is terminal: ${_isTerminalState()}`);
-    if (_isTerminalState(board)) return _evaluate(board, depth);
+    //console.log('In minmax');
+    //console.log(`Is terminal: ${_isTerminalState(board)}`);
+    const score = _evaluate(board, depth);
 
-    console.log(`Depth: ${depth}`);
-    console.log(board.getEmptyCells());
-    Asserts.maxRecursionDepthNotExceeded(depth, _getMaxDepth());
+    if (!!score) {
+      //console.log(`Cunter: ${counter} Score: ${score}`);
+      return score;
+    }
+
+    if (depth <= 2) {
+      console.log(`Depth: ${depth} Counter: ${counter}`);
+      board.print();
+    }
+    //console.log(`Depth: ${depth}`);
+    //console.log(board.getEmptyCells());
+    //Asserts.maxRecursionDepthNotExceeded(depth, _getMaxDepth());
 
     return _performFutureMove(board, depth, isMaximizingPlayer);
   }
 
 
   function _performFutureMove(board, depth, isMaximizingPlayer) {
-    console.log('In perform future move');
+    //console.log('In perform future move');
     const player = _getFuturePlayer(isMaximizingPlayer);
 
     let bestValue = isMaximizingPlayer ? -2137 : 2137;
     
     board.getEmptyCells().forEach(cell => {
-      const futureBoard = Board({...board});
-      console.log(cell);
-      console.log(futureBoard);
+      const futureBoard = Board({...board.getState()});
+      //console.log(cell);
+      //console.log(futureBoard.getState());
 
       futureBoard.setOwnership(cell, player);
-      console.log(futureBoard[cell].to_s());
+      //console.log(futureBoard.getState()[cell].to_s());
       let value = _findBestMove(futureBoard, depth + 1, !isMaximizingPlayer);
 
-      console.log(
-        `mainBoard: ${mainBoard}\n` +
-        `Cell     : ${cell}\n`   +
-        `Value    : ${value}` 
-      )
+    //  console.log(
+    //    `mainBoard: ${mainBoard}\n` +
+    //    `Cell     : ${cell}\n`   +
+    //    `Value    : ${value}` 
+    //  )
       
       if (_betterValue(value, bestValue)) {
         bestValue = value;
@@ -129,7 +137,7 @@ const UnbeatableAI = (function() {
 
 
   function _isTerminalState(board) {
-    console.log(board);
+  //  console.log(board);
     if (  board.allCellsOccupied() ||
           board.findWinner()
     ) return true;
@@ -145,15 +153,17 @@ const UnbeatableAI = (function() {
 
 
   function _evaluate(board, depth) {
+    const game    = Game.getState();
     const winner  = board.findWinner();
-    const player1 = Game.getState().player1;
-    const player2 = Game.getState().player2;
     
-    if ( !(winner)) return 0; // Draw
+    const player1 = game.player1;
+    const player2 = game.player2;
+
     if (winner === player1) return  10 - depth;
     if (winner === player2) return -10 + depth;
-
-    throw new RangeError("Invalid game resolution");
+    if (board.allCellsOccupied() && !winner) return 0; // Draw;
+    
+    return false;
   }
 
 

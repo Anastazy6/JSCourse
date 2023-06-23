@@ -1,3 +1,5 @@
+import Player from "./player.js";
+
 const Board = function(gameboard={}) {
   const getState = () => gameboard;
 
@@ -16,8 +18,26 @@ const Board = function(gameboard={}) {
     ..._singleAxisWin(_moral),
     ..._diagonalWin
   ];
+
+
+  function print() {
+    let counter = 1;
+    let row = '';
+
+    Object.keys(gameboard).map(cell => {
+      row = `${row} ${stringifyCell(cell)}`;
+      counter++;
+      if (counter % 3 === 0) row += '\n';
+    })
+  }
   
 
+  function stringifyCell(cell) {
+    const player = gameboard[cell];
+
+    if (!!player) return `${player.getSymbol()}`;
+    return '.';
+  }
 
   // Yep, the gameboard is basen on DnD cell chart. This obviously adds
   //   needless complexity, but for some reason I wanted to do it this way.
@@ -153,6 +173,7 @@ const Board = function(gameboard={}) {
     getEmptyCells   : getEmptyCells,
     getState        : getState,
     isCellOccupied  : isCellOccupied,
+    print           : print,
     reset           : reset,
     setOwnership    : setOwnership
   }

@@ -21,14 +21,16 @@ const Board = function(gameboard={}) {
 
 
   function print() {
-    let counter = 1;
-    let row = '';
+    let counter = 0;
+    let result = '';
 
     Object.keys(gameboard).map(cell => {
-      row = `${row} ${stringifyCell(cell)}`;
+      result = `${result} ${stringifyCell(cell)}`;
       counter++;
-      if (counter % 3 === 0) row += '\n';
+      if (counter % 3 === 0) result += '\n';
     })
+
+    console.log(result);
   }
   
 

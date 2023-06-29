@@ -1,7 +1,11 @@
+'use strict'
+
 import Asserts from "../asserts.js";
 
 import Board from "../Models/board.js";
 import Game  from "../Models/game.js";
+
+
 
 const Move = function(cell, value) {
   function to_s() {
@@ -14,6 +18,8 @@ const Move = function(cell, value) {
     to_s
   }
 }
+
+
 
 const UnbeatableAI = (function() {
   const mainBoard = () => Game.getState().board;
@@ -77,7 +83,8 @@ const UnbeatableAI = (function() {
     //console.log('In minmax');
     //console.log(`Is terminal: ${_isTerminalState(board)}`);
     const score = _evaluate(board, depth);
-
+    //console.log(`Depth: ${depth} Counter: ${counter}`);
+    //board.print();
     if (!!score) {
       //console.log(`Cunter: ${counter} Score: ${score}`);
       return score;
@@ -85,7 +92,6 @@ const UnbeatableAI = (function() {
 
     if (depth <= 2) {
       console.log(`Depth: ${depth} Counter: ${counter}`);
-      board.print();
     }
     //console.log(`Depth: ${depth}`);
     //console.log(board.getEmptyCells());
@@ -104,10 +110,10 @@ const UnbeatableAI = (function() {
     board.getEmptyCells().forEach(cell => {
       const futureBoard = Board({...board.getState()});
       //console.log(cell);
-      //console.log(futureBoard.getState());
+      //futureBoard.print();
 
       futureBoard.setOwnership(cell, player);
-      //console.log(futureBoard.getState()[cell].to_s());
+      //futureBoard.print();
       let value = _findBestMove(futureBoard, depth + 1, !isMaximizingPlayer);
 
     //  console.log(
@@ -155,12 +161,14 @@ const UnbeatableAI = (function() {
   function _evaluate(board, depth) {
     const game    = Game.getState();
     const winner  = board.findWinner();
+    //console.log(board.allCellsOccupied());
     
     const player1 = game.player1;
     const player2 = game.player2;
 
     if (winner === player1) return  10 - depth;
     if (winner === player2) return -10 + depth;
+    //if (board.allCellsOccupied() && !winner) console.log('Draw');
     if (board.allCellsOccupied() && !winner) return 0; // Draw;
     
     return false;

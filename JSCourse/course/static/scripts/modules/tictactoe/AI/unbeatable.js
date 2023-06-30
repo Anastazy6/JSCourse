@@ -28,7 +28,7 @@ const UnbeatableAI = (function() {
   function move(player) {
     Asserts.playerIsUnbeatableAI(player);
 
-    return _findBestMove(mainBoard(), 0, _isMaximizing(player)).cell;
+    return godMinmax(mainBoard(), 0, _isMaximizing(player)).cell;
   }
 
 
@@ -158,6 +158,45 @@ const UnbeatableAI = (function() {
     if (board.allCellsOccupied() && !winner) return 0; // Draw;
     
     return false;
+  }
+
+
+  function godMinmax(board, depth, isMaximizingPlayer) {
+    counter++;
+    if (counter === 1000) debugger;
+    
+    console.log(`\n\n\n Iteration #${counter}`);
+
+    board.print();
+    console.log(legalMoves);
+
+    let score = _evaluate(board, depth);
+    console.log(`Score: ${score}`);
+    if (!!score) return score;
+
+    if (legalMoves.length === 0) {
+      console.log(`There are no moves left, this should be true: ${board.allCellsOccupied()}`);
+    }
+    
+    const legalMoves = board.getEmptyCells();
+    let bestMove = null;
+
+    legalMoves.forEach(cell => {
+      const futureBoard = Board({...board.getState()});
+      const player  = _getFuturePlayer(isMaximizingPlayer);
+      
+      let bestValue = isMaximizingPlayer ? -2137 : 2137;
+      
+      futureBoard.setOwnership(cell, player);
+      console.log(`Picked cell: ${cell}`);
+      
+      let value = godMinmax(futureBoard, depth + 1, !isMaximizingPlayer);
+      bestValue = _betterValue(value, bestValue, isMaximizingPlayer);
+
+      let move = Move(cell, bestValue);
+      bestMove = _betterMove(bestMove, move, isMaximizingPlayer);
+    })
+    return bestMove;
   }
 
 

@@ -168,17 +168,20 @@ const UnbeatableAI = (function() {
     console.log(`\n\n\n Iteration #${counter}`);
 
     board.print();
-    console.log(legalMoves);
+
 
     let score = _evaluate(board, depth);
     console.log(`Score: ${score}`);
     if (!!score) return score;
 
+
+    
+    const legalMoves = board.getEmptyCells();
+    console.log(legalMoves);
     if (legalMoves.length === 0) {
       console.log(`There are no moves left, this should be true: ${board.allCellsOccupied()}`);
     }
     
-    const legalMoves = board.getEmptyCells();
     let bestMove = null;
 
     legalMoves.forEach(cell => {

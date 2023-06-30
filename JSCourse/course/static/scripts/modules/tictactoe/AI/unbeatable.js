@@ -34,6 +34,7 @@ const UnbeatableAI = (function() {
 
   function _findBestMove(board, depth, isMaximizingPlayer) {
     counter++;
+    if (counter === 1000) debugger;
     const legalMoves = board.getEmptyCells();
     console.log(`\n\n\n Iteration #${counter}`);
 
@@ -102,6 +103,7 @@ const UnbeatableAI = (function() {
     board.getEmptyCells().forEach(cell => {
       const futureBoard = Board({...board.getState()});
       futureBoard.setOwnership(cell, player);
+      console.log(`Picked cell: ${cell}`);
       let value = _findBestMove(futureBoard, depth + 1, !isMaximizingPlayer);
       
       bestValue = _betterValue(value, bestValue, isMaximizingPlayer);

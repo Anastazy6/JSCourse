@@ -88,7 +88,9 @@ const TicTacToe = (function() {
 
   function _handleAIMove(AIModule) {
     const player     = Game.getState().current;
-    const chosenCell = setTimeout(() => AIModule.move(player), 0);
+    const chosenCell = AIModule.move(player);
+
+    console.log(chosenCell);
 
     setTimeout(() => _performMove(chosenCell, player), 666);
   }

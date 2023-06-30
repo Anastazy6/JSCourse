@@ -23,7 +23,9 @@ const Move = function(cell, value) {
 
 const UnbeatableAI = (function() {
   const mainBoard = () => Game.getState().board;
+  const currentPlayer = Game.getState().current;
   let   counter   = 0;
+  let   bestMove  = false; 
 
   function move(player) {
     Asserts.playerIsUnbeatableAI(player);
@@ -110,7 +112,7 @@ const UnbeatableAI = (function() {
 
   function godMinmax(board, depth, isMaximizingPlayer) {
     Asserts.maxRecursionDepthNotExceeded(depth, 10);
-    counter++;
+
     //if (counter === 1000) debugger;
     
     //console.log(`\n\n\n Iteration #${counter}`);
@@ -121,7 +123,7 @@ const UnbeatableAI = (function() {
     let score = _evaluate(board, depth);
     //console.log(`Score: ${score}`);
     if (!!score) return score;
-
+    counter++;
 
     
     const legalMoves = board.getEmptyCells();
@@ -129,8 +131,6 @@ const UnbeatableAI = (function() {
     //if (legalMoves.length === 0) {
     //  console.log(`There are no moves left, this should be true: ${board.allCellsOccupied()}`);
     //}
-
-    let bestMove = null;
 
     legalMoves.forEach(cell => {
       const futureBoard = Board({...board.getState()});
@@ -143,7 +143,7 @@ const UnbeatableAI = (function() {
       
       
       let value = godMinmax(futureBoard, depth + 1, !isMaximizingPlayer);
-      bestValue = _betterValue(value, bestValue, isMaximizingPlayer);
+      bestValue = _betterValue(value, bestValue, _isMaximizing(currentPlayer));
 
       let move = Move(cell, bestValue);
       bestMove = _betterMove(bestMove, move, isMaximizingPlayer);

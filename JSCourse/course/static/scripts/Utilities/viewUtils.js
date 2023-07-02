@@ -13,9 +13,11 @@ const ViewUtils = (function() {
     element.style.display = type;
   }
 
+
   function hide(element) {
     element.style.display = "none";
   }
+
 
 
   return {
@@ -24,5 +26,7 @@ const ViewUtils = (function() {
     hide    : hide
   }
 })()
+
+
 
 export default ViewUtils;

@@ -1,6 +1,4 @@
 const Asserts = (function (){
-  
-  
   function playerIsUnbeatableAI(player) {
     if ( !(player.isUnbeatableAI()) ) {
       throw new TypeError(
@@ -33,7 +31,7 @@ const Asserts = (function (){
   }
 
 
-  
+
   return {
     playerIsUnbeatableAI,
     playerIsRandomAI,

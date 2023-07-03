@@ -1,3 +1,4 @@
+import Asserts from "../asserts.js";
 import Player from "./player.js";
 
 const Board = function(gameboard={}) {
@@ -61,7 +62,7 @@ const Board = function(gameboard={}) {
     if (victoryRows.length === 0) return false; // Winner not found;
 
     let winner = gameboard[victoryRows[0][0]];
-    _assertOneWinner(victoryRows, winner);
+    Asserts.onlyOneWinner(gameboard, victoryRows, winner);
 
     return winner;
   }
@@ -107,14 +108,6 @@ const Board = function(gameboard={}) {
   /*****************************************************************************
   *********************************** Private **********************************
   *****************************************************************************/
-
-
-  function _assertOneWinner(victoryRows, winner) {
-    if (victoryRows.some(row => gameboard[row[0]] !== winner)) {
-      victoryRows.map(row => console.error(gameboard[row[0]], winner));
-      throw new Error('There cannot be 2 winners. The hell is going on?');
-    }
-  }
 
 
   function _findVictoryRows() {

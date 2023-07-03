@@ -25,8 +25,8 @@ const UnbeatableAI = (function() {
   const mainBoard     = () => Game.getState().board;
   const currentPlayer = () => Game.getState().current;
   
-  const player1 = Game.getState().player1;
-  const player2 = Game.getState().player2;
+  const player1 = () => Game.getState().player1;
+  const player2 = () => Game.getState().player2;
   
   let   counter   = 0;
 
@@ -39,30 +39,28 @@ const UnbeatableAI = (function() {
     
     const legalMoves = board.getEmptyCells();
     let bestMove  = null;
-
+    let bestValue = isMax ? -2137 : 2137;
 
     legalMoves.forEach(cell => {
       //console.log(board);
       let futureBoard = Board({...board.getState()});
       futureBoard.setOwnership(cell, player);
 
-      let moveValue = minmax(futureBoard, 0, isMax);
-      let move = Move(cell, moveValue);
-
-      if (bestMove === null) bestMove = move;
-
-      console.log(`Move: ${move.cell} Value: ${move.value}`);
+      let value = minmax(futureBoard, 0, !isMax);
       
-      if (
-        ( isMax && move.value > bestMove.value) ||
-        (!isMax && move.value < bestMove.value)
-      ) bestMove = move; 
+      console.log(`Move: ${cell} Value: ${value}`);
+      
+      if (( isMax  && value > bestValue) ||
+          ( !isMax && value < bestValue)) {
+        bestMove  = cell;
+        bestValue = value;
+      }
     })
     
     console.log(`Done in ${counter} iterations`);
     counter = 0;
 
-    return bestMove.cell;
+    return bestMove;
   }
 
 
@@ -70,19 +68,20 @@ const UnbeatableAI = (function() {
     Asserts.maxRecursionDepthNotExceeded(depth, _getMaxDepth());
 
     const score = _evaluate(board, depth);
-    //if (!!score) console.log(score);
+   // if (!!score) console.log(score);
     if (!!score) return score;
 
     counter++;
 
     const legalMoves = board.getEmptyCells();
-    const player     = isMax ? player1 : player2;
+    const player     = isMax ? player1() : player2();
 
     let best = isMax ? -2137 : 2137;
     
-
+    //console.log(counter);
     //console.log(legalMoves);
     //console.log(`Depth: ${depth}`);
+    //console.log(player.getId());
     
       
     legalMoves.forEach(cell => {
@@ -156,10 +155,10 @@ const UnbeatableAI = (function() {
     const winner  = board.findWinner();
 
     //board.print();
-    //console.log(winner);
+    //if (!!winner) console.log(winner.to_s());
 
-    if (winner === player1) return  10 - depth;
-    if (winner === player2) return -10 + depth;
+    if (winner === player1()) return  10 - depth;
+    if (winner === player2()) return -10 + depth;
     if (board.allCellsOccupied() && !winner) return 0; // Draw;
     
     return false;

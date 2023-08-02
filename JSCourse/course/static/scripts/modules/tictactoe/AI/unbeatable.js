@@ -42,7 +42,7 @@ const UnbeatableAI = (function() {
     let bestValue = isMax ? -2137 : 2137;
 
     legalMoves.forEach(cell => {
-      //console.log(board);
+      console.log(board);
       let futureBoard = Board({...board.getState()});
       futureBoard.setOwnership(cell, player);
 
@@ -67,8 +67,14 @@ const UnbeatableAI = (function() {
   function minmax(board, depth, isMax) {
     Asserts.maxRecursionDepthNotExceeded(depth, _getMaxDepth());
 
+    console.log(
+      `Counter  : ${counter}\n` +
+      `Depth    : ${depth}\n` +
+      `Player ID: ${player.getId()}`
+    );
+
     const score = _evaluate(board, depth);
-   // if (!!score) console.log(score);
+    if (!!score) console.log(score);
     if (!!score) return score;
 
     counter++;
@@ -78,16 +84,13 @@ const UnbeatableAI = (function() {
 
     let best = isMax ? -2137 : 2137;
     
-    //console.log(counter);
-    //console.log(legalMoves);
-    //console.log(`Depth: ${depth}`);
-    //console.log(player.getId());
-    
+
+    console.log(legalMoves);
       
     legalMoves.forEach(cell => {
       const nextBoard  = Board({...board.getState()});
 
-      //console.log(cell);
+      console.log(cell);
 
       //nextBoard.print();
       nextBoard.setOwnership(cell, player);
@@ -154,8 +157,9 @@ const UnbeatableAI = (function() {
   function _evaluate(board, depth) {
     const winner  = board.findWinner();
 
-    //board.print();
-    //if (!!winner) console.log(winner.to_s());
+    console.log('Evaluating...');
+    board.print();
+    if (!!winner) console.log(winner.to_s());
 
     if (winner === player1()) return  10 - depth;
     if (winner === player2()) return -10 + depth;

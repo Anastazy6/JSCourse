@@ -67,11 +67,14 @@ $utilities: map-merge(
 
 
 // Keep other imports below Bootstrap so as to be able to override its styles.
+@import "./includes/fonts";
 @import "./includes/general";
 
 
 @import "./includes/library/library";
 @import "./includes/tictactoe/tictactoe";
+
+@import "./includes/HtmlCssIntermediateCourse/forms_practice";
 
 
 // Add temporary solutions to the file imported below

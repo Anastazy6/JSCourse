@@ -1,0 +1,35 @@
+.pretty-font {
+  font-family: $font-pretty;
+  background: transparent;;
+}
+
+#forms-practice-container {
+  display: flex;
+  max-width: 1000px;
+  min-height: 666px; // test
+  margin: 0 auto;
+}
+
+#caption {
+  position: relative;
+  background-color: rgba(248, 248, 255, 0.385);
+  width: 100%;
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+}
+
+#part-with-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  // Image credits: "trees under starry sky" by Max Saeling
+  //   from unsplash.com under Unsplash license (https://unsplash.com/license)
+  background-image: url("https://images.unsplash.com/photo-1518889735218-3e3a03fd3128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80");
+}
+
+#part-with-form {
+  flex: 2;
+  background-color: map-get($theme-colors, 'lleuad');
+}

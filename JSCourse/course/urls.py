@@ -14,6 +14,9 @@ urlpatterns = [
     path(  'tictactoe',
             views.tictactoe,
             name='tictactoe'
-    )
+    ),
+    path(   'forms-practice',
+            views.forms_practice,
+            name='forms-practice')
 
 ]

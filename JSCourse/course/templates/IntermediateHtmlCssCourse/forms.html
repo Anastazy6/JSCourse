@@ -11,7 +11,7 @@
 {% block body-mid %}
 
   <div id="forms-practice-container">
-    <div id="part-with-image">
+    <section id="part-with-image">
       <div id="caption">
         <div id="logo">
           <a
@@ -30,10 +30,80 @@
           Some dummy text
         </h1>
       </div>
-    </div>
-    <div id="part-with-form">
+    </section>
+    <section id="part-with-form">
+      <article
+        id="dummy-text"
+      >
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+          Neque qui numquam ipsum optio! Sunt molestias ratione quidem 
+          esse ipsum corporis magni exercitationem facere, nesciunt 
+          autem expedita, veniam quibusdam, accusamus vel?
+        </p>
+        <p>
+          This form does nothing. It's just for demonstration and practice purposes.
+        </p>
+      </article>
+      <form 
+        id="practice-form"
+      >
       
-    </div>
+        <fieldset id="practice-form-inputs">
+          <legend>
+            Some form
+          </legend>
+
+          <label>
+            First name
+            <input type="text">
+          </label>
+          
+          <label>
+            Last name
+            <input type="text">
+          </label>
+          
+          <label>
+            E-mail
+            <input type="email">
+          </label>
+          
+          <label>
+            Tel
+            <input type="tel">
+          </label>
+          
+          <label>
+            Password
+            <input 
+              type     ="password"
+              minlength="6"
+            >
+          </label>
+          
+          <label>
+            Confirm password
+            <input
+              type     ="password"
+              minlength="6"
+            >
+          </label>
+        </fieldset>
+      
+      <fieldset id="practice-form-extras">
+        <button
+          class="btn btn-outline-lleuad-lawn"
+          type ="submit">
+          Submit nothing
+        </button>
+        <p>
+          Already have an account? How?!
+        </p>
+      </fieldset>
+      
+      </form>
+    </section>
   </div>
 
 {% endblock %}

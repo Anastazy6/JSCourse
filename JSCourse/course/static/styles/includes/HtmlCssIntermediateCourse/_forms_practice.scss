@@ -1,6 +1,7 @@
 .pretty-font {
   font-family: $font-pretty;
-  background: transparent;;
+  background: transparent;
+  text-shadow: 0 0 2px black;
 }
 
 #forms-practice-container {
@@ -8,6 +9,7 @@
   max-width: 1000px;
   min-height: 666px; // test
   margin: 0 auto;
+  box-shadow: 0 0 35px -5px map-get($theme-colors , 'lleuad');
 }
 
 #caption {
@@ -17,6 +19,16 @@
   display        : flex;
   justify-content: center;
   align-items    : center;
+  background     :  rgba(183, 209, 218, 0.15);
+  
+  #logo {
+    background: none;
+    flex: none;
+  }
+
+  h1 {
+    flex: 1 1 150px;
+  }
 }
 
 #part-with-image {
@@ -31,5 +43,25 @@
 
 #part-with-form {
   flex: 2;
-  background-color: map-get($theme-colors, 'lleuad');
+  background-color: map-get($theme-colors, 'lleuad-newydd');
+}
+
+#practice-form>fieldset {
+  padding: 20px;
+}
+
+#practice-form-inputs {
+  background-color: map-get($theme-colors, 'full-moon-glass');
+
+  input {
+    width: 250px;
+    margin-right : 20px;
+    margin-bottom: 20px;
+  }
+}
+
+
+#dummy-text {
+  background: none;
+  border    : none;
 }

@@ -51,6 +51,11 @@ input {
     outline      : none;
     border-bottom: 2px solid map-get($theme-colors, "lleuad-lawn");
   }
+
+  &:invalid {
+    outline      : none;
+    border-bottom: 2px solid map-get($theme-colors, "danger");
+  }
 }
 
 select {

@@ -17500,13 +17500,39 @@ input {
   border-bottom: 2px solid #3c6473;
   resize: none;
 }
+input:invalid {
+  outline: none;
+  border-bottom: 2px solid #570202;
+}
+input:focus:invalid, input:hover:invalid {
+  outline: none;
+  border-bottom: 2px solid #dc3545;
+}
+input:placeholder-shown {
+  outline: none;
+  border-bottom: 2px solid #3c6473;
+}
 input:focus, input:hover {
   outline: none;
   border-bottom: 2px solid #b7d1da;
 }
-input:invalid {
-  outline: none;
-  border-bottom: 2px solid #dc3545;
+
+input[type=email] {
+  background: transparent;
+}
+
+input::after {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+input:valid::after {
+  content: "✓";
+  color: #198754;
+}
+input:invalid::after {
+  content: "❌";
+  color: #dc3545;
 }
 
 select {
@@ -18114,6 +18140,13 @@ select select:focus {
 #dummy-text {
   background: none;
   border: none;
+}
+
+#rrol {
+  text-decoration: none;
+}
+#rrol:hover, #rrol:focus {
+  text-decoration: underline;
 }
 
 * {

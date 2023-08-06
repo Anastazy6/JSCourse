@@ -47,16 +47,51 @@ input {
   border-bottom: 2px solid map-get($theme-colors, "lleuad");
   resize       : none;
 
+  &:invalid {
+    outline      : none;
+    border-bottom: 2px solid map-get($theme-colors, "danger-empty");
+  }
+
+  &:focus:invalid,
+  &:hover:invalid {
+    outline      : none;
+    border-bottom: 2px solid map-get($theme-colors, "danger");
+  }
+
+  &:placeholder-shown {
+    outline: none;
+    border-bottom: 2px solid map-get($theme-colors, "lleuad");
+  }
+
   &:focus, &:hover {
     outline      : none;
     border-bottom: 2px solid map-get($theme-colors, "lleuad-lawn");
   }
+}
 
-  &:invalid {
-    outline      : none;
-    border-bottom: 2px solid map-get($theme-colors, "danger");
+input[type="email"] {
+  background: transparent;
+}
+
+input {
+  &::after {
+    display: inline-block;
+    width  : 1em;
+    height : 1em;
+  }
+
+  &:valid::after {
+    
+    content: "✓";
+    color  : map-get($theme-colors , "success");
+  }
+
+  &:invalid::after {
+    content: "❌";
+    color  : map-get($theme-colors , "danger");
   }
 }
+
 
 select {
   height: 35px;

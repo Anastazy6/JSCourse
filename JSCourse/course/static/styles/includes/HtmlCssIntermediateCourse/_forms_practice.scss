@@ -65,3 +65,12 @@
   background: none;
   border    : none;
 }
+
+#rrol {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}

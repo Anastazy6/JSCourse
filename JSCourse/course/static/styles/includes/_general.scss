@@ -2,7 +2,8 @@ $article-background-color: #1d2249;
 $background-color: #110d25;
 $text-color: ghostwhite;
 
-$font-main: Helvetica, Arial, sans-serif;
+$font-main  : Helvetica, Arial, sans-serif;
+$font-pretty: 'BlocusRegular', $font-main;
 
 
 html, body {
@@ -46,11 +47,34 @@ input {
   border-bottom: 2px solid map-get($theme-colors, "lleuad");
   resize       : none;
 
+  &:invalid {
+    outline      : none;
+    border-bottom: 2px solid map-get($theme-colors, "danger-empty");
+  }
+
+  &:focus:invalid,
+  &:hover:invalid {
+    outline      : none;
+    border-bottom: 2px solid map-get($theme-colors, "danger");
+  }
+
+  &:placeholder-shown {
+    outline: none;
+    border-bottom: 2px solid map-get($theme-colors, "lleuad");
+  }
+
   &:focus, &:hover {
     outline      : none;
     border-bottom: 2px solid map-get($theme-colors, "lleuad-lawn");
   }
 }
+
+input[type="email"] {
+  background: transparent;
+}
+
+
+
 
 select {
   height: 35px;

@@ -5,15 +5,17 @@
 @import "../../../node_modules/bootstrap/scss/utilities";
 
 $custom-colors: map-merge($theme-colors, (
-  "porffor"      : rgb(32, 7, 34),
-  "lleuad"       : rgb(60, 100, 115),
-  "lleuad-lawn"  : rgb(183, 209, 218),
-  "moon-glass"   : rgb(60, 100, 115, 0.3),
-  "success-empty": rgb(1, 76, 37),
-  "info-empty"   : rgb(0, 49, 89),
-  "danger-empty" : rgb(87, 2, 2),
-  "warning-empty": rgb(83, 74, 0),
-  "transparent"  : rgba(255, 255, 255, 0)
+  "porffor"        : rgb(32, 7, 34),
+  "lleuad"         : rgb(60, 100, 115),
+  "lleuad-lawn"    : rgb(183, 209, 218),
+  "lleuad-newydd"  : rgb(2, 26, 33),
+  "moon-glass"     : rgba(5, 39, 51, 0.3),
+  "full-moon-glass": rgba(183, 209, 218, 0.05),
+  "success-empty"  : rgb(1, 76, 37),
+  "info-empty"     : rgb(0, 49, 89),
+  "danger-empty"   : rgb(87, 2, 2),
+  "warning-empty"  : rgb(83, 74, 0),
+  "transparent"    : rgba(255, 255, 255, 0)
 ));
 
 
@@ -67,11 +69,14 @@ $utilities: map-merge(
 
 
 // Keep other imports below Bootstrap so as to be able to override its styles.
+@import "./includes/fonts";
 @import "./includes/general";
 
 
 @import "./includes/library/library";
 @import "./includes/tictactoe/tictactoe";
+
+@import "./includes/HtmlCssIntermediateCourse/forms_practice";
 
 
 // Add temporary solutions to the file imported below

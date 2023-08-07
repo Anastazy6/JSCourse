@@ -1,0 +1,141 @@
+{% extends 'Layout/layout.html' %}
+
+{% block title %}
+  Forms
+{% endblock %}
+
+{% block head-extension %}
+  <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/blocus" type="text/css"/>
+{% endblock %}
+
+{% block body-mid %}
+
+  <div id="forms-practice-container">
+    <section id="part-with-image">
+      <div id="caption">
+        <div id="logo">
+          <a
+            href ="https://www.freepnglogos.com/pics/pentagram"
+            title="Image from freepnglogos.com"
+          >
+            <img
+              src  ="https://www.freepnglogos.com/uploads/pentagram-png/metallic-pentagram-clipart-vacaliga-deviantart-23.png"
+              width="100"
+              alt  ="metallic pentagram clipart vacaliga deviantart"
+            />
+          </a>
+        </div>
+      
+        <h1 class="pretty-font">
+          Some dummy text
+        </h1>
+      </div>
+    </section>
+    <section id="part-with-form">
+      <article
+        id="dummy-text"
+      >
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+          Neque qui numquam ipsum optio! Sunt molestias ratione quidem 
+          esse ipsum corporis magni exercitationem facere, nesciunt 
+          autem expedita, veniam quibusdam, accusamus vel?
+        </p>
+        <p>
+          This form does nothing. It's just for demonstration and practice purposes.
+        </p>
+      </article>
+      <form 
+        id="practice-form"
+      >
+      
+        <fieldset id="practice-form-inputs">
+          <legend>
+            <h3>Some form</h3>
+            <p>Required fields are marked with a <strong>*</strong></p>
+          </legend>
+
+          <div class="labeled-input-practice">
+            <input 
+              id  ="name"
+              name="name"
+              type="text"
+              placeholder="John"
+              required
+            >
+            <label for="name">First name</label>
+          </div>
+          
+          <div class="labeled-input-practice">
+            <input 
+              id  ="surname"
+              name="surname"
+              type="text"
+              placeholder="Doe"
+              required
+            >
+            <label for="surname">Last name</label>
+          </div>
+          
+          <div class="labeled-input-practice">
+            <input 
+              id  ="email"
+              name="email"
+              type="email"
+              placeholder="john_doe@wtf.xd"
+              required
+            >
+            <label for="email">E-mail</label>
+          </div>
+          
+          <div class="labeled-input-practice">
+            <input 
+              id  ="tel"
+              name="tel"
+              type="tel"
+              placeholder="692 137 420"
+              required
+            >
+            <label for="tel">Tel</label>
+          </div>
+          
+          <div class="labeled-input-practice">
+            <input 
+              id       ="password"
+              type     ="password"
+              minlength="6"
+              placeholder="Min 6 characters"
+              required
+            >
+            <label for="password">Password</label>
+          </div>
+          
+          <div class="labeled-input-practice">
+            <input
+              id       ="confirm"
+              type     ="password"
+              minlength="6"
+              placeholder="Min 6 characters"
+              required
+            >
+            <label for="confirm">Confirm password</label>
+          </div>
+        </fieldset>
+      
+      <fieldset id="practice-form-extras">
+        <button
+          id   ="practice-form-submit"
+          class="btn btn-outline-lleuad-lawn"
+          type ="submit">
+          Submit nothing
+        </button>
+        <p>
+          Already have an account? <a id="rrol" href="https://youtu.be/dQw4w9WgXcQ" class="text-lleuad-lawn"> How?!</a>
+        </p>
+      </fieldset>
+      
+      </form>
+    </section>
+  </div>
+
+{% endblock %}

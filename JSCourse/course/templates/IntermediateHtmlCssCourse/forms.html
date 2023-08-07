@@ -51,51 +51,55 @@
       
         <fieldset id="practice-form-inputs">
           <legend>
-            Some form
+            <h3>Some form</h3>
+            <p>Required fields are marked with a <strong>*</strong></p>
           </legend>
 
-          <label>
-            First name
+          <div class="labeled-input-practice">
             <input 
+              id  ="name"
               name="name"
               type="text"
               placeholder="John"
               required
             >
-          </label>
+            <label for="name">First name</label>
+          </div>
           
-          <label>
-            Last name
+          <div class="labeled-input-practice">
             <input 
+              id  ="surname"
               name="surname"
               type="text"
               placeholder="Doe"
               required
             >
-          </label>
+            <label for="surname">Last name</label>
+          </div>
           
-          <label>
-            E-mail
+          <div class="labeled-input-practice">
             <input 
+              id  ="email"
               name="email"
               type="email"
               placeholder="john_doe@wtf.xd"
               required
             >
-          </label>
+            <label for="email">E-mail</label>
+          </div>
           
-          <label>
-            Tel
+          <div class="labeled-input-practice">
             <input 
+              id  ="tel"
               name="tel"
               type="tel"
               placeholder="692 137 420"
               required
             >
-          </label>
+            <label for="tel">Tel</label>
+          </div>
           
-          <label>
-            Password
+          <div class="labeled-input-practice">
             <input 
               id       ="password"
               type     ="password"
@@ -103,10 +107,10 @@
               placeholder="Min 6 characters"
               required
             >
-          </label>
+            <label for="password">Password</label>
+          </div>
           
-          <label>
-            Confirm password
+          <div class="labeled-input-practice">
             <input
               id       ="confirm"
               type     ="password"
@@ -114,11 +118,13 @@
               placeholder="Min 6 characters"
               required
             >
-          </label>
+            <label for="confirm">Confirm password</label>
+          </div>
         </fieldset>
       
       <fieldset id="practice-form-extras">
         <button
+          id   ="practice-form-submit"
           class="btn btn-outline-lleuad-lawn"
           type ="submit">
           Submit nothing

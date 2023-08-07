@@ -73,24 +73,7 @@ input[type="email"] {
   background: transparent;
 }
 
-input {
-  &::after {
-    display: inline-block;
-    width  : 1em;
-    height : 1em;
-  }
 
-  &:valid::after {
-    
-    content: "✓";
-    color  : map-get($theme-colors , "success");
-  }
-
-  &:invalid::after {
-    content: "❌";
-    color  : map-get($theme-colors , "danger");
-  }
-}
 
 
 select {

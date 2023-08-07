@@ -52,11 +52,40 @@
 
 #practice-form-inputs {
   background-color: map-get($theme-colors, 'full-moon-glass');
+  display: flex;
+  flex-wrap: wrap;
 
   input {
     width: 250px;
     margin-right : 20px;
     margin-bottom: 20px;
+  }
+}
+
+.labeled-input-practice {
+  display: flex;
+  flex-direction: column-reverse;
+  
+
+  input+label::before {
+    display: inline-block;
+    width  : 1em;
+    height : 1em;
+    margin-right: 10px;
+  }
+
+  input:valid+label::before {
+    content: "✓";
+    color  : map-get($theme-colors , "lleuad-lawn");
+  }
+
+  input:invalid+label::before {
+    content: "❌";
+    color  : map-get($theme-colors , "danger");
+  }
+
+  input:required+label::after {
+    content: "*";
   }
 }
 
@@ -72,5 +101,20 @@
   &:hover,
   &:focus {
     text-decoration: underline;
+  }
+}
+
+#practice-form-submit {
+  margin-bottom: 10px;
+}
+
+legend {
+  h3 {
+    background: transparent;
+    text-align: left;
+  }
+
+  p {
+    font-size: 1rem;
   }
 }

@@ -17521,20 +17521,6 @@ input[type=email] {
   background: transparent;
 }
 
-input::after {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-}
-input:valid::after {
-  content: "✓";
-  color: #198754;
-}
-input:invalid::after {
-  content: "❌";
-  color: #dc3545;
-}
-
 select {
   height: 35px;
   color: ghostwhite;
@@ -18130,11 +18116,35 @@ select select:focus {
 
 #practice-form-inputs {
   background-color: rgba(183, 209, 218, 0.05);
+  display: flex;
+  flex-wrap: wrap;
 }
 #practice-form-inputs input {
   width: 250px;
   margin-right: 20px;
   margin-bottom: 20px;
+}
+
+.labeled-input-practice {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.labeled-input-practice input + label::before {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 10px;
+}
+.labeled-input-practice input:valid + label::before {
+  content: "✓";
+  color: #b7d1da;
+}
+.labeled-input-practice input:invalid + label::before {
+  content: "❌";
+  color: #dc3545;
+}
+.labeled-input-practice input:required + label::after {
+  content: "*";
 }
 
 #dummy-text {
@@ -18147,6 +18157,18 @@ select select:focus {
 }
 #rrol:hover, #rrol:focus {
   text-decoration: underline;
+}
+
+#practice-form-submit {
+  margin-bottom: 10px;
+}
+
+legend h3, legend .h3 {
+  background: transparent;
+  text-align: left;
+}
+legend p {
+  font-size: 1rem;
 }
 
 * {

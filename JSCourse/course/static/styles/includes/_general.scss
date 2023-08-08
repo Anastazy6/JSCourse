@@ -48,23 +48,19 @@ input {
   resize       : none;
 
   &:invalid {
-    outline      : none;
     border-bottom: 2px solid map-get($theme-colors, "danger-empty");
   }
 
   &:focus:invalid,
   &:hover:invalid {
-    outline      : none;
     border-bottom: 2px solid map-get($theme-colors, "danger");
   }
 
   &:placeholder-shown {
-    outline: none;
     border-bottom: 2px solid map-get($theme-colors, "lleuad");
   }
 
   &:focus, &:hover {
-    outline      : none;
     border-bottom: 2px solid map-get($theme-colors, "lleuad-lawn");
   }
 }
@@ -147,4 +143,8 @@ select {
   #body-right-panel {
     display: block;
   }
+}
+
+*:focus {
+  outline: 2px dashed map-get($theme-colors, "lleuad-lawn");
 }

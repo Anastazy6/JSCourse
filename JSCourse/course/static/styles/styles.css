@@ -17501,19 +17501,15 @@ input {
   resize: none;
 }
 input:invalid {
-  outline: none;
   border-bottom: 2px solid #570202;
 }
 input:focus:invalid, input:hover:invalid {
-  outline: none;
   border-bottom: 2px solid #dc3545;
 }
 input:placeholder-shown {
-  outline: none;
   border-bottom: 2px solid #3c6473;
 }
 input:focus, input:hover {
-  outline: none;
   border-bottom: 2px solid #b7d1da;
 }
 
@@ -17591,6 +17587,10 @@ select select:focus {
     display: block;
   }
 }
+*:focus {
+  outline: 2px dashed #b7d1da;
+}
+
 #library-wrapper {
   max-width: 1000px;
   margin: auto;
@@ -18123,6 +18123,9 @@ select select:focus {
   width: 250px;
   margin-right: 20px;
   margin-bottom: 20px;
+}
+#practice-form-inputs * {
+  background: transparent;
 }
 
 .labeled-input-practice {

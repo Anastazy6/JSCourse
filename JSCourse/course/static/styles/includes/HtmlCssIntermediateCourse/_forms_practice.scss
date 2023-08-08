@@ -4,23 +4,25 @@
   text-shadow: 0 0 2px black;
 }
 
+
 #forms-practice-container {
   display: flex;
+  flex-wrap: wrap;
   max-width: 1000px;
   min-height: 666px; // test
   margin: 0 auto;
   box-shadow: 0 0 35px -5px map-get($theme-colors , 'lleuad');
 }
 
+
 #caption {
-  position: relative;
-  background-color: rgba(248, 248, 255, 0.385);
-  width: 100%;
-  display        : flex;
-  justify-content: center;
   align-items    : center;
   background     :  rgba(183, 209, 218, 0.15);
-  
+  display        : flex;
+  justify-content: center;
+  position       : relative;
+  width          : 100%;
+
   #logo {
     background: none;
     flex: none;
@@ -31,24 +33,31 @@
   }
 }
 
+
 #part-with-image {
-  position: relative;
-  display: flex;
   align-items: center;
-  flex: 1;
+  flex       : 1 2 auto;
+  display    : flex;
+  min-height : 250px;
+  position   : relative;
+
   // Image credits: "trees under starry sky" by Max Saeling
   //   from unsplash.com under Unsplash license (https://unsplash.com/license)
   background-image: url("https://images.unsplash.com/photo-1518889735218-3e3a03fd3128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80");
 }
 
+
 #part-with-form {
-  flex: 2;
+  flex: 5 1 400px;
   background-color: map-get($theme-colors, 'lleuad-newydd');
+  justify-content: center;
 }
+
 
 #practice-form>fieldset {
   padding: 20px;
 }
+
 
 #practice-form-inputs {
   background-color: map-get($theme-colors, 'full-moon-glass');
@@ -65,6 +74,7 @@
     background: transparent;
   }
 }
+
 
 .labeled-input-practice {
   display: flex;
@@ -99,6 +109,7 @@
   border    : none;
 }
 
+
 #rrol {
   text-decoration: none;
 
@@ -108,9 +119,11 @@
   }
 }
 
+
 #practice-form-submit {
   margin-bottom: 10px;
 }
+
 
 legend {
   h3 {
@@ -120,5 +133,28 @@ legend {
 
   p {
     font-size: 1rem;
+  }
+}
+
+
+#image-credits {
+  align-items   : center;
+  background    : transparent;
+  bottom        : 10px;
+  display       : flex;
+  flex-direction: column;
+  flex-wrap     : wrap;
+  line-height   : 1em;
+  position      : absolute;
+  width         : 100%;
+
+  p {
+    margin-bottom: 8px;
+  }
+
+  a {
+    color          : rgba(248, 248, 255, 0.5); // semi-transparent ghostwhite
+    font-size      : 0.7rem;
+    text-decoration: none;
   }
 }

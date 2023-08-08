@@ -65,9 +65,6 @@ input {
   }
 }
 
-input[type="email"] {
-  background: transparent;
-}
 
 
 
@@ -147,4 +144,19 @@ select {
 
 *:focus {
   outline: 2px dashed map-get($theme-colors, "lleuad-lawn");
+}
+
+
+input[type="email"] {
+  background: transparent;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: ghostwhite;
+  // Exact same color as the form's background but without any transparency
+  //   Changing the bg color will require changing this value as well
+  //   This is a work-around for browsers forcing a specific autofill bg color
+  -webkit-box-shadow: 0 0 0px 40rem rgb(11, 36, 42) inset;
 }

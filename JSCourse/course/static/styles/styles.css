@@ -17513,10 +17513,6 @@ input:focus, input:hover {
   border-bottom: 2px solid #b7d1da;
 }
 
-input[type=email] {
-  background: transparent;
-}
-
 select {
   height: 35px;
   color: ghostwhite;
@@ -17589,6 +17585,17 @@ select select:focus {
 }
 *:focus {
   outline: 2px dashed #b7d1da;
+}
+
+input[type=email] {
+  background: transparent;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: ghostwhite;
+  -webkit-box-shadow: 0 0 0px 40rem #0b242a inset;
 }
 
 #library-wrapper {
@@ -18074,6 +18081,7 @@ select select:focus {
 
 #forms-practice-container {
   display: flex;
+  flex-wrap: wrap;
   max-width: 1000px;
   min-height: 666px;
   margin: 0 auto;
@@ -18081,13 +18089,12 @@ select select:focus {
 }
 
 #caption {
-  position: relative;
-  background-color: rgba(248, 248, 255, 0.385);
-  width: 100%;
-  display: flex;
-  justify-content: center;
   align-items: center;
   background: rgba(183, 209, 218, 0.15);
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
 }
 #caption #logo {
   background: none;
@@ -18098,16 +18105,18 @@ select select:focus {
 }
 
 #part-with-image {
-  position: relative;
-  display: flex;
   align-items: center;
-  flex: 1;
+  flex: 1 2 auto;
+  display: flex;
+  min-height: 250px;
+  position: relative;
   background-image: url("https://images.unsplash.com/photo-1518889735218-3e3a03fd3128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80");
 }
 
 #part-with-form {
-  flex: 2;
+  flex: 5 1 400px;
   background-color: #021a21;
+  justify-content: center;
 }
 
 #practice-form > fieldset {
@@ -18172,6 +18181,26 @@ legend h3, legend .h3 {
 }
 legend p {
   font-size: 1rem;
+}
+
+#image-credits {
+  align-items: center;
+  background: transparent;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  line-height: 1em;
+  position: absolute;
+  width: 100%;
+}
+#image-credits p {
+  margin-bottom: 8px;
+}
+#image-credits a {
+  color: rgba(248, 248, 255, 0.5);
+  font-size: 0.7rem;
+  text-decoration: none;
 }
 
 * {

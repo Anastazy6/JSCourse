@@ -1,0 +1,31 @@
+#dashboard-side-panel {
+  background: map-get($theme-colors, 'lleuad-newydd');
+  display: grid;
+  width  : 300px;
+
+
+  grid-template-columns: 1fr;
+  grid-template-rows   : 2fr repeat(9, 1fr);
+
+  svg {
+    width: 1.5em
+  }
+}
+
+
+
+.dashboard-bottom-gap {
+  gap: 0 0 30px 0;
+}
+
+#dashboard-logo-icon,
+.dashboard-side-bar-icon {
+  width: 50px;
+  background: red; //test
+}
+
+#dashboard-logo,
+.dashboard-side-nav {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}

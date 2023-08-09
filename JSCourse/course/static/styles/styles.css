@@ -17473,10 +17473,6 @@ main {
   margin-bottom: 50px;
 }
 
-div {
-  background: inherit;
-}
-
 article {
   background: #1d2249;
   border: 1px solid #1d2044;
@@ -17596,6 +17592,10 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   -webkit-text-fill-color: ghostwhite;
   -webkit-box-shadow: 0 0 0px 40rem #0b242a inset;
+}
+
+.svg-fill-ghostwhite {
+  fill: ghostwhite;
 }
 
 #library-wrapper {
@@ -18201,6 +18201,33 @@ legend p {
   color: rgba(248, 248, 255, 0.5);
   font-size: 0.7rem;
   text-decoration: none;
+}
+
+#dashboard-side-panel {
+  background: #021a21;
+  display: grid;
+  width: 300px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr repeat(9, 1fr);
+}
+#dashboard-side-panel svg {
+  width: 1.5em;
+}
+
+.dashboard-bottom-gap {
+  gap: 0 0 30px 0;
+}
+
+#dashboard-logo-icon,
+.dashboard-side-bar-icon {
+  width: 50px;
+  background: red;
+}
+
+#dashboard-logo,
+.dashboard-side-nav {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
 }
 
 * {

@@ -10,8 +10,10 @@
 {% block body-mid %}
 
 
-
-{% include "./dashboardIncludes/side_panel.html" %}
-
+  <div id="dashboard">
+    {% include "./dashboardIncludes/header.html"       %}
+    {% include "./dashboardIncludes/side_panel.html"   %}
+    {% include "./dashboardIncludes/main_content.html" %}
+  </div>
 
 {% endblock %}

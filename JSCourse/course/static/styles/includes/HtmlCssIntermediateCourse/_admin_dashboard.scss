@@ -34,10 +34,20 @@
 #dashboard-logo-icon,
 .dashboard-side-bar-icon {
   width: 50px;
-  background: red; //test
 }
 
-#dashboard-logo,
+#dashboard-logo-icon {
+  justify-self: center;
+}
+
+#dashboard-logo {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  font-size: 2em;
+}
+
+
 .dashboard-side-nav {
   display: grid;
   grid-template-columns: 1fr 6fr;
@@ -63,6 +73,7 @@
   background: map-get($theme-colors, "lleuad");
   height    : 200px;
   padding   : 30px;
+  gap       : 0.5em 2.5em;
 
 
   display: grid;
@@ -79,6 +90,8 @@
 #dashboard-header-search-bar              { grid-area: search;  }
 
 #dashboard-header-search {
+  gap: 1em;
+
   display: grid;
   grid-template-columns: 30px 1fr;
   grid-template-rows   : 1fr;
@@ -102,16 +115,19 @@
   gap: 20px;
 
   display: grid;
-  grid-template-columns: 3fr 1fr 3fr;
+  grid-template-columns: 2fr 1fr 3fr;
   grid-template-rows   : 1fr;
   grid-template-areas  : 
     'bell icon name';
 }
 
-#dashboard-header-profile-icon img {
-  border-radius: 100%;
-  justify-self: center;
-  width: 35px;
+#dashboard-header-profile-icon {
+  text-align: center;
+
+  img {
+    border-radius: 100%;
+    width: 35px;
+  }
 }
 
 #dashboard-header-profile-bell {
@@ -120,8 +136,8 @@
 }
 
 #dashboard-header-profile-name {
-  font-size: 1.5rem;
-  justify-self: center;
+  font-size   : 1.3rem;
+  justify-self: left;
   
 }
 
@@ -152,6 +168,8 @@
 
 
 #dashboard-header-buttons {
+  align-items: end;
+
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(3, 1fr);

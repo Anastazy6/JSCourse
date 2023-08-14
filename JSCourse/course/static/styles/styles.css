@@ -18240,10 +18240,19 @@ legend p {
 #dashboard-logo-icon,
 .dashboard-side-bar-icon {
   width: 50px;
-  background: red;
 }
 
-#dashboard-logo,
+#dashboard-logo-icon {
+  justify-self: center;
+}
+
+#dashboard-logo {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  font-size: 2em;
+}
+
 .dashboard-side-nav {
   display: grid;
   grid-template-columns: 1fr 6fr;
@@ -18274,6 +18283,7 @@ legend p {
   background: #3c6473;
   height: 200px;
   padding: 30px;
+  gap: 0.5em 2.5em;
   display: grid;
   grid-template-columns: 5fr 3fr;
   grid-template-rows: 1fr 1fr;
@@ -18289,6 +18299,7 @@ legend p {
 }
 
 #dashboard-header-search {
+  gap: 1em;
   display: grid;
   grid-template-columns: 30px 1fr;
   grid-template-rows: 1fr;
@@ -18317,14 +18328,16 @@ legend p {
 #dashboard-header-profile {
   gap: 20px;
   display: grid;
-  grid-template-columns: 3fr 1fr 3fr;
+  grid-template-columns: 2fr 1fr 3fr;
   grid-template-rows: 1fr;
   grid-template-areas: "bell icon name";
 }
 
+#dashboard-header-profile-icon {
+  text-align: center;
+}
 #dashboard-header-profile-icon img {
   border-radius: 100%;
-  justify-self: center;
   width: 35px;
 }
 
@@ -18334,8 +18347,8 @@ legend p {
 }
 
 #dashboard-header-profile-name {
-  font-size: 1.5rem;
-  justify-self: center;
+  font-size: 1.3rem;
+  justify-self: left;
 }
 
 #dashboard-header-hello-icon {
@@ -18368,6 +18381,7 @@ legend p {
 }
 
 #dashboard-header-buttons {
+  align-items: end;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(3, 1fr);

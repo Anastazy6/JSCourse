@@ -19,10 +19,6 @@ main {
 }
 
 
-div {
-  background: inherit;
-}
-
 article {
   background   : $article-background-color;
   border       : 1px solid #1d2044;
@@ -159,4 +155,8 @@ input:-webkit-autofill:focus {
   //   Changing the bg color will require changing this value as well
   //   This is a work-around for browsers forcing a specific autofill bg color
   -webkit-box-shadow: 0 0 0px 40rem rgb(11, 36, 42) inset;
+}
+
+.svg-fill-ghostwhite {
+  fill: ghostwhite;
 }

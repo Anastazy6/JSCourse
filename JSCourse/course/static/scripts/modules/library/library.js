@@ -1,7 +1,7 @@
 import Cover     from "./components/cover.js";
 import ViewUtils from "../../Utilities/viewUtils.js";
 import View      from "./view.js"
-
+import Util      from "../../Utilities/util.js";
 
 
 const Library = (function() {

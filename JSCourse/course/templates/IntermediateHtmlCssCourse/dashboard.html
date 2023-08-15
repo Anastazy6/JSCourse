@@ -1,0 +1,19 @@
+{% extends 'Layout/layout.html' %}
+
+{% block title %}
+  Admin dashboard
+{% endblock %}
+
+{% block head-extension %}
+{% endblock %}
+
+{% block body-mid %}
+
+
+  <div id="dashboard">
+    {% include "./dashboardIncludes/header.html"       %}
+    {% include "./dashboardIncludes/side_panel.html"   %}
+    {% include "./dashboardIncludes/main_content.html" %}
+  </div>
+
+{% endblock %}

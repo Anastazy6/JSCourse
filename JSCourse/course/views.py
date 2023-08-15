@@ -14,3 +14,6 @@ def tictactoe(request):
 
 def forms_practice(request):
     return render(request, 'IntermediateHtmlCssCourse/forms.html')
+
+def admin_dashboard(request):
+    return render(request, 'IntermediateHtmlCssCourse/dashboard.html')

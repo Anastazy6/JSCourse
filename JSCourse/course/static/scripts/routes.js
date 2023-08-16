@@ -23,6 +23,9 @@ const routes = [
   }, {
     route : simplePattern("forms-practice"),
     module: practice("formsPractice")
+  }, {
+    route : simplePattern("admin-dashboard"),
+    module: practice("adminDashboard")
   }
 ]
 

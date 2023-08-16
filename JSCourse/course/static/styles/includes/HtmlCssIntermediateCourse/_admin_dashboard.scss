@@ -17,6 +17,9 @@
     'side main';
 }
 
+#side-panel-switch {
+  display: none;
+}
 
 #dashboard-side-panel {
   background: map-get($theme-colors, 'hanner-lleuad');
@@ -90,19 +93,25 @@
 
 #dashboard-header-search {
   gap: 1em;
+  border       : 2px solid map-get($theme-colors , "lleuad-lawn");
+  border-radius: 50px;
+  height       : 2em;
+  padding      : 0 1em;
 
   display: grid;
-  grid-template-columns: 30px 1fr;
+  grid-template-columns: 1fr 30px;
   grid-template-rows   : 1fr;
   grid-template-areas  : 
-    'magnify search';
+    'search magnify ';
 }
 
 #dashboard-header-search-bar {
-  border: 2px solid map-get($theme-colors , "lleuad-lawn");
-  border-radius: 50px;
-  height: 2em;
-  padding: 0 1em;
+  border: none;
+  border-right: 1px solid map-get($theme-colors , "lleuad-lawn");
+
+  &:focus {
+    border: 3px dotted azure;
+  }
 }
 
 
@@ -167,11 +176,11 @@
 
 
 #dashboard-header-buttons {
-  align-items: end;
+  justify-content: space-around;
 
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, min-content);
 
   button {
     height: 2.5em;
@@ -212,7 +221,12 @@
   }
 
   article {
-    background: map-get($theme-colors, "full-moon-glass");
+    background: map-get($theme-colors, "full-moon-glass-thick");
+    border    : 2px solid map-get($theme-colors, "lleuad-lawn");
+  }
+
+  p {
+    margin-bottom: 0;
   }
 }
 
@@ -225,6 +239,7 @@
 }
 
 .dashboard-project {
+  gap: 15px;
   padding: 1.5rem 1rem;
   display: grid;
   grid-template-rows: 2.5rem 1fr 1rem;
@@ -269,5 +284,81 @@
     font-size: 1em;
     text-align: left;
     font-weight: bold;
+  }
+}
+
+@media (max-width: 999px) {
+  #dashboard {
+    position: relative;
+  }
+
+  #dashboard-main {
+    grid-template-columns: 1fr;
+    grid-template-rows   : auto;
+    grid-template-areas  :
+      'projects'
+      'annons  '
+      'trends  ';
+  }
+
+  #dashboard-header {
+    grid-template-columns: 1fr;
+    grid-template-rows   : auto;
+    grid-template-areas  : 
+      'profile'
+      'search '
+      'buttons';
+
+    #dashboard-header-hello {
+      display: none;
+    }
+  }
+
+  #dashboard-header-profile {
+    grid-template-columns: 1fr min-content max-content;
+    grid-template-rows   : 1fr;
+    grid-template-areas  : 
+      'bell icon name';
+
+    #dashboard-header-profile-bell {
+      justify-self: end;
+    }
+  }
+}
+
+@media (max-width: 666px) {
+  #dashboard {
+    grid-template-columns: 1fr;
+    grid-template-rows   : auto;
+    grid-template-areas  :
+      'head'
+      'main';
+  }
+
+  #dashboard-side-panel {
+    position: fixed;
+    left: -300px;
+		transition: transform 666ms ease-out;
+    
+  }
+
+  #dashboard-side-panel.mobile-sidepanel-visible-grid {
+    min-height: 100vh;
+    transform: translateX(0px);
+    transition: transform 666ms ease-in;
+    position: fixed;
+    display : grid;
+    top     : 0;
+    left    : 0;
+  }
+
+  #side-panel-switch {
+    border: none;
+    background: transparent;
+    display : block;
+    position: absolute;
+    top     : 15px;
+    left    : 15px;
+    width   : 3rem;
   }
 }

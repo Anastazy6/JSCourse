@@ -8,7 +8,7 @@ const Dashboard = (function() {
   }
 
   function toggleSidePanel() {
-    sidePanel      .classList.toggle("mobile-sidepanel-visible-grid");
+    sidePanel      .classList.toggle("mobile-hidden");
     sidePanelSwitch.classList.toggle("sidepanel-visible");
   }
 

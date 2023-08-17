@@ -79,23 +79,23 @@
   }
 
   #dashboard-side-panel {
-    width    : 300px;
-    padding  : 5px 50px 20px 20px;
-    position : fixed;
-    left     : -300px;
-		transition: transform 666ms ease-out;
+    width     : 300px;
+    min-height: 100vh;
+    padding   : 5px 50px 20px 20px;
+    position  : fixed;
+    transform : translateX(0px);
+		transition: transform 300ms ease-out;
     
+    &.mobile-hidden {
+      transform : translateX(-300px);
+      transition: transform 300ms ease-in;
+      position  : fixed;
+      display   : grid;
+      top       : 0;
+      left      : 0;
+    }
   }
 
-  #dashboard-side-panel.mobile-sidepanel-visible-grid {
-    min-height: 100vh;
-    transform : translateX(0px);
-    //transition: transform 666ms ease-in;
-    position  : fixed;
-    display   : grid;
-    top       : 0;
-    left      : 0;
-  }
 
   #side-panel-switch {
     z-index   : 2137;
@@ -106,10 +106,14 @@
     position  : absolute;
     top       : 25px;
     width     : 3rem;
-  }
-
-  #side-panel-switch.sidepanel-visible {
-    transform: translateX(225px);
-    position : fixed;
+    
+    transform : translateX(0px);
+    transition: transform 300ms ease-in;
+    
+    &.sidepanel-visible {
+      transform : translateX(225px);
+      transition: transform 350ms ease-out;
+      position  : fixed;
+    }
   }
 }

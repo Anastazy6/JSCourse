@@ -7,77 +7,66 @@
 {% block body-mid %}
 
 
-  <article
-    id="launcher"
-  >
-  {% include './launcher.html' %}
-  </article>
+  <div class="wrapper-with-horizontal-margin-50">
+    <article
+      id="launcher"
+    >
+    {% include './launcher.html' %}
+    </article>
     
-
-
-  <section
-    id="game-container"
-  >
-    <article
-      id="game-state"
+    <section
+      id="game-container"
     >
-      <div id="p1-name"></div>
-      <div id="p1-symbol"></div>
-      <div id="p1-wins"></div>
-      <div id="separator">:</div>
-      <div id="p2-wins"></div>
-      <div id="p2-symbol"></div>
-      <div id="p2-name"></div>
-      <div id="current-player-symbol"></div>
-
-    </article>
-
-
-    <article
-      id="gameboard"
-    >
-    </article>
-  </section>
-
-
-  <section
-    id="summary-container"
-  >
-    <article
-      id="summary"
-    >
-      <div
-        id="winner"
-      ></div>
-
-      <div
-        id="draws"
-      ></div>
-
-      <div
-        id="player1-score"
-      ></div>
-
-      <div
-        id="player2-score"
-      ></div>
-
-      <button
-        id   ="restart-button"
-        class="btn btn-outline-danger"
+      <article
+        id="game-state"
       >
-        Restart
-      </button>
-
-      <button
-        id   ="next-round-button"
-        class="btn btn-outline-success"
+        <div id="p1-name"></div>
+        <div id="p1-symbol"></div>
+        <div id="p1-wins"></div>
+        <div id="separator">:</div>
+        <div id="p2-wins"></div>
+        <div id="p2-symbol"></div>
+        <div id="p2-name"></div>
+        <div id="current-player-symbol"></div>
+      </article>
+      <article
+        id="gameboard"
       >
-        Next round
-      </button>
-
-    </article>
-  </section>
+      </article>
+    </section>
+    <section
+      id="summary-container"
+    >
+      <article
+        id="summary"
+      >
+        <div
+          id="winner"
+        ></div>
+        <div
+          id="draws"
+        ></div>
+        <div
+          id="player1-score"
+        ></div>
+        <div
+          id="player2-score"
+        ></div>
+        <button
+          id   ="restart-button"
+          class="btn btn-outline-danger"
+        >
+          Restart
+        </button>
+        <button
+          id   ="next-round-button"
+          class="btn btn-outline-success"
+        >
+          Next round
+        </button>
+      </article>
+    </section>
+  </div>
 
 
 {% endblock %}

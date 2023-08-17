@@ -1,0 +1,54 @@
+#dashboard-side-panel {
+  background: map-get($theme-colors, 'hanner-lleuad');
+  padding   : 15px;
+
+  display   : grid;
+  grid-template-columns: 1fr;
+  grid-template-rows   : 5rem repeat(11, 2.5rem) 1fr;
+
+  svg {
+    width: 1.5em
+  }
+}
+
+
+#dashboard-logo-icon,
+.dashboard-side-bar-icon {
+  width: 50px;
+}
+
+#dashboard-logo-icon {
+  justify-self: center;
+}
+
+#dashboard-logo {
+  align-items: center;
+  display    : grid;
+  font-size  : 2em;
+
+  grid-template-columns: 1fr 3fr;
+}
+
+
+.dashboard-side-nav {
+  border-top: 1px solid map-get($theme-colors, "lleuad-lawn");
+  gap       : 20px;
+  padding   : 7px 15px;
+
+  display: grid;
+  grid-template-columns: min-content 1fr;
+
+  &:hover, :focus {
+    color : map-get($theme-colors, "lleuad-lawn");
+    cursor: pointer;
+
+    svg {
+      fill: map-get($theme-colors, "lleuad-lawn");
+    }
+  }
+}
+
+.dashboard-side-nav-separator +
+.dashboard-side-nav {
+  border: none;
+}

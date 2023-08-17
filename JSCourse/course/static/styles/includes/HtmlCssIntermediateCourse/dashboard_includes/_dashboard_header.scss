@@ -1,0 +1,122 @@
+#dashboard-header-search  { grid-area: search;  }
+#dashboard-header-profile { grid-area: profile; }
+#dashboard-header-hello   { grid-area: hello;   }
+#dashboard-header-buttons { grid-area: buttons; }
+
+#dashboard-header {
+  background: map-get($theme-colors, "lleuad");
+  gap       : 0.5em 2.5em;
+  height    : 200px;
+  padding   : 30px;
+
+  display: grid;
+  grid-template-columns: minmax(450px, 5fr) 3fr;
+  grid-template-rows   : 1fr 1fr;
+  grid-template-areas  :
+    'search profile'
+    'hello  buttons';
+}
+
+
+
+#dashboard-header-search-magnifying-glass { grid-area: magnify; }
+#dashboard-header-search-bar              { grid-area: search;  }
+
+#dashboard-header-search {
+  gap: 1em;
+  border       : 2px solid map-get($theme-colors , "lleuad-lawn");
+  border-radius: 50px;
+  height       : 2em;
+  padding      : 0 1em;
+
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  grid-template-rows   : 1fr;
+  grid-template-areas  : 
+    'search magnify ';
+}
+
+#dashboard-header-search-bar {
+  border: none;
+  border-right: 1px solid map-get($theme-colors , "lleuad-lawn");
+
+  &:focus {
+    border: 3px dotted azure;
+  }
+}
+
+
+#dashboard-header-profile-bell { grid-area: bell; }
+#dashboard-header-profile-icon { grid-area: icon; }
+#dashboard-header-profile-name { grid-area: name; }
+
+#dashboard-header-profile {
+  gap: 20px;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr;
+  grid-template-rows   : 1fr;
+  grid-template-areas  : 
+    'bell icon name';
+}
+
+#dashboard-header-profile-icon {
+  text-align: center;
+
+  img {
+    border-radius: 100%;
+    width        : 35px;
+  }
+}
+
+#dashboard-header-profile-bell {
+  justify-self: end;
+  width       : 30px;
+}
+
+#dashboard-header-profile-name {
+  font-size   : 1.3rem;
+  justify-self: left;
+  
+}
+
+
+#dashboard-header-hello-icon     { grid-area: icon;           }
+#dashboard-header-hello-there    { grid-area: hello-there;    }
+#dashboard-header-general-kenobi { grid-area: general-kenobi; }
+
+#dashboard-header-hello {
+  gap    : 0 20px;
+
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  grid-template-rows   : 1fr  1.5fr;
+  grid-template-areas  :
+    'icon hello-there   '
+    'icon general-kenobi';
+}
+
+#dashboard-header-hello-icon img {
+  border-radius: 100%;
+  width        : 100%;
+}
+
+#dashboard-header-general-kenobi {
+  font-size: 1.5rem;
+}
+
+
+#dashboard-header-buttons {
+  justify-content: space-around;
+
+  display: grid;
+  grid-template-rows   : 1fr;
+  grid-template-columns: repeat(3, min-content);
+
+  button {
+    border-radius: 100px;
+    border-width : 2.5px;
+    height       : 2.5em;
+    width        : 6em;
+  }
+}

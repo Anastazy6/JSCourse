@@ -1,3 +1,7 @@
+@import "./dashboard_includes/dashboard_side";
+@import "./dashboard_includes/dashboard_header";
+@import "./dashboard_includes/dashboard_main";
+
 #dashboard-side-panel { grid-area: side; }
 #dashboard-header     { grid-area: head; }
 #dashboard-main       { grid-area: main; }
@@ -6,286 +10,25 @@
   margin    : auto;
   margin-bottom: 0;
   min-height: 100vh;
-  position  : relative;
-  top       : -50px;
-  
+
   display: grid;
   grid-template-columns: 250px 1fr;
   grid-template-rows   : 200px 1fr;
   grid-template-areas  :
     'side head'
     'side main';
+
+  svg, img {
+    &:hover, :focus {
+      cursor: pointer;
+    }
+  }
 }
 
 #side-panel-switch {
   display: none;
 }
 
-#dashboard-side-panel {
-  background: map-get($theme-colors, 'hanner-lleuad');
-  display   : grid;
-  grid-template-columns: 1fr;
-  grid-template-rows   : 5rem repeat(11, 2.5rem) 1fr;
-
-  svg {
-    width: 1.5em
-  }
-}
-
-
-#dashboard-logo-icon,
-.dashboard-side-bar-icon {
-  width: 50px;
-}
-
-#dashboard-logo-icon {
-  justify-self: center;
-}
-
-#dashboard-logo {
-  align-items: center;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  font-size: 2em;
-}
-
-
-.dashboard-side-nav {
-  display: grid;
-  grid-template-columns: 1fr 6fr;
-}
-
-.dashboard-side-nav {
-  padding: 7px 15px;
-  gap    : 20px;
-}
-
-
-
-
-
-
-
-#dashboard-header-search  { grid-area: search;  }
-#dashboard-header-profile { grid-area: profile; }
-#dashboard-header-hello   { grid-area: hello;   }
-#dashboard-header-buttons { grid-area: buttons; }
-
-#dashboard-header {
-  background: map-get($theme-colors, "lleuad");
-  height    : 200px;
-  padding   : 30px;
-  gap       : 0.5em 2.5em;
-
-
-  display: grid;
-  grid-template-columns: minmax(450px, 5fr) 3fr;
-  grid-template-rows   : 1fr 1fr;
-  grid-template-areas:
-    'search profile'
-    'hello  buttons';
-}
-
-
-
-#dashboard-header-search-magnifying-glass { grid-area: magnify; }
-#dashboard-header-search-bar              { grid-area: search;  }
-
-#dashboard-header-search {
-  gap: 1em;
-  border       : 2px solid map-get($theme-colors , "lleuad-lawn");
-  border-radius: 50px;
-  height       : 2em;
-  padding      : 0 1em;
-
-  display: grid;
-  grid-template-columns: 1fr 30px;
-  grid-template-rows   : 1fr;
-  grid-template-areas  : 
-    'search magnify ';
-}
-
-#dashboard-header-search-bar {
-  border: none;
-  border-right: 1px solid map-get($theme-colors , "lleuad-lawn");
-
-  &:focus {
-    border: 3px dotted azure;
-  }
-}
-
-
-#dashboard-header-profile-bell { grid-area: bell; }
-#dashboard-header-profile-icon { grid-area: icon; }
-#dashboard-header-profile-name { grid-area: name; }
-
-#dashboard-header-profile {
-  gap: 20px;
-
-  display: grid;
-  grid-template-columns: 2fr 1fr 3fr;
-  grid-template-rows   : 1fr;
-  grid-template-areas  : 
-    'bell icon name';
-}
-
-#dashboard-header-profile-icon {
-  text-align: center;
-
-  img {
-    border-radius: 100%;
-    width: 35px;
-  }
-}
-
-#dashboard-header-profile-bell {
-  justify-self: end;
-  width: 30px;
-}
-
-#dashboard-header-profile-name {
-  font-size   : 1.3rem;
-  justify-self: left;
-  
-}
-
-
-#dashboard-header-hello-icon     { grid-area: icon;           }
-#dashboard-header-hello-there    { grid-area: hello-there;    }
-#dashboard-header-general-kenobi { grid-area: general-kenobi; }
-
-#dashboard-header-hello {
-  gap    : 0 20px;
-
-  display: grid;
-  grid-template-columns: 70px 1fr;
-  grid-template-rows   : 1fr  1.5fr;
-  grid-template-areas  :
-    'icon hello-there   '
-    'icon general-kenobi';
-}
-
-#dashboard-header-hello-icon img {
-  width: 100%;
-  border-radius: 100%;
-}
-
-#dashboard-header-general-kenobi {
-  font-size: 1.5rem;
-}
-
-
-#dashboard-header-buttons {
-  justify-content: space-around;
-
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: repeat(3, min-content);
-
-  button {
-    height: 2.5em;
-    width : 6em;
-    border-radius: 100px;
-    border-width: 2.5px;
-  }
-}
-
-#dashboard-main-projects-wrapper      { grid-area: projects; }
-#dashboard-main-announcements-wrapper { grid-area: annons;   }
-#dashboard-main-trending-wrapper      { grid-area: trends;   }
-
-
-#dashboard-main {
-  background-color: map-get($theme-colors, "lleuad-newydd");
-  padding: 20px;
-  gap    : 25px 20px;
-
-  display: grid;
-  grid-template-columns: 1fr 250px;
-  grid-template-rows   : 1fr 1fr;
-  grid-template-areas  : 
-    'projects annons'
-    'projects trends';
-
-  h3, h4 {
-    background: transparent;
-  }
-
-  a {
-    color: map-get($theme-colors, 'lleuad-lawn');
-    text-decoration: none;
-
-    &:hover, &:focus {
-      text-decoration: underline;
-    }
-  }
-
-  article {
-    background: map-get($theme-colors, "full-moon-glass-thick");
-    border    : 2px solid map-get($theme-colors, "lleuad-lawn");
-  }
-
-  p {
-    margin-bottom: 0;
-  }
-}
-
-
-#dashboard-main-projects {
-  gap: 20px;
-  
-  display: grid;   
-  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr));
-}
-
-.dashboard-project {
-  gap: 15px;
-  padding: 1.5rem 1rem;
-  display: grid;
-  grid-template-rows: 2.5rem 1fr 1rem;
-}
-
-.dashboard-project-icons {
-  text-align: right;
-
-  svg {
-    fill : ghostwhite;
-    width: 1.5rem;
-    margin-left: 2rem;
-  }
-}
-
-#dashboard-main-announcements,
-#dashboard-main-trending {
-  font-size: 0.75rem;
-  gap: 15px;
-  display: grid;
-}
-
-.dashboard-trend {
-  gap: 5px 10px;
-  display: grid;
-  grid-template-columns: 35px 1fr;
-  grid-template-rows   : 1rem 1fr;
-  grid-template-areas  :
-    'icon header '
-    'icon content';
-
-  .trend-icon { grid-area: icon;    }
-  h4          { grid-area: header;  }
-  p           { grid-area: content; }
-
-  .trend-icon img {
-    border-radius: 2137px;;
-    width: 35px;
-  }
-
-  h4 {
-    font-size: 1em;
-    text-align: left;
-    font-weight: bold;
-  }
-}
 
 @media (max-width: 999px) {
   #dashboard {
@@ -336,29 +79,37 @@
   }
 
   #dashboard-side-panel {
-    position: fixed;
-    left: -300px;
+    width    : 300px;
+    padding  : 5px 50px 20px 20px;
+    position : fixed;
+    left     : -300px;
 		transition: transform 666ms ease-out;
     
   }
 
   #dashboard-side-panel.mobile-sidepanel-visible-grid {
     min-height: 100vh;
-    transform: translateX(0px);
-    transition: transform 666ms ease-in;
-    position: fixed;
-    display : grid;
-    top     : 0;
-    left    : 0;
+    transform : translateX(0px);
+    //transition: transform 666ms ease-in;
+    position  : fixed;
+    display   : grid;
+    top       : 0;
+    left      : 0;
   }
 
   #side-panel-switch {
-    border: none;
+    z-index   : 2137;
+    border    : none;
     background: transparent;
-    display : block;
-    position: absolute;
-    top     : 15px;
-    left    : 15px;
-    width   : 3rem;
+    display   : block;
+    left      : 25px;
+    position  : absolute;
+    top       : 25px;
+    width     : 3rem;
+  }
+
+  #side-panel-switch.sidepanel-visible {
+    transform: translateX(225px);
+    position : fixed;
   }
 }

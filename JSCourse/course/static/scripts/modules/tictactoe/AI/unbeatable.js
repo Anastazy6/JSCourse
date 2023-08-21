@@ -20,7 +20,10 @@ const Move = function(cell, value) {
 }
 
 
-
+/**
+ * Work in progress, suspended due to taking a lot of time to debug while
+ *   distracting me from continuing the course
+ */
 const UnbeatableAI = (function() {
   const mainBoard     = () => Game.getState().board;
   const currentPlayer = () => Game.getState().current;

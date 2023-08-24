@@ -5,7 +5,7 @@ module.exports = {
   entry: './course/static/scripts/index.js',  
   output: {  
     filename: 'main.js',  
-    publicPath: './course/dist/scripts'  
+    publicPath: './course/static/dist'  
   },
   module: {  
     rules: [  

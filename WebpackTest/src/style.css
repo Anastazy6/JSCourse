@@ -1,3 +1,7 @@
+body {
+  background: url('./Ikona.png');
+}
+
 .hello {
-  color: red;
+  color: red; 
 }

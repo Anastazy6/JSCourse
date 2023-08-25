@@ -1,7 +1,35 @@
-body {
-  background: url('./Ikona.png');
+@font-face {
+  font-family: 'TiltPrism';
+  src: url('./TiltPrism.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 
+@font-face {
+  font-family: "Qwitcher";
+  src: url('./QwitcherGrypen-Regular.ttf');
+  font-style : normal;
+}
+
+@font-face {
+  font-family: "Qwitcher";
+  src: url('./QwitcherGrypen-Bold.ttf');
+  font-weight: bold;
+  font-style : normal;
+}
+
+
+/* body {
+  background: url('./Ikona.png');
+} */
+
 .hello {
+  font-size: 30px;
+  font-family: 'Qwitcher';
   color: red; 
+}
+.hello2 {
+  font-size: 30px;
+  font-family: 'TiltPrism';
+  color: blue;
 }

@@ -22,4 +22,4 @@ function Icon() {
 }
 
 document.body.appendChild(component());
-document.body.appendChild(Icon());
+// document.body.appendChild(Icon());

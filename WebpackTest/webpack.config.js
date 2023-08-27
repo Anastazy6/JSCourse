@@ -7,7 +7,7 @@ module.exports = {
     index: './src/index.js',
     print: './src/print.js',
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Development',

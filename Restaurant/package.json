@@ -1,0 +1,16 @@
+{
+  "name": "restaurant",
+  "version": "0.0.0",
+  "description": "Restaurant page project from The Odin Project course",
+  "main": "index.js",
+  "scripts": {
+    "test" : "echo \"Error: no test specified\" && exit 1",
+    "watch": "npx webpack --watch"
+  },
+  "author": "Kamil",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}

@@ -5,15 +5,17 @@ const navitems = [
 ]
 
 function Navbar() {
-  const navbar = document.createDocumentFragment('nav.navbar');
+  const navbar   = document.createElement('nav.navbar');
+  const fragment = document.createDocumentFragment();
 
-  navitems.forEach(item => navbar.appendChild(Navitem(item)));
+  navitems.forEach(item => fragment.appendChild(Navitem(item)));
+  navbar.appendChild(fragment);
 
   return navbar;
 }
 
 function Navitem(item) {
-  const navitem = document.createDocumentFragment('div');
+  const navitem = document.createElement('div');
 
   navitem.innerText = item;
 

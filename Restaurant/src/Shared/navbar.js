@@ -5,9 +5,10 @@ const navitems = [
 ]
 
 function Navbar() {
-  const navbar   = document.createElement('nav.navbar');
+  const navbar   = document.createElement('nav');
   const fragment = document.createDocumentFragment();
 
+  navbar.classList.add("navbar");
   navitems.forEach(item => fragment.appendChild(Navitem(item)));
   navbar.appendChild(fragment);
 

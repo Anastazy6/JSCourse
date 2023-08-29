@@ -1,0 +1,16 @@
+.navbar {
+  background     : map-get($theme-colors, "hanner-lleuad");
+  display        : flex;
+  gap            : 40px;
+  font-family    : $font-pretty;
+  font-size      : 2rem;
+  justify-content: center;
+  min-height     : 50px;
+  padding        : 10px;
+  position       : fixed;
+  width          : 100%;
+
+  div:hover {
+    text-shadow: 0 0 5px map-get($map: $theme-colors, $key: "lleuad-lawn");
+  }
+}

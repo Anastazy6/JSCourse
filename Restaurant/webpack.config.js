@@ -4,8 +4,14 @@ module.exports = {
   devtool: "inline-source-map",
   entry: './src/index.js',
   mode : 'development',
+  devServer: {
+    static: './dist',
+  },
+  optimization: {
+    runtimeChunk: 'single',
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {

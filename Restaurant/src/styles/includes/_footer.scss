@@ -1,9 +1,9 @@
-.navbar {
+footer {
   background     : map-get($theme-colors, "hanner-lleuad");
   display        : flex;
-  gap            : 40px;
+  gap            : 20px;
   font-family    : $font-pretty;
-  font-size      : 2rem;
+  font-size      : 1rem;
   justify-content: center;
   min-height     : 50px;
   padding        : 10px;

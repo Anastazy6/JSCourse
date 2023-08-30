@@ -12,10 +12,35 @@ html, body {
   font-size  : 16px;
 }
 
-.wrapper-with-horizontal-margin-50 {
-  margin-top   : 50px;
-  margin-bottom: 50px;
+#content>nav    { grid-area: navbar; }
+#content>main   { grid-area: main;   }
+#content>footer { grid-area: footer; }
+
+#content {
+  background: map-get($map: $theme-colors, $key: "moon-glass");
+  display   : grid;
+  gap       : 30px;
+  min-height: 100vh;
+  overflow-y: auto;
+  grid-template-columns: 1fr clamp(350px, 70%, 1000px) 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'navbar navbar navbar'
+    '......  main  ......'
+    'footer footer footer';
 }
+
+main {
+  background-color: map-get($map: $theme-colors, $key: 'full-moon-glass');
+  border-radius: 21.37px;
+  border: 2px solid map-get($map: $theme-colors, $key: 'lleuad-lawn');
+  height: 100%;
+}
+
+// .wrapper-with-horizontal-margin-50 {
+//   margin-top   : 50px;
+//   margin-bottom: 50px;
+// }
 
 article {
   border       : 1px solid #1d2044;
@@ -25,7 +50,6 @@ article {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  background: $background-color;
   color     : $text-color;
   text-align: center;
 }

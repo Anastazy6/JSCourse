@@ -54,13 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     main.innerHTML = '';
     main.appendChild(view());
+    indicateCurrentView(view);
   }
 
 
   function turnNavbarOn() {
     navitems.map(item => {
-      console.log(item);
       const view = views.filter(v => v.name === item.view);
+
+      console.log(view[0].name);
 
       if (view.length > 1) {
         console.error(
@@ -69,8 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
       }
       
-      item.pointer.addEventListener('click', show(view[0]));
+      item.pointer.addEventListener('click', () => show(view[0]));
     })
+  }
+
+
+  function indicateCurrentView(view) {
+    const activeBtn = navitems.filter(item => item.view === view.name)[0].pointer;
+    
+    navitems.map(item => {
+      item.pointer.classList.remove('btn-outline-ghostwhite' );
+      item.pointer.classList.add   ('btn-outline-lleuad-lawn');
+    })
+
+    activeBtn.classList.remove('btn-outline-lleuad-lawn');
+    activeBtn.classList.add   ('btn-outline-ghostwhite' );
   }
 });
 

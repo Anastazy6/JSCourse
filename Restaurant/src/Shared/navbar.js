@@ -44,7 +44,9 @@ function Navbar() {
 
 
 function Navitem(item) {
-  const navitem = document.createElement('div');
+  const navitem = document.createElement('button');
+
+  navitem.classList.add('btn', 'btn-outline-ghostwhite', 'navbar-btn');
 
   navitem.innerText = item;
 

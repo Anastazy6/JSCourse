@@ -4,9 +4,9 @@
   "description": "Restaurant page project from The Odin Project course",
   "main": "index.js",
   "scripts": {
-    "test" : "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npx webpack --watch",
-    "sass" : "sass --watch ./src/styles/styles.scss:./src/styles/styles.css",
+    "sass": "sass --watch ./src/styles/styles.scss:./src/styles/styles.css",
     "start": "webpack serve --open"
   },
   "author": "Kamil",
@@ -21,6 +21,6 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "bootstrap": "^5.2.3"
+    "bootstrap": "^5.3.1"
   }
 }

@@ -15808,7 +15808,7 @@ textarea.form-control-lg {
 html, body {
   background: rgb(2, 26, 33);
   color: ghostwhite;
-  font-family: "Qwitcher", Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 
@@ -15830,7 +15830,7 @@ html, body {
   gap: 30px;
   min-height: 100vh;
   overflow-y: auto;
-  grid-template-columns: 1fr clamp(350px, 70%, 1000px) 1fr;
+  grid-template-columns: 1fr clamp(350px, 70%, 800px) 1fr;
   grid-template-rows: auto 1fr auto;
   grid-template-areas: "navbar navbar navbar" "......  main  ......" "footer footer footer";
 }
@@ -15849,73 +15849,29 @@ article {
   padding: 15px;
 }
 
+main article > p {
+  text-align: center;
+}
+
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  font-family: "Qwitcher", "Tilt Prism", Helvetica, Arial, sans-serif;
   color: ghostwhite;
   text-align: center;
 }
 
-input {
-  display: block;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  color: ghostwhite;
-  border-bottom: 2px solid rgb(60, 100, 115);
-  resize: none;
-}
-input:invalid {
-  border-bottom: 2px solid rgb(87, 2, 2);
-}
-input:focus:invalid, input:hover:invalid {
-  border-bottom: 2px solid #dc3545;
-}
-input:placeholder-shown {
-  border-bottom: 2px solid rgb(60, 100, 115);
-}
-input:focus, input:hover {
-  border-bottom: 2px solid rgb(183, 209, 218);
+h1, .h1 {
+  font-size: 3rem;
 }
 
-select {
-  height: 35px;
-  color: ghostwhite;
-  border: 0px solid transparent;
-}
-select select,
-select select:hover,
-select select:active,
-select select:focus {
-  border: 0px solid transparent;
-}
-
-.text-right {
-  text-align: right;
-}
-
-*:focus {
-  outline: 2px dashed rgb(183, 209, 218);
-}
-
-input[type=email] {
-  background: transparent;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  -webkit-text-fill-color: ghostwhite;
-  -webkit-box-shadow: 0 0 0px 40rem rgb(11, 36, 42) inset;
-}
-
-.svg-fill-ghostwhite {
-  fill: ghostwhite;
+h2, .h2 {
+  font-size: 2rem;
 }
 
 .navbar {
   background: rgb(17, 48, 58);
   display: flex;
   gap: 40px;
-  font-family: "Tilt Prism", "Qwitcher", Helvetica, Arial, sans-serif;
+  font-family: "Tilt Prism", Helvetica, Arial, sans-serif;
   font-size: 2rem;
   justify-content: center;
   min-height: 50px;
@@ -15930,7 +15886,7 @@ footer {
   background: rgb(17, 48, 58);
   display: flex;
   gap: 20px;
-  font-family: "Tilt Prism", "Qwitcher", Helvetica, Arial, sans-serif;
+  font-family: "Tilt Prism", Helvetica, Arial, sans-serif;
   font-size: 1rem;
   justify-content: center;
   min-height: 50px;

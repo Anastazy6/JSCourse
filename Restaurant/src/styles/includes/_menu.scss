@@ -1,0 +1,40 @@
+
+.drink-name  { grid-area: name;  }
+.drink-info  { grid-area: info;  }
+.drink-price { grid-area: price; }
+.drink-vol   { grid-area: volum; }
+.drink-power { grid-area: power; }
+
+
+.menu-drink {
+  background    : map-get($theme-colors, "full-moon-glass");
+  border        : none;
+  border-radius : 21.37px;
+  box-shadow    : 0 0 7px -2px map-get($theme-colors, "lleuad-lawn"),
+            inset 0 0 7px -2px map-get($theme-colors, "lleuad-lawn");
+  margin        : auto;
+  margin-bottom : 2rem;
+  text-align    : center;
+  width         : clamp(200px, 400px, 90%);
+
+  
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 5rem) 1fr;
+  grid-template-rows   : 3fr 3fr 2fr;
+  grid-template-areas  :
+    'name name  name  name  name'
+    'info info  info  info  info'
+    '.... price volum power ....';
+}
+
+.drink-price::after {
+  content: ' zł';
+}
+
+.drink-vol::after {
+  content: ' ml';
+}
+
+.drink-power::after {
+  content: ' %';
+}

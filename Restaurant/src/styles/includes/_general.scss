@@ -58,11 +58,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: clamp(2.5rem, 5rem, 7vw);
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: clamp(2rem, 3.5rem, 5vw);
 }
 
 

@@ -38,3 +38,36 @@
 .drink-power::after {
   content: ' %';
 }
+
+.drink-price,
+.drink-vol,
+.drink-power {
+  &::after {
+    color: map-get($theme-colors, "lleuad-lawn");
+  }
+}
+
+.contact-item {
+  text-align: center;
+}
+
+.item-tel::before {
+  content: "tel:";
+}
+
+.item-email::before {
+  content: "e-mail:";
+}
+
+.item-post::before {
+  content: "post:";
+}
+
+.item-tel,
+.item-email,
+.item-post {
+  &::before {
+    padding-right: 0.5rem;
+    color: map-get($theme-colors, "lleuad-lawn");
+  };
+}

@@ -53,8 +53,8 @@ const Contents = {
       power: 8
       
     }, {
-      name : "Wodka with cola",
-      info : "Wodka 50ml, cola 200ml",
+      name : "Vodka with cola",
+      info : "Vodka 50ml, cola 200ml",
       price: 18,
       vol  : 250,
       power: 8

@@ -1,0 +1,23 @@
+{
+  "name": "todolist",
+  "version": "0.0.0",
+  "description": "Another The Odin Project project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kamil",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "sass": "^1.66.1",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.1"
+  }
+}

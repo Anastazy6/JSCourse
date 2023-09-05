@@ -1,0 +1,139 @@
+$background-color: map-get($map: $theme-colors, $key: "lleuad-newydd");
+$text-color: ghostwhite;
+
+
+$font-main  : Helvetica, Arial, sans-serif;
+$font-pretty: 'Tilt Prism', $font-main;
+$font-header: 'Qwitcher', $font-pretty;
+
+
+html, body {
+  background : $background-color;
+  color      : $text-color;
+  font-family: $font-main;
+  font-size  : 16px;
+}
+
+#content>nav    { grid-area: navbar; }
+#content>main   { grid-area: main;   }
+#content>footer { grid-area: footer; }
+
+#content {
+  background: map-get($map: $theme-colors, $key: "moon-glass");
+  display   : grid;
+  gap       : 30px;
+  min-height: 100vh;
+  overflow-y: auto;
+  grid-template-columns: 1fr clamp(350px, 70%, 800px) 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'navbar navbar navbar'
+    '......  main  ......'
+    'footer footer footer';
+}
+
+main {
+  background-color: map-get($map: $theme-colors, $key: 'full-moon-glass');
+  border-radius: 21.37px;
+  border: 2px solid map-get($map: $theme-colors, $key: 'lleuad-lawn');
+  height: 100%;
+}
+
+
+article {
+  border       : 1px solid #1d2044;
+  border-radius: 21.37px;
+  color        : $text-color;
+  padding      : 15px;
+}
+
+main article>p {
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-header;
+  color      : $text-color;
+  text-align : center;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5rem, 7vw);
+}
+
+h2 {
+  font-size: clamp(2rem, 3.5rem, 5vw);
+}
+
+
+// input {
+//   display: block;
+
+//   background   : transparent;
+//   border       : none;
+//   border-radius: 0;
+//   color        : $text-color;
+//   border-bottom: 2px solid map-get($theme-colors, "lleuad");
+//   resize       : none;
+
+//   &:invalid {
+//     border-bottom: 2px solid map-get($theme-colors, "danger-empty");
+//   }
+
+//   &:focus:invalid,
+//   &:hover:invalid {
+//     border-bottom: 2px solid map-get($theme-colors, "danger");
+//   }
+
+//   &:placeholder-shown {
+//     border-bottom: 2px solid map-get($theme-colors, "lleuad");
+//   }
+
+//   &:focus, &:hover {
+//     border-bottom: 2px solid map-get($theme-colors, "lleuad-lawn");
+//   }
+// }
+
+
+
+// select {
+//   height: 35px;
+//   color : $text-color;
+//   border          : 0px solid transparent;
+  
+//   select, 
+//   select:hover,
+//   select:active,
+//   select:focus {
+//     border: 0px solid transparent;
+//   }
+// }
+
+// .text-right {
+//   text-align: right;
+// }
+
+
+
+// *:focus {
+//   outline: 2px dashed map-get($theme-colors, "lleuad-lawn");
+// }
+
+
+// input[type="email"] {
+//   background: transparent;
+// }
+
+// input:-webkit-autofill,
+// input:-webkit-autofill:hover, 
+// input:-webkit-autofill:focus {
+//   -webkit-text-fill-color: ghostwhite;
+//   // Exact same color as the form's background but without any transparency
+//   //   Changing the bg color will require changing this value as well
+//   //   This is a work-around for browsers forcing a specific autofill bg color
+//   -webkit-box-shadow: 0 0 0px 40rem rgb(11, 36, 42) inset;
+// }
+
+// .svg-fill-ghostwhite {
+//   fill: ghostwhite;
+// }  

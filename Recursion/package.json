@@ -1,0 +1,14 @@
+{
+  "name": "recursion_practice",
+  "version": "0.0.0",
+  "description": "Recursion exercises",
+  "main": "fibo.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "kamil",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

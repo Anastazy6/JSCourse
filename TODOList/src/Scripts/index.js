@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //   New TODO ?
   // ]
 
-  main.textContent("Source code has been bundled properly if this is visible");
+  main.textContent = "Source code has been bundled properly if this is visible";
 
   run();  
 

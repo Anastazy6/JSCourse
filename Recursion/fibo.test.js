@@ -1,15 +1,5 @@
 const Fibonacci = require("./fibo");
 
-// function arrayComp (arr1, arr2) {
-//   if (arr1.length !== arr2.length) return false;
-
-//   for(let i = 0; i < arr1.length; i++) {
-//     if (arr1[i] !== arr2[i]) return false;
-//   }
-
-//   return true;
-// }
-
 describe('Create an array of x first Fibonacci numbers iteratively', () => { 
   test('0 first Fibonacci numbers to be an empty array', () => {
     expect(Fibonacci.iterative(0)).toEqual([]);

@@ -50,7 +50,6 @@ describe('Create an array of x first Fibonacci numbers recursively', () => {
   test('generates an array of the 8 first Fibonacci numbers', () => {
     let result = Fibonacci.recursive(8);
     let target = [0, 1, 1, 2, 3, 5, 8, 13];
-    console.log(result);
     expect(result).toEqual(target);
   });
 })

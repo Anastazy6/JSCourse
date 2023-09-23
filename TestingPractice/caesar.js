@@ -19,6 +19,8 @@ function createTable (offset, key) {
     let cipherIndex = (i + offset) % key.length;
     let cipherChar  = key[cipherIndex].toLowerCase();
 
+    if (plainChar in table) throw("Duplicate characters in key");
+
     table[plainChar] = cipherChar;
   }
 

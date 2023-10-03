@@ -136,3 +136,45 @@ describe("It finds the last element of the list", () => {
     expect(analyzeNode(list.tail(), 'third', null)).toBe(true);
   });
 });
+
+
+describe("It finds a node given its index", () => {
+  let longList = new LinkedList('0').append('1').append('2').append('3').append('4');
+
+  test("It requires the index to be an integer", () => {
+    expect( () => longList.at('two')).toThrow(
+      "Index must be an integer"
+    );
+  })
+  
+  test("Works with an empty list (returns null)", () => {
+    expect(new LinkedList().at(0)).toBe(null);
+  });
+
+  test("Works with a root-only list, making sure that indexing starts at 0", () => {
+    let list = new LinkedList('root');
+
+    expect(list.at(0)).toEqual(list.head());
+    expect(list.at(1)).toBe(null);
+  });
+
+  test("Finds a node somewhere within the list", () => {
+    expect(analyzeNode(longList.at(2), '2', longList.at(3))).toBe(true);
+  });
+
+  test("Finds the list's tail using both it's index and the list's size -1", () => {
+    expect(longList.at(4)).toEqual(longList.tail());
+    expect(longList.at(longList.size() - 1)).toEqual(longList.tail());
+  });
+
+  test("Returns null if the given index reaches past the list's length", () => {
+    expect(longList.at(2137)).toBe(null);
+  });
+
+  test("Can count from backwards using negative index", () => {
+    expect(longList.at(-1))                .toEqual(longList.tail());
+    expect(longList.at(-4))                .toEqual(longList.head().getNext());
+    expect(longList.at(-(longList.size()))).toEqual(longList.head());
+    expect(longList.at(-2137))             .toBe(null);
+  });
+});

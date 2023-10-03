@@ -9,27 +9,46 @@ class LinkedList {
     this.root = rootNode;
   }
 
+
   append (value) {
     let finalNode = new Node(value, null);
 
     if (this.root === null) {
       this.root = finalNode;
-      return;
+      return this;
     }
 
     let currentNode = this.root;
+
     while (currentNode.getNext() !== null) {
       currentNode = currentNode.getNext();
     }
+
     currentNode.setNext(finalNode);  
+    return this;
   }
+
 
   prepend (value) {
-  
+    let newRoot = new Node(value, this.root);
+    this.root = newRoot;
+
+    return this;
   }
 
-  size () {
 
+  size () {
+    if (this.root === null) return 0;
+
+    let nodes = 0;
+    let current = this.root;
+
+    while (current) {
+      nodes++;
+      current = current.getNext();
+    }
+
+    return nodes;
   }
 
   head () {

@@ -6,7 +6,7 @@ class Node {
   }
 
 
-  static isValidAsNextNode (nextNode) {
+  static isValidNode (nextNode) {
     if (nextNode instanceof Node || nextNode === null) {
       return true;
     }
@@ -15,7 +15,7 @@ class Node {
 
 
   static #assertValidNextNode (nextNode) {
-    if ( !Node.isValidAsNextNode(nextNode)) {
+    if ( !Node.isValidNode(nextNode)) {
       throw new TypeError("Next node property must be another Node or null");
     }
   }

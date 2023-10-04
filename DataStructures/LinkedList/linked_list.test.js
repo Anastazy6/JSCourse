@@ -171,10 +171,17 @@ describe("It finds a node given its index", () => {
     expect(longList.at(2137)).toBe(null);
   });
 
-  test("Can count from backwards using negative index", () => {
+  test("Can count from backwards using negative index, iterative method", () => {
     expect(longList.at(-1))                .toEqual(longList.tail());
     expect(longList.at(-4))                .toEqual(longList.head().getNext());
     expect(longList.at(-(longList.size()))).toEqual(longList.head());
     expect(longList.at(-2137))             .toBe(null);
+  });
+
+  test("Can count from backwards using negative index, recursive method", () => {
+    expect(longList.at(-1, true))                .toEqual(longList.tail());
+    expect(longList.at(-4, true))                .toEqual(longList.head().getNext());
+    expect(longList.at(-(longList.size()), true)).toEqual(longList.head());
+    expect(longList.at(-2137, true))             .toBe(null);
   });
 });

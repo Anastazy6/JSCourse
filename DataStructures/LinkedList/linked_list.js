@@ -152,22 +152,59 @@ class LinkedList {
 
 
   pop () {
+    let prev    = null;
+    let current = this.root;
+    
+    while (current && current.getNext()) {
+      prev    = current;
+      current = current.getNext();
+    }
 
+    if (prev) {
+      prev.setNext(null);
+    } else {
+      this.root = null;
+    }
+
+    return current;
   }
 
 
   contains (value) {
+    let current = this.root;
 
+    while (current) {
+      if (current.getValue() === value) return true;
+      current = current.getNext();
+    }
+
+    return false;
   }
 
 
   find (value) {
+    let index = 0;
+    let current = this.root;
 
+    while (current) {
+      if (current.getValue() === value) return index;
+      current = current.getNext();
+      index++;
+    }
+
+    return null;
   }
 
 
   toString () {
+    let result  = "";
+    let current = this.root;
 
+    while (current) {
+      result += `( ${current.getValue()} ) -> `;
+      current = current.getNext();
+    }
+    return result + 'null';
   }
 
 

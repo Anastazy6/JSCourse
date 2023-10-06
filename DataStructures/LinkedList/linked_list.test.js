@@ -280,3 +280,113 @@ describe("It displays the list as a single string", () => {
     expect(list.toString()).toEqual("( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> null");
   });
 });
+
+
+describe("It inserts a value at the specified index", () => {
+  test("Inserting at index 0 of an empty list inserts its root", () => {
+    let list = new LinkedList();
+    list.insertAt('root', 0);
+
+    expect(list.toString()).toEqual("( root ) -> null");
+  });
+
+  test("Inserting at index 0 of a non-empty list equals to prepend", () => {
+    let list = new LinkedList('root');
+    list.insertAt('new root', 0);
+
+    expect(list.toString()).toEqual("( new root ) -> ( root ) -> null");
+  });
+
+  test("Inserting at the list's length works just like appending to it", () => {
+    let list = new LinkedList('root');
+    list.insertAt('tail', list.size());
+
+    expect(list.toString()).toEqual("( root ) -> ( tail ) -> null");
+  });
+
+  test("It inserts into the interior of the list", () => {
+    let list = new LinkedList('root').append('tail');
+    list.insertAt('middle', 1);
+
+    expect(list.toString()).toEqual("( root ) -> ( middle ) -> ( tail ) -> null");
+  });
+
+  test("It inserts way past the list's tail because it's JavaScript", () => {
+    let list = makeLongList();
+    list.insertAt('tail', list.size() + 2);
+
+    expect(list.toString()).toEqual(
+      "( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> ( 4 ) -> ( undefined ) -> " +
+      "( undefined ) -> ( tail ) -> null"
+    );
+  });
+});
+
+
+describe("It removes a node with a specified index from the list, returning the node", () => {
+  test("Returns null if the list is empty", () => {
+    expect(new LinkedList().removeAt(0)).toBe(null);
+  });
+
+
+  test("Turns a single-node list into an empty one if the root is removed", () => {
+    let list = new LinkedList('root');
+    list.removeAt(0);
+    expect(list.size()).toBe(0);
+  });
+
+
+  test("It pushes the second node into the head if the root node is removed", () => {
+    let list   = new LinkedList('root').append('second');
+    let second = list.at(1);
+    list.removeAt(0);
+    expect(list.head()).toEqual(second);
+  });
+
+
+  test("It removes the list's tail, making the second-to-last node the tail", () => {
+    let list = makeLongList();
+    let tail = list.tail();
+
+    expect(list.removeAt(list.size() - 1)).toEqual(tail);
+    expect(list.toString()).toEqual(
+      '( 0 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> null'
+    );
+  });
+
+
+  test("It removes a node from the middle of the list", () => {
+    let list = makeLongList();
+    list.removeAt(2);
+    expect(list.toString()).toEqual(
+      '( 0 ) -> ( 1 ) -> ( 3 ) -> ( 4 ) -> null'
+    );
+  });
+
+
+  test("Returns null if the index is too large (is no less than the list's size)", () => {
+    let list = makeLongList();
+    let size = list.size();
+    let removedAtSize   = list.removeAt(size);
+    let removedPastSize = list.removeAt(size + 5);
+    
+    expect(removedAtSize)  .toBe(null);
+    expect(removedPastSize).toBe(null);
+  });
+
+
+  test("Works with negative indexes from -1 (tail) to -(LinkedList.size()) (head)", () => {
+    let list   = makeLongList();
+    let middle = list.removeAt(-3); // node equal to list.at(2);
+    let tail   = list.removeAt(-1);
+    let root   = list.removeAt(-(list.size()));
+    
+    let wayTooFarToTheLeft = -(list.size() + 5);
+    let goesPastSize = list.removeAt(wayTooFarToTheLeft);
+
+    expect(middle.getValue()).toEqual('2');
+    expect(tail  .getValue()).toEqual('4');
+    expect(root  .getValue()).toEqual('0');
+    expect(goesPastSize)     .toBe   (null);
+  });
+});

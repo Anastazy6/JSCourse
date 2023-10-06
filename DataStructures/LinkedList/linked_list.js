@@ -119,8 +119,7 @@ class LinkedList {
    * @returns 
    */
   #atNegativeIteratively (negativeIndex) {
-    let length = this.size();
-    let positiveIndex = length + negativeIndex;
+    let positiveIndex = this.#getPositiveIndex(negativeIndex);
 
     // May occur if the absolute of the negative index is larger than the list's size
     //   i.e. it tries to find a node starting from the list's tail but it goes
@@ -128,6 +127,20 @@ class LinkedList {
     if (positiveIndex < 0) return null;
 
     return this.at(positiveIndex);
+  }
+
+
+  #getPositiveIndex (negativeIndex) {
+    let length = this.size();
+    
+    // Does not exceed the list's boundary
+    if (length >= -negativeIndex) {
+      return length + negativeIndex;
+    // Exceeds the list's boundary, node at such an index does not exist
+    } else {
+      // 
+      return length;
+    }
   }
 
 
@@ -211,12 +224,69 @@ class LinkedList {
   // Extra stuff (TODO if I'm feeling ambitious)
 
   insertAt (value, index) {
+    let id = 0;
+    let prev    = null;
+    let current = this.root;
 
+    let node = new Node(value, null);
+
+    while (id < index) {
+      if (!current) {
+        this.append(undefined);
+        current = prev.getNext();
+      }
+      prev = current;
+      current = current.getNext();
+      id++;
+    }
+
+    node.setNext(current);
+    if (prev) {
+      prev.setNext(node)
+    } else {
+      this.root = node;
+    }
   }
 
 
-  deleteAt (index) {
+  removeAt (index) {
+    if (index < 0 ) {
+      console.log(`Converting negative index of (${index})...`);
+      index = this.#getPositiveIndex(index);
+      console.log(`Negative index converted to (${index})!`);
+    }
 
+    let id = 0;
+    let prev = null;
+    let current = this.root;
+
+    if (index === 0) {
+      let removed = this.root;
+
+      this.root = this.root 
+        ? this.root.getNext() 
+        : null;
+
+      return removed;
+    }
+
+    while (id < index) {
+      if (!current) return null;
+      
+      prev = current;
+      current = current.getNext();
+
+      id++;
+    }
+
+    if (prev) {
+      let newNext = current
+        ? current.getNext()
+        : null
+      prev.setNext(newNext);
+    } 
+
+    return current;
   }
 }
 

@@ -1,12 +1,102 @@
 import Node from "./node";
 
+
+function makeSimpleTree () {
+  let leftNode  = new Node('left');
+  let rightNode = new Node('right');
+  return new Node('root', leftNode, rightNode);
+}
+
+/**
+ * Checks if all properties of the given node are exactly as expected
+ * @param {Node} node which will be analyzed
+ * @param {*} expected: expectations about the Node's data, left and right properties
+ * @returns true, if everything is as expected, else false
+ */
+function analyzeNode (node, expected) {
+  if ( !(
+    Node.isValidNode(node)       ||
+    node.data  === expected.data ||
+    node.left  === expected.left ||
+    node.right === expected.right
+  )) return false;
+  return true;
+}
+
+
+
 describe.only("It creates a Node for Binary Search Tree", () => {
   test("It creates a leaf by default", () => {
     let node = new Node('leaf?');
-    
-    expect(node instanceof Node).toBe(true);
-    expect(node.data) .toEqual("leaf?");
-    expect(node.left) .toBe(null);
-    expect(node.right).toBe(null);  
+    let expected = {
+      data : 'leaf?',
+      left : null,
+      right: null
+    };
+
+    expect(analyzeNode(node, expected)).toBe(true);
   });
+
+
+  test("It throws an error at attempts to change the node's data", () => {
+    let node = new Node(1);
+    expect(() => node.data = 2).toThrow(
+      "Changing the Node's data is imposibble in order to protect the sorted " +
+      "nature of the Binary Search Tree"
+    );
+  });
+
+
+  test("It creates a Node pointing to other nodes at creation", () => {
+    let leftNode  = new Node('left');
+    let rightNode = new Node('right');
+    let rootNode  = new Node('root', leftNode, rightNode);
+  
+    let expected = {
+      data : 'root',
+      left : leftNode,
+      right: rightNode
+    };
+
+    expect(analyzeNode(rootNode, expected)).toBe(true);
+  });
+
+
+  test("It changes a Node's branch from Node to null", () => {
+    let root = makeSimpleTree();
+
+    // Make sure the initial values are as expected
+    expect(root.left .data).toEqual("left");
+    expect(root.right.data).toEqual("right");
+
+    root.left = null;
+    
+    expect(root.left ).toBe(null);            // Make sure left node is changed;
+    expect(root.right.data).toEqual('right'); // Make sure right note stays the same;
+  });
+
+
+  test("It changes a Node's branch from null to Node", () => {
+    let root = new Node('root');
+    let left = new Node('left');
+
+    expect(analyzeNode(root, {data: 'root', left: null, right: null})).toBe(true);
+
+    root.left = left;
+    
+    let expected = {
+      data : 'left',
+      left : null,
+      right: null
+    }
+    expect(analyzeNode(root.left, expected)).toBe(true);
+    expect(root.right).toBe(null); // Make sure right node stays unchanged;
+  });
+
+
+  test.todo("It changes a Node's branch from Node to another Node");
+
+
+  test.todo("It throws an error when changing a Node's branch to anything " +
+            "that isn't a Node or null");
 });

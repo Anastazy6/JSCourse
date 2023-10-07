@@ -136,11 +136,10 @@ class LinkedList {
     // Does not exceed the list's boundary
     if (length >= -negativeIndex) {
       return length + negativeIndex;
-    // Exceeds the list's boundary, node at such an index does not exist
-    } else {
-      // 
-      return length;
     }
+    
+    // Exceeds the list's boundary, node at such an index does not exist
+    return length;
   }
 
 
@@ -251,9 +250,7 @@ class LinkedList {
 
   removeAt (index) {
     if (index < 0 ) {
-      console.log(`Converting negative index of (${index})...`);
       index = this.#getPositiveIndex(index);
-      console.log(`Negative index converted to (${index})!`);
     }
 
     let id = 0;

@@ -17,8 +17,14 @@ class Node {
     return this._right;
   }
 
-  set data (value) {
-    this._data = value;
+  /**
+   * Forces the Nodes' data property to be immutable
+   */
+  set data (_literallyWhateverBecauseDataIsGoingToBeImmutable) {
+    throw new SyntaxError(
+      "Changing the Node's data is imposibble in order to protect the sorted " +
+      "nature of the Binary Search Tree"
+    );
   }
 
   set left (nextNode) {
@@ -31,8 +37,15 @@ class Node {
     this._right = nextNode;
   }
 
-  #ensureValidNode (nextNode) {
-    if ( !(nextNode instanceof Node || nextNode === null) ) {
+  static isValidNode (node) {
+    if ( !(node instanceof Node || node === null) ) {
+      return false;
+    }
+    return true;
+  }
+
+  #ensureValidNode (node) {
+    if ( !(Node.isValidNode(node))) {
       throw new TypeError(
         "The next node must be an instance of the Node class or null"
       );

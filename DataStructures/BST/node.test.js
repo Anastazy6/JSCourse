@@ -13,7 +13,7 @@ function makeSimpleTree () {
  * @param {*} expected: expectations about the Node's data, left and right properties
  * @returns true, if everything is as expected, else false
  */
-function analyzeNode (node, expected) {
+export function analyzeNode (node, expected) {
   if ( !(
     Node.isValidNode(node)       ||
     node.data  === expected.data ||
@@ -25,7 +25,7 @@ function analyzeNode (node, expected) {
 
 
 
-describe.only("It creates a Node for Binary Search Tree", () => {
+describe("It creates a Node for Binary Search Tree", () => {
   test("It creates a leaf by default", () => {
     let node = new Node('leaf?');
     let expected = {
@@ -94,9 +94,29 @@ describe.only("It creates a Node for Binary Search Tree", () => {
   });
 
 
-  test.todo("It changes a Node's branch from Node to another Node");
+  test("It changes a Node's branch from Node to another Node", () => {
+    let root = new Node('root', new Node('left'), new Node('right'));
+
+    expect(root.data).toBe('root');
+    expect(analyzeNode(root.left, {data: 'left', left: null, right: null})).toBe(true);
+    let newLeft = new Node('new Left');
+    root.left = newLeft
+
+    expect(analyzeNode(
+      root.left , {data: 'new left', left: null, right: null}
+    )).toBe(true);
+    
+    expect(analyzeNode(
+      root.right, {data: 'right',    left: null, right: null}
+    )).toBe(true); // No changes to the root's right branch
+  });
 
 
-  test.todo("It throws an error when changing a Node's branch to anything " +
-            "that isn't a Node or null");
+  test("It throws an error when changing a Node's branch to anything " +
+            "that isn't a Node or null", () => {
+    let root = makeSimpleTree();
+    expect(() => root.left = 'not a valid node').toThrow(
+      "The next node must be an instance of the Node class or null"
+    );
+  });
 });

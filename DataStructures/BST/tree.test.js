@@ -64,6 +64,14 @@ describe("It creates a Binary Search Tree", () => {
       runTests(tree);
     });
   });
+
+  test("It creates assimetrical trees (number of nodes different than 2^x -1)", () => {
+    let tree = new Tree([1, 2, 3, 4]);
+    expect(tree.root.data).toBe(2);
+    expect(tree.root.left.data).toBe(1);
+    expect(tree.root.right.data).toBe(3);
+    expect(tree.root.right.right.data).toBe(4);
+  });
 });
 
 
@@ -151,6 +159,7 @@ describe("It inserts a value (as a Node)", () => {
       let tree = makeTestTree();
       tree.insert(1);
       let farLeft = tree.root.left.left.left;
+      console.log(farLeft);
 
       let expectedFarLeft = {
         data: 1,

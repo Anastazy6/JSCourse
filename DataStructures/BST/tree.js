@@ -14,7 +14,7 @@ class Tree {
    */
   constructor (array, unsorted=true, hasDuplicates=true) {
     if (hasDuplicates) array = Array.from(new Set(array));
-    if (unsorted     ) array = array.sort();
+    if (unsorted     ) array = array.sort((a, b) => a - b);
     
     this.root = this.buildTree(array, 0, array.length - 1);
   }
@@ -23,19 +23,18 @@ class Tree {
    *  The Odin Project's pretty print
    *  FIX NEEDED!
    */
-  static prettyPrint (node, prefix="", isLeft=true) {
+  prettyPrint (node=this.root, prefix="", isLeft=true) {
     if (node === null) {
       return;
     }
     if (node.right !== null) {
-      Tree.prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+      this.prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
     }
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
     if (node.left !== null) {
-      Tree.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+      this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
   }
-
 
 
   buildTree (array, start, end) { 
@@ -43,7 +42,7 @@ class Tree {
       return null;
     }
 
-    let mid = (start + end) / 2;
+    let mid = parseInt((start + end) / 2);
     
     let root   = new Node(array[mid]);
     root.left  = this.buildTree(array, start,   mid - 1);

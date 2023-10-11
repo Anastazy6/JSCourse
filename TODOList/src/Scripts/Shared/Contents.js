@@ -11,9 +11,6 @@
 */
 
 
-
-
-
 // import { Header } from "./Header";
 
 // function createItemsGroup(group, items, customProperties={}) {

@@ -2,7 +2,15 @@ import Cell from "./cell.mjs";
 import _ from "lodash";
 
 function Board (owner) {
+  const board = createBoard();
 
+  function registerHit(x, y) {
+    
+  }
+
+  return {
+    board
+  }
 }
 
 function createBoard () {

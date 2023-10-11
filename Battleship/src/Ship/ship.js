@@ -1,4 +1,4 @@
-const Ship = function(length) {
+const Ship = function(length, startX, startY, horizontal=true) {
 
 }
 

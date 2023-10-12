@@ -36,7 +36,7 @@ describe("It creates a Binary Search Tree", () => {
       expect(tree.root.data).toBe(2);
       expect(analyzeNode(tree.root.left,  expectedLeft )).toBe(true);
       expect(analyzeNode(tree.root.right, expectedRight)).toBe(true);
-      Tree.prettyPrint(tree.root);
+      tree.prettyPrint();
     }
 
 
@@ -91,7 +91,7 @@ describe("It inserts a value (as a Node)", () => {
   // This should alse test whether it picks the correct branch
   describe("It inserts a value to a root-only tree", () => {
     test("It inserts a value to the left branch if value < root.data", () => {
-      let tree = new Tree(3);
+      let tree = new Tree([3]);
       let expectedLeft = {
         data: 2,
         left: null,
@@ -105,7 +105,7 @@ describe("It inserts a value (as a Node)", () => {
 
 
     test("It inserts a value to the right branch if value > root.data", () => {
-      let tree = new Tree(3);
+      let tree = new Tree([3]);
       let expectedRight = {
         data: 4,
         left: null,
@@ -119,7 +119,7 @@ describe("It inserts a value (as a Node)", () => {
 
 
     test("It does not insert a value that is already present in the tree", () => {
-      let tree = new Tree(3);
+      let tree = new Tree([3]);
       let expectedRoot = {
         data: 3,
         left: null,
@@ -148,9 +148,9 @@ describe("It inserts a value (as a Node)", () => {
     test("It creates a tree of height 3 (for testing purposes)", () => {
       let tree = makeTestTree();
       expect(tree.root.data).toBe(5);
-      expect(tree.root.left.left).toBe(2);
-      expect(tree.root.right).toBe(7);
-      expect(tree.root.right.left).toBe(6);
+      expect(tree.root.left.left.data).toBe(2);
+      expect(tree.root.right.data).toBe(7);
+      expect(tree.root.right.left.data).toBe(6);
       expect(tree.root.left.right.left).toBe(null);
     });
 

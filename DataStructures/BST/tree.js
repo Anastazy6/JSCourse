@@ -1,5 +1,14 @@
 import Node from "./node";
 
+function removeDuplicates (array) {
+  if ( !(Array.isArray(array))) {
+    throw new TypeError(`You must pass an array to this function, got ${typeof array}`);
+  }
+
+  return [...new Set(array)];
+}
+
+
 class Tree {
   /**
    * By default, the array on which the tree will be based upon is considered
@@ -13,7 +22,7 @@ class Tree {
    * @param {*} hasDuplicates 
    */
   constructor (array, unsorted=true, hasDuplicates=true) {
-    if (hasDuplicates) array = Array.from(new Set(array));
+    if (hasDuplicates) array = removeDuplicates(array);
     if (unsorted     ) array = array.sort((a, b) => a - b);
     
     this.root = this.buildTree(array, 0, array.length - 1);

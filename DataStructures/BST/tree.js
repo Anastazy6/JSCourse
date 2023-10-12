@@ -62,26 +62,25 @@ class Tree {
 
   insert (value) {
     let current = this.root;
+
     if (!current) {
       this.root = new Node(value);
       return;
     }
 
-    let next;
-    do {
-      if (value === current.data) return;
-      if (value  <  current.data) next = current.left;
-      if (value  >  current.data) next = current.right;
+    while (true) {
+      if (value === current.data) break;
       
-      if (next) {
-        current = next;
+      let branch = value < current.data ? 'left' : 'right';
+      
+      if (current[branch]) {
+        current = current[branch];
       } else {
-        let node = new Node(value);
-        value < current.data ? current.left = node : current.right = node;
+        current[branch] = new Node(value);
+        break;
       }
-    } while (next);
-
-
+    }
+    return this;
   }
 
 

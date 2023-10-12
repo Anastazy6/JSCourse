@@ -14,15 +14,15 @@ function makeSimpleTree () {
  * @returns true, if everything is as expected, else false
  */
 export function analyzeNode (node, expected) {
-  if ( !(
-    Node.isValidNode(node)       ||
-    node.data  === expected.data ||
-    node.left  === expected.left ||
-    node.right === expected.right
-  )) return false;
-  return true;
+  if (node instanceof Node) {
+    return (
+      node.data  === expected.data &&
+      node.left  === expected.left &&
+      node.right === expected.right
+    )
+  }
+  return false;
 }
-
 
 
 describe("It creates a Node for Binary Search Tree", () => {

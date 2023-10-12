@@ -36,7 +36,6 @@ describe("It creates a Binary Search Tree", () => {
       expect(tree.root.data).toBe(2);
       expect(analyzeNode(tree.root.left,  expectedLeft )).toBe(true);
       expect(analyzeNode(tree.root.right, expectedRight)).toBe(true);
-      tree.prettyPrint();
     }
 
 
@@ -67,10 +66,13 @@ describe("It creates a Binary Search Tree", () => {
 
   test("It creates assimetrical trees (number of nodes different than 2^x -1)", () => {
     let tree = new Tree([1, 2, 3, 4]);
-    expect(tree.root.data).toBe(2);
-    expect(tree.root.left.data).toBe(1);
-    expect(tree.root.right.data).toBe(3);
-    expect(tree.root.right.right.data).toBe(4);
+    let expectations = [
+      tree.root.data             === 2,
+      tree.root.left.data        === 1,
+      tree.root.right.data       === 3,
+      tree.root.right.right.data === 4
+    ];
+    expectations.forEach(exp => expect(exp).toBe(true));
   });
 });
 
@@ -113,8 +115,11 @@ describe("It inserts a value (as a Node)", () => {
       };
 
       tree.insert(4);
+      console.log(analyzeNode(tree.root.right, expectedRight));
       expect(analyzeNode(tree.root.right, expectedRight)).toBe(true);
       expect(tree.root.left).toBe(null);
+      expect(tree.root.right).not.toBeNull();
+      tree.prettyPrint();
     });
 
 
@@ -147,11 +152,14 @@ describe("It inserts a value (as a Node)", () => {
 
     test("It creates a tree of height 3 (for testing purposes)", () => {
       let tree = makeTestTree();
-      expect(tree.root.data).toBe(5);
-      expect(tree.root.left.left.data).toBe(2);
-      expect(tree.root.right.data).toBe(7);
-      expect(tree.root.right.left.data).toBe(6);
-      expect(tree.root.left.right.left).toBe(null);
+      let expectations = [
+        tree.root.data            === 5,
+        tree.root.left.left.data  === 2,
+        tree.root.right.data      === 7,
+        tree.root.right.left.data === 6,
+        tree.root.left.right.left === null
+      ];
+      expectations.forEach(exp => expect(exp).toBe(true));
     });
 
 
@@ -159,7 +167,6 @@ describe("It inserts a value (as a Node)", () => {
       let tree = makeTestTree();
       tree.insert(1);
       let farLeft = tree.root.left.left.left;
-      console.log(farLeft);
 
       let expectedFarLeft = {
         data: 1,

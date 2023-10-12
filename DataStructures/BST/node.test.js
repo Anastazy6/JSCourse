@@ -99,8 +99,8 @@ describe("It creates a Node for Binary Search Tree", () => {
 
     expect(root.data).toBe('root');
     expect(analyzeNode(root.left, {data: 'left', left: null, right: null})).toBe(true);
-    let newLeft = new Node('new Left');
-    root.left = newLeft
+    let newLeft = new Node('new left');
+    root.left = newLeft;
 
     expect(analyzeNode(
       root.left , {data: 'new left', left: null, right: null}

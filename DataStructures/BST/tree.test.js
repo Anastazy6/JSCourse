@@ -115,11 +115,8 @@ describe("It inserts a value (as a Node)", () => {
       };
 
       tree.insert(4);
-      console.log(analyzeNode(tree.root.right, expectedRight));
       expect(analyzeNode(tree.root.right, expectedRight)).toBe(true);
       expect(tree.root.left).toBe(null);
-      expect(tree.root.right).not.toBeNull();
-      tree.prettyPrint();
     });
 
 

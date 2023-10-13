@@ -60,13 +60,34 @@ class Tree {
     return root;
   }
 
-  insert (value) {
-    let current = this.root;
-
-    if (!current) {
+  insert (value, recursive=true) {
+    if (this.root === null) {
       this.root = new Node(value);
       return;
     }
+
+    return recursive
+      ? this.#insertRecursively(this.root, value)
+      : this.#insertIteratively(value);
+  }
+
+
+  #insertRecursively (root, value) {
+    if (root.data === value) return this;
+
+    let branch = value < root.data ? 'left' : 'right';
+    
+    if (root[branch]) {
+      return this.#insertRecursively(root[branch], value);
+    } else {
+      root[branch] = new Node(value);
+      return this;
+    }
+  }
+
+
+  #insertIteratively (value) {
+    let current = this.root;
 
     while (true) {
       if (value === current.data) break;

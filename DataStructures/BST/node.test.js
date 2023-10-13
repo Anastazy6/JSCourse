@@ -120,3 +120,39 @@ describe("It creates a Node for Binary Search Tree", () => {
     );
   });
 });
+
+describe("It checks the Node's type as a leaf, single parent or double parent", () => {
+  const testNodes = {
+    'leaf'  : new Node(1, null, null),
+    'lefty' : new Node(1, new Node(2), null),
+    'righty': new Node(1, null, new Node(2)),
+    'dual'  : new Node(1, new Node(2), new Node(3))
+  }
+
+  const singles = ['lefty', 'righty'];
+
+  test("It checks if a Node is leaf", () => {
+    Object.entries(testNodes).forEach(([name, node]) => {
+      expect(node.isLeaf()).toBe(name === 'leaf');
+    });
+  });
+
+  test("It checks if a Node has only one child", () => {
+    Object.entries(testNodes).forEach(([name, node]) => {
+      expect(node.isSingle()).toBe(singles.includes(name));
+    });
+  });
+
+  test("It checks if a Node has 2 children", () => {
+    Object.entries(testNodes).forEach(([name, node]) => {
+      expect(node.isDual()).toBe(name === 'dual');
+    });
+  });
+
+  test("It gets the Node's type, returning it as a string", () => {
+    Object.entries(testNodes).forEach(([name, node]) => {
+      let type = singles.includes(name) ? 'single' : name;
+      expect(node.type).toEqual(type);
+    });
+  });
+});

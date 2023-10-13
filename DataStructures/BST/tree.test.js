@@ -2,6 +2,19 @@ import Node from "./node";
 import Tree from "./tree";
 import { analyzeNode } from "./node.test";
 
+
+/**
+   *              5
+   *           /     \
+   *          3       7 
+   *        /  \    /   \
+   *       2   4   6     8
+   */
+function makeTestTree () {
+  return new Tree([2, 3, 4, 5, 6, 7, 8]);
+}
+
+
 describe("It creates a Binary Search Tree", () => {
   test("It creates an empty tree", () => {
     let tree = new Tree([]);
@@ -135,18 +148,6 @@ describe("It inserts a value (as a Node)", () => {
   });
 
   describe("It inserts a value into a leaf node of a bigger tree", () => {
-    
-    /**
-       *              5
-       *           /     \
-       *          3       7 
-       *        /  \    /   \
-       *       2   4   6     8
-       */
-    function makeTestTree () {
-      return new Tree([2, 3, 4, 5, 6, 7, 8]);
-    }
-
     test("It creates a tree of height 3 (for testing purposes)", () => {
       let tree = makeTestTree();
       let expectations = [
@@ -173,5 +174,33 @@ describe("It inserts a value (as a Node)", () => {
 
       expect(analyzeNode(farLeft, expectedFarLeft)).toBe(true);
     });
+  });
+});
+
+describe("It deletes a node from a BST", () => {
+  test("Returns null if the tree is empty", () => {
+    let tree = new Tree([]);
+    expect(tree.delete(1)).toBeNull();
+  });
+
+  test("It does nothing if there's no node with given value, returns null", () => {
+    let tree = makeTestTree();
+    expect(tree.delete(20)).toBeNull();
+    expect(tree).toEqual(makeTestTree());
+  });
+
+  test("It deletes a leaf node from a tree, returning the deleted node" , () => {
+    let tree = makeTestTree();
+    let deleted = tree.delete(6);
+    
+    // check the node
+    expect(deleted instanceof Node).toBe(true);
+    expect(deleted.data).toBe(6);
+
+    // check the tree
+
+    expect(tree.root.right.data      ).toBe(7);
+    expect(tree.root.right.right.data).toBe(8);
+    expect(tree.root.right.left      ).toBeNull();
   });
 });

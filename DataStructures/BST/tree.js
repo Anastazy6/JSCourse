@@ -105,8 +105,18 @@ class Tree {
   }
 
 
-  delete (value) {
+  delete (value, root=this.root, parent=null) {
+    if (root===null) return root;
 
+    if (value === root.data) {
+      
+    } else {
+      let branch = value < root.data ? 'left' : 'right';
+      let parent = {
+        root, branch
+      }
+      return this.delete(value, root[branch], parent);
+    }
   }
 
 

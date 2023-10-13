@@ -51,6 +51,29 @@ class Node {
       );
     }
   }
+
+  isLeaf () {
+    if (this.left || this.right) return false;
+    return true;
+  }
+
+  isDual () {
+    if (this.left && this.right) return true;
+    return false;
+  }
+
+  isSingle () {
+    if (this.isLeaf() || this.isDual()) return false;
+    return true;
+  }
+
+  get type () {
+    return this.isLeaf()
+      ? 'leaf'
+      : this.isDual()
+        ? 'dual'
+        : 'single';
+  }
 }
 
 export default Node;

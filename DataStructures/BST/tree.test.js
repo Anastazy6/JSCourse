@@ -15,6 +15,23 @@ function makeTestTree () {
 }
 
 
+/**
+ *            6
+ *          /    \
+ *       3         9
+ *     /  \       /  \
+ *   1     4    7     11
+ *    \     \    \    /  \
+ *    2     5     8  10  12
+ * 
+ * 
+ */
+function makeAsymmetricalTestTree () {
+  let arr = Array.from({length: 12}, (val, index) => index + 1);
+  return new Tree(arr);
+}
+
+
 describe("It creates a Binary Search Tree", () => {
   test("It creates an empty tree", () => {
     let tree = new Tree([]);
@@ -202,5 +219,45 @@ describe("It deletes a node from a BST", () => {
     expect(tree.root.right.data      ).toBe(7);
     expect(tree.root.right.right.data).toBe(8);
     expect(tree.root.right.left      ).toBeNull();
+  });
+
+  test("It deletes a single parent node from a tree, keeping proper BST structure", () => {
+    let tree = makeAsymmetricalTestTree();
+    let deleted = tree.delete(7);
+
+    // check the node
+    expect(deleted instanceof Node).toBe(true);
+    expect(deleted.data).toBe(7);
+
+    // check the tree
+    expect(tree.root.right.data).toBe(9);
+    expect(tree.root.right.left.data).toBe(8);
+    expect(tree.root.right.left.isLeaf()).toBe(true);
+    expect(tree.root.right.right.data).toBe(11);
+    expect(tree.root.right.right.isDual()).toBe(true);
+  });
+
+  describe("It deletes a dual parent node from a tree, keeping proper BST structure", () => {
+    test("Works when the inorder successor node is a leaf", () => {
+      let tree = makeAsymmetricalTestTree();
+      let deleted = tree.delete(11);
+
+      expect(tree.root.right.right.data).toBe(10);
+      expect(tree.root.right.right.left).toBeNull();
+      expect(tree.root.right.right.right.data).toBe(12);
+
+      expect(deleted.data).toBe(11);
+    });
+
+    test("Works when the inorder successor node is a single parent", () => {
+      let tree = makeAsymmetricalTestTree();
+      let deleted = tree.delete(6) // root
+
+      expect(tree.root.data).toBe(7);
+      expect(tree.root.right.data).toBe(9);
+      expect(tree.root.right.left.data).toBe(8)
+      expect(tree.root.right.left.isLeaf()).toBe(true);
+      expect(tree.root.right.right.isDual()).toBe(true);
+    }); 
   });
 });

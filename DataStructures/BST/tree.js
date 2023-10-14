@@ -108,8 +108,20 @@ class Tree {
   delete (value, root=this.root, parent=null) {
     if (root===null) return root;
 
+    // Node to delete found
     if (value === root.data) {
+      switch (root.type) {
+        case 'leaf':
+          return this.#deleteLeaf(root, parent.root, parent.branch);
+        case 'single':
+          return this.#deleteSingle(root, parent.root, parent.branch);
+        case 'dual':
+          return this.#deleteDual(root, parent.root, parent.branch);
+        default:
+          throw new TypeError(`Invalid node type: ${root.type}`);
+      }
       
+    // Recursively look for the node
     } else {
       let branch = value < root.data ? 'left' : 'right';
       let parent = {
@@ -117,6 +129,24 @@ class Tree {
       }
       return this.delete(value, root[branch], parent);
     }
+  }
+
+
+  #deleteLeaf (node, parent, branch) {
+    
+    if (parent) parent[branch] = null;
+    return node;
+  }
+
+
+  #deleteSingle (node, parent, branch) {
+    if (parent) parent[branch] = node.onlyChild;
+    return node;
+  }
+
+
+  #deleteDual (node, parent, branch) {
+
   }
 
 

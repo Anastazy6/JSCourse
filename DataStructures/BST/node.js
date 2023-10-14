@@ -74,6 +74,22 @@ class Node {
         ? 'dual'
         : 'single';
   }
+
+  get onlyChild () {
+    if ( !(this.isSingle()) ) return null;
+
+    return this.left ? this.left : this.right;
+  }
+
+  get inorderSuccessor () {
+    let successor = this.right;
+    
+    while (successor.left) {
+      successor = successor.left;
+    }
+
+    return successor;
+  }
 }
 
 export default Node;

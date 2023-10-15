@@ -277,15 +277,29 @@ describe("It deletes a node from a BST", () => {
 
 
   describe("It deletes a dual parent node from a tree, keeping proper BST structure", () => {
+
+/**
+ *            6
+ *          /    \
+ *       3         9
+ *     /  \       /  \
+ *   1     4    7     11
+ *    \     \    \    /  \
+ *    2     5     8  10  12
+ * 
+ * 
+ */
+
     test("Works when the inorder successor node is a leaf", () => {
       let tree = makeAsymmetricalTestTree();
-      let deleted = tree.delete(11);
+      let deleted = tree.delete(9);
 
-      expect(tree.root.right.right.data      ).toBe(10);
+      expect(tree.root.right.left .data      ).toBe(7);
+      expect(tree.root.right.right.data      ).toBe(11);
       expect(tree.root.right.right.left      ).toBeNull();
       expect(tree.root.right.right.right.data).toBe(12);
 
-      expect(deleted.data).toBe(11);
+      expect(deleted.data).toBe(9);
     });
 
     test("Works when the inorder successor node is a single parent", () => {

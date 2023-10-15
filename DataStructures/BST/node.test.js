@@ -39,15 +39,6 @@ describe("It creates a Node for Binary Search Tree", () => {
   });
 
 
-  test("It throws an error at attempts to change the node's data", () => {
-    let node = new Node(1);
-    expect(() => node.data = 2).toThrow(
-      "Changing the Node's data is imposibble in order to protect the sorted " +
-      "nature of the Binary Search Tree"
-    );
-  });
-
-
   test("It creates a Node pointing to other nodes at creation", () => {
     let leftNode  = new Node('left');
     let rightNode = new Node('right');

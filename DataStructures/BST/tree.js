@@ -133,8 +133,10 @@ class Tree {
 
 
   #deleteLeaf (node, parent) {
+    // Normal case: deleting a leaf in a multi-node Tree
     if (parent) {
       parent.root[parent.branch] = null
+    // Deleting the Tree's root when it's the only element
     } else {
       this.root = null;
     }
@@ -143,8 +145,10 @@ class Tree {
 
 
   #deleteSingle (node, parent) {
+    // Normal case: the node is not the Tree's root
     if (parent) {
       parent.root[parent.branch] = node.onlyChild;
+    // Deleting the Tree's root when it has only 1 child
     } else {
       this.root = this.delete(node.onlyChild.data);
     }
@@ -152,8 +156,19 @@ class Tree {
   }
 
 
-  #deleteDual (node, parent, branch) {
+  #deleteDual (node, parent) {
+    let savedNode = new Node(node.data, node.left, node.right);
 
+    let inorderSuccessorValue = node.inorderSuccessor.data;
+    this.delete(inorderSuccessorValue);
+    
+    if (parent) {
+      parent.root[parent.branch].data = inorderSuccessorValue;
+    } else {
+      this.root.data = inorderSuccessorValue;
+    }
+    
+    return savedNode;
   }
 
 

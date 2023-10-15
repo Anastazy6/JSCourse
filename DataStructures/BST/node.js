@@ -17,15 +17,18 @@ class Node {
     return this._right;
   }
 
-  /**
-   * Forces the Nodes' data property to be immutable
-   */
-  set data (_literallyWhateverBecauseDataIsGoingToBeImmutable) {
-    throw new SyntaxError(
-      "Changing the Node's data is imposibble in order to protect the sorted " +
-      "nature of the Binary Search Tree"
-    );
+  set data (value) {
+    if (this.left && value <= this.left.data) {
+      throw new RangeError("New value must be larger than the left child's value");
+    }
+
+    if (this.right && value >= this.right.data) {
+      throw new RangeError("New value must be smaller than the right child's value");
+    }
+
+    this._data = value;
   }
+
 
   set left (nextNode) {
     this.#ensureValidNode(nextNode);

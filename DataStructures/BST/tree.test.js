@@ -314,3 +314,32 @@ describe("It deletes a node from a BST", () => {
     }); 
   });
 });
+
+
+
+describe("It finds a Node with a given value in the Tree", () => {
+  test("Edge case: it returns null if the Tree is empty", () => {
+    let tree = new Tree([]);
+    
+    expect(tree.find(5)).toBeNull();
+  });
+
+
+  test("It returns null if there's no such Node in the Tree", () => {
+    let tree = makeTestTree();
+
+    expect(tree.find(12)).toBeNull();
+  });
+
+
+  test("It returns the Node when it's found", () => {
+    let tree  = makeTestTree();
+    let found = tree.find(7);
+
+    expect(found.data).toBe(7);
+    expect(found instanceof Node).toBe(true);
+    
+    expect(found.left .data).toBe(6);
+    expect(found.right.data).toBe(8);
+  });
+});

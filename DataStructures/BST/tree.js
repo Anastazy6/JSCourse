@@ -172,8 +172,13 @@ class Tree {
   }
 
 
-  find (value) {
+  find (value, root = this.root) {
+    if (root === null) return null;
 
+    if (value  <  root.data) return this.find(value, root.left);
+    if (value  >  root.data) return this.find(value, root.right);
+
+    return root;
     // returns NODE
   }
 

@@ -84,7 +84,7 @@ class Node {
   get inorderSuccessor () {
     let successor = this.right;
     
-    while (successor.left) {
+    while (successor && successor.left) {
       successor = successor.left;
     }
 

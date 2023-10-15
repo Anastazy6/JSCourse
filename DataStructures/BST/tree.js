@@ -112,11 +112,11 @@ class Tree {
     if (value === root.data) {
       switch (root.type) {
         case 'leaf':
-          return this.#deleteLeaf(root, parent.root, parent.branch);
+          return this.#deleteLeaf(root, parent);
         case 'single':
-          return this.#deleteSingle(root, parent.root, parent.branch);
+          return this.#deleteSingle(root, parent);
         case 'dual':
-          return this.#deleteDual(root, parent.root, parent.branch);
+          return this.#deleteDual(root, parent);
         default:
           throw new TypeError(`Invalid node type: ${root.type}`);
       }
@@ -132,15 +132,22 @@ class Tree {
   }
 
 
-  #deleteLeaf (node, parent, branch) {
-    
-    if (parent) parent[branch] = null;
+  #deleteLeaf (node, parent) {
+    if (parent) {
+      parent.root[parent.branch] = null
+    } else {
+      this.root = null;
+    }
     return node;
   }
 
 
-  #deleteSingle (node, parent, branch) {
-    if (parent) parent[branch] = node.onlyChild;
+  #deleteSingle (node, parent) {
+    if (parent) {
+      parent.root[parent.branch] = node.onlyChild;
+    } else {
+      this.root = this.delete(node.onlyChild.data);
+    }
     return node;
   }
 

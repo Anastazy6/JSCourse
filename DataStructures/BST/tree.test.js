@@ -32,6 +32,7 @@ function makeAsymmetricalTestTree () {
 }
 
 
+
 describe("It creates a Binary Search Tree", () => {
   test("It creates an empty tree", () => {
     let tree = new Tree([]);
@@ -107,6 +108,7 @@ describe("It creates a Binary Search Tree", () => {
 });
 
 
+
 describe("It inserts a value (as a Node)", () => {
   test("It inserts a value into an empty tree, creating its root node", () => {
     let tree = new Tree([]);
@@ -119,6 +121,7 @@ describe("It inserts a value (as a Node)", () => {
 
     expect(analyzeNode(tree.root, expectedRoot)).toBe(true);
   });
+
 
   // This should alse test whether it picks the correct branch
   describe("It inserts a value to a root-only tree", () => {
@@ -164,6 +167,7 @@ describe("It inserts a value (as a Node)", () => {
     });
   });
 
+
   describe("It inserts a value into a leaf node of a bigger tree", () => {
     test("It creates a tree of height 3 (for testing purposes)", () => {
       let tree = makeTestTree();
@@ -194,11 +198,14 @@ describe("It inserts a value (as a Node)", () => {
   });
 });
 
+
+
 describe("It deletes a node from a BST", () => {
   test("Returns null if the tree is empty", () => {
     let tree = new Tree([]);
     expect(tree.delete(1)).toBeNull();
   });
+
 
   test("It does nothing if there's no node with given value, returns null", () => {
     let tree = makeTestTree();
@@ -206,44 +213,76 @@ describe("It deletes a node from a BST", () => {
     expect(tree).toEqual(makeTestTree());
   });
 
-  test("It deletes a leaf node from a tree, returning the deleted node" , () => {
-    let tree = makeTestTree();
-    let deleted = tree.delete(6);
+
+  describe("It deletes a leaf node from a tree, returning the deleted node" , () => {
+    test("Edge case: 1-node tree: the root is the deleted leaf", () => {
+      let tree = new Tree([1]);
+      let deleted = tree.delete(1);
+
+      expect(deleted.data).toBe(1);
+      expect(tree.root   ).toBeNull();
+    });
     
-    // check the node
-    expect(deleted instanceof Node).toBe(true);
-    expect(deleted.data).toBe(6);
 
-    // check the tree
+    test("Standard case: leaf is not the root", () => {
+      let tree = makeTestTree();
+      let deleted = tree.delete(6);
+      
+      // check the node
+      expect(deleted instanceof Node).toBe(true);
+      expect(deleted.data).toBe(6);
 
-    expect(tree.root.right.data      ).toBe(7);
-    expect(tree.root.right.right.data).toBe(8);
-    expect(tree.root.right.left      ).toBeNull();
+      // check the tree
+
+      expect(tree.root.right.data      ).toBe(7);
+      expect(tree.root.right.right.data).toBe(8);
+      expect(tree.root.right.left      ).toBeNull();
+    });
+  })
+
+
+  describe("It deletes a single parent node from a tree, keeping proper BST structure", () => {
+    test("Edge case: the single parent node is the root in 2-node BST", () => {
+      let tree = new Tree([1,2]);
+      
+      expect(tree.root.data      ).toBe(1);
+      expect(tree.root.isSingle()).toBe(true);
+      expect(tree.root.right.data).toBe(2);
+
+      let deleted = tree.delete(1);
+
+      expect(deleted.data      ).toBe(1);
+      expect(tree.root.data    ).toBe(2);
+      expect(tree.root.isLeaf()).toBe(true);
+    });
+
+
+    test("Standard case", () => {
+      let tree = makeAsymmetricalTestTree();
+      let deleted = tree.delete(7);
+
+      // check the node
+      expect(deleted instanceof Node).toBe(true);
+      expect(deleted.data           ).toBe(7);
+
+      // check the tree
+      expect(tree.root.right.data          ).toBe(9);
+      expect(tree.root.right.left.data     ).toBe(8);
+      expect(tree.root.right.left.isLeaf() ).toBe(true);
+      expect(tree.root.right.right.data    ).toBe(11);
+      expect(tree.root.right.right.isDual()).toBe(true);
+
+    });
   });
 
-  test("It deletes a single parent node from a tree, keeping proper BST structure", () => {
-    let tree = makeAsymmetricalTestTree();
-    let deleted = tree.delete(7);
-
-    // check the node
-    expect(deleted instanceof Node).toBe(true);
-    expect(deleted.data).toBe(7);
-
-    // check the tree
-    expect(tree.root.right.data).toBe(9);
-    expect(tree.root.right.left.data).toBe(8);
-    expect(tree.root.right.left.isLeaf()).toBe(true);
-    expect(tree.root.right.right.data).toBe(11);
-    expect(tree.root.right.right.isDual()).toBe(true);
-  });
 
   describe("It deletes a dual parent node from a tree, keeping proper BST structure", () => {
     test("Works when the inorder successor node is a leaf", () => {
       let tree = makeAsymmetricalTestTree();
       let deleted = tree.delete(11);
 
-      expect(tree.root.right.right.data).toBe(10);
-      expect(tree.root.right.right.left).toBeNull();
+      expect(tree.root.right.right.data      ).toBe(10);
+      expect(tree.root.right.right.left      ).toBeNull();
       expect(tree.root.right.right.right.data).toBe(12);
 
       expect(deleted.data).toBe(11);
@@ -253,10 +292,10 @@ describe("It deletes a node from a BST", () => {
       let tree = makeAsymmetricalTestTree();
       let deleted = tree.delete(6) // root
 
-      expect(tree.root.data).toBe(7);
-      expect(tree.root.right.data).toBe(9);
-      expect(tree.root.right.left.data).toBe(8)
-      expect(tree.root.right.left.isLeaf()).toBe(true);
+      expect(tree.root.data                ).toBe(7);
+      expect(tree.root.right.data          ).toBe(9);
+      expect(tree.root.right.left.data     ).toBe(8)
+      expect(tree.root.right.left .isLeaf()).toBe(true);
       expect(tree.root.right.right.isDual()).toBe(true);
     }); 
   });

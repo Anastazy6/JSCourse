@@ -1,4 +1,5 @@
 import Node from "./node";
+import Tree from "./tree";
 
 
 function makeSimpleTree () {
@@ -154,5 +155,79 @@ describe("It checks the Node's type as a leaf, single parent or double parent", 
       let type = singles.includes(name) ? 'single' : name;
       expect(node.type).toEqual(type);
     });
+  });
+});
+
+
+describe("It gets a Node's only child", () => {
+  test("Returns null if the node has 0 or 2 children", () => {
+    let root = new Node(3, new Node(2), new Node(4));
+    
+    expect(root.onlyChild     ).toBeNull(); // returns null for dual parent
+    expect(root.left.onlyChild).toBeNull(); //   as well as for a leaf node
+  });
+
+
+  describe("Returns the only child of a Node with 1 child", () => {
+    test("Works with left branch", () => {
+      let root = new Node(3, new Node(2), null);
+      let expectedChild = {
+        data : 2,
+        left : null,
+        right: null
+      }
+
+      expect(analyzeNode(root.onlyChild, expectedChild)).toBe(true);
+    });
+
+    
+    test("Works with right branch", () => {
+      let root = new Node(3, null, new Node(4));
+      let expectedChild = {
+        data : 4,
+        left : null,
+        right: null
+      }
+
+      expect(analyzeNode(root.onlyChild, expectedChild)).toBe(true);
+    });
+  });
+});
+
+
+describe("It gets a Node's inorder successor", () => {
+  test("Edge case: there's no inorder successor, returns null instead of breaking", () => {
+    let root = new Node(1, null, null);
+
+    expect(root.inorderSuccessor).toBeNull();
+  });
+
+
+  test("Edge case: the inorder successor is the node's right child (and thus a leaf as well", () => {
+    let root = new Node (1, new Node(0), new Node(2));
+
+    expect(root.inorderSuccessor.data    ).toBe(2);
+    expect(root.inorderSuccessor.isLeaf()).toBe(true);
+  });
+
+
+  test("Works when the inorder successor is a leaf node", () => {
+    let root = new Node(2, new Node(1), new Node(4, new Node(3), new Node(5)));
+    /*            
+     *               2
+     *           1       4
+     *                 3   5
+     */
+    expect(root.inorderSuccessor.data    ).toBe(3);
+    expect(root.inorderSuccessor.isLeaf()).toBe(true);
+  });
+
+
+  test("Works when the inorder successor has one child (has to be the right one by design)", () => {
+    let tree = new Tree(Array.from({length: 12}, (val, index) => index + 1));
+    
+    expect(tree.root.data                       ).toBe(6);
+    expect(tree.root.inorderSuccessor.data      ).toBe(7);
+    expect(tree.root.inorderSuccessor.isSingle()).toBe(true);
   });
 });

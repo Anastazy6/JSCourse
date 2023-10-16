@@ -182,7 +182,9 @@ class Tree {
     // returns NODE
   }
 
-
+  // WARNING: Extremaly WET code below (up to postorder)
+  //   Might be refactored in some future commit, though I'd rather finish other
+  //   methods first
   levelOrder (callback=null) {
     const values = [];
     const queue  = [];
@@ -202,55 +204,45 @@ class Tree {
 
 
   preorder (callback=null) {
-    const traverse = (root = this.root) => {
-      if (root === null) return;
-
-      values.push(root.data);
-      traverse(root.left);
-      traverse(root.right);
-    }
-
-    const values = [];
-    traverse();
-
-    return callback
-      ? values.map(node => callback(node))
-      : values;
+    return Tree.#anyorder(callback, 'preorder', this.root);
   }
 
   inorder (callback=null) {
-    const traverse = (root = this.root) => {
-      if (root === null) return;
-
-      traverse(root.left);
-      values.push(root.data);
-      traverse(root.right);
-    }
-
-    const values = [];
-    traverse();
-
-    return callback
-      ? values.map(node => callback(node))
-      : values;
+    return Tree.#anyorder(callback, 'inorder', this.root);
   }
 
 
   postorder (callback=null) {
-    const traverse = (root = this.root) => {
-      if (root === null) return;
+    return Tree.#anyorder(callback, 'postorder', this.root);
+  }
 
-      traverse(root.left);
-      traverse(root.right);
-      values.push(root.data);
-    }
 
+  static #anyorder (callback, order, root) {
     const values = [];
-    traverse();
+    Tree.#traverseDepthFirst(order, values, root);
 
     return callback
       ? values.map(node => callback(node))
-      : values;
+      : values
+  }
+
+
+  static #traverseDepthFirst (order, values, root) {
+    const orders = ['preorder', 'inorder', 'postorder'];
+    
+    if (!(orders.includes(order))) {
+      throw new RangeError(
+        `Order must be one of: "${orders.join('", "')}", got ${order}`
+      );
+    }
+    
+    if (root === null ) return;
+
+    if (order === 'preorder' ) values.push(root.data);
+    Tree.#traverseDepthFirst(order, values, root.left);
+    if (order === 'inorder'  ) values.push(root.data);
+    Tree.#traverseDepthFirst(order, values, root.right);
+    if (order === 'postorder') values.push(root.data);
   }
 
 

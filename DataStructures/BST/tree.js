@@ -183,8 +183,21 @@ class Tree {
   }
 
 
-  levelOrder () {
+  levelOrder (callback=null) {
+    const levelOrderedNodes = [];
+    const queue = [];
+    if (this.root) queue.push(this.root);
 
+    while (queue.length > 0) {
+      if (queue[0].left ) queue.push(queue[0].left );
+      if (queue[0].right) queue.push(queue[0].right);
+
+      levelOrderedNodes.push(queue.shift().data);
+    }
+
+    return callback
+      ? levelOrderedNodes.map(node => callback(node))
+      : levelOrderedNodes;
   }
 
 

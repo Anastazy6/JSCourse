@@ -343,3 +343,175 @@ describe("It finds a Node with a given value in the Tree", () => {
     expect(found.right.data).toBe(8);
   });
 });
+
+
+
+describe("It performs a level-order traversal", () => {
+  describe("It returns an array of level-order node values if no callback is provided", () => {
+    test("It returns an empty array if the tree is empty", () => {
+      let tree = new Tree([]);
+      let levelOrderedData = tree.levelOrder();
+
+      expect(Array.isArray(levelOrderedData)).toBe(true);
+      expect(levelOrderedData.length).toBe(0);
+    });
+
+
+    test("It returns an level ordered array", () => {
+      let tree    = makeTestTree();
+      let ashTree = makeAsymmetricalTestTree();
+
+      expect(tree   .levelOrder()).toEqual([5, 3, 7, 2, 4, 6, 8]);
+      expect(ashTree.levelOrder()).toEqual([6, 3, 9, 1, 4, 7, 11, 2, 5, 8, 10, 12]);
+    });
+  });
+
+
+  describe("It calls the provided callback funcion on each element of the level-ordered array", () => {
+    const testCallback = value => value + 1;
+    
+    test("It does nothing and returns nothing if the tree is empty", () => {
+      let tree = new Tree([]);
+
+      expect(tree.levelOrder(testCallback)).toBeFalsy;
+    });
+
+
+    test("It performs an operation defined in the callback on each element of the array", () => {
+      let tree    = makeTestTree();
+      let ashTree = makeAsymmetricalTestTree();
+
+      expect(tree   .levelOrder(testCallback)).toEqual([6, 4, 8, 3, 5, 7, 9]);
+      expect(ashTree.levelOrder(testCallback)).toEqual([7, 4, 10, 2, 5, 8, 12, 3, 6, 9, 11, 13]);
+    });
+  });
+});
+
+
+
+describe("It performs a preorder traversal", () => {
+  describe("It returns an array of preorder node values if no callback is provided", () => {
+    test("It returns an empty array if the tree is empty", () => {
+      let tree = new Tree([]);
+      let preorderedData = tree.preorder();
+
+      expect(Array.isArray(preorderedData)).toBe(true);
+      expect(preorderedData.length).toBe(0);
+    });
+
+
+    test("It returns a preordered array", () => {
+      let tree    = makeTestTree();
+      let ashTree = makeAsymmetricalTestTree();
+
+      expect(tree   .preorder()).toEqual([5, 3, 2, 4, 7, 6, 8]);
+      expect(ashTree.preorder()).toEqual([6, 3, 1, 2, 4, 5, 9, 7, 8, 11, 10, 12]);
+    });
+  });
+
+
+  describe("It calls the provided callback funcion on each element of the preordered array", () => {
+    const testCallback = value => value + 1;
+    
+    test("It does nothing and returns nothing if the tree is empty", () => {
+      let tree = new Tree([]);
+
+      expect(tree.preorder(testCallback)).toBeFalsy;
+    });
+
+
+    test("It performs an operation defined in the callback on each element of the array", () => {
+      let tree    = makeTestTree();
+      let ashTree = makeAsymmetricalTestTree();
+
+      expect(tree   .preorder(testCallback)).toEqual([6, 4, 3, 5, 8, 7, 9]);
+      expect(ashTree.preorder(testCallback)).toEqual([7, 4, 2, 3, 5, 6, 10, 8, 9, 12, 11, 13]);
+    });
+  });
+});
+
+
+
+describe("It performs an inorder traversal", () => {
+  describe("It returns an array of inorder node values if no callback is provided", () => {
+    test("It returns an empty array if the tree is empty", () => {
+      let tree = new Tree([]);
+      let inorderedData = tree.inorder();
+
+      expect(Array.isArray(inorderedData)).toBe(true);
+      expect(inorderedData.length).toBe(0);
+    });
+
+
+    test("It returns an inordered array", () => {
+      let tree    = makeTestTree();
+      let ashTree = makeAsymmetricalTestTree();
+
+      expect(tree   .inorder()).toEqual([2, 3, 4, 5, 6, 7, 8]);
+      expect(ashTree.inorder()).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    });
+  });
+
+
+  describe("It calls the provided callback funcion on each element of the inordered array", () => {
+    const testCallback = value => value + 1;
+    
+    test("It does nothing and returns nothing if the tree is empty", () => {
+      let tree = new Tree([]);
+
+      expect(tree.inorder(testCallback)).toBeFalsy;
+    });
+
+
+    test("It performs an operation defined in the callback on each element of the array", () => {
+      let tree    = makeTestTree();
+      let ashTree = makeAsymmetricalTestTree();
+
+      expect(tree   .inorder(testCallback)).toEqual([3, 4, 5, 6, 7, 8, 9]);
+      expect(ashTree.inorder(testCallback)).toEqual([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+    });
+  });
+});
+
+
+
+describe("It performs a postorder traversal", () => {
+  describe("It returns an array of postorder node values if no callback is provided", () => {
+    test("It returns an empty array if the tree is empty", () => {
+      let tree = new Tree([]);
+      let postorderedData = tree.postorder();
+
+      expect(Array.isArray(postorderedData)).toBe(true);
+      expect(postorderedData.length).toBe(0);
+    });
+
+
+    test("It returns a postordered array", () => {
+      let tree    = makeTestTree();
+      let ashTree = makeAsymmetricalTestTree();
+
+      expect(tree   .postorder()).toEqual([2, 4, 3, 6, 8, 7, 5]);
+      expect(ashTree.postorder()).toEqual([2, 1, 5, 4, 3, 8, 7, 10, 12, 11, 9, 6]);
+    });
+  });
+
+
+  describe("It calls the provided callback funcion on each element of the postordered array", () => {
+    const testCallback = value => value + 1;
+    
+    test("It does nothing and returns nothing if the tree is empty", () => {
+      let tree = new Tree([]);
+
+      expect(tree.postorder(testCallback)).toBeFalsy;
+    });
+
+
+    test("It performs an operation defined in the callback on each element of the array", () => {
+      let tree    = makeTestTree();
+      let ashTree = makeAsymmetricalTestTree();
+
+      expect(tree   .postorder(testCallback)).toEqual([3, 5, 4, 7, 9, 8, 6]);
+      expect(ashTree.postorder(testCallback)).toEqual([3, 2, 6, 5, 4, 9, 8, 11, 13, 12, 10, 7]);
+    });
+  });
+});

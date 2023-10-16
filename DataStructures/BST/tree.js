@@ -179,12 +179,9 @@ class Tree {
     if (value  >  root.data) return this.find(value, root.right);
 
     return root;
-    // returns NODE
   }
 
-  // WARNING: Extremaly WET code below (up to postorder)
-  //   Might be refactored in some future commit, though I'd rather finish other
-  //   methods first
+
   levelOrder (callback=null) {
     const values = [];
     const queue  = [];

@@ -184,36 +184,73 @@ class Tree {
 
 
   levelOrder (callback=null) {
-    const levelOrderedNodes = [];
-    const queue = [];
+    const values = [];
+    const queue  = [];
     if (this.root) queue.push(this.root);
 
     while (queue.length > 0) {
       if (queue[0].left ) queue.push(queue[0].left );
       if (queue[0].right) queue.push(queue[0].right);
 
-      levelOrderedNodes.push(queue.shift().data);
+      values.push(queue.shift().data);
     }
 
     return callback
-      ? levelOrderedNodes.map(node => callback(node))
-      : levelOrderedNodes;
+      ? values.map(node => callback(node))
+      : values;
   }
 
 
-  preorder () {
+  preorder (callback=null) {
+    const traverse = (root = this.root) => {
+      if (root === null) return;
 
+      values.push(root.data);
+      traverse(root.left);
+      traverse(root.right);
+    }
 
+    const values = [];
+    traverse();
+
+    return callback
+      ? values.map(node => callback(node))
+      : values;
   }
 
-  inorder () {
+  inorder (callback=null) {
+    const traverse = (root = this.root) => {
+      if (root === null) return;
 
+      traverse(root.left);
+      values.push(root.data);
+      traverse(root.right);
+    }
 
+    const values = [];
+    traverse();
+
+    return callback
+      ? values.map(node => callback(node))
+      : values;
   }
 
 
-  postorder () {
+  postorder (callback=null) {
+    const traverse = (root = this.root) => {
+      if (root === null) return;
 
+      traverse(root.left);
+      traverse(root.right);
+      values.push(root.data);
+    }
+
+    const values = [];
+    traverse();
+
+    return callback
+      ? values.map(node => callback(node))
+      : values;
   }
 
 

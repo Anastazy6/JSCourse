@@ -243,13 +243,41 @@ class Tree {
   }
 
 
-  height () {
+  height (node, currentHeight=null) {
+    if ( !(Node.isValidNode(node)) ) {
+      throw new TypeError("The argument has to be a Node or null");
+    }
 
+    // base case
+    if (node === null) return currentHeight;
+
+    if (currentHeight === null) {
+      currentHeight = 0;
+    } else {
+      currentHeight++;
+    }
+
+    let leftHeight  = this.height(node.left,  currentHeight);
+    let rightHeight = this.height(node.right, currentHeight);
+
+    return Math.max(leftHeight, rightHeight);
   }
 
 
-  depth () {
+  depth (node, root=this.root, currentDepth=0) {
+    if ( !(Node.isValidNode(node)) ) {
+      throw new TypeError("The argument has to be a Node or null");
+    }
 
+    // edge case: node is null
+    if (node===null) return null;
+
+    // base case
+    if (root === null) return null;
+
+    if (node.data === root.data) return currentDepth;
+    if (node.data  <  root.data) return this.depth(node, root.left,  currentDepth + 1);
+    if (node.data  >  root.data) return this.depth(node, root.right, currentDepth + 1);
   }
 
   

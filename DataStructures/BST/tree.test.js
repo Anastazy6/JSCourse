@@ -515,3 +515,96 @@ describe("It performs a postorder traversal", () => {
     });
   });
 });
+
+
+
+describe("It calculates a Node's height", () => {
+  test("It only accepts a Node or null as an argument", () => {
+    let tree = makeTestTree();
+    let nullNode = tree.find(123); // null
+    let node = tree.find(3);
+
+    expect(() => tree.height(nullNode)).not.toThrow();
+    expect(() => tree.height(node    )).not.toThrow();
+
+    [5, 'string', true, false, [new Node(50)]].forEach(notANode => {
+      expect(() => tree.height(notANode)).toThrow("The argument has to be a Node or null");
+    });
+  });
+
+
+  test("It returns null if the given Node is null", () => {
+    expect(makeTestTree().height(null)).toBe(null);
+  });
+
+
+  test("Indexing starts at 0, so that a leaf's height is 0", () => {
+    let tree = makeTestTree();
+    let leaf = tree.find(8);
+
+    expect(tree.height(leaf)).toBe(0);
+  });
+
+
+  test("It returns the height of a Node, where all its subtrees are fully symmetrical", () => {
+    let tree = makeTestTree();
+
+    expect(tree.height(tree.root   )).toBe(2);
+    expect(tree.height(tree.find(7))).toBe(1);
+    expect(tree.height(tree.find(8))).toBe(0);
+  });
+
+
+  test("If the left and right subtree of a node are of different heights, it picks the higher one", () => {
+    let tree = makeTestTree();
+    tree.insert(9).insert(10); // 6 <-  (7)  -> 8 -> 9 -> 10
+
+    expect(tree.height(tree.find(7))).toBe(3) // 1 in the left subtree, 3 in the right, picks higher
+  });
+});
+
+
+
+describe("It caclulates a Node's depth", () => {
+  test("It only accepts a Node or null as an argument", () => {
+    let tree = makeTestTree();
+    let nullNode = tree.find(123); // null
+    let node = tree.find(3);
+
+    expect(() => tree.depth(nullNode)).not.toThrow();
+    expect(() => tree.depth(node    )).not.toThrow();
+
+    [5, 'string', true, false, [new Node(50)]].forEach(notANode => {
+      expect(() => tree.depth(notANode)).toThrow("The argument has to be a Node or null");
+    });
+  });
+
+
+  test("Returns null if the Node is null", () => {
+    expect(makeAsymmetricalTestTree().height(null)).toBeNull();
+  });
+
+
+  test("Returns null if the Node is not in the Tree", () => {
+    let tree = makeTestTree();
+    let node = new Node(123, null, null);
+
+    expect(tree.depth(node)).toBeNull();
+    expect(new Tree([]).depth(node)).toBeNull();
+  });
+
+
+  test("Returns 0 for the Tree's root (ensures counting starts at 0)", () => {
+    let tree = makeAsymmetricalTestTree();
+    expect(tree.depth(tree.root)).toBe(0);
+  });
+
+
+  test("Returns the number of steps needed to go from the Tree's root to the Node", () => {
+    let tree = makeAsymmetricalTestTree();
+
+    expect(tree.depth(tree.find(3))).toBe(1);
+    expect(tree.depth(tree.find(7))).toBe(2);
+    expect(tree.depth(tree.find(12))).toBe(3);
+  });
+});

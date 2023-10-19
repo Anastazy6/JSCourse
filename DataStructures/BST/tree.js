@@ -285,13 +285,14 @@ class Tree {
     // base case
     if (root === null) return true;
 
-    if (root.left  === null) {
-      return this.height(root.right) === (0 || null) ? true : false;
-    } 
-    if (root.right === null) {
-      return this.height(root.left ) === (0 || null) ? true : false;
-    }
+    
+    let leftHeight  = this.height(root.left ) + 1 || 0;
+    let rightHeight = this.height(root.right) + 1 || 0;
 
+    if (Math.max(leftHeight, rightHeight) - Math.min(leftHeight, rightHeight) > 1) {
+      return false;
+    }
+    
     return this.isBalanced(root.left) && this.isBalanced(root.right);
   }
 

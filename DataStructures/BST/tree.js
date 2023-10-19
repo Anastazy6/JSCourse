@@ -281,17 +281,36 @@ class Tree {
   }
 
   
-  isBalanced () {
+  isBalanced (root=this.root) {
+    // base case
+    if (root === null) return true;
 
+    if (root.left  === null) {
+      return this.height(root.right) === (0 || null) ? true : false;
+    } 
+    if (root.right === null) {
+      return this.height(root.left ) === (0 || null) ? true : false;
+    }
+
+    return this.isBalanced(root.left) && this.isBalanced(root.right);
   }
 
 
-  rebalance () {
+  rebalance (overlySafe=false) {
+    let items = this.inorder();
+    console.log(items);
+    
+    // This shouldn't be neccessary as inorder traversal should keep the items
+    //   properly sorted and the tree methods should not create duplicate nodes
+    //   thus it's mostly for the evulz
+    if (overlySafe) {
+      items = removeDuplicates(items);
+      items = items.sort((a, b) => a - b);
+    }
 
+    this.root = this.buildTree(items, 0, items.length - 1);
+    return this;
   }
-
-
-
 }
 
 export default Tree;

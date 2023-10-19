@@ -31,6 +31,12 @@ function makeAsymmetricalTestTree () {
   return new Tree(arr);
 }
 
+function makeUnbalancedTree () {
+  let tree = makeAsymmetricalTestTree();
+  tree.insert(15).insert(16).insert(17).insert(18);
+
+  return tree;
+}
 
 
 describe("It creates a Binary Search Tree", () => {
@@ -606,5 +612,76 @@ describe("It caclulates a Node's depth", () => {
     expect(tree.depth(tree.find(3))).toBe(1);
     expect(tree.depth(tree.find(7))).toBe(2);
     expect(tree.depth(tree.find(12))).toBe(3);
+  });
+});
+
+
+
+describe("It checks if the tree is balanced", () => {
+  test("Empty tree is balanced", () => {
+    expect(new Tree([]).isBalanced()).toBe(true);
+  });
+
+
+  test("Single-node tree is balanced", () => {
+    expect(new Tree([2]).isBalanced()).toBe(true);
+  });
+
+
+  test("Returns true if a tree is balanced", () => {
+    expect(makeTestTree().isBalanced()).toBe(true);
+  });
+
+
+  test("Returns false if a tree is unbalanced", () => {
+    expect(makeUnbalancedTree().isBalanced()).toBe(false);
+  });
+});
+
+
+
+describe("It rebalances an unbalanced tree", () => {
+  test("It returns a new Tree", () => {
+    let tree = makeUnbalancedTree();
+
+    let balancedTree = tree.rebalance();
+    expect(balancedTree instanceof Tree).toBe(true);
+  });
+
+
+  test("The new tree has exactly the same elements as the old one, in the same inorder order", () => {
+    let unbalancedTree  = makeUnbalancedTree();
+    let unbalancedItems = unbalancedTree.inorder();
+
+    let balancedTree  = unbalancedTree.rebalance();
+    let balancedItems = balancedTree.inorder();
+    
+    expect(balancedItems).toEqual(unbalancedItems);
+  });
+
+
+  test("It balances an unbalanced tree", () => {
+    let unbalancedTree = makeUnbalancedTree();
+    expect(unbalancedTree.isBalanced()).toBe(false);
+
+    let balancedTree = unbalancedTree.rebalance();
+    expect(balancedTree.isBalanced()).toBe(true);
+  });
+
+
+  test("It keeps a balanced tree balanced", () => {
+    let tree = makeTestTree();
+    expect(tree.isBalanced()).toBe(true);
+
+    let newTree = tree.rebalance();
+    expect(newTree.isBalanced()).toBe(true);
+  });
+
+
+  test("It actually mutates the existing tree, instead of returning a new one", () => {
+    let tree = makeUnbalancedTree();
+    expect(tree.isBalanced()).toBe(false);
+    tree.rebalance();
+    expect(tree.isBalanced()).toBe(true);
   });
 });

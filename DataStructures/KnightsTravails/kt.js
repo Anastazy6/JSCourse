@@ -1,5 +1,3 @@
-import { arrayComp } from "./helpers";
-
 const Knight = (function () {
   const _moveRange = [
     [ 2,  1],
@@ -11,7 +9,55 @@ const Knight = (function () {
     [-2, -1],
     [-2,  1]
   ]
+
+
+  function knightMoves (start, finish) {
+    [start, finish].forEach(pos => _validatePosition(pos));
+
+    const movesQueue = _initializeMovesQueue(start);
+    
+    return _findShortestPath(movesQueue, finish);
+  }
+
+
+  function _initializeMovesQueue (start) {
+    const movesQueue = [];
+    
+    _findLegalMoves(start).forEach(move => {
+      movesQueue.push([start, move]);
+    });
+
+    return movesQueue;
+  }
   
+
+  function _findShortestPath (movesQueue, finish) {
+    while (movesQueue.length > 0) {
+      let path     = movesQueue.shift();
+      let lastMove = path[path.length - 1];
+
+      if (_isFinishReached(lastMove, finish)) {
+        return path;
+      }
+
+      _enqueueMoves(movesQueue, path, lastMove);
+    }
+  }
+
+
+  function _isFinishReached (lastMove, finish) {
+    return (lastMove[0] === finish[0]) && (lastMove[1] === finish[1]);
+  }
+
+
+  function _enqueueMoves (movesQueue, path, lastMove) {
+    let legalMoves  = _findLegalMoves(lastMove);
+
+    legalMoves.forEach(newMove => 
+      movesQueue.push([...path, newMove])
+    );
+  }
+
 
   function _isPositionLegal (pos) {
     pos.forEach(coord => {
@@ -41,34 +87,7 @@ const Knight = (function () {
   }
 
 
-  function knightMoves (start, finish) {
-    [start, finish].forEach(pos => _validatePosition(pos));
 
-    let movesQueue = [];
-    
-    // Initialize moves Queue
-    _findLegalMoves(start).forEach(move => {
-      console.log(`Testing move to: ${move}, is finish: ${arrayComp(move, finish)}`);
-      if (arrayComp(move, finish)) return [start, finish]; // In case the finish can be reached in 1 move
-
-      movesQueue.push([start, finish]);
-    });
-
-    while (movesQueue.lenght > 0) {
-      let currentPath    = movesQueue.shift();
-      console.log(currentPath);
-      let lastMoveInPath = currentPath[currentPath.length - 1];
-      let nextMoves      = _findLegalMoves(lastMoveInPath);
-
-      nextMoves.forEach(move => {
-        let newPath = [...currentPath, move];
-
-        if (arrayComp(move, finish)) return newPath;
-        
-        movesQueue.push(newPath);
-      });
-    }
-  }
 
   return {
     knightMoves: knightMoves
@@ -77,5 +96,6 @@ const Knight = (function () {
 
 export default Knight;
 
-Knight.knightMoves([3, 3], [5, 5]);
-
+console.log(Knight.knightMoves([3, 3], [5, 5]));
+console.log(Knight.knightMoves([2, 4], [6, 1]));
+console.log(Knight.knightMoves([0, 0], [7 ,7]));

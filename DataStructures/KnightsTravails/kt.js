@@ -60,10 +60,12 @@ const Knight = (function () {
 
 
   function _isPositionLegal (pos) {
-    pos.forEach(coord => {
-      if (!(0 <= coord <=7)) return false;
-    })
-    return true;
+    return _isCoordLegal(pos[0]) && _isCoordLegal(pos[1]);
+  }
+
+
+  function _isCoordLegal (coord) {
+    return (0 <= coord) && (coord <= 7);
   }
 
 
@@ -78,15 +80,16 @@ const Knight = (function () {
     const moves = [];
 
     _moveRange.forEach(move => {
-      let newPosition = [pos[0] + move[0], pos[1] + move[1]];
+      let x = pos[0] + move[0];
+      let y = pos[1] + move[1];
+
+      let newPosition = [x, y];
       if (_isPositionLegal(newPosition)) {
         moves.push(newPosition);
-      }
+      } 
     });
     return moves;
   }
-
-
 
 
   return {
@@ -99,3 +102,4 @@ export default Knight;
 console.log(Knight.knightMoves([3, 3], [5, 5]));
 console.log(Knight.knightMoves([2, 4], [6, 1]));
 console.log(Knight.knightMoves([0, 0], [7 ,7]));
+console.log(Knight.knightMoves([0, 0], [1, 2]));

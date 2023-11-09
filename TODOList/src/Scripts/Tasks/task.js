@@ -1,4 +1,14 @@
-function Task () {
+class Task {
+  constructor (props) {
+    this.id          = props.id;
+    this.title       = props.title;
+    this.description = props.description;
+    this.notes       = props.notes;
+    this.dueDate     = props.dueDate;
+    this.bestBefore  = props.bestBefore;
+    this.priority    = props.priority;
+    this.status      = props.status;
+  }
   /**
    * Properties to implement:
    * title       (mandatory)
@@ -13,3 +23,5 @@ function Task () {
    *             'pending' (default))
    */
 }
+
+export default Task;

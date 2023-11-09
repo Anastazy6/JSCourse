@@ -1,6 +1,8 @@
 class Task {
+  static ID = 0
+
   constructor (props) {
-    this.id          = props.id;
+    this.id          = Task.ID;
     this.title       = props.title;
     this.description = props.description;
     this.notes       = props.notes;
@@ -8,6 +10,8 @@ class Task {
     this.bestBefore  = props.bestBefore;
     this.priority    = props.priority;
     this.status      = props.status;
+
+    Task.ID++;
   }
   /**
    * Properties to implement:

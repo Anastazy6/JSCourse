@@ -6,13 +6,17 @@ import { MAX_PROJECT_IMPORTANCE } from "../Constants/limits";
 import Task from "../Tasks/task";
 
 class Project {
+  static ID = 0;
+
   constructor (props) {
-    this.id          = props.id;
+    this.id          = Project.ID;
     this.title       = props.title;
     this.description = props.description;
     this.notes       = props.notes;
     this.importance  = props.importance;
     this.tasks       = [];
+
+    Project.ID++;
   }
 
 

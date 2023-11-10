@@ -1,8 +1,8 @@
 import { MAX_PROJECT_TITLE_LENGTH } from "../Constants/limits";
 import { MAX_PROJECT_DESCRIPTION_LENGTH } from "../Constants/limits";
 
-import { MIN_PROJECT_IMPORTANCE } from "../Constants/limits";
-import { MAX_PROJECT_IMPORTANCE } from "../Constants/limits";
+import { MIN_PROJECT_PRIORITY } from "../Constants/limits";
+import { MAX_PROJECT_PRIORITY } from "../Constants/limits";
 import Task from "../Tasks/task";
 
 class Project {
@@ -13,7 +13,7 @@ class Project {
     this.title       = props.title;
     this.description = props.description;
     this.notes       = props.notes;
-    this.importance  = props.importance;
+    this.priority    = props.priority;
     this.tasks       = [];
 
     Project.ID++;
@@ -45,21 +45,28 @@ class Project {
   }
 
 
-  set importance (value) {
-    if (value < MIN_PROJECT_IMPORTANCE || MAX_PROJECT_IMPORTANCE < value) {
+  set priority (value) {
+    if (value < MIN_PROJECT_PRIORITY || MAX_PROJECT_PRIORITY < value) {
       throw new RangeError(
-        `Importance must neither be lesser than ${MIN_PROJECT_IMPORTANCE} \
-        nor greater than ${MAX_PROJECT_IMPORTANCE}`
+        `priority must neither be lesser than ${MIN_PROJECT_PRIORITY} \
+        nor greater than ${MAX_PROJECT_PRIORITY}`
       );
     }
 
     if (!(Number.isInteger(value))) {
       throw new TypeError(
-        `Importance must be an integer (got ${typeof value})`
+        `priority must be an integer (got ${typeof value})`
       );
     }
 
-    this.importance = value;
+    this.priority = value;
+  }
+
+  get priority () {
+    // Ensure it
+    if (this.priority < MIN_PROJECT_PRIORITY) {
+      return MIN_PROJECT_PRIORITY;
+    }
   }
 
 
@@ -95,7 +102,7 @@ class Project {
    * title       (mandatory)
    * description (optional, recommended)
    * notes       (totally optional)
-   * importance  (mandatory, importance is measured relatively to the other projects) 
+   * priority  (mandatory, priority is measured relatively to the other projects) 
    * tasks       (the very point of a project: grouping tasks. Most likely an array)
    * isDefault   (mandatory, but might be implemented as a global variable: a pointer
    *              to the currently default project, which will be loaded on the home page)

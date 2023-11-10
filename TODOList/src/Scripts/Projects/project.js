@@ -42,6 +42,8 @@ class Project {
         `Description must not be longer than ${MAX_PROJECT_DESCRIPTION_LENGTH} characters`
       );
     }
+
+    this.description = description;
   }
 
 

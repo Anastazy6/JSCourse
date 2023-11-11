@@ -1,15 +1,15 @@
-const legalHeaders = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+import React from "react";
+import { HTMLHeaders } from "../Constants/headers";
 
 function Header(level='h1', text) {
-  if ( !(legalHeaders.includes(level))) {
+  if ( !(HTMLHeaders.includes(level))) {
     console.error(`${level} is not a valid header level!`);
     return false;
   }
 
-  const header = document.createElement(level);
-  header.innerText = text;
+  const Level = level;
 
-  return header;
+  return <Level> `${text}` </Level>;
 }
 
-export { Header };
+export default Header ;

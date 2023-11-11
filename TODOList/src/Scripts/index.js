@@ -1,10 +1,16 @@
 import "../Styles/styles.scss";
 
+import { createRoot } from 'react-dom/client';
+
 import Header from "./Shared/Header";
 import Navbar from "./Shared/Navbar";
 import Footer from "./Shared/Footer";
 
 document.addEventListener('DOMContentLoaded', () => {
+  const root    = createRoot(document.getElementById('react-root'));
+
+  root.render("React imported properly if this is visible");
+
   const content = document.getElementById('content');
   const main    = document.createElement ('main'   );
 

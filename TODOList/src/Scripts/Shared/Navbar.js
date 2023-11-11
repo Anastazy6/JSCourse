@@ -1,3 +1,5 @@
+import React from "react";
+
 /**
  * text: refers to the innerText property of each nav item
  * view: referst to the name of the function that will render the view that
@@ -22,35 +24,30 @@ const navitems = [
 
 
 function Navbar() {
-  const navbar   = document.createElement('nav');
-  const fragment = document.createDocumentFragment();
-
-  navbar.classList.add("navbar");
-  navitems.forEach(item => {
-    
-    // Create navitem;
-    const navitem = Navitem(item.text); 
-    
-    // Store the reference to the navitem so that querying them isn't needed;
-    item.pointer  = navitem;
-
-    // Add the navitem to the nav bar;
-    fragment.appendChild(navitem);
+  const items = navitems.map(item => {
+    let navitem = <Navitem text={item.text}></Navitem>;
+    item.pointer = navitem;
+    return navitem;
   });
-  navbar.appendChild(fragment);
 
-  return navbar;
+  return (
+    <nav className='navbar'>
+      {items}
+    </nav>
+  );
 }
 
 
-function Navitem(item) {
-  const navitem = document.createElement('button');
-
-  navitem.classList.add('btn', 'btn-outline-ghostwhite', 'navbar-btn');
-
-  navitem.innerText = item;
-
-  return navitem;
+function Navitem({text}) {
+  return (
+    <button 
+      className=' btn 
+                  btn-outline-ghostwhite
+                  navbar-btn'
+    >
+      {text}
+    </button>
+  );
 }
 
 

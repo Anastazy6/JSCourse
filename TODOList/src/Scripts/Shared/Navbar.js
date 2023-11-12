@@ -24,8 +24,8 @@ const navitems = [
 
 
 function Navbar() {
-  const items = navitems.map(item => {
-    let navitem = <Navitem text={item.text}></Navitem>;
+  const items = navitems.map((item, id) => {
+    let navitem = <Navitem key={id} text={item.text}></Navitem>;
     item.pointer = navitem;
     return navitem;
   });

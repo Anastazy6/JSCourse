@@ -1,8 +1,8 @@
-import { MAX_PROJECT_TITLE_LENGTH } from "../Constants/limits";
-import { MAX_PROJECT_DESCRIPTION_LENGTH } from "../Constants/limits";
+import { MAX_PROJECT_TITLE_LENGTH } from "../Constants/constraints";
+import { MAX_PROJECT_DESCRIPTION_LENGTH } from "../Constants/constraints";
 
-import { MIN_PROJECT_PRIORITY } from "../Constants/limits";
-import { MAX_PROJECT_PRIORITY } from "../Constants/limits";
+import { MIN_PROJECT_PRIORITY } from "../Constants/constraints";
+import { MAX_PROJECT_PRIORITY } from "../Constants/constraints";
 import Task from "../Tasks/task";
 
 class Project {

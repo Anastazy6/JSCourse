@@ -1,7 +1,7 @@
-import { MAX_TASK_TITLE_LENGTH } from "../Constants/limits";
-import { MAX_TASK_DESCRIPTION_LENGTH } from "../Constants/limits";
-import { MIN_TASK_PRIORITY } from "../Constants/limits";
-import { MAX_TASK_PRIORITY } from "../Constants/limits";
+import { MAX_TASK_TITLE_LENGTH } from "../Constants/constraints";
+import { MAX_TASK_DESCRIPTION_LENGTH } from "../Constants/constraints";
+import { MIN_TASK_PRIORITY } from "../Constants/constraints";
+import { MAX_TASK_PRIORITY } from "../Constants/constraints";
 
 
 class Task {

@@ -11,20 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const root    = createRoot(document.getElementById('react-root'));
 
   root.render(
-    <Navbar />
+    <>
+      <Navbar />
+      <Footer />
+    </>
   );
 
-  const content = document.getElementById('content');
-  const main    = document.createElement ('main'   );
+  // const content = document.getElementById('content');
+  // const main    = document.createElement ('main'   );
 
-  const navbar = Navbar();
-  const footer = Footer();
-
-  const contentOrder = [
-    navbar,
-    main,
-    footer
-  ]
+  // const contentOrder = [
+  //   navbar,
+  //   main,
+  //   footer
+  // ]
 
   // const views = [
   //   General/default ?
@@ -33,14 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
   //   New TODO ?
   // ]
 
-  main.textContent = "Source code has been bundled properly if this is visible";
+  // main.textContent = "Source code has been bundled properly if this is visible";
 
   //run();  
 
-  function run() {
-    contentOrder.map(item => content.appendChild(item));
+  // function run() {
+  //   contentOrder.map(item => content.appendChild(item));
 
     // show(Home);
     // turnNavbarOn();
-  }
+  //}
 })

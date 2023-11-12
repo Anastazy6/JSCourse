@@ -1,4 +1,4 @@
-const FORM_INPUT_TYPES = [
+const VALID_INPUT_TYPES = [
   "button",
   "checkbox",
   "color",
@@ -23,4 +23,4 @@ const FORM_INPUT_TYPES = [
   "week"
 ];
 
-export default FORM_INPUT_TYPES;
+export default VALID_INPUT_TYPES;

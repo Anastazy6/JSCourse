@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   root.render(
     <>
       <Navbar />
+      <Header level={'h1'} text="TEST"></Header>
       <Footer />
     </>
   );

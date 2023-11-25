@@ -3,9 +3,10 @@ import "../Styles/styles.scss";
 import { createRoot } from 'react-dom/client';
 import React  from "react";
 
-import Header from "./Shared/Header";
-import Navbar from "./Shared/Navbar";
-import Footer from "./Shared/Footer";
+import Contents from "./Shared/Contents";
+import Header   from "./Shared/Header";
+import Navbar   from "./Shared/Navbar";
+import Footer   from "./Shared/Footer";
 
 document.addEventListener('DOMContentLoaded', () => {
   const root    = createRoot(document.getElementById('react-root'));
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   root.render(
     <>
       <Navbar />
-      <Header level={'h1'} text="TEST"></Header>
+      <Contents />
       <Footer />
     </>
   );

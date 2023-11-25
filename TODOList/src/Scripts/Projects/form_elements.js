@@ -10,23 +10,33 @@ import VALID_INPUT_TYPES   from "../Constants/form_input_types";
 
 const formItems = [
   {
-    name     : 'Title',
-    type     : ['input', 'text'],
-    maxlength: MAX_PROJECT_TITLE_LENGTH,
-    required : true,
+    name    : 'Title',
+    tag     : 'input',
+    required: true,
+    props   : {
+      type     : 'text',
+      maxlength: MAX_PROJECT_TITLE_LENGTH,
+    },
   }, {
-    name     : 'Description',
-    type     : ['textarea'],
-    maxlength: MAX_PROJECT_DESCRIPTION_LENGTH
+    name    : 'Description',
+    tag     : 'textarea',
+    required: false,
+    props   : {
+      maxlength: MAX_PROJECT_DESCRIPTION_LENGTH
+    }
   }, {
-    name     : 'Notes',
-    type     : ['textarea'],
+    name    : 'Notes',
+    tag     : 'textarea',
+    required: false,
   }, {
-    name     : 'Priority',
-    type     : ['input', 'number'],
-    min      : MIN_PROJECT_PRIORITY,
-    max      : MAX_PROJECT_PRIORITY,
-    required : true,
+    name    : 'Priority',
+    tag     : 'input',
+    required: true,
+    props   : {
+      type     : 'number',
+      min      : MIN_PROJECT_PRIORITY,
+      max      : MAX_PROJECT_PRIORITY,
+    }
   }
 ];
 
@@ -38,20 +48,22 @@ const formItems = [
  */
 function typeCheck () {
   formItems.forEach(item => {
-    let controlType = item.type[0].toLowerCase();
-    let inputType   = item.type[1].toLowerCase() || null;
+    let controlType = item.tag;
 
     if (!(VALID_FORM_CONTROLS.includes(controlType))) {
       throw new TypeError(`Invalid form control type: ${controlType}`);
     }
 
-    if (controlType === 'input' && !(VALID_INPUT_TYPES.includes(inputType))) {
-      throw new TypeError(`Invalid form input type: ${inputType}`);
+    if (controlType === 'input') {
+      let inputType = item.props.type;
+      if (!(VALID_INPUT_TYPES.includes(inputType))) {
+        throw new TypeError(`Invalid form input type: ${inputType}`);
+      }
     }
   });
 }
 
-typeCheck();
+//typeCheck();
 
 
-export default formItems
+export default formItems;

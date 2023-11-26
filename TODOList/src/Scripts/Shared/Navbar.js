@@ -14,8 +14,8 @@ const navitems = [
     text: "Home",
     view: "Home"
   }, {
-    text: "Menu",
-    view: "Menu"
+    text: "Projects",
+    view: "Projects"
   }, {
     text: "Contact",
     view: "Contact"

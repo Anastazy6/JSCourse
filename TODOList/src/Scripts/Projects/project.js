@@ -5,18 +5,23 @@ import { MIN_PROJECT_PRIORITY } from "../Constants/constraints";
 import { MAX_PROJECT_PRIORITY } from "../Constants/constraints";
 import Task from "../Tasks/task";
 
-class Project {
-  static ID = 0;
+const getProjectId = () => parseInt(localStorage.getItem('projectId'));
+const incrementProjectId = () => localStorage.setItem('projectId', getProjectId() + 1);
 
+class Project {
   constructor (props) {
-    this._id          = Project.ID;
+    if (!getProjectId()) {
+      localStorage.setItem('projectId', 0);
+    }
+
+    this._id          = getProjectId();
     this._title       = props.title;
     this._description = props.description;
     this._notes       = props.notes;
     this._priority    = props.priority;
     this._tasks       = [];
 
-    Project.ID++;
+    incrementProjectId();
   }
 
 

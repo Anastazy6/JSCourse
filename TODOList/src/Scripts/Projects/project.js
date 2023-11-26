@@ -5,13 +5,29 @@ import { MIN_PROJECT_PRIORITY } from "../Constants/constraints";
 import { MAX_PROJECT_PRIORITY } from "../Constants/constraints";
 import Task from "../Tasks/task";
 
+
+// Initialize current project id variable as 0, if it's not present in local storage,
+//   which is the persistent memory for this JS Project
+if (!getProjectId()) {
+  localStorage.setItem('projectId', 0);
+}
+
+
 const getProjectId = () => parseInt(localStorage.getItem('projectId'));
 const incrementProjectId = () => localStorage.setItem('projectId', getProjectId() + 1);
 
 class Project {
   constructor (props) {
-    if (!getProjectId()) {
-      localStorage.setItem('projectId', 0);
+    let id;
+
+    if (!props.id) {
+      // use id from the local storage and increment its value for the next project
+      //   if creating a brand new project
+      id = getProjectId();
+      incrementProjectId();
+    } else {
+      // use the project's id if recreating it from serialized data
+      id = props.id;
     }
 
     this._id          = getProjectId();
@@ -20,8 +36,6 @@ class Project {
     this._notes       = props.notes;
     this._priority    = props.priority;
     this._tasks       = [];
-
-    incrementProjectId();
   }
 
 

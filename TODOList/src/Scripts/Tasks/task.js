@@ -4,26 +4,56 @@ import { MIN_TASK_PRIORITY } from "../Constants/constraints";
 import { MAX_TASK_PRIORITY } from "../Constants/constraints";
 
 
+const currentTaskId   = () => parseInt(localStorage.getItem('taskId'));
+const incrementTaskId = () => localStorage.setItem('taskId', currentTaskId() + 1);
+
 class Task {
-  static ID = 0
-
   constructor (props) {
-    this.id          = Task.ID;
-    this.title       = props.title;
-    this.description = props.description;
-    this.notes       = props.notes;
-    this.dueDate     = props.dueDate;
-    this.bestBefore  = props.bestBefore;
-    this.priority    = props.priority;
-    this.status      = props.status;
-
-    Task.ID++;
+    this._id          = currentTaskId();
+    this._title       = props.title;
+    this._description = props.description;
+    this._notes       = props.notes;
+    this._dueDate     = props.dueDate;
+    this._bestBefore  = props.bestBefore;
+    this._priority    = props.priority;
+    this._status      = props.status;
+    
+    incrementTaskId();
   }
 
-  set id (_value) {
-    throw new SyntaxError("Changing the id property of a task is not allowed");
+
+  get title () {
+    return this._title;
   }
 
+  get description () {
+    return this._description;
+  }
+
+  get notes () {
+    return this._notes;
+  }
+
+  get dueDate () {
+    return this._dueDate;
+  }
+
+  get bestBefore() {
+    return this._bestBefore;
+  }
+
+  get priority () {
+    return (this._priority < MIN_TASK_PRIORITY
+      ? MIN_TASK_PRIORITY
+      : this._priority > MAX_TASK_PRIORITY
+        ? MAX_TASK_PRIORITY
+        : this._priority
+    );
+  }
+
+  get status () {
+    return this._status;
+  }
 
   set title (title) {
     if (title.length > MAX_TASK_TITLE_LENGTH) {
@@ -32,7 +62,7 @@ class Task {
       );
     }
 
-    this.title = title;
+    this._title = title;
   }
 
 
@@ -43,7 +73,7 @@ class Task {
       );
     }
 
-    this.description = description;
+    this._description = description;
   }
 
 
@@ -61,8 +91,10 @@ class Task {
       );
     }
 
-    this.priority = value;
+    this._priority = value;
   }
+
+
   /**
    * Properties to implement:
    * title       (mandatory)

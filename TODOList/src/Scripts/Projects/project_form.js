@@ -1,46 +1,60 @@
 import React from "react";
-import formItems from "./form_elements";
+import { Title, Description, Notes, Priority, Submit } from './form_elements' ;
 
-import { createElement } from "react";
+import { useState } from 'react';
 
-function FormItem ({item}) {
-  console.log(typeof item.tag);
-  
-  const Element = createElement(
-    item.tag,
-    {
-      name: item.name,
-      id  : `project-form-${item.name}`
-    }
-  );
-    
-    console.log(Element);
-  if (item.required) Element.setAttribute('required', '');
-  
-  Object.entries(item).forEach(([attr, val]) => {
-    Element.setAttribute(attr, val);
-  });  
-
-  return (
-    <div 
-      className="project-form-control"
-    >
-      <label for={`project-form-${item.name}`}>
-        {item.name}
-      </label>
-      <Element
-      
-      >
-      </Element>
-    </div>
-  );
-}
-
+import { MIN_PROJECT_PRIORITY } from "../Constants/constraints";
+import Project from "./project";
 
 function ProjectForm () {
-  const items = formItems.map(item => FormItem({item}));
+  const [project, setProject] = useState({
+    title      : 'Title',
+    description: 'Description',
+    notes      : 'Notes',
+    priority   : MIN_PROJECT_PRIORITY
+  })
 
-  return <form>{items}</form>;
+  function handleSubmit (e) {
+    e.preventDefault();
+
+    saveProject()
+    
+    console.log(localStorage.getItem('projects'));
+  }
+
+
+  function saveProject () { 
+    let newProject = new Project(project).serialize();
+    let projects = JSON.parse(localStorage.getItem('projects'));
+
+    if (projects) {
+      localStorage.setItem('projects', JSON.stringify([...projects, {newProject}]));
+    } else {
+      localStorage.setItem('projects', JSON.stringify([{newProject}]));
+    }
+  }
+
+
+  function handleChange (e) {
+    const property = e.target.name;
+
+    let nextProject = {...project};
+    nextProject[property] = e.target.value;
+
+    setProject(nextProject);
+  }
+
+  return(
+    <form
+      onSubmit={handleSubmit}
+    >
+      <Title       project={project} onChange={handleChange} />
+      <Description project={project} onChange={handleChange} />
+      <Notes       project={project} onChange={handleChange} />
+      <Priority    project={project} onChange={handleChange} />
+      <Submit />
+    </form>
+  );
 }
 
 

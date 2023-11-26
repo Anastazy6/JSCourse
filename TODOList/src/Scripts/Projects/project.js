@@ -9,42 +9,66 @@ class Project {
   static ID = 0;
 
   constructor (props) {
-    this.id          = Project.ID;
-    this.title       = props.title;
-    this.description = props.description;
-    this.notes       = props.notes;
-    this.priority    = props.priority;
-    this.tasks       = [];
+    this._id          = Project.ID;
+    this._title       = props.title;
+    this._description = props.description;
+    this._notes       = props.notes;
+    this._priority    = props.priority;
+    this._tasks       = [];
 
     Project.ID++;
   }
 
 
-  set id (_value) {
-    throw new SyntaxError("Changing the id property of a project is not allowed");
+  serialize () {
+    return {
+      id         : this._id,
+      title      : this._title,
+      description: this._description,
+      notes      : this._notes,
+      priority   : this._priority,
+      tasks      : this._tasks.map(t => t.id)
+    };
   }
 
 
-  set title (title) {
-    if (title.length > MAX_PROJECT_TITLE_LENGTH) {
+  get id () {
+    return this._id;
+  }
+
+
+  get title () {
+    return this._title;
+  }
+
+  set title (newTitle) {
+    if (newTitle.length > MAX_PROJECT_TITLE_LENGTH) {
       throw new RangeError(
         `Title must not be longer than ${MAX_PROJECT_TITLE_LENGTH} characters`
       );
     }
 
-    this.title = title;
+    console.log(`Changing project title from ${this.title} to ${newTitle}`);
+    this._title = newTitle;
+  }
+
+  
+  get description () {
+    return this._description;
   }
 
 
-  set description (description) {
-    if (description.length > MAX_PROJECT_DESCRIPTION_LENGTH) {
+  set description (newDescription) {
+    if (newDescription.length > MAX_PROJECT_DESCRIPTION_LENGTH) {
       throw new RangeError(
         `Description must not be longer than ${MAX_PROJECT_DESCRIPTION_LENGTH} characters`
       );
     }
 
-    this.description = description;
+    this._description = newDescription;
   }
+
+
 
 
   set priority (value) {
@@ -61,14 +85,18 @@ class Project {
       );
     }
 
-    this.priority = value;
+    this._priority = value;
   }
 
   get priority () {
-    // Ensure it
-    if (this.priority < MIN_PROJECT_PRIORITY) {
+    // Ensure it returns a value within the current constraints (even if they've been
+    //   changed in such a way that the old priority is out of boundaries)
+    if (this._priority < MIN_PROJECT_PRIORITY) {
       return MIN_PROJECT_PRIORITY;
-    }
+    } else if (this._priority > MIN_PROJECT_PRIORITY) {
+      return MAX_PROJECT_PRIORITY;
+    } 
+    return this._priority;
   }
 
 
@@ -79,23 +107,23 @@ class Project {
       );
     }
 
-    this.tasks = [...this.tasks, task];
+    this._tasks = [...this._tasks, task];
   }
 
 
   deleteTask (taskID) {
-    const task = this.tasks.find(task => task.id === taskID);
+    const task = this._tasks.find(task => task.id === taskID);
 
     if (!task) {
       console.warn(`Couldn't find a task with id ${taskID}`);
       return;
     }
 
-    let index = this.tasks.indexOf(task);
+    let index = this._tasks.indexOf(task);
 
-    this.tasks = [
-      ...this.tasks.slice(0, index),
-      ...this.tasks.slice(index + 1)
+    this._tasks = [
+      ...this._tasks.slice(0, index),
+      ...this._tasks.slice(index + 1)
     ];
   }
 

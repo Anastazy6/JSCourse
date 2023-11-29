@@ -1,0 +1,9 @@
+$background-color: map-get($map: $theme-colors, $key: "lleuad-newydd");
+
+$font-main  : Helvetica, Arial, sans-serif;
+$font-pretty: 'Tilt Prism', $font-main;
+$font-header: 'Qwitcher', $font-pretty;
+
+$footer-height: 2.5rem;
+
+$text-color: ghostwhite;

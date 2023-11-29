@@ -4,33 +4,53 @@ import { Title, Description, Notes, Priority, Submit } from './form_elements' ;
 import { useState } from 'react';
 
 import { MIN_PROJECT_PRIORITY } from "../Constants/constraints";
-import Project from "./project";
 
-function ProjectForm () {
+
+import { getProjectId } from "./project";
+
+
+const defaultProps = {
+  id         : getProjectId(),
+  title      : 'Title',
+  description: 'Description',
+  notes      : 'Notes',
+  priority   : MIN_PROJECT_PRIORITY
+}
+
+
+function ProjectForm ({props=defaultProps, edit=false}) {
+  console.log('Props start')
+  console.log(props);
+  console.log('Props end');
+
   const [project, setProject] = useState({
-    title      : 'Title',
-    description: 'Description',
-    notes      : 'Notes',
-    priority   : MIN_PROJECT_PRIORITY
-  })
+    id         : props.id,
+    title      : props.title,
+    description: props.description,
+    notes      : props.notes,
+    priority   : props.priority
+  });
+
 
   function handleSubmit (e) {
     e.preventDefault();
 
-    saveProject()
+    if (props.onSubmit) return props.onSubmit();;
+
+    saveProject();
     
     console.log(localStorage.getItem('projects'));
   }
 
 
   function saveProject () { 
-    let newProject = new Project(project).serialize();
+    let newProject = {...project};
     let projects = JSON.parse(localStorage.getItem('projects'));
 
     if (projects) {
-      localStorage.setItem('projects', JSON.stringify([...projects, {newProject}]));
+      localStorage.setItem('projects', JSON.stringify([...projects, newProject]));
     } else {
-      localStorage.setItem('projects', JSON.stringify([{newProject}]));
+      localStorage.setItem('projects', JSON.stringify([newProject]));
     }
   }
 
@@ -52,7 +72,7 @@ function ProjectForm () {
       <Description project={project} onChange={handleChange} />
       <Notes       project={project} onChange={handleChange} />
       <Priority    project={project} onChange={handleChange} />
-      <Submit />
+      {!edit && <Submit /> }
     </form>
   );
 }

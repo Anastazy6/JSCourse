@@ -6,15 +6,23 @@ import { MAX_PROJECT_PRIORITY } from "../Constants/constraints";
 import Task from "../Tasks/task";
 
 
+
+
+
+export function getProjectId () {
+  return parseInt(localStorage.getItem('projectId'))
+}
+
+function incrementProjectId () {
+  return localStorage.setItem('projectId', getProjectId() + 1);
+}
+
+
 // Initialize current project id variable as 0, if it's not present in local storage,
 //   which is the persistent memory for this JS Project
 if (!getProjectId()) {
   localStorage.setItem('projectId', 0);
 }
-
-
-const getProjectId = () => parseInt(localStorage.getItem('projectId'));
-const incrementProjectId = () => localStorage.setItem('projectId', getProjectId() + 1);
 
 class Project {
   constructor (props) {

@@ -1,12 +1,16 @@
+@import './project-variables';
+
 footer {
   background     : map-get($theme-colors, "hanner-lleuad");
+  bottom         : 0;
   display        : flex;
   gap            : 20px;
   font-family    : $font-pretty;
   font-size      : 1rem;
   justify-content: center;
-  min-height     : 50px;
+  height         : $footer-height;
   padding        : 10px;
+  position       : fixed;
   width          : 100%;
 
   div:hover {

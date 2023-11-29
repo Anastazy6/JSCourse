@@ -30,7 +30,10 @@ main {
   background-color: map-get($map: $theme-colors, $key: 'full-moon-glass');
   border-radius: 21.37px;
   border: 2px solid map-get($map: $theme-colors, $key: 'lleuad-lawn');
-  min-height: 100vh;
+  min-height: cacl(100vh) - $navbar-height;
+  padding: 1.5rem;
+  margin-bottom: $footer-height;
+  margin-top   : $footer-height;
 }
 
 

@@ -10,7 +10,7 @@ footer {
   justify-content: center;
   height         : $footer-height;
   padding        : 10px;
-  position       : fixed;
+  position       : relative;
   width          : 100%;
 
   div:hover {

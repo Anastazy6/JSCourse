@@ -1,3 +1,5 @@
+@import './project-variables';
+
 .navbar {
   background     : map-get($theme-colors, "hanner-lleuad");
   display        : flex;
@@ -5,7 +7,7 @@
   font-family    : $font-pretty;
   font-size      : 2rem;
   justify-content: center;
-  min-height     : 50px;
+  min-height     : $navbar-height;
   padding        : 10px;
   width          : 100%;
 

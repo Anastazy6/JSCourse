@@ -12,12 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const root    = createRoot(document.getElementById('react-root'));
 
   root.render(
-    <>
+    <div id='content'>
       <Navbar />
       <Contents />
       <Footer />
-    </>
+    </div>
   );
+
+
 
   // const content = document.getElementById('content');
   // const main    = document.createElement ('main'   );

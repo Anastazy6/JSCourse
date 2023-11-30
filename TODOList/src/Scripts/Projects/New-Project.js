@@ -5,37 +5,29 @@ import { useState } from 'react';
 
 import { MIN_PROJECT_PRIORITY } from "../Constants/constraints";
 
-
 import { getProjectId } from "./project";
 
 
-const defaultProps = {
-  id         : getProjectId(),
-  title      : 'Title',
-  description: 'Description',
-  notes      : 'Notes',
-  priority   : MIN_PROJECT_PRIORITY
-}
 
 
-function ProjectForm ({props=defaultProps, edit=false}) {
-  console.log('Props start')
-  console.log(props);
-  console.log('Props end');
-
+function NewProject() {
   const [project, setProject] = useState({
-    id         : props.id,
-    title      : props.title,
-    description: props.description,
-    notes      : props.notes,
-    priority   : props.priority
+    id         : getProjectId(),
+    title      : 'Title',
+    description: 'Description',
+    notes      : 'Notes',
+    priority   : MIN_PROJECT_PRIORITY
   });
 
 
+  const inputProps = {
+    project : project,
+    onChange: handleChange,
+    label   : true
+  }
+
   function handleSubmit (e) {
     e.preventDefault();
-
-    if (props.onSubmit) return props.onSubmit();;
 
     saveProject();
     
@@ -68,14 +60,14 @@ function ProjectForm ({props=defaultProps, edit=false}) {
     <form
       onSubmit={handleSubmit}
     >
-      <Title       project={project} onChange={handleChange} />
-      <Description project={project} onChange={handleChange} />
-      <Notes       project={project} onChange={handleChange} />
-      <Priority    project={project} onChange={handleChange} />
-      {!edit && <Submit /> }
+      <Title       {...inputProps} />
+      <Description {...inputProps} />
+      <Notes       {...inputProps} />
+      <Priority    {...inputProps} />
+      <Submit />
     </form>
   );
 }
 
 
-export default ProjectForm;
+export default NewProject;

@@ -7,15 +7,18 @@ import { MAX_PROJECT_PRIORITY           } from "../Constants/constraints";
 
 
 
-export function Title ({project, onChange}) {
+export function Title (props) {
+  console.log(props);
   return (
     <>
-      <label htmlFor='project-title-input'>
-        Title
-      </label>
+      {props.label &&
+        <label htmlFor='project-title-input'>
+          Title
+        </label>
+      }
       <input 
-        onChange={onChange}
-        value={project.title}
+        onChange={props.onChange}
+        value={props.project.title}
         id='project-title-input'
         name='title'
         type='text'
@@ -26,15 +29,17 @@ export function Title ({project, onChange}) {
   )
 }
 
-export function Description ({project, onChange}) {
+export function Description (props) {
   return (
     <>
-      <label htmlFor='project-description-input'>
-        description
-      </label>
+      {props.label &&
+        <label htmlFor='project-description-input'>
+          description
+        </label>
+      }
       <textarea
-        onChange={onChange}
-        value={project.description}
+        onChange={props.onChange}
+        value={props.project.description}
         id='project-description-input'
         name='description'
         maxLength={MAX_PROJECT_DESCRIPTION_LENGTH}
@@ -44,15 +49,17 @@ export function Description ({project, onChange}) {
   )
 }
 
-export function Notes ({project, onChange}) {
+export function Notes (props) {
   return (
     <>
-      <label htmlFor='project-notes-input'>
-        Notes
-      </label>
+      {props.label &&
+        <label htmlFor='project-notes-input'>
+          Notes
+        </label>
+      }
       <textarea
-        value={project.notes}
-        onChange={onChange}
+        value={props.project.notes}
+        onChange={props.onChange}
         id='project-description-notes'
         name='notes'
       >
@@ -61,15 +68,17 @@ export function Notes ({project, onChange}) {
   )
 }
 
-export function Priority ({project, onChange}) {
+export function Priority (props) {
   return(
     <>
-      <label htmlFor='project-priority-input'>
-        Priority
-      </label>
+      {props.label &&
+        <label htmlFor='project-priority-input'>
+          Priority
+        </label>
+      }
       <input 
-        value={project.priority}
-        onChange={onChange}
+        value={props.project.priority}
+        onChange={props.onChange}
         id='project-priority-input'
         name='priority'
         min={MIN_PROJECT_PRIORITY}

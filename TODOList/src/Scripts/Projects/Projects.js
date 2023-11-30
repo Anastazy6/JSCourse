@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
 
-import ProjectForm from "./project_form";
+import NewProject from "./New-Project";
 import Header from "../Shared/Header";
+import EditProject from "./Edit-Project";
 
 
 const getProjects = () => JSON.parse(localStorage.getItem('projects'));
@@ -74,16 +75,7 @@ function SingleProject ({props}) {
     <tr>
         
     {edit 
-      ? ( <td colSpan={5}>
-          <ProjectForm
-            id         ={project.id}
-            title      ={project.title}
-            description={project.title}
-            notes      ={project.notes}
-            priority   ={project.priority}
-          />
-        </td>
-        ) 
+      ? ( <EditProject project={project} /> ) 
       : ( <>
             <td>{project.id}</td>
             <td>{project.title}</td>

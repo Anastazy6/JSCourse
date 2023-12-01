@@ -21,6 +21,14 @@ export function getProjectId () {
 }
 
 
+export function setDefaultProject (id) {
+  localStorage.setItem('defaultProject', id);
+}
+
+export function getDefaultProject () {
+  return parseInt(localStorage.getItem('defaultProject'));
+}
+
 const getProjects = () => JSON.parse(localStorage.getItem('projects'));
 
 

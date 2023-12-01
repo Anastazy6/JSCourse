@@ -1,9 +1,15 @@
 import React from "react";
 import { useState } from "react";
 
-import NewProject from "./New-Project";
 import Header from "../Shared/Header";
 import EditProject from "./Edit-Project";
+
+import { getExcerpt } from "../Shared/helpers";
+
+import {
+  setDefaultProject,
+  getDefaultProject
+  } from "./storage";
 
 
 const getProjects = () => JSON.parse(localStorage.getItem('projects'));
@@ -19,12 +25,14 @@ function Projects () {
     });
   }
 
+
+  
   
 
   return ( 
     projects
     ? (
-      <table>
+      <table id='all-projects'>
         <ProjectHeader />
         <tbody>
           {renderedProjects}
@@ -45,7 +53,7 @@ function ProjectHeader() {
           <th>Description</th>
           <th>Notes</th>
           <th>Priority</th>
-          <th colSpan='2'>Actions</th>
+          <th colSpan='3'>Actions</th>
         </tr>
       </thead>
   )
@@ -62,14 +70,27 @@ function SingleProject ({props}) {
 
   const [edit, setEdit] = useState(false);
 
+  function isDefault () {
+    return project.id === getDefaultProject();
+  }
+
 
   function handleEdit () {
     setEdit(!edit);
   }
 
+
   function handleDelete () {
     console.log('Deleting is not yet implemented');
   }
+
+
+  function handleMarkAsDefault () {
+    if (isDefault()) return;
+
+    setDefaultProject(project.id);
+  }
+
 
   return (
     <tr>
@@ -78,12 +99,15 @@ function SingleProject ({props}) {
       ? ( <EditProject project={project} onSave={handleEdit} /> ) 
       : ( <>
             <td>{project.id}</td>
-            <td>{project.title}</td>
-            <td>{project.description}</td>
-            <td>{project.notes}</td>
+            <td>{getExcerpt(35, project.title)}</td>
+            <td>{getExcerpt(35, project.description)}</td>
+            <td>{getExcerpt(35, project.notes)}</td>
             <td>{project.priority}</td>
             <td>
-            <button onClick={handleEdit}>
+            <button 
+              className="btn btn-outline-success"
+              onClick={handleEdit}
+            >
               Edit
             </button>
 
@@ -92,8 +116,19 @@ function SingleProject ({props}) {
       )}
       <td>
 
-        <button onClick={handleDelete}>
+        <button 
+          className="btn btn-outline-danger"  
+          onClick={handleDelete}
+        >
           Delete
+        </button>
+      </td>
+      <td>
+        <button
+          className={`btn btn-outline-${isDefault() ? 'primary' : 'lleuad-lawn'}`}
+          onClick={handleMarkAsDefault}
+        >
+          {isDefault() ? 'Default' : 'Mark as default'}
         </button>
       </td>
     </tr>

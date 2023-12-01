@@ -1,0 +1,23 @@
+table#all-projects {
+  
+  width: 100%;
+  padding: 5px;
+
+  thead {
+    background: map-get($map: $theme-colors, $key: 'lleuad');
+  }
+
+  tbody {
+    tr{
+      background: map-get($map: $theme-colors, $key: 'full-moon-glass');
+    }
+    
+    tr:nth-child(even) {
+        background: map-get($map: $theme-colors, $key: 'full-moon-glass-thick');
+    }
+  }
+
+  td, th {
+    padding: 4px 8px;
+  }
+}

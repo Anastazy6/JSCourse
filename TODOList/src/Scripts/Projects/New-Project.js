@@ -16,6 +16,7 @@ import {
   getProjectId,
   saveProject
 } from './storage';
+import { isProjectValid, validate } from "./validate";
 
 
 
@@ -40,9 +41,9 @@ function NewProject() {
   function handleSubmit (e) {
     e.preventDefault();
 
-    saveProject(project);
-    
-    console.log(localStorage.getItem('projects'));
+    if (isProjectValid(project)) {
+      saveProject(project);
+    }
   }
 
 

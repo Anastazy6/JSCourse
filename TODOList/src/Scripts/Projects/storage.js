@@ -2,7 +2,7 @@ export function saveProject (project) {
   let newProject = {...project};
   
   const projects = getProjects();
-  const isEditingAnOldProject = projects.some(p => p.id === newProject.id);
+  const isEditingAnOldProject = projects && projects.some(p => p.id === newProject.id);
 
   if (projects) {    
     if (isEditingAnOldProject) {

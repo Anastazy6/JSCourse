@@ -8,7 +8,6 @@ import { MAX_PROJECT_PRIORITY           } from "../Constants/constraints";
 
 
 export function Title (props) {
-  console.log(props);
   return (
     <>
       {props.label &&

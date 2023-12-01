@@ -4,7 +4,7 @@ import { Title, Description, Notes, Priority } from './form_elements' ;
 import { useState } from 'react';
 
 import { saveProject } from "./storage";
-
+import { isProjectValid } from "./validate";
 
 
 function EditProject ({project, onSave}) {
@@ -34,9 +34,10 @@ function EditProject ({project, onSave}) {
   function handleSubmit (e) {
     e.preventDefault();
 
-    saveProject(updatedProject);
-
-    onSave();
+    if (isProjectValid(updatedProject)) {
+      saveProject(updatedProject);
+      onSave();
+    }
   }
   
 

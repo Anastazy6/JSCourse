@@ -1,11 +1,22 @@
-import React from "react";
-import { Title, Description, Notes, Priority, Submit } from './form_elements' ;
+import React, {
+  useState
+} from "react";
 
-import { useState } from 'react';
+import { 
+  Title,
+  Description,
+  Notes,
+  Priority,
+  Submit
+} from './form_elements' ;
 
 import { MIN_PROJECT_PRIORITY } from "../Constants/constraints";
 
-import { getProjectId } from "./project";
+import { 
+  getProjectId,
+  saveProject
+} from './storage';
+
 
 
 
@@ -29,22 +40,13 @@ function NewProject() {
   function handleSubmit (e) {
     e.preventDefault();
 
-    saveProject();
+    saveProject(project);
     
     console.log(localStorage.getItem('projects'));
   }
 
 
-  function saveProject () { 
-    let newProject = {...project};
-    let projects = JSON.parse(localStorage.getItem('projects'));
 
-    if (projects) {
-      localStorage.setItem('projects', JSON.stringify([...projects, newProject]));
-    } else {
-      localStorage.setItem('projects', JSON.stringify([newProject]));
-    }
-  }
 
 
   function handleChange (e) {

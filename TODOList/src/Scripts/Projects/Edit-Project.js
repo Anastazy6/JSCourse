@@ -3,13 +3,15 @@ import { Title, Description, Notes, Priority } from './form_elements' ;
 
 import { useState } from 'react';
 
+import { saveProject } from "./storage";
 
 
 
-function EditProject ({project}) {
+function EditProject ({project, onSave}) {
   const [updatedProject, setUpdatedProject] = useState(project);
 
   const formId = `edit-project#${updatedProject.id}-form`
+
 
   const inputProps = {
     form: formId,
@@ -17,6 +19,7 @@ function EditProject ({project}) {
     onChange: handleChange,
     label: false
   };
+
 
   function handleChange (e) {
     const property = e.target.name;
@@ -31,6 +34,9 @@ function EditProject ({project}) {
   function handleSubmit (e) {
     e.preventDefault();
 
+    saveProject(updatedProject);
+
+    onSave();
   }
   
 
@@ -53,6 +59,11 @@ function EditProject ({project}) {
         <td><Description {...inputProps} /></td>
         <td><Notes       {...inputProps} /></td>
         <td><Priority    {...inputProps} /></td>
+        <td>
+          <button role='submit'>
+            Save
+          </button>
+        </td>
         </>
       
   );

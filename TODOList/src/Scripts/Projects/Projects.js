@@ -45,7 +45,7 @@ function ProjectHeader() {
           <th>Description</th>
           <th>Notes</th>
           <th>Priority</th>
-          <th>Actions</th>
+          <th colSpan='2'>Actions</th>
         </tr>
       </thead>
   )
@@ -75,19 +75,23 @@ function SingleProject ({props}) {
     <tr>
         
     {edit 
-      ? ( <EditProject project={project} /> ) 
+      ? ( <EditProject project={project} onSave={handleEdit} /> ) 
       : ( <>
             <td>{project.id}</td>
             <td>{project.title}</td>
             <td>{project.description}</td>
             <td>{project.notes}</td>
             <td>{project.priority}</td>
+            <td>
+            <button onClick={handleEdit}>
+              Edit
+            </button>
+
+            </td>
           </>
       )}
       <td>
-        <button onClick={handleEdit}>
-          {edit ? 'Save' : 'Edit'}
-        </button>
+
         <button onClick={handleDelete}>
           Delete
         </button>

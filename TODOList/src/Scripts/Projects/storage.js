@@ -29,19 +29,24 @@ export function getDefaultProject () {
   return parseInt(localStorage.getItem('defaultProject'));
 }
 
-const getProjects = () => JSON.parse(localStorage.getItem('projects'));
 
+export function deleteProject (id) {
+  const filteredProjects = getProjects().filter(p => {
+    return p.id !== id;
+  });
+
+  localStorage.setItem('projects', JSON.stringify([...filteredProjects]));
+}
+
+
+export function getProjects () {
+  return JSON.parse(localStorage.getItem('projects'));
+}
 
 
 function incrementProjectId () {
   return localStorage.setItem('projectId', getProjectId() + 1);
 }
-
-
-
-
-
-
 
 
 function editProject (projects, newProject) {

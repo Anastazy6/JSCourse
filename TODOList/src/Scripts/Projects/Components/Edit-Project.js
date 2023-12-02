@@ -3,8 +3,8 @@ import { Title, Description, Notes, Priority } from './form_elements' ;
 
 import { useState } from 'react';
 
-import { saveProject } from "./storage";
-import { isProjectValid } from "./validate";
+import { saveProject } from "../storage";
+import { isProjectValid } from "../validate";
 
 
 function EditProject ({project, onSave}) {
@@ -31,13 +31,16 @@ function EditProject ({project, onSave}) {
   }
   
 
-  function handleSubmit (e) {
-    e.preventDefault();
-
+  function handleSave () {
     if (isProjectValid(updatedProject)) {
       saveProject(updatedProject);
       onSave();
     }
+  }
+
+
+  function handleDiscard () {
+    
   }
   
 
@@ -47,7 +50,7 @@ function EditProject ({project, onSave}) {
         <td>
           <form 
             id={formId}
-            onSubmit={handleSubmit}
+            onSubmit={e => e.preventDefault()}
           />
           <input
             form={formId} 
@@ -61,9 +64,23 @@ function EditProject ({project, onSave}) {
         <td><Notes       {...inputProps} /></td>
         <td><Priority    {...inputProps} /></td>
         <td>
-          <button role='submit'>
+          
+          <button 
+            onClick={handleSave}
+            role='button'
+            className='btn btn-outline-success'
+          >
             Save
           </button>
+          
+          <button 
+            onClick={handleDiscard}
+            role='button'
+            className='btn btn-outline-danger'
+          >
+            Discard
+          </button>
+
         </td>
         </>
       

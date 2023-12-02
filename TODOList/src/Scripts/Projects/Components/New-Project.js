@@ -1,6 +1,4 @@
-import React, {
-  useState
-} from "react";
+import React, { useState } from "react";
 
 import { 
   Title,
@@ -10,21 +8,16 @@ import {
   Submit
 } from './form_elements' ;
 
-import { MIN_PROJECT_PRIORITY } from "../Constants/constraints";
+import { MIN_PROJECT_PRIORITY } from "../../Constants/constraints";
 
-import { 
-  getProjectId,
-  saveProject
-} from './storage';
-import { isProjectValid, validate } from "./validate";
-
-
+import * as Storage from '../storage';
+import { isProjectValid } from "../validate";
 
 
 
 function NewProject() {
   const [project, setProject] = useState({
-    id         : getProjectId(),
+    id         : Storage.getProjectId(),
     title      : 'Title',
     description: 'Description',
     notes      : 'Notes',
@@ -38,16 +31,14 @@ function NewProject() {
     label   : true
   }
 
+
   function handleSubmit (e) {
     e.preventDefault();
 
     if (isProjectValid(project)) {
-      saveProject(project);
+      Storage.saveProject(project);
     }
   }
-
-
-
 
 
   function handleChange (e) {
@@ -58,6 +49,7 @@ function NewProject() {
 
     setProject(nextProject);
   }
+
 
   return(
     <form

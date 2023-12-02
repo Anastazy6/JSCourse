@@ -1,5 +1,5 @@
 import React from "react";
-import NewProject from "../Projects/New-Project";
+import NewProject from "../Projects/Components/New-Project";
 import Header     from "./Header";
 import Projects   from "../Projects/Projects";
 

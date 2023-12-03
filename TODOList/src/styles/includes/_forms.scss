@@ -33,17 +33,78 @@ input, textarea {
   margin: auto;
   max-width: 666px;
 
-
-  display: grid;
-  grid-template-columns: 80px 1fr; 
     
 
-  button[role="submit"] {
-    grid-column: 1 / span 2;
-  }
+  
 
-  input, textarea {
-    margin-bottom: 10px;
-  }
+  .new-project-form-fieldset {
+    display: grid;
+    grid-template-columns: 80px 1fr;
 
+    align-items: end;
+    gap: 20px;
+
+    button[role="submit"] {
+      grid-column: 1 / span 2;
+    }
+  
+    input, textarea {
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      height: 6em;
+    }
+  
+    label {
+      padding-right: 10px;
+      position: relative;
+      bottom: 4px;
+    }
+  }
 }
+
+
+
+
+select {
+  height: 35px;
+  color : $text-color;
+  border          : 0px solid transparent;
+  
+  select, 
+  select:hover,
+  select:active,
+  select:focus {
+    border: 0px solid transparent;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
+
+
+*:focus {
+  outline: 2px dashed map-get($theme-colors, "lleuad-lawn");
+}
+
+
+input[type="email"] {
+  background: transparent;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: ghostwhite;
+  // Exact same color as the form's background but without any transparency
+  //   Changing the bg color will require changing this value as well
+  //   This is a work-around for browsers forcing a specific autofill bg color
+  -webkit-box-shadow: 0 0 0px 40rem rgb(11, 36, 42) inset;
+}
+
+.svg-fill-ghostwhite {
+  fill: ghostwhite;
+} 

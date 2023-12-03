@@ -20,4 +20,25 @@ table#all-projects {
   td, th {
     padding: 4px 8px;
   }
+
+
+
+  td, th {
+    border: 1px dashed map-get($map: $theme-colors, $key: 'full-moon-glass-thick');
+  }
+
+  tr {
+    display: grid;
+    grid-template-columns: 50px 3fr 3fr 3fr 80px 4fr;
+
+    td {
+      min-width: 0;
+      word-wrap: break-word;
+      hyphens: auto;
+    } 
+  }
+
+  td button {
+    margin-right: 10px;
+  }
 }

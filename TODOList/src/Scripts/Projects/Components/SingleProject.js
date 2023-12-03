@@ -32,8 +32,12 @@ function SingleProject ({props, onUpdate}) {
 
 
   function handleDelete () {
-    Storage.deleteProject(project.id);
-    onUpdate()
+    if (confirm(
+      'Are you sure? Deleting a project is an action which cannot be reverted!'
+    )) {
+      Storage.deleteProject(project.id);
+      onUpdate();
+    }
   }
 
 

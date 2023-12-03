@@ -18,7 +18,6 @@ import Header from "../../Shared/Header";
 
 function NewProject({onCreateProject, isVisible}) {
   const [project, setProject] = useState({
-    id         : Storage.getProjectId(),
     title      : '',
     description: '',
     notes      : '',
@@ -37,7 +36,10 @@ function NewProject({onCreateProject, isVisible}) {
     e.preventDefault();
 
     if (isProjectValid(project)) {
-      Storage.saveProject(project);
+      Storage.saveProject({
+        ...project,
+        id: Storage.getProjectId()
+      });
     }
     onCreateProject();
   }
@@ -55,7 +57,7 @@ function NewProject({onCreateProject, isVisible}) {
 
   return(
     <section
-      style={{display: isVisible ? 'grid' : 'none'}}
+      style={{display: isVisible ? '' : 'none'}}
     >
       
       <Header 

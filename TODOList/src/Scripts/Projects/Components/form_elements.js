@@ -14,24 +14,31 @@ export function Title (props) {
     id       : 'project-title-input',
     name     : 'title',
     type     : 'text',
-    maxLength:MAX_PROJECT_TITLE_LENGTH
+    maxLength: MAX_PROJECT_TITLE_LENGTH
   }
+
+  const input = <input {...properties} required />;
+  
+  const label = (
+    <label htmlFor='project-title-input'>
+      Title
+    </label>
+  );
 
 
   return (
     <>
-      {props.label &&
-        <label htmlFor='project-title-input'>
-          Title
-        </label>
+      {props.label
+      ? <div className='new-project-form-fieldset'>
+          {label}
+          {input}
+        </div>
+      : {input}  
       }
-      <input 
-        {...properties}
-        required
-      />
     </>
-  )
+  );
 }
+
 
 export function Description (props) {
   const properties = {
@@ -41,21 +48,20 @@ export function Description (props) {
     name     : 'description',
     maxLength: MAX_PROJECT_DESCRIPTION_LENGTH
   }
-  
+
   return (
     <>
-      {props.label &&
-        <label htmlFor='project-description-input'>
-          description
-        </label>
+      {props.label
+        ? <div className='new-project-form-fieldset'>
+            <Label          {...properties} />
+            <ImportantInput {...properties} />
+          </div>
+        : <ImportantInput   {...properties} />
       }
-      <textarea
-        {...properties}
-      >
-      </textarea>
     </>
-  )
+  );
 }
+
 
 export function Notes (props) {
   const properties = {
@@ -67,18 +73,17 @@ export function Notes (props) {
 
   return (
     <>
-      {props.label &&
-        <label htmlFor='project-notes-input'>
-          Notes
-        </label>
+      {props.label
+        ? <div className='new-project-form-fieldset'>
+            <Label    {...properties} />
+            <Textarea {...properties} />
+          </div>
+        : <Textarea {...properties} />
       }
-      <textarea
-        {...properties}
-      >
-      </textarea>
     </>
-  )
+  );
 }
+
 
 export function Priority (props) {
   const properties = {
@@ -91,20 +96,18 @@ export function Priority (props) {
     max     : MAX_PROJECT_PRIORITY,
     step    : 1
   }
-  
+
   return(
     <>
-      {props.label &&
-        <label htmlFor='project-priority-input'>
-          Priority
-        </label>
+      {props.label
+        ? <div className='new-project-form-fieldset'>
+            <Label          {...properties} />
+            <ImportantInput {...properties} />
+          </div>
+        : <ImportantInput   {...properties} />
       }
-      <input 
-        {...properties}
-        required
-      />
     </>
-  )
+  );
 }
 
 
@@ -116,8 +119,23 @@ export function Submit () {
     >
       Create project
     </button>
-  )
+  );
 }
 
 
+function ImportantInput (props) {
+  return <input {...props} required />;
+}
 
+
+function Label (props) {
+  return (
+    <label htmlFor={`project-${props.name}-input`}>
+      {props.capiza}
+    </label>
+  )
+}
+
+function Textarea (props) {
+  return <textarea {...props} />;
+}

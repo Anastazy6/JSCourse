@@ -1,0 +1,49 @@
+input, textarea {
+  display: block;
+
+  background   : transparent;
+  border       : none;
+  border-radius: 0;
+  color        : $text-color;
+  border-bottom: 2px solid map-get($theme-colors, "lleuad");
+  resize       : none;
+
+  &:invalid {
+    border-bottom: 2px solid map-get($theme-colors, "danger-empty");
+  }
+
+  &:focus:invalid,
+  &:hover:invalid {
+    border-bottom: 2px solid map-get($theme-colors, "danger");
+  }
+
+  &:placeholder-shown {
+    border-bottom: 2px solid map-get($theme-colors, "lleuad");
+  }
+
+  &:focus, &:hover {
+    border-bottom: 2px solid map-get($theme-colors, "lleuad-lawn");
+  }
+}
+
+
+
+
+.new-project-form {
+  margin: auto;
+  max-width: 666px;
+
+
+  display: grid;
+  grid-template-columns: 80px 1fr; 
+    
+
+  button[role="submit"] {
+    grid-column: 1 / span 2;
+  }
+
+  input, textarea {
+    margin-bottom: 10px;
+  }
+
+}

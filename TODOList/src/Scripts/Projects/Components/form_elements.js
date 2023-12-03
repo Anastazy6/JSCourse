@@ -8,6 +8,16 @@ import { MAX_PROJECT_PRIORITY           } from "../../Constants/constraints";
 
 
 export function Title (props) {
+  const properties = {
+    onChange : props.onChange,
+    value    : props.project.title,
+    id       : 'project-title-input',
+    name     : 'title',
+    type     : 'text',
+    maxLength:MAX_PROJECT_TITLE_LENGTH
+  }
+
+
   return (
     <>
       {props.label &&
@@ -16,12 +26,7 @@ export function Title (props) {
         </label>
       }
       <input 
-        onChange={props.onChange}
-        value={props.project.title}
-        id='project-title-input'
-        name='title'
-        type='text'
-        maxLength={MAX_PROJECT_TITLE_LENGTH}
+        {...properties}
         required
       />
     </>
@@ -29,6 +34,14 @@ export function Title (props) {
 }
 
 export function Description (props) {
+  const properties = {
+    onChange : props.onChange,
+    value    : props.project.description,
+    id       : 'project-description-input',
+    name     : 'description',
+    maxLength: MAX_PROJECT_DESCRIPTION_LENGTH
+  }
+  
   return (
     <>
       {props.label &&
@@ -37,11 +50,7 @@ export function Description (props) {
         </label>
       }
       <textarea
-        onChange={props.onChange}
-        value={props.project.description}
-        id='project-description-input'
-        name='description'
-        maxLength={MAX_PROJECT_DESCRIPTION_LENGTH}
+        {...properties}
       >
       </textarea>
     </>
@@ -49,6 +58,13 @@ export function Description (props) {
 }
 
 export function Notes (props) {
+  const properties = {
+    value   : props.project.notes,
+    onChange: props.onChange,
+    id      : 'project-description-notes',
+    name    : 'notes'
+  }
+
   return (
     <>
       {props.label &&
@@ -57,10 +73,7 @@ export function Notes (props) {
         </label>
       }
       <textarea
-        value={props.project.notes}
-        onChange={props.onChange}
-        id='project-description-notes'
-        name='notes'
+        {...properties}
       >
       </textarea>
     </>
@@ -68,6 +81,17 @@ export function Notes (props) {
 }
 
 export function Priority (props) {
+  const properties = {
+    type    : 'number',
+    value   : props.project.priority,
+    onChange: props.onChange,
+    id      :'project-priority-input',
+    name    : 'priority',
+    min     : MIN_PROJECT_PRIORITY,
+    max     : MAX_PROJECT_PRIORITY,
+    step    : 1
+  }
+  
   return(
     <>
       {props.label &&
@@ -76,18 +100,13 @@ export function Priority (props) {
         </label>
       }
       <input 
-        value={props.project.priority}
-        onChange={props.onChange}
-        id='project-priority-input'
-        name='priority'
-        min={MIN_PROJECT_PRIORITY}
-        max={MAX_PROJECT_PRIORITY}
-        step='1'
+        {...properties}
         required
       />
     </>
   )
 }
+
 
 export function Submit () {
   return (

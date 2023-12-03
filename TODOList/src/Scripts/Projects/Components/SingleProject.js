@@ -8,7 +8,7 @@ import * as Storage from '../storage';
 import EditProject from "./Edit-Project";
 
 
-function SingleProject ({props}, refresh) {
+function SingleProject ({props, onUpdate}) {
   const [project, setProject] = useState({
     id         : props.id,
     title      : props.title,
@@ -33,7 +33,7 @@ function SingleProject ({props}, refresh) {
 
   function handleDelete () {
     Storage.deleteProject(project.id);
-    refresh();
+    onUpdate()
   }
 
 
@@ -41,7 +41,7 @@ function SingleProject ({props}, refresh) {
     if (isDefault()) return;
 
     Storage.setDefaultProject(project.id);
-    refresh();
+    onUpdate();
   }
 
 

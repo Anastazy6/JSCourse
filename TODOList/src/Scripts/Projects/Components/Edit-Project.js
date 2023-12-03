@@ -7,7 +7,7 @@ import { saveProject } from "../storage";
 import { isProjectValid } from "../validate";
 
 
-function EditProject ({project, onSave}) {
+function EditProject ({project, onSave, onDiscard}) {
   const [updatedProject, setUpdatedProject] = useState(project);
 
   const formId = `edit-project#${updatedProject.id}-form`
@@ -40,7 +40,7 @@ function EditProject ({project, onSave}) {
 
 
   function handleDiscard () {
-    
+    onDiscard();
   }
   
 

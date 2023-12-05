@@ -26,7 +26,12 @@ function SingleProject ({props, onUpdate}) {
   }
 
 
-  function handleEdit () {
+  function handleCloseForm () {
+    setEdit(false);
+  }
+
+
+  function handleOpenForm () {
     setEdit(!edit);
   }
 
@@ -54,9 +59,9 @@ function SingleProject ({props, onUpdate}) {
         
     {edit 
       ? ( <EditProject
-            project  ={project} 
-            onSave   ={setProject}
-            onDiscard={handleEdit}
+            project    ={project} 
+            setProject ={setProject}
+            onCloseForm={handleCloseForm}
           /> ) 
       : ( <>
             <td>{project.id}</td>
@@ -68,7 +73,7 @@ function SingleProject ({props, onUpdate}) {
             
               <button 
                 className="btn btn-outline-success"
-                onClick={handleEdit}
+                onClick={handleOpenForm}
               >
                 Edit
               </button>

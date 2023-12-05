@@ -1,10 +1,13 @@
 import React  from 'react';
 
-import { MAX_PROJECT_DESCRIPTION_LENGTH } from "../../Constants/constraints";
-import { MAX_PROJECT_TITLE_LENGTH       } from "../../Constants/constraints";
-import { MIN_PROJECT_PRIORITY           } from "../../Constants/constraints";
-import { MAX_PROJECT_PRIORITY           } from "../../Constants/constraints";
+import { 
+  MAX_PROJECT_DESCRIPTION_LENGTH,
+  MAX_PROJECT_TITLE_LENGTH,
+  MIN_PROJECT_PRIORITY,
+  MAX_PROJECT_PRIORITY           
+} from "../../Constants/constraints";
 
+import { capitalize } from '../../Shared/helpers';
 
 
 export function Title (props) {
@@ -17,68 +20,18 @@ export function Title (props) {
     maxLength: MAX_PROJECT_TITLE_LENGTH
   }
 
-  const input = <input {...properties} required />;
-  
-  const label = (
-    <label htmlFor='project-title-input'>
-      Title
-    </label>
-  );
+
+
 
 
   return (
     <>
       {props.label
       ? <div className='new-project-form-fieldset'>
-          {label}
-          {input}
+          <Label          {...properties} />
+          <ImportantInput {...properties} />
         </div>
-      : {input}  
-      }
-    </>
-  );
-}
-
-
-export function Description (props) {
-  const properties = {
-    onChange : props.onChange,
-    value    : props.project.description,
-    id       : 'project-description-input',
-    name     : 'description',
-    maxLength: MAX_PROJECT_DESCRIPTION_LENGTH
-  }
-
-  return (
-    <>
-      {props.label
-        ? <div className='new-project-form-fieldset'>
-            <Label          {...properties} />
-            <ImportantInput {...properties} />
-          </div>
-        : <ImportantInput   {...properties} />
-      }
-    </>
-  );
-}
-
-
-export function Notes (props) {
-  const properties = {
-    value   : props.project.notes,
-    onChange: props.onChange,
-    id      : 'project-description-notes',
-    name    : 'notes'
-  }
-
-  return (
-    <>
-      {props.label
-        ? <div className='new-project-form-fieldset'>
-            <Label    {...properties} />
-            <Textarea {...properties} />
-          </div>
-        : <Textarea {...properties} />
+      : <ImportantInput   {...properties} />
       }
     </>
   );
@@ -111,6 +64,51 @@ export function Priority (props) {
 }
 
 
+export function Description (props) {
+  const properties = {
+    onChange : props.onChange,
+    value    : props.project.description,
+    id       : 'project-description-input',
+    name     : 'description',
+    maxLength: MAX_PROJECT_DESCRIPTION_LENGTH
+  }
+
+  return (
+    <>
+      {props.label
+        ? <div className='new-project-form-fieldset'>
+            <Label    {...properties} />
+            <Textarea {...properties} />
+          </div>
+        : <Textarea   {...properties} />
+      }
+    </>
+  );
+}
+
+
+export function Notes (props) {
+  const properties = {
+    value   : props.project.notes,
+    onChange: props.onChange,
+    id      : 'project-description-notes',
+    name    : 'notes'
+  }
+
+  return (
+    <>
+      {props.label
+        ? <div className='new-project-form-fieldset'>
+            <Label    {...properties} />
+            <Textarea {...properties} />
+          </div>
+        : <Textarea {...properties} />
+      }
+    </>
+  );
+}
+
+
 export function Submit () {
   return (
     <button
@@ -131,10 +129,11 @@ function ImportantInput (props) {
 function Label (props) {
   return (
     <label htmlFor={`project-${props.name}-input`}>
-      {props.capiza}
+      {capitalize(props.name)}
     </label>
   )
 }
+
 
 function Textarea (props) {
   return <textarea {...props} />;

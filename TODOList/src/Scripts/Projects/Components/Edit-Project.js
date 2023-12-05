@@ -7,10 +7,12 @@ import { saveProject } from "../storage";
 import { isProjectValid } from "../validate";
 
 
-function EditProject ({project, onSave, onDiscard}) {
+function EditProject ({project, setProject, onCloseForm}) {
   const [updatedProject, setUpdatedProject] = useState(project);
 
-  const formId = `edit-project#${updatedProject.id}-form`
+  const formId = `edit-project#${updatedProject.id}-form`;
+
+  console.log(updatedProject);
 
 
   const inputProps = {
@@ -25,7 +27,13 @@ function EditProject ({project, onSave, onDiscard}) {
     const property = e.target.name;
 
     let changedProject = {...updatedProject};
-    changedProject[property] = e.target.value;
+
+    console.log(`Changing ${property}`);
+    console.log(changedProject);
+    
+    changedProject[property] = property === 'priority' 
+      ? parseInt(e.target.value) 
+      : e.target.value;
 
     setUpdatedProject(changedProject);
   }
@@ -34,13 +42,14 @@ function EditProject ({project, onSave, onDiscard}) {
   function handleSave () {
     if (isProjectValid(updatedProject)) {
       saveProject(updatedProject);
-      onSave();
+      setProject(updatedProject);
+      onCloseForm();
     }
   }
 
 
   function handleDiscard () {
-    onDiscard();
+    if (confirm('Discard all your changes?')) onCloseForm();
   }
   
 
@@ -58,6 +67,7 @@ function EditProject ({project, onSave, onDiscard}) {
             name="id" 
             value={updatedProject.id}
           />
+          {updatedProject.id}
         </td>
         <td><Title       {...inputProps} /></td>
         <td><Description {...inputProps} /></td>

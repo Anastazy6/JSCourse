@@ -7,7 +7,11 @@ import {
   MAX_PROJECT_PRIORITY           
 } from "../../Constants/constraints";
 
-import { capitalize } from '../../Shared/helpers';
+import { 
+  ImportantInput,
+  Textarea,
+  Label 
+} from '../../Shared/helpers';
 
 
 export function Title (props) {
@@ -19,9 +23,6 @@ export function Title (props) {
     type     : 'text',
     maxLength: MAX_PROJECT_TITLE_LENGTH
   }
-
-
-
 
 
   return (
@@ -121,20 +122,4 @@ export function Submit () {
 }
 
 
-function ImportantInput (props) {
-  return <input {...props} required />;
-}
 
-
-function Label (props) {
-  return (
-    <label htmlFor={`project-${props.name}-input`}>
-      {capitalize(props.name)}
-    </label>
-  )
-}
-
-
-function Textarea (props) {
-  return <textarea {...props} />;
-}

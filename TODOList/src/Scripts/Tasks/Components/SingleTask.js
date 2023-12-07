@@ -23,6 +23,11 @@ function SingleTask (props) {
   }
 
 
+  function handleDelete () {
+    
+  }
+
+
   return (
     <>
       {edit
@@ -36,6 +41,21 @@ function SingleTask (props) {
           <td>{task.bestBefore}</td>
           <td>{task.priority}</td>
           <td>{task.status}</td>
+          <td>
+            <button
+              onClick={handleEdit}
+              className="btn btn-outline-success"
+            >
+              Edit
+            </button>
+
+            <button
+              onClick={handleDelete}
+              className="btn btn-outline-danger"
+            >
+              Delete
+            </button>
+          </td>
         </tr>
       }
     </>

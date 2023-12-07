@@ -1,113 +1,108 @@
-import { MAX_TASK_TITLE_LENGTH } from "../Constants/constraints";
-import { MAX_TASK_DESCRIPTION_LENGTH } from "../Constants/constraints";
-import { MIN_TASK_PRIORITY } from "../Constants/constraints";
-import { MAX_TASK_PRIORITY } from "../Constants/constraints";
+import React, { useState } from "react";
+
+import * as Storage from './storage';
+import SingleTask from "./Components/SingleTask";
+
+import Header  from "../Shared/Header";
+import NewTask from "./Components/NewTask";
+import TasksHeader from "./Components/TasksHeader";
 
 
-const currentTaskId   = () => parseInt(localStorage.getItem('taskId'));
-const incrementTaskId = () => localStorage.setItem('taskId', currentTaskId() + 1);
+function Tasks () {
+  const [tasks, setTasks] = useState(Storage.getTasks());
+  const [isNewTaskFormVisible, setIsNewTaskFormVisible] = useState(false);
 
-class Task {
-  constructor (props) {
-    this._id          = currentTaskId();
-    this._title       = props.title;
-    this._description = props.description;
-    this._notes       = props.notes;
-    this._dueDate     = props.dueDate;
-    this._bestBefore  = props.bestBefore;
-    this._priority    = props.priority;
-    this._status      = props.status;
-    
-    incrementTaskId();
+  let renderedTasks;
+
+  
+  function refresh () {
+    setTasks(Storage.getTasks());
+    setIsNewTaskFormVisible(false);
   }
 
 
-  get title () {
-    return this._title;
+  function switchView () {
+    setIsNewTaskFormVisible(!isNewTaskFormVisible);
   }
-
-  get description () {
-    return this._description;
-  }
-
-  get notes () {
-    return this._notes;
-  }
-
-  get dueDate () {
-    return this._dueDate;
-  }
-
-  get bestBefore() {
-    return this._bestBefore;
-  }
-
-  get priority () {
-    return (this._priority < MIN_TASK_PRIORITY
-      ? MIN_TASK_PRIORITY
-      : this._priority > MAX_TASK_PRIORITY
-        ? MAX_TASK_PRIORITY
-        : this._priority
-    );
-  }
-
-  get status () {
-    return this._status;
-  }
-
-  set title (title) {
-    if (title.length > MAX_TASK_TITLE_LENGTH) {
-      throw new RangeError(
-        `Title must not be longer than ${MAX_TASK_TITLE_LENGTH} characters`
+  
+  
+  if (tasks) {
+    renderedTasks = tasks.map(t => {
+      return (
+        <SingleTask
+          props   ={t}
+          onUpdate={refresh}
+          key     ={`task#${t.id}`}
+        />
       );
-    }
-
-    this._title = title;
+    });
   }
 
 
-  set description (description) {
-    if (description.length > MAX_TASK_DESCRIPTION_LENGTH) {
-      throw new RangeError(
-        `Description must not be longer than ${MAX_TASK_DESCRIPTION_LENGTH} characters`
-      );
-    }
+  return (
+    <>
+      <Header level={'h1'} text={'Tasks'} />
+      
+      <NewTask 
+        onCreateTask={refresh} 
+        isVisible   ={isNewTaskFormVisible}
+      />
 
-    this._description = description;
-  }
+      <TasksView 
+        tasks        ={tasks}
+        renderedTasks={renderedTasks}
+        isVisible    ={!isNewTaskFormVisible}
+      />
 
+      <ViewSwitch 
+        onSwitchView ={switchView}
+        isFormVisible={isNewTaskFormVisible}
+      />
 
-  set priority (value) {
-    if (value < MIN_TASK_PRIORITY || MAX_TASK_PRIORITY < value) {
-      throw new RangeError(
-        `priority must neither be lesser than ${MIN_TASK_PRIORITY} \
-        nor greater than ${MAX_TASK_PRIORITY}`
-      );
-    }
-
-    if (!(Number.isInteger(value))) {
-      throw new TypeError(
-        `priority must be an integer (got ${typeof value})`
-      );
-    }
-
-    this._priority = value;
-  }
-
-
-  /**
-   * Properties to implement:
-   * title       (mandatory)
-   * description (optional, only needed when the title is not decriptive enough)
-   * notes       (optional, bonus info that doesn't fit the title and description fields)
-   * due date    (mandatory)
-   * best before (optional, only used when there's additional benefit to complete
-   *              a task before its deadline)
-   * priority    (or importance, whatever it will be called, mandatory, measured
-   *              relatively to the other tasks within a given project)
-   * status      (mandatory, one of the following: 'done', 'in progress', 'failed',
-   *             'pending' (default))
-   */
+    </>
+  );
 }
 
-export default Task;
+
+
+
+
+export default Tasks;
+
+
+function TasksView ({tasks, renderedTasks, isVisible}) {
+  return (
+    <section
+    style={{display: isVisible ? '' : 'none'}}
+  >
+  <Header level={'h2'} text={'Current Tasks'} />
+  {tasks
+  ? (
+    <table id='all-tasks'>
+      <TasksHeader />
+      <tbody>
+        {renderedTasks}
+      </tbody>
+    </table>
+  ) : (
+    <Header 
+      level={'h3'}
+      text={'You have no Tasks yet'}
+    />
+  )}
+  </section>
+  )
+}
+
+
+function ViewSwitch ({onSwitchView, isFormVisible}) {
+  return (
+    <button
+    className='btn btn-outline-lleuad-lawn'
+    onClick  ={onSwitchView}
+  >
+
+  {isFormVisible ? 'Show Tasks' : 'Create a new Task'}
+  </button>
+  )
+}

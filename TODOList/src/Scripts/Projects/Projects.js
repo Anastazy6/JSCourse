@@ -38,7 +38,7 @@ function Projects () {
           onUpdate={refresh}
           key={`project#${p.id}`}
         />
-      )
+      );
     });
   }
 

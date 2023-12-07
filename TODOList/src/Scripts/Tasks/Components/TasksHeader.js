@@ -13,6 +13,7 @@ function TasksHeader () {
         <td>Best before</td>
         <td>Priority</td>
         <td>Status</td>
+        <td>Actions</td>
       </tr>
     </thead>
   );

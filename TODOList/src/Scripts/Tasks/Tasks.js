@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 
-import * as Storage from './storage';
-import SingleTask from "./Components/SingleTask";
+import * as Storage from '../Storage/tasks';
 
 import Header  from "../Shared/Header";
-import NewTask from "./Components/NewTask";
-import TasksHeader from "./Components/TasksHeader";
+
+import NewTask    from "./Components/NewTask";
+import SingleTask from "./Components/SingleTask";
+import TasksView  from "./Components/TasksView";
+import ViewSwitch from "../Shared/ViewSwitch";
 
 
-function Tasks () {
-  const [tasks, setTasks] = useState(Storage.getTasks());
+function Tasks ({project}) {
+  const [tasks, setTasks] = useState(Storage.getTasks(project));
   const [isNewTaskFormVisible, setIsNewTaskFormVisible] = useState(false);
 
   let renderedTasks;
 
   
   function refresh () {
-    setTasks(Storage.getTasks());
+    setTasks(Storage.getTasks(project));
     setIsNewTaskFormVisible(false);
   }
 
@@ -46,17 +48,20 @@ function Tasks () {
       <NewTask 
         onCreateTask={refresh} 
         isVisible   ={isNewTaskFormVisible}
+        project     ={project}
       />
 
       <TasksView 
         tasks        ={tasks}
         renderedTasks={renderedTasks}
         isVisible    ={!isNewTaskFormVisible}
+        project      ={project}
       />
 
       <ViewSwitch 
         onSwitchView ={switchView}
         isFormVisible={isNewTaskFormVisible}
+        viewName     ='Task'
       />
 
     </>
@@ -64,45 +69,4 @@ function Tasks () {
 }
 
 
-
-
-
 export default Tasks;
-
-
-function TasksView ({tasks, renderedTasks, isVisible}) {
-  return (
-    <section
-    style={{display: isVisible ? '' : 'none'}}
-  >
-  <Header level={'h2'} text={'Current Tasks'} />
-  {tasks
-  ? (
-    <table id='all-tasks'>
-      <TasksHeader />
-      <tbody>
-        {renderedTasks}
-      </tbody>
-    </table>
-  ) : (
-    <Header 
-      level={'h3'}
-      text={'You have no Tasks yet'}
-    />
-  )}
-  </section>
-  )
-}
-
-
-function ViewSwitch ({onSwitchView, isFormVisible}) {
-  return (
-    <button
-    className='btn btn-outline-lleuad-lawn'
-    onClick  ={onSwitchView}
-  >
-
-  {isFormVisible ? 'Show Tasks' : 'Create a new Task'}
-  </button>
-  )
-}

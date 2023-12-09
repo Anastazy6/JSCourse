@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { saveTask } from "../storage";
+import { saveTask } from "../../Storage/tasks";
 
 import { isTaskValid } from '../validate';
 import { Description, Title } from "./formElements";

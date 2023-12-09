@@ -10,7 +10,7 @@ import {
 
 import { MIN_PROJECT_PRIORITY } from "../../Constants/constraints";
 
-import * as Storage from '../storage';
+import * as Storage from '../../Storage/projects';
 import { isProjectValid } from "../validate";
 import Header from "../../Shared/Header";
 
@@ -21,7 +21,8 @@ function NewProject({onCreateProject, isVisible}) {
     title      : '',
     description: '',
     notes      : '',
-    priority   : MIN_PROJECT_PRIORITY
+    priority   : MIN_PROJECT_PRIORITY,
+    tasks      : []
   });
 
 

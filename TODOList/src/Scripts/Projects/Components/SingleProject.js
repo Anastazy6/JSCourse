@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { getExcerpt } from "../../Shared/helpers";
 
-import * as Storage from '../storage';
+import * as Storage from '../../Storage/projects';
 
 
 import EditProject from "./Edit-Project";

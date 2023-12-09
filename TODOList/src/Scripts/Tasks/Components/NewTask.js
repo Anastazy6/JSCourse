@@ -15,9 +15,9 @@ import Header from "../../Shared/Header";
 
 import { isTaskValid } from "../validate";
 
-import * as Storage from '../storage';
+import * as Storage from '../../Storage/tasks';
 
-function NewTask ({onCreateTask, isVisible}) {
+function NewTask ({onCreateTask, isVisible, project}) {
   const [task, setTask] = useState({
     title      : '',
     priority   : MIN_TASK_PRIORITY,
@@ -49,10 +49,13 @@ function NewTask ({onCreateTask, isVisible}) {
     e.preventDefault();
 
     if (isTaskValid(task)) {
-      Storage.saveTask({
-        ...task,
-        id: Storage.getTaskId()
-      });
+      Storage.saveTask(
+        {
+          ...task,
+          id: Storage.getNextTaskId()
+        },
+        project
+      );
     }
     onCreateTask();
   }

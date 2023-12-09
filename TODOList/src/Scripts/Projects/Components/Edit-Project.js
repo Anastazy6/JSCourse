@@ -3,7 +3,7 @@ import { Title, Description, Notes, Priority } from './form_elements' ;
 
 import { useState } from 'react';
 
-import { saveProject } from "../storage";
+import { saveProject } from "../../Storage/projects";
 import { isProjectValid } from "../validate";
 
 

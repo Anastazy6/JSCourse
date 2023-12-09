@@ -16,17 +16,58 @@ export function saveProject (project) {
   }
 }
 
+
+export function addTaskToProject (projectId, taskId) {
+  const project = getProject(projectId);
+  
+  const newProject = { ...project, tasks: [...project.tasks, taskId] };
+      
+  saveProject(newProject);
+}
+
+
+export function removeTaskFromProject (projectId, taskId) {
+  const project = getProject(projectId);
+
+  const newProject = { 
+    ...project,
+    tasks: project.tasks.filter(t => t.id !== taskId)
+  }
+
+  saveProject(newProject);
+}
+
+
 export function getProjectId () {
   return parseInt(localStorage.getItem('projectId'))
 }
 
 
+export function getProject (projectId) {
+  return getProjects().find(p => p.id === projectId);
+}
+
 export function setDefaultProject (id) {
   localStorage.setItem('defaultProject', id);
 }
 
+
+export function getDefaultProjectId () {
+  let defaultProject = localStorage.getItem('defaultProject');
+
+  if (defaultProject) return parseInt(defaultProject);
+  return null;
+}
+
+
 export function getDefaultProject () {
-  return parseInt(localStorage.getItem('defaultProject'));
+  let id = getDefaultProjectId();
+
+  if (!id) return null;
+
+  return JSON.parse(
+    localStorage.getItem('projects')
+    ).filter(p => p.id === id)[0];
 }
 
 

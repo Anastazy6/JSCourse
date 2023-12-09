@@ -3,12 +3,12 @@ import { useState } from "react";
 
 import Header from "../Shared/Header";
 
-import SingleProject  from "./Components/SingleProject";
-import ProjectsHeader from "./Components/ProjectsHeader";
+import ProjectsView   from "./Components/ProjectsView";
 import NewProject     from "./Components/New-Project";
+import SingleProject  from "./Components/SingleProject";
+import ViewSwitch     from "../Shared/ViewSwitch";
 
-
-import * as Storage from "./storage";
+import * as Storage from "../Storage/projects";
 
 
 
@@ -61,6 +61,7 @@ function Projects () {
       <ViewSwitch 
         onSwitchView ={switchView}
         isFormVisible={isNewProjectFormVisible}
+        viewName     ='Project'
       />
 
     </>
@@ -69,41 +70,3 @@ function Projects () {
 
 
 export default Projects;
-
-
-function ProjectsView ({projects, renderedProjects, isVisible}) {
-  return (
-    <section
-    style={{display: isVisible ? '' : 'none'}}
-  >
-  <Header level={'h2'} text={'Current Projects'} />
-  {projects
-  ? (
-    <table id='all-projects'>
-      <ProjectsHeader />
-      <tbody>
-        {renderedProjects}
-      </tbody>
-    </table>
-  ) : (
-    <Header 
-      level={'h3'}
-      text={'You have no Projects yet'}
-    />
-  )}
-  </section>
-  )
-}
-
-
-function ViewSwitch ({onSwitchView, isFormVisible}) {
-  return (
-    <button
-    className='btn btn-outline-lleuad-lawn'
-    onClick  ={onSwitchView}
-  >
-
-  {isFormVisible ? 'Show projects' : 'Create a new Project'}
-  </button>
-  )
-}

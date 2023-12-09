@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import EditTask from "./EditTask";
 
-function SingleTask (props) {
+function SingleTask ({props}) {
   const [task, setTask] = useState({
     id         : props.id,
     title      : props.title,

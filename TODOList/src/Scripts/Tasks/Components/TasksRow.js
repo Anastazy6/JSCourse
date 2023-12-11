@@ -2,14 +2,15 @@ import React, { useState } from "react";
 
 import EditTask from "./EditTask";
 
-function SingleTask ({props}) {
+import * as Storage from '../../Storage/tasks';
+
+function TasksRow ({props, onUpdate}) {
   const [task, setTask] = useState({
     id         : props.id,
     title      : props.title,
     description: props.description,
     notes      : props.notes,
     dueDate    : props.dueDate,
-    bestBefore : props.bestBefore,
     priority   : props.priority,
     status     : props.status
   });
@@ -22,23 +23,31 @@ function SingleTask ({props}) {
     setEdit(!edit);
   }
 
+  
 
-  function handleDelete () {
-    
+
+  function handleDelete (e) {
+    e.stopPropagation();
+
+    Storage.deleteTask(task.id);
+    onUpdate();
   }
 
 
   return (
     <>
       {edit
-        ? <EditTask {...task} />
+        ? <EditTask 
+            task={task}
+            setTask={setTask}
+            onCloseForm={handleEdit}
+          />
         : <tr>
           <td>{task.id}</td>
           <td>{task.title}</td>
           <td>{task.description}</td>
           <td>{task.notes}</td>
           <td>{task.dueDate}</td>
-          <td>{task.bestBefore}</td>
           <td>{task.priority}</td>
           <td>{task.status}</td>
           <td>
@@ -62,4 +71,4 @@ function SingleTask ({props}) {
   )
 }
 
-export default SingleTask;
+export default TasksRow;

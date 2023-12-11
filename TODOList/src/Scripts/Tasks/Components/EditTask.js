@@ -3,7 +3,15 @@ import React, { useState } from "react";
 import { saveTask } from "../../Storage/tasks";
 
 import { isTaskValid } from '../validate';
-import { Description, Title } from "./formElements";
+import {
+  Title,
+  Priority,
+  Description,
+  Notes,
+  DueDate,
+  Status
+} from './formElements';
+
 
 function EditTask ({task, setTask, onCloseForm}) {
   const [updatedTask, setUpdatedTask] = useState(task);
@@ -41,7 +49,7 @@ function EditTask ({task, setTask, onCloseForm}) {
 
 
   function handleDiscard () {
-    
+    onCloseForm();
   }
 
 
@@ -64,9 +72,8 @@ function EditTask ({task, setTask, onCloseForm}) {
         <td><Description {...inputProps} /></td>
         <td><Notes       {...inputProps} /></td>
         <td><DueDate     {...inputProps} /></td>
-        <td><BestBefore  {...inputProps} /></td>
-        <td><Status      {...inputProps} /></td>
         <td><Priority    {...inputProps} /></td>
+        <td><Status      {...inputProps} /></td>
         <td>
 
             <button 

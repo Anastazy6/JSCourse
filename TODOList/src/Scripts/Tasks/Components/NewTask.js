@@ -5,7 +5,6 @@ import {
   Description,
   Notes,
   DueDate,
-  BestBefore,
   Submit
 } from './formElements';
 
@@ -23,8 +22,8 @@ function NewTask ({onCreateTask, isVisible, project}) {
     priority   : MIN_TASK_PRIORITY,
     description: '',
     notes      : '',
-    DueDate    : new Date().toJSON().slice(0,10),
-    BestBefore : new Date().toJSON().slice(0,10),
+    DueDate    : new Date().toLocaleDateString(),
+    status     : 'active'
   });
 
 
@@ -79,7 +78,6 @@ function NewTask ({onCreateTask, isVisible, project}) {
         <Description {...inputProps} />
         <Notes       {...inputProps} />
         <DueDate     {...inputProps} />
-        <BestBefore  {...inputProps} />
         <Submit />
       </form>
 

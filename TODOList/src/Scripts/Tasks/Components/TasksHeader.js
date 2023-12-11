@@ -10,7 +10,6 @@ function TasksHeader () {
         <td>Description</td>
         <td>Notes</td>
         <td>Due date</td>
-        <td>Best before</td>
         <td>Priority</td>
         <td>Status</td>
         <td>Actions</td>

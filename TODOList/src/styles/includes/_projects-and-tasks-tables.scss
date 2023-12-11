@@ -29,6 +29,7 @@ table.moonlit-table {
 
   tr {
     display: grid;
+    height: fit-content;
 
     td {
       min-width: 0;
@@ -47,5 +48,5 @@ table.moonlit-table {
 }
 
 #all-tasks tr {
-  grid-template-columns: 50px 3fr 3fr 3fr 2fr 2fr 80px 2fr 3fr;
+  grid-template-columns: 50px 3fr 3fr 3fr 2fr 80px 2fr 3fr;
 }

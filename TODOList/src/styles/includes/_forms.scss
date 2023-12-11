@@ -26,6 +26,9 @@ input, textarea {
   }
 }
 
+input, textarea, select {
+  max-width: 100%;
+}
 
 
 
@@ -68,15 +71,19 @@ input, textarea {
 
 
 select {
+  background-color: inherit;
   height: 35px;
   color : $text-color;
   border          : 0px solid transparent;
   
-  select, 
-  select:hover,
-  select:active,
-  select:focus {
+  &, 
+  &:hover,
+  &:active,
+  &:focus {
     border: 0px solid transparent;
+  }
+  option {
+    background-color: inherit;
   }
 }
 

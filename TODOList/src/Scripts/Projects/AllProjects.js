@@ -5,14 +5,14 @@ import Header from "../Shared/Header";
 
 import ProjectsView   from "./Components/ProjectsView";
 import NewProject     from "./Components/New-Project";
-import SingleProject  from "./Components/SingleProject";
+import ProjectsRow    from "./Components/ProjectsRow";
 import ViewSwitch     from "../Shared/ViewSwitch";
 
 import * as Storage from "../Storage/projects";
 
 
 
-function Projects () {
+function AllProjects () {
   const [projects, setProjects] = useState(Storage.getProjects());
   const [isNewProjectFormVisible, setIsNewProjectFormVisible] = useState(false);
   
@@ -33,7 +33,7 @@ function Projects () {
   if (projects) {
     renderedProjects = projects.map(p => {
       return (
-        <SingleProject
+        <ProjectsRow  
           props={p}
           onUpdate={refresh}
           key={`project#${p.id}`}
@@ -69,4 +69,4 @@ function Projects () {
 }
 
 
-export default Projects;
+export default AllProjects;

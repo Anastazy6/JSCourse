@@ -30,7 +30,7 @@ export function Title (props) {
     <>
       {props.label
       ? <div className='new-task-form-fieldset'>
-          <Label          {...properties} />
+          <Label          {...properties} type={'task'} />
           <ImportantInput {...properties} />
         </div>
       : <ImportantInput   {...properties} />
@@ -56,7 +56,7 @@ export function Priority (props) {
     <>
       {props.label
         ? <div className='new-task-form-fieldset'>
-            <Label          {...properties} />
+            <Label          {...properties} type={'task'} />
             <ImportantInput {...properties} />
           </div>
         : <ImportantInput   {...properties} />
@@ -113,9 +113,24 @@ export function Notes (props) {
 
 export function Status (props) {
   const properties = {
-    type    : 'select',
-    value   : props.status
+    name : 'status',
   }
+
+  return (
+    <>
+      {props.label && <Label {...properties} type={'task'} />}
+      <select
+        id='task-status-input'
+        defaultValue='active'
+      >
+        <option value='active'>ctive</option>
+        <option value='overdue'>overdue</option>
+        <option value='failed'>failed</option>
+        <option value='finished'>finished</option>
+
+      </select>
+    </>
+  )
 }
 
 
@@ -132,33 +147,10 @@ export function DueDate (props) {
     <>
       {props.label
         ? <div className='new-task-form-fieldset'>
-            <Label          {...properties} />
+            <Label          {...properties} type={'task'} />
             <ImportantInput {...properties} />
           </div>
         : <ImportantInput   {...properties} />
-      }      
-    </>
-  );
-}
-
-
-export function BestBefore (props) {
-  const properties = {
-    type    : 'date',
-    value   : props.dueDate,
-    onChange: props.onChange,
-    id      :'task-best-before-input',
-    name    : 'best before',
-  }
-
-  return (
-    <>
-      {props.label
-        ? <div className='new-task-form-fieldset'>
-            <Label {...properties} />
-            <Input {...properties} />
-          </div>
-        : <Input   {...properties} />
       }      
     </>
   );

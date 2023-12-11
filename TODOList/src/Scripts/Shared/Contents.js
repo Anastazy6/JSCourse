@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 
 
-import Header     from "./Header";
-import Projects   from "../Projects/Projects";
-import Tasks      from "../Tasks/Tasks";
+import Header        from "./Header";
+import AllProjects      from "../Projects/AllProjects";
+import SingleProject from "../Projects/SingleProject";
 
 import * as ProjectsStorage from '../Storage/projects';
 
@@ -12,8 +12,8 @@ import * as ProjectsStorage from '../Storage/projects';
 function Contents () {
   const defaultProject = ProjectsStorage.getDefaultProject();
   const defaultView    = !!defaultProject 
-    ? <Tasks project={defaultProject} />
-    : <Projects />;
+    ? <SingleProject project={defaultProject} />
+    : <AllProjects />;
 
 
   const [view, setView] = useState(defaultView);

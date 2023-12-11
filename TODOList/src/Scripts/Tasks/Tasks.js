@@ -2,10 +2,8 @@ import React, { useState } from "react";
 
 import * as Storage from '../Storage/tasks';
 
-import Header  from "../Shared/Header";
-
 import NewTask    from "./Components/NewTask";
-import SingleTask from "./Components/SingleTask";
+import TasksRow   from "./Components/TasksRow";
 import TasksView  from "./Components/TasksView";
 import ViewSwitch from "../Shared/ViewSwitch";
 
@@ -31,7 +29,7 @@ function Tasks ({project}) {
   if (tasks) {
     renderedTasks = tasks.map(t => {
       return (
-        <SingleTask
+        <TasksRow
           props   ={t}
           onUpdate={refresh}
           key     ={`task#${t.id}`}
@@ -42,9 +40,7 @@ function Tasks ({project}) {
 
 
   return (
-    <>
-      <Header level={'h1'} text={'Tasks'} />
-      
+    <>      
       <NewTask 
         onCreateTask={refresh} 
         isVisible   ={isNewTaskFormVisible}

@@ -8,7 +8,7 @@ import * as Storage from '../../Storage/projects';
 import EditProject from "./Edit-Project";
 
 
-function SingleProject ({props, onUpdate}) {
+function ProjectsRow ({props, onUpdate}) {
   const [project, setProject] = useState({
     id         : props.id,
     title      : props.title,
@@ -99,4 +99,4 @@ function SingleProject ({props, onUpdate}) {
   )
 }
 
-export default SingleProject;
+export default ProjectsRow;

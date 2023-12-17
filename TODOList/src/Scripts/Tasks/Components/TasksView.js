@@ -9,7 +9,7 @@ import TasksHeader from "./TasksHeader";
 
 
 function TasksView ({tasks, renderedTasks, isVisible}) {
-  const project = useProject().project;
+  const project = useProject();
 
   return (
     <section

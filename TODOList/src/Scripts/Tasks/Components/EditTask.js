@@ -19,7 +19,7 @@ import {
 
 
 function EditTask ({task, setTask, onCloseForm}) {
-  const project = useProject().project;
+  const project = useProject();
 
   const [updatedTask, setUpdatedTask] = useState(task);
 

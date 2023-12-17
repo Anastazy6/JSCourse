@@ -27,7 +27,7 @@ export function ProjectProvider ({ initialProject, children }) {
 
 
 export function useProject () {
-  return  useContext(ProjectContext);
+  return useContext(ProjectContext).project;
 }
 
 

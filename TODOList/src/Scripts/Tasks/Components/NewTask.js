@@ -24,7 +24,7 @@ import * as Storage from '../../Storage/tasks';
 
 
 function NewTask ({onCreateTask, isVisible}) {
-  const project = useProject().project;
+  const project = useProject();
 
   const [task, setTask] = useState({
     title      : '',

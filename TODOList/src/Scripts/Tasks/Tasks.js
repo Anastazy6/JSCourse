@@ -13,7 +13,7 @@ import ViewSwitch from "../Shared/ViewSwitch";
 
 
 function Tasks () {
-  const project  = useProject().project; // t'was a pain to get it working
+  const project  = useProject();
   const dispatch = useProjectDispatch();
   
   console.log(typeof dispatch);

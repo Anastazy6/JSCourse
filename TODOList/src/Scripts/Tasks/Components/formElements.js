@@ -93,7 +93,7 @@ export function Notes (props) {
   const properties = {
     value   : props.task.notes,
     onChange: props.onChange,
-    id      : 'task-description-notes',
+    id      : 'task-notes-input',
     name    : 'notes'
   }
 
@@ -113,7 +113,10 @@ export function Notes (props) {
 
 export function Status (props) {
   const properties = {
-    name : 'status',
+    id      : 'task-status-input',
+    name    : 'status',
+    onChange: props.onChange,
+    value   : props.status
   }
 
   return (
@@ -121,12 +124,12 @@ export function Status (props) {
       {props.label && <Label {...properties} type={'task'} />}
       <select
         id='task-status-input'
-        defaultValue='active'
+        defaultValue='Active'
       >
-        <option value='active'>ctive</option>
-        <option value='overdue'>overdue</option>
-        <option value='failed'>failed</option>
-        <option value='finished'>finished</option>
+        <option value='Active'>Active</option>
+        <option value='Overdue'>Overdue</option>
+        <option value='Failed'>Failed</option>
+        <option value='Finished'>Finished</option>
 
       </select>
     </>
@@ -139,8 +142,8 @@ export function DueDate (props) {
     type    : 'date',
     value   : props.dueDate,
     onChange: props.onChange,
-    id      :'task-due-date-input',
-    name    : 'due date',
+    id      : 'task-due-date-input',
+    name    : 'dueDate',
   }
 
   return (

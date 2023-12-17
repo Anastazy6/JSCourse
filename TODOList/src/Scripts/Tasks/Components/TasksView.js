@@ -1,10 +1,16 @@
-import React from "react";
+import React, {
+  useContext
+} from "react";
+
+import { useProject } from "../../Contexts/ProjectContext";
 
 import Header      from "../../Shared/Header";
 import TasksHeader from "./TasksHeader";
 
 
-function TasksView ({tasks, renderedTasks, isVisible, project}) {
+function TasksView ({tasks, renderedTasks, isVisible}) {
+  const project = useProject().project;
+
   return (
     <section
     style={{display: isVisible ? '' : 'none'}}

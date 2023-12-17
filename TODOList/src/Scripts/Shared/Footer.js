@@ -2,23 +2,28 @@ import React from "react";
 
 const footerItems = [
   {
-    text: 'Clear local storage',
-    onClick: (() => localStorage.clear())},
-  {
-    text: 'Delete all projects',
-    onClick: (() => localStorage.removeItem('projects'))
+    text: 'Log projects',
+    onClick: (() => console.log(JSON.parse(localStorage.getItem('projects'))))
   },
   {
-    text: "Reset projects' counter",
-    onCLick: (() => localStorage.setItem('projectId', 0))
-  }
+    text: 'Log tasks',
+    onClick: (() => console.log(JSON.parse(localStorage.getItem('tasks'))))
+  },
+  {
+    text: 'Clear local storage',
+    onClick: (() => localStorage.clear())},
+  
 ]
 
 function Footer() {
   const items = footerItems.map((item, id) => (
-    <div key={id} onClick={item.onClick}>
+    <button
+      key={id}
+      onClick={item.onClick}
+      className="btn btn-outline-lleuad"
+    >
       {item.text}
-    </div>)
+    </button>)
   );
 
   return (

@@ -17,8 +17,8 @@ const navitems = [
     text: "Projects",
     view: "Projects"
   }, {
-    text: "Contact",
-    view: "Contact"
+    text: "About",
+    view: "About"
   }
 ]
 

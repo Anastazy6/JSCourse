@@ -39,7 +39,7 @@ function NewProject({onCreateProject, isVisible}) {
     if (isProjectValid(project)) {
       Storage.saveProject({
         ...project,
-        id: Storage.getProjectId()
+        id: Storage.getNewProjectId()
       });
     }
     onCreateProject();

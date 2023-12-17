@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 
 import Tasks from "../Tasks/Tasks";
 
-function SingleProject ({project}) {
+import { ProjectProvider } from "../Contexts/ProjectContext";
+
+
+function SingleProject (initialProject) {
 
 
   return (
-    <>
-      <Tasks project={project} />
-    </>
+    <ProjectProvider initialProject={initialProject}>
+      <Tasks />
+    </ProjectProvider>
   )
 }
 
 
 
 export default SingleProject;
+
+

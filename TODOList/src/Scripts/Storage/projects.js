@@ -38,14 +38,15 @@ export function removeTaskFromProject (projectId, taskId) {
 }
 
 
-export function getProjectId () {
-  return parseInt(localStorage.getItem('projectId'))
+export function getNewProjectId () {
+  return parseInt(localStorage.getItem('newProjectId'))
 }
 
 
 export function getProject (projectId) {
   return getProjects().find(p => p.id === projectId);
 }
+
 
 export function setDefaultProject (id) {
   localStorage.setItem('defaultProject', id);
@@ -63,7 +64,7 @@ export function getDefaultProjectId () {
 export function getDefaultProject () {
   let id = getDefaultProjectId();
 
-  if (!id) return null;
+  if (!id && !(id === 0)) return null;
 
   return JSON.parse(
     localStorage.getItem('projects')
@@ -85,8 +86,8 @@ export function getProjects () {
 }
 
 
-function incrementProjectId () {
-  return localStorage.setItem('projectId', getProjectId() + 1);
+function incrementNewProjectId () {
+  return localStorage.setItem('newProjectId', getNewProjectId() + 1);
 }
 
 
@@ -102,18 +103,18 @@ function editProject (projects, newProject) {
 
 function saveNewProject (projects, newProject) {
   localStorage.setItem('projects', JSON.stringify([...projects, newProject]));
-  incrementProjectId();
+  incrementNewProjectId();
 }
 
 
 function saveFirstProject (newProject) {
   localStorage.setItem('projects', JSON.stringify([newProject]));
-  incrementProjectId();
+  incrementNewProjectId();
 }
 
 
-// Initialize current project id variable as 0, if it's not present in local storage,
+// Initialize new project id variable as 0, if it's not present in local storage,
 //   which is the persistent memory for this JS Project
-if (!getProjectId()) {
-  localStorage.setItem('projectId', 0);
+if (!getNewProjectId()) {
+  localStorage.setItem('newProjectId', 0);
 }

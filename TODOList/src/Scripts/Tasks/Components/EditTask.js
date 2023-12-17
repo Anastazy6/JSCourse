@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, {
+  useState,
+  useContext
+} from "react";
+
+import { useProject } from "../../Contexts/ProjectContext";
 
 import { saveTask } from "../../Storage/tasks";
 
@@ -14,6 +19,8 @@ import {
 
 
 function EditTask ({task, setTask, onCloseForm}) {
+  const project = useProject().project;
+
   const [updatedTask, setUpdatedTask] = useState(task);
 
   const formId = `edit-task#${task.id}-form`;
@@ -30,6 +37,9 @@ function EditTask ({task, setTask, onCloseForm}) {
     const property = e.target.name;
     const nextValue = e.target.value
 
+    console.log(property);
+    console.log(nextValue);
+
     let changedTask = {...updatedTask};
     changedTask[property] = property === 'priority'
       ? parseInt(nextValue)
@@ -41,7 +51,7 @@ function EditTask ({task, setTask, onCloseForm}) {
 
   function handleSave () {
     if (isTaskValid(updatedTask)) {
-      saveTask(updatedTask);
+      saveTask(updatedTask, project);
       setTask(updatedTask);
       onCloseForm()
     }

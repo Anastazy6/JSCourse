@@ -8,6 +8,30 @@ import {
 // Note: it might be worth to refactor Projects' storage so as to be used for
 //   both by passing a type parameter os something like that.
 
+
+export function deleteTask (id) {
+  const filteredTasks = getAllTasks().filter(p => {
+    return p.id !== id;
+  });
+
+  localStorage.setItem('tasks', JSON.stringify([...filteredTasks]));
+  forgetTask(id);
+}
+
+
+export function getTasks (project) {
+  const tasks = JSON.parse(localStorage.getItem('tasks'));
+  if (!tasks) return false;
+
+  return tasks.filter(t => project.tasks.includes(t.id));
+}
+
+
+export function getNextTaskId () {
+  return parseInt(localStorage.getItem('nextTaskId'))
+}
+
+
 export function saveTask (task, project) { 
   let newTask = {...task};
   
@@ -29,36 +53,6 @@ export function saveTask (task, project) {
 }
 
 
-export function getNextTaskId () {
-  return parseInt(localStorage.getItem('nextTaskId'))
-}
-
-
-export function deleteTask (id) {
-  const filteredTasks = getTasks().filter(p => {
-    return p.id !== id;
-  });
-
-  localStorage.setItem('tasks', JSON.stringify([...filteredTasks]));
-  forgetTask(id);
-}
-
-
-export function getTasks (project) {
-  const tasks = JSON.parse(localStorage.getItem('tasks'));
-  if (!tasks) return false;
-
-  console.log(project);
-
-  return tasks.filter(t => project.tasks.includes(t.id));
-}
-
-
-function incrementNextTaskId () {
-  return localStorage.setItem('nextTaskId', getNextTaskId() + 1);
-}
-
-
 function editTask (tasks, newTask) {
   const nextTasks = tasks.map(p => {
     if (newTask.id === p.id) return newTask;
@@ -69,9 +63,26 @@ function editTask (tasks, newTask) {
 }
 
 
-function saveNewTask (tasks, newTask) {
-  localStorage.setItem('tasks', JSON.stringify([...tasks, newTask]));
-  incrementNextTaskId();
+/**
+ * Removes the Task's id from every Project's tasks property
+ * @param {*} taskId 
+ */
+function forgetTask (taskId) {
+  getProjects().forEach(project => {
+    if (project.tasks.includes(taskId)) {
+      removeTaskFromProject(project.id, taskId);
+    }
+  });
+}
+
+
+function getAllTasks () {
+  return JSON.parse(localStorage.getItem('tasks'));
+}
+
+
+function incrementNextTaskId () {
+  return localStorage.setItem('nextTaskId', getNextTaskId() + 1);
 }
 
 
@@ -81,9 +92,11 @@ function saveFirstTask (newTask) {
 }
 
 
-function getAllTasks () {
-  return JSON.parse(localStorage.getItem('tasks'));
+function saveNewTask (tasks, newTask) {
+  localStorage.setItem('tasks', JSON.stringify([...tasks, newTask]));
+  incrementNextTaskId();
 }
+
 
 // Initialize current Task id variable as 0, if it's not present in local storage,
 //   which is the persistent memory for this JS Task
@@ -91,14 +104,3 @@ if (!getNextTaskId()) {
   localStorage.setItem('nextTaskId', 0);
 }
 
-/**
- * Removes the Task's id from every Project's tasks property
- * @param {*} taskId 
- */
-function forgetTask (taskId) {
-  getProjects().forEach(project => {
-    if (project.tasks.includes(id)) {
-      removeTaskFromProject(project.id, taskId);
-    }
-  });
-}

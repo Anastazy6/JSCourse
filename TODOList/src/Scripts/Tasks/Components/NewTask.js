@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+import React, {
+  useState,
+  useContext
+} from "react";
+
+import { useProject } from "../../Contexts/ProjectContext";
+
 import {
   Title,
   Priority,
@@ -16,14 +22,17 @@ import { isTaskValid } from "../validate";
 
 import * as Storage from '../../Storage/tasks';
 
-function NewTask ({onCreateTask, isVisible, project}) {
+
+function NewTask ({onCreateTask, isVisible}) {
+  const project = useProject().project;
+
   const [task, setTask] = useState({
     title      : '',
     priority   : MIN_TASK_PRIORITY,
     description: '',
     notes      : '',
     DueDate    : new Date().toLocaleDateString(),
-    status     : 'active'
+    status     : 'Active'
   });
 
 

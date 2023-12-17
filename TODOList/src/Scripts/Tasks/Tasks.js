@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, {
+  useState,
+} from "react";
+
+import { useProject, useProjectDispatch } from "../Contexts/ProjectContext";
 
 import * as Storage from '../Storage/tasks';
 
@@ -8,14 +12,25 @@ import TasksView  from "./Components/TasksView";
 import ViewSwitch from "../Shared/ViewSwitch";
 
 
-function Tasks ({project}) {
+function Tasks () {
+  const project  = useProject().project; // t'was a pain to get it working
+  const dispatch = useProjectDispatch();
+  
+  console.log(typeof dispatch);
+
+  
+
   const [tasks, setTasks] = useState(Storage.getTasks(project));
   const [isNewTaskFormVisible, setIsNewTaskFormVisible] = useState(false);
 
   let renderedTasks;
 
   
+  
   function refresh () {
+    dispatch({
+      type: 'changed'
+    });
     setTasks(Storage.getTasks(project));
     setIsNewTaskFormVisible(false);
   }
@@ -44,14 +59,12 @@ function Tasks ({project}) {
       <NewTask 
         onCreateTask={refresh} 
         isVisible   ={isNewTaskFormVisible}
-        project     ={project}
       />
 
       <TasksView 
         tasks        ={tasks}
         renderedTasks={renderedTasks}
         isVisible    ={!isNewTaskFormVisible}
-        project      ={project}
       />
 
       <ViewSwitch 

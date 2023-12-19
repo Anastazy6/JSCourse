@@ -40,7 +40,7 @@ export function saveTask (task, project) {
 
   if (tasks) {    
     if (isEditingAnOldTask) {
-      editTask(tasks, newTask);
+      return editTask(tasks, newTask);
     } else {
       saveNewTask(tasks, newTask);
     }

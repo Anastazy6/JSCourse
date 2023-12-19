@@ -123,8 +123,7 @@ export function Status (props) {
     <>
       {props.label && <Label {...properties} type={'task'} />}
       <select
-        id='task-status-input'
-        defaultValue='Active'
+        {...properties}
       >
         <option value='Active'>Active</option>
         <option value='Overdue'>Overdue</option>

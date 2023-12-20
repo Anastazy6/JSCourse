@@ -15,18 +15,12 @@ import ViewSwitch from "../Shared/ViewSwitch";
 function Tasks () {
   const project  = useProject();
   const dispatch = useProjectDispatch();
-  
-  
-  console.log(typeof dispatch);
-
-  
 
   const [tasks, setTasks] = useState(Storage.getTasks(project));
   const [isNewTaskFormVisible, setIsNewTaskFormVisible] = useState(false);
 
   let renderedTasks;
 
-  
   
   function refresh () {
     dispatch({

@@ -21,7 +21,12 @@ import {
 function EditTask ({task, setTask, onCloseForm}) {
   const project = useProject();
 
-  const [updatedTask, setUpdatedTask] = useState(task);
+  const [updatedTask, setUpdatedTask] = useState({
+    ...task,
+    //dueDate: task.dueDate.split('-').join('.')
+  });
+
+  console.log(task);
 
   const formId = `edit-task#${task.id}-form`;
 

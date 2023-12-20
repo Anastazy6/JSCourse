@@ -31,7 +31,7 @@ function NewTask ({onCreateTask, isVisible}) {
     priority   : MIN_TASK_PRIORITY,
     description: '',
     notes      : '',
-    DueDate    : new Date().toLocaleDateString(),
+    dueDate    : new Date().toISOString().slice(0, 10),
     status     : 'Active'
   });
 
@@ -55,6 +55,11 @@ function NewTask ({onCreateTask, isVisible}) {
 
   function handleSubmit (e) {
     e.preventDefault();
+
+    // debug
+    const date = document.getElementById('task-due-date-input');
+    console.log(date.value);
+    //return;
 
     if (isTaskValid(task)) {
       Storage.saveTask(

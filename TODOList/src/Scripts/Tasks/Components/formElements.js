@@ -139,11 +139,13 @@ export function Status (props) {
 export function DueDate (props) {
   const properties = {
     type    : 'date',
-    value   : props.dueDate,
+    value   : props.task.dueDate,
     onChange: props.onChange,
     id      : 'task-due-date-input',
     name    : 'dueDate',
   }
+
+
 
   return (
     <>

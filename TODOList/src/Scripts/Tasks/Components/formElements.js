@@ -10,7 +10,6 @@ import {
 import {
   Label,
   Textarea,
-  Input,
   ImportantInput
 } from '../../Shared/helpers';
 

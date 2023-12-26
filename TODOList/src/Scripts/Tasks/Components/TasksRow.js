@@ -12,7 +12,8 @@ function TasksRow ({props, onUpdate}) {
     notes      : props.notes,
     dueDate    : props.dueDate,
     priority   : props.priority,
-    status     : props.status
+    status     : props.status,
+    min        : props.min // read-only, limits the duedate so that the task cannot be overdue BEFORE it's creation date
   });
 
 

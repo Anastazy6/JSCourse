@@ -1,6 +1,5 @@
 import React, {
   useState,
-  useContext
 } from "react";
 
 import { useProject } from "../../Contexts/ProjectContext";
@@ -63,8 +62,6 @@ function NewTask ({onCreateTask, isVisible}) {
   function handleSubmit (e) {
     e.preventDefault();
 
-    console.log(JSON.parse(localStorage.getItem('projects')));
-
     if (isTaskValid(task)) {
       const newTaskId = Storage.getNextTaskId();
       Storage.saveTask(
@@ -76,7 +73,6 @@ function NewTask ({onCreateTask, isVisible}) {
       );
       setTask(startingState) // reset state to conveniently add new task withour reloading
       onCreateTask(newTaskId);
-      console.log(JSON.parse(localStorage.getItem('projects')));
     }
   }
 

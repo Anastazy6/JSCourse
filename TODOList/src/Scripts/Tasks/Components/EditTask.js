@@ -1,6 +1,5 @@
 import React, {
   useState,
-  useContext
 } from "react";
 
 import { useProject } from "../../Contexts/ProjectContext";
@@ -23,10 +22,8 @@ function EditTask ({task, setTask, onCloseForm}) {
 
   const [updatedTask, setUpdatedTask] = useState({
     ...task,
-    //dueDate: task.dueDate.split('-').join('.')
   });
 
-  console.log(task);
 
   const formId = `edit-task#${task.id}-form`;
 
@@ -41,9 +38,6 @@ function EditTask ({task, setTask, onCloseForm}) {
   function handleChange (e) {
     const property = e.target.name;
     const nextValue = e.target.value
-
-    console.log(property);
-    console.log(nextValue);
 
     let changedTask = {...updatedTask};
     changedTask[property] = property === 'priority'

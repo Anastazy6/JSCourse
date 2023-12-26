@@ -4,9 +4,6 @@ import React, {
   useReducer
 } from "react";
 
-import { 
-  getProject
-} from "../Storage/projects";
 
 
 const ProjectContext         = createContext(null);
@@ -27,7 +24,7 @@ export function ProjectProvider ({ initialProject, children }) {
 
 
 export function useProject () {
-  return useContext(ProjectContext).project;
+  return useContext(ProjectContext);
 }
 
 
@@ -38,8 +35,15 @@ export function useProjectDispatch () {
 
 function projectReducer (project, action) {
   switch (action.type) {
-    case 'changed': {
-      return getProject(project.id)
+    case 'added_task': {
+      console.log(project);
+      return {
+        ...project,
+        tasks: [...project.tasks, action.newTaskId]
+      }
+    }
+    case 'changed_task': {
+      return {...project}
     }
     default:
       throw Error('Invalid action type');

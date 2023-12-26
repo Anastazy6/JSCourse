@@ -12,6 +12,11 @@ export function capitalize (string) {
 }
 
 
+export function getCurrentDate () {
+  return new Date().toISOString().slice(0, 10);
+}
+
+
 export function Input (props) {
   return <input {...props} />;
 }

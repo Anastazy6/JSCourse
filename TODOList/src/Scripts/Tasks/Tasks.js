@@ -16,18 +16,31 @@ function Tasks () {
   const project  = useProject();
   const dispatch = useProjectDispatch();
 
+
+  
   const [tasks, setTasks] = useState(Storage.getTasks(project));
   const [isNewTaskFormVisible, setIsNewTaskFormVisible] = useState(false);
 
   let renderedTasks;
 
   
-  function refresh () {
+
+
+  function renderWithNewTask (newTaskId) {
     dispatch({
-      type: 'changed'
+      type     : 'added_task',
+      newTaskId: newTaskId
     });
+    setTimeout(() => {
+        setIsNewTaskFormVisible(false);
+        setTasks(Storage.getTasks(project));
+      }, 0
+    );
+  }
+
+
+  function refresh () {
     setTasks(Storage.getTasks(project));
-    setIsNewTaskFormVisible(false);
   }
 
 
@@ -52,7 +65,7 @@ function Tasks () {
   return (
     <>      
       <NewTask 
-        onCreateTask={refresh} 
+        onCreateTask={renderWithNewTask} 
         isVisible   ={isNewTaskFormVisible}
       />
 

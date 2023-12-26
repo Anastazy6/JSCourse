@@ -16,14 +16,17 @@ import Header from "../../Shared/Header";
 
 
 
+const startingState = {
+  title      : '',
+  description: '',
+  notes      : '',
+  priority   : MIN_PROJECT_PRIORITY,
+  tasks      : []
+}
+
+
 function NewProject({onCreateProject, isVisible}) {
-  const [project, setProject] = useState({
-    title      : '',
-    description: '',
-    notes      : '',
-    priority   : MIN_PROJECT_PRIORITY,
-    tasks      : []
-  });
+  const [project, setProject] = useState(startingState);
 
 
   const inputProps = {
@@ -42,6 +45,7 @@ function NewProject({onCreateProject, isVisible}) {
         id: Storage.getNewProjectId()
       });
     }
+    setProject(startingState);
     onCreateProject();
   }
 

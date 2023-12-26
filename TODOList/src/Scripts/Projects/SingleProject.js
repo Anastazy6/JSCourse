@@ -5,11 +5,10 @@ import Tasks from "../Tasks/Tasks";
 import { ProjectProvider } from "../Contexts/ProjectContext";
 
 
-function SingleProject (initialProject) {
-
+function SingleProject ({project}) {
 
   return (
-    <ProjectProvider initialProject={initialProject}>
+    <ProjectProvider initialProject={project}>
       <Tasks />
     </ProjectProvider>
   )

@@ -22,18 +22,25 @@ import { isTaskValid } from "../validate";
 
 import * as Storage from '../../Storage/tasks';
 
+import { getCurrentDate } from "../../Shared/helpers";
+
+
+
+const startingState = {
+  title      : '',
+  priority   : MIN_TASK_PRIORITY,
+  description: '',
+  notes      : '',
+  dueDate    : getCurrentDate(),
+  status     : 'Active',
+  min        : getCurrentDate()
+}
+
 
 function NewTask ({onCreateTask, isVisible}) {
   const project = useProject();
 
-  const [task, setTask] = useState({
-    title      : '',
-    priority   : MIN_TASK_PRIORITY,
-    description: '',
-    notes      : '',
-    dueDate    : new Date().toISOString().slice(0, 10),
-    status     : 'Active'
-  });
+  const [task, setTask] = useState(startingState);
 
 
   const inputProps = {
@@ -56,21 +63,21 @@ function NewTask ({onCreateTask, isVisible}) {
   function handleSubmit (e) {
     e.preventDefault();
 
-    // debug
-    const date = document.getElementById('task-due-date-input');
-    console.log(date.value);
-    //return;
+    console.log(JSON.parse(localStorage.getItem('projects')));
 
     if (isTaskValid(task)) {
+      const newTaskId = Storage.getNextTaskId();
       Storage.saveTask(
         {
           ...task,
-          id: Storage.getNextTaskId()
+          id: newTaskId
         },
         project
       );
+      setTask(startingState) // reset state to conveniently add new task withour reloading
+      onCreateTask(newTaskId);
+      console.log(JSON.parse(localStorage.getItem('projects')));
     }
-    onCreateTask();
   }
 
 

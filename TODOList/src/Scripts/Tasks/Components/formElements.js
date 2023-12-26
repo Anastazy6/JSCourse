@@ -143,6 +143,7 @@ export function DueDate (props) {
     onChange: props.onChange,
     id      : 'task-due-date-input',
     name    : 'dueDate',
+    min     : props.task.min
   }
 
 

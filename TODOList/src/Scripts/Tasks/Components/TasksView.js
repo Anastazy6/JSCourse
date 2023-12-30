@@ -6,10 +6,29 @@ import { useProject } from "../../Contexts/ProjectContext";
 
 import Header      from "../../Shared/Header";
 import TasksHeader from "./TasksHeader";
+import TasksRow    from "./TasksRow";
 
 
-function TasksView ({tasks, renderedTasks, isVisible}) {
+function TasksView ({tasks, isVisible, onUpdate}) {
   const project = useProject();
+
+  console.log(tasks);
+
+  function renderTasks (tasks) {
+    if (tasks) {
+      return tasks.map(t => {
+        return (
+          <TasksRow
+            props   ={t}
+            onUpdate={onUpdate}
+            key     ={`task#${t.id}`}
+          />
+        );
+      });
+    }
+    return null;
+  }
+
 
   return (
     <section
@@ -24,7 +43,7 @@ function TasksView ({tasks, renderedTasks, isVisible}) {
     >
       <TasksHeader />
       <tbody>
-        {renderedTasks}
+        {renderTasks(tasks)}
       </tbody>
     </table>
   ) : (

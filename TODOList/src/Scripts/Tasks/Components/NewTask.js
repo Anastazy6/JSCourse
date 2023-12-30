@@ -72,7 +72,7 @@ function NewTask ({onCreateTask, isVisible}) {
         project
       );
       setTask(startingState) // reset state to conveniently add new task withour reloading
-      onCreateTask(newTaskId);
+      onCreateTask(newTaskId)
     }
   }
 

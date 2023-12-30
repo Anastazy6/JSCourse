@@ -21,9 +21,11 @@ export function deleteTask (id) {
 
 export function getTasks (project) {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
-  if (!tasks) return false;
+  if (!tasks) return null;
 
-  return tasks.filter(t => project.tasks.includes(t.id));
+  const filteredTasks = tasks.filter(t => project.tasks.includes(t.id));
+
+  return filteredTasks.length > 0 ? filteredTasks : null;
 }
 
 

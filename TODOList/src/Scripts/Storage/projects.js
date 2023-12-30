@@ -29,13 +29,10 @@ export function addTaskToProject (projectId, taskId) {
 export function removeTaskFromProject (projectId, taskId) {
   const project = getProject(projectId);
 
-  console.log(projectId, taskId);
-  console.log(project);
   const newProject = { 
     ...project,
     tasks: project.tasks.filter(t => t !== taskId)
   }
-  console.log(newProject);
 
   saveProject(newProject);
 }

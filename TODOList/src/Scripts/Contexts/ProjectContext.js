@@ -36,11 +36,11 @@ export function useProjectDispatch () {
 function projectReducer (project, action) {
   switch (action.type) {
     case 'added_task': {
-      console.log(project);
-      return {
+      const updatedProject = {
         ...project,
         tasks: [...project.tasks, action.newTaskId]
       }
+      return updatedProject;
     }
     case 'changed_task': {
       return {...project}

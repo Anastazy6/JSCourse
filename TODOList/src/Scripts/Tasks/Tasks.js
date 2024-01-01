@@ -20,11 +20,6 @@ function Tasks () {
   const [isNewTaskFormVisible, setIsNewTaskFormVisible] = useState(false);
 
 
-  function renderWithNewTask () {
-    refresh();
-    switchView();
-  }
-
   function addTaskToProject (newTaskId) {
     dispatch({
       type     : 'added_task',
@@ -32,16 +27,10 @@ function Tasks () {
     });
   }
 
-  function refresh () {
-    // let bandAidedTasks = [...project.tasks, newTaskId];
 
-    // let bandAidedProject = newTaskId 
-    // ? {
-    //     ...project,
-    //     tasks: bandAidedTasks
-    //   } 
-    // : project; 
+  function refresh () {
     setTasks(Storage.getTasks(getProject(project.id)));
+    setIsNewTaskFormVisible(false);
   }
 
 
@@ -53,14 +42,14 @@ function Tasks () {
   return (
     <>      
       <NewTask 
-        onCreateTask ={renderWithNewTask}
+        onCreateTask ={refresh}
         updateProject={addTaskToProject}
         isVisible    ={isNewTaskFormVisible}
       />
 
       <TasksView 
         tasks        ={tasks}
-        onUpdate     ={() => setTasks(Storage.getTasks(project))}
+        onUpdate     ={refresh}
         isVisible    ={!isNewTaskFormVisible}
       />
 

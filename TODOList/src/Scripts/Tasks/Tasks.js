@@ -7,9 +7,9 @@ import { useProject, useProjectDispatch } from "../Contexts/ProjectContext";
 import * as Storage from '../Storage/tasks';
 
 import NewTask    from "./Components/NewTask";
-import TasksRow   from "./Components/TasksRow";
 import TasksView  from "./Components/TasksView";
 import ViewSwitch from "../Shared/ViewSwitch";
+import { getProject } from "../Storage/projects";
 
 
 function Tasks () {
@@ -20,26 +20,28 @@ function Tasks () {
   const [isNewTaskFormVisible, setIsNewTaskFormVisible] = useState(false);
 
 
-  function renderWithNewTask (newTaskId) {
+  function renderWithNewTask () {
+    refresh();
+    switchView();
+  }
+
+  function addTaskToProject (newTaskId) {
     dispatch({
       type     : 'added_task',
       newTaskId: newTaskId
     });
-    switchView();
-    setTimeout(() => refresh(newTaskId), 500)
   }
 
+  function refresh () {
+    // let bandAidedTasks = [...project.tasks, newTaskId];
 
-  function refresh (newTaskId = null) {
-    let bandAidedTasks = [...project.tasks, newTaskId];
-
-    let bandAidedProject = newTaskId 
-    ? {
-        ...project,
-        tasks: bandAidedTasks
-      } 
-    : project; 
-    setTasks(Storage.getTasks(bandAidedProject));
+    // let bandAidedProject = newTaskId 
+    // ? {
+    //     ...project,
+    //     tasks: bandAidedTasks
+    //   } 
+    // : project; 
+    setTasks(Storage.getTasks(getProject(project.id)));
   }
 
 
@@ -51,8 +53,9 @@ function Tasks () {
   return (
     <>      
       <NewTask 
-        onCreateTask={renderWithNewTask} 
-        isVisible   ={isNewTaskFormVisible}
+        onCreateTask ={renderWithNewTask}
+        updateProject={addTaskToProject}
+        isVisible    ={isNewTaskFormVisible}
       />
 
       <TasksView 

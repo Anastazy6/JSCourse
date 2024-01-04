@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import EditTask from "./EditTask";
 
 import * as Storage from '../../Storage/tasks';
+import { getExcerpt } from "../../Shared/helpers";
 
 function TasksRow ({props, onUpdate}) {
   const [task, setTask] = useState({
@@ -44,13 +45,13 @@ function TasksRow ({props, onUpdate}) {
             onCloseForm={handleEdit}
           />
         : <tr>
-          <td>{task.id}</td>
-          <td>{task.title}</td>
-          <td>{task.description}</td>
-          <td>{task.notes}</td>
-          <td>{task.dueDate}</td>
-          <td>{task.priority}</td>
-          <td>{task.status}</td>
+          <td>{ task.id}</td>
+          <td>{ getExcerpt(60, task.title)       }</td>
+          <td>{ getExcerpt(75, task.description) }</td>
+          <td>{ getExcerpt(75, task.notes)       }</td>
+          <td>{ task.dueDate  }</td>
+          <td>{ task.priority }</td>
+          <td>{ task.status   }</td>
           <td>
             <button
               onClick={handleEdit}

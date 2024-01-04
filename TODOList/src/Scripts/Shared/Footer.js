@@ -1,4 +1,5 @@
 import React from "react";
+import { downloadLocalStorage } from "../Storage/example";
 
 const footerItems = [
   {
@@ -11,7 +12,12 @@ const footerItems = [
   },
   {
     text: 'Clear local storage',
-    onClick: (() => localStorage.clear())},
+    onClick: (() => localStorage.clear())
+  },
+  {
+    text: 'Download local storage',
+    onClick: (() => downloadLocalStorage())
+  }
   
 ]
 

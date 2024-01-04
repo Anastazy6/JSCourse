@@ -14,7 +14,8 @@ function ProjectsRow ({props, onUpdate}) {
     title      : props.title,
     description: props.description,
     notes      : props.notes,
-    priority   : props.priority
+    priority   : props.priority,
+    tasks      : props.tasks
   });
 
 
@@ -22,7 +23,8 @@ function ProjectsRow ({props, onUpdate}) {
 
 
   function isDefault () {
-    return project.id === Storage.getDefaultProject();
+    return localStorage.getItem('defaultProject') && 
+        project.id === Storage.getDefaultProject().id;
   }
 
 

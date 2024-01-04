@@ -28,9 +28,6 @@ function EditProject ({project, setProject, onCloseForm}) {
 
     let changedProject = {...updatedProject};
 
-    console.log(`Changing ${property}`);
-    console.log(changedProject);
-    
     changedProject[property] = property === 'priority' 
       ? parseInt(e.target.value) 
       : e.target.value;

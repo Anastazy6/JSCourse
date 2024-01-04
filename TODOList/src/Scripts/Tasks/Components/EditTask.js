@@ -88,7 +88,7 @@ function EditTask ({task, setTask, onCloseForm}) {
             <button 
               onClick={handleSave}
               role='button'
-              className='btn btn-outline-success'
+              className='btn btn-outline-info'
             >
               Save
             </button>
@@ -96,7 +96,7 @@ function EditTask ({task, setTask, onCloseForm}) {
             <button 
               onClick={handleDiscard}
               role='button'
-              className='btn btn-outline-danger'
+              className='btn btn-outline-warning'
             >
               Discard
             </button>

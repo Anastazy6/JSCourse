@@ -1,4 +1,6 @@
 import React from "react";
+import { getDefaultProject } from "../Storage/projects";
+
 
 export function getExcerpt(maxLength, text) {
   if (text.length <= maxLength) return text;
@@ -38,4 +40,16 @@ export function Label (props, type='project') {
 
 export function Textarea (props) {
   return <textarea {...props} />;
+}
+
+
+export function getDefaultView () {
+  const defaultProject = getDefaultProject();
+  return !!defaultProject 
+    ? { type  : 'singleProject',
+        itemId: defaultProject.id    
+      }
+    : { type  : 'allProjects',
+        itemId: null
+      }
 }

@@ -1,5 +1,4 @@
 import React from "react";
-
 /**
  * text: refers to the innerText property of each nav item
  * view: referst to the name of the function that will render the view that
@@ -9,23 +8,32 @@ import React from "react";
  * text and view props are likely to be the same, but keeping them separate
  * makes it easier to only change the innerText of the nav items
  */
+
+
 const navitems = [
   {
-    text: "Home",
-    view: "Home"
+    text      : "Home",
+    viewType  : "default"
   }, {
-    text: "Projects",
-    view: "Projects"
+    text      : "Projects",
+    viewType  : "allProjects",
+    viewitemId: null
   }, {
-    text: "About",
-    view: "About"
+    text    : "About",
+    viewType: "about"
   }
 ]
 
 
-function Navbar() {
+function Navbar({onSwitchView}) {
   const items = navitems.map((item, id) => {
-    let navitem = <Navitem key={id} text={item.text}></Navitem>;
+    let navitem = <Navitem 
+      key={id} 
+      text={item.text}
+      viewType={item.viewType}
+      viewitemId={item.viewitemId}
+      onSwitchView={onSwitchView}
+    />;
     item.pointer = navitem;
     return navitem;
   });
@@ -37,13 +45,13 @@ function Navbar() {
   );
 }
 
-
-function Navitem({text}) {
+function Navitem({text, onSwitchView, viewType, viewitemId}) {
   return (
     <button 
       className=' btn 
                   btn-outline-ghostwhite
                   navbar-btn'
+      onClick={() => onSwitchView(viewType, viewitemId)}
     >
       {text}
     </button>

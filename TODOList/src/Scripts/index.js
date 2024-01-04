@@ -4,19 +4,21 @@ import { createRoot } from 'react-dom/client';
 import React, { StrictMode }  from "react";
 
 import Contents from "./Shared/Contents";
-import Navbar   from "./Shared/Navbar";
 import Footer   from "./Shared/Footer";
+
+import { ViewProvider } from "./Contexts/ViewContext";
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = createRoot(document.getElementById('react-root'));
 
   root.render(
     <StrictMode>
-      <div id='content'>
-        <Navbar   />
-        <Contents />
-        <Footer   />
-      </div>
+      <ViewProvider>
+        <div id='content'>
+          <Contents />
+          <Footer   />
+        </div>
+      </ViewProvider>
     </StrictMode>
   );
 });

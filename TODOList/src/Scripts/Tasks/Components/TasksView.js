@@ -1,6 +1,4 @@
-import React, {
-  useContext
-} from "react";
+import React from "react";
 
 import { useProject } from "../../Contexts/ProjectContext";
 
@@ -11,8 +9,6 @@ import TasksRow    from "./TasksRow";
 
 function TasksView ({tasks, isVisible, onUpdate}) {
   const project = useProject();
-
-  console.log(tasks);
 
   function renderTasks (tasks) {
     if (tasks) {
@@ -32,28 +28,31 @@ function TasksView ({tasks, isVisible, onUpdate}) {
 
   return (
     <section
-    style={{display: isVisible ? '' : 'none'}}
-  >
-  <Header level={'h2'} text={`${project.title} - tasks`} />
-  {tasks
-  ? (
-    <table 
-      className="moonlit-table"
-      id="all-tasks"  
+      style={{display: isVisible ? '' : 'none'}}
     >
-      <TasksHeader />
-      <tbody>
-        {renderTasks(tasks)}
-      </tbody>
-    </table>
-  ) : (
-    <Header
-      level={'h3'}
-      text={'You have no Tasks for this Project yet'}
-    />
-  )}
-  </section>
-  )
+    
+    <Header level={'h2'} text={`${project.title} - tasks`} />
+    
+    {tasks
+      ? (
+        <table 
+          className="moonlit-table"
+          id="all-tasks"  
+        >
+          <TasksHeader />
+          <tbody>
+            {renderTasks(tasks)}
+          </tbody>
+        </table>
+      ) : (
+        <Header
+          level={'h3'}
+          text={'You have no Tasks for this Project yet'}
+        />
+    )}
+
+    </section>
+  );
 }
 
 export default TasksView;

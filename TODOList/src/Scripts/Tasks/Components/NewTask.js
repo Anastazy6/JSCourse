@@ -36,7 +36,7 @@ const startingState = {
 }
 
 
-function NewTask ({onCreateTask, isVisible}) {
+function NewTask ({onCreateTask, updateProject, isVisible}) {
   const project = useProject();
 
   const [task, setTask] = useState(startingState);
@@ -71,6 +71,7 @@ function NewTask ({onCreateTask, isVisible}) {
         },
         project
       );
+      updateProject(newTaskId);
       setTask(startingState) // reset state to conveniently add new task withour reloading
       onCreateTask(newTaskId)
     }

@@ -124,10 +124,10 @@ export function Status (props) {
       <select
         {...properties}
       >
-        <option value='Active'>Active</option>
-        <option value='Overdue'>Overdue</option>
-        <option value='Failed'>Failed</option>
-        <option value='Finished'>Finished</option>
+        <option value='Active'  > Active   </option>
+        <option value='Overdue' > Overdue  </option>
+        <option value='Failed'  > Failed   </option>
+        <option value='Finished'> Finished </option>
 
       </select>
     </>

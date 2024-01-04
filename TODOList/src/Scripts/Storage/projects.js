@@ -78,6 +78,10 @@ export function deleteProject (id) {
   });
 
   localStorage.setItem('projects', JSON.stringify([...filteredProjects]));
+
+  if (parseInt(localStorage.getItem('defaultProject')) === id) {
+    localStorage.removeItem('defaultProject');
+  }
 }
 
 

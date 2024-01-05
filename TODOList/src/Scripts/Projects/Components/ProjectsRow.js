@@ -8,7 +8,7 @@ import * as Storage from '../../Storage/projects';
 import EditProject from "./Edit-Project";
 
 
-function ProjectsRow ({props, onUpdate}) {
+function ProjectsRow ({props, onUpdate, onVisitProject}) {
   const [project, setProject] = useState({
     id         : props.id,
     title      : props.title,
@@ -18,6 +18,7 @@ function ProjectsRow ({props, onUpdate}) {
     tasks      : props.tasks
   });
 
+  console.log(onVisitProject);
 
   const [edit, setEdit] = useState(false);
 
@@ -28,17 +29,20 @@ function ProjectsRow ({props, onUpdate}) {
   }
 
 
-  function handleCloseForm () {
+  function handleCloseForm (e) {
+    e.stopPropagation();
     setEdit(false);
   }
 
 
   function handleOpenForm () {
+    e.stopPropagation();
     setEdit(!edit);
   }
 
 
   function handleDelete () {
+    e.stopPropagation();
     if (confirm(
       'Are you sure? Deleting a project is an action which cannot be reverted!'
     )) {
@@ -49,6 +53,7 @@ function ProjectsRow ({props, onUpdate}) {
 
 
   function handleMarkAsDefault () {
+    e.stopPropagation();
     if (isDefault()) return;
 
     Storage.setDefaultProject(project.id);
@@ -57,7 +62,9 @@ function ProjectsRow ({props, onUpdate}) {
 
 
   return (
-    <tr>
+    <tr
+      onClick={() => onVisitProject(project.id)}
+    >
         
     {edit 
       ? ( <EditProject

@@ -9,6 +9,7 @@ import ProjectsRow    from "./Components/ProjectsRow";
 import ViewSwitch     from "../Shared/ViewSwitch";
 
 import * as Storage from "../Storage/projects";
+import { useViewDispatch } from "../Contexts/ViewContext";
 
 
 
@@ -18,6 +19,8 @@ function AllProjects () {
   
   let  renderedProjects;
 
+  const dispatchView = useViewDispatch();
+
 
   function refresh () {
     setProjects(Storage.getProjects());
@@ -25,8 +28,19 @@ function AllProjects () {
   }
 
 
-  function switchView () {
+  function toggleForm () {
     setIsNewProjectFormVisible(!isNewProjectFormVisible);
+  }
+
+
+  function handleClickProject (id) {
+    dispatchView({
+      type  : 'switched_view',
+      nextView: {
+        type  : "singleProject",
+        itemId: id
+      }
+    }); 
   }
 
 
@@ -37,6 +51,7 @@ function AllProjects () {
           props={p}
           onUpdate={refresh}
           key={`project#${p.id}`}
+          onVisitProject={handleClickProject}
         />
       );
     });
@@ -59,7 +74,7 @@ function AllProjects () {
       />
 
       <ViewSwitch 
-        onSwitchView ={switchView}
+        onSwitchView ={toggleForm}
         isFormVisible={isNewProjectFormVisible}
         viewName     ='Project'
       />

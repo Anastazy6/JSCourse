@@ -1,5 +1,5 @@
 import React from "react";
-import { downloadLocalStorage } from "../Storage/example";
+import { downloadLocalStorage, setExampleStorage } from "../Storage/example";
 
 const footerItems = [
   {
@@ -17,8 +17,11 @@ const footerItems = [
   {
     text: 'Download local storage',
     onClick: (() => downloadLocalStorage())
+  },
+  {
+    text: 'Create example TODOlist',
+    onClick: (() => setExampleStorage())
   }
-  
 ]
 
 function Footer() {

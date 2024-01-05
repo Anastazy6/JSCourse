@@ -31,7 +31,7 @@ function TasksView ({tasks, isVisible, onUpdate}) {
       style={{display: isVisible ? '' : 'none'}}
     >
     
-    <Header level={'h2'} text={`${project.title} - tasks`} />
+    <Header level='h2' text='Tasks' />
     
     {tasks
       ? (

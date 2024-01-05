@@ -34,7 +34,7 @@ function Tasks () {
   }
 
 
-  function switchView () {
+  function toggleForm () {
     setIsNewTaskFormVisible(!isNewTaskFormVisible);
   }
 
@@ -53,8 +53,8 @@ function Tasks () {
         isVisible    ={!isNewTaskFormVisible}
       />
 
-      <ViewSwitch 
-        onSwitchView ={switchView}
+      <ViewSwitch
+        onSwitchView ={toggleForm}
         isFormVisible={isNewTaskFormVisible}
         viewName     ='Task'
       />

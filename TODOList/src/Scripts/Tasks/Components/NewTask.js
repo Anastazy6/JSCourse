@@ -89,7 +89,7 @@ function NewTask ({onCreateTask, updateProject, isVisible}) {
 
       <form
         onSubmit={handleSubmit}
-        className="new-task-form"
+        className="new-task-form centered mobile-width"
       >
         <Title       {...inputProps} />
         <Priority    {...inputProps} />

@@ -32,15 +32,12 @@ input, textarea, select {
 
 
 
-.new-project-form {
+.new-todolist-item-form {
   margin: auto;
   max-width: 666px;
-
-    
-
   
 
-  .new-project-form-fieldset {
+  .new-todolist-item-fieldset {
     display: grid;
     grid-template-columns: 80px 1fr;
 

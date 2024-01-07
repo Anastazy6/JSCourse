@@ -28,7 +28,7 @@ export function Title (props) {
   return (
     <>
       {props.label
-      ? <div className='new-project-form-fieldset'>
+      ? <div className='new-todolist-item-fieldset'>
           <Label          {...properties} />
           <ImportantInput {...properties} />
         </div>
@@ -54,7 +54,7 @@ export function Priority (props) {
   return(
     <>
       {props.label
-        ? <div className='new-project-form-fieldset'>
+        ? <div className='new-todolist-item-fieldset'>
             <Label          {...properties} />
             <ImportantInput {...properties} />
           </div>
@@ -77,7 +77,7 @@ export function Description (props) {
   return (
     <>
       {props.label
-        ? <div className='new-project-form-fieldset'>
+        ? <div className='new-todolist-item-fieldset'>
             <Label    {...properties} />
             <Textarea {...properties} />
           </div>
@@ -99,7 +99,7 @@ export function Notes (props) {
   return (
     <>
       {props.label
-        ? <div className='new-project-form-fieldset'>
+        ? <div className='new-todolist-item-fieldset'>
             <Label    {...properties} />
             <Textarea {...properties} />
           </div>

@@ -89,7 +89,7 @@ function NewTask ({onCreateTask, updateProject, isVisible}) {
 
       <form
         onSubmit={handleSubmit}
-        className="new-task-form centered mobile-width"
+        className="new-todolist-item-form"
       >
         <Title       {...inputProps} />
         <Priority    {...inputProps} />

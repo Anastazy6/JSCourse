@@ -72,7 +72,7 @@ function NewProject({onCreateProject, isVisible}) {
       
       <form
         onSubmit={handleSubmit}
-        className="new-project-form"  
+        className="new-todolist-item-form"  
       >
         <Title       {...inputProps} />
         <Priority    {...inputProps} />

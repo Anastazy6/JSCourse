@@ -28,7 +28,7 @@ export function Title (props) {
   return (
     <>
       {props.label
-      ? <div className='new-task-form-fieldset'>
+      ? <div className='new-todolist-item-fieldset'>
           <Label          {...properties} type={'task'} />
           <ImportantInput {...properties} />
         </div>
@@ -54,7 +54,7 @@ export function Priority (props) {
   return(
     <>
       {props.label
-        ? <div className='new-task-form-fieldset'>
+        ? <div className='new-todolist-item-fieldset'>
             <Label          {...properties} type={'task'} />
             <ImportantInput {...properties} />
           </div>
@@ -77,7 +77,7 @@ export function Description (props) {
   return (
     <>
       {props.label
-        ? <div className='new-task-form-fieldset'>
+        ? <div className='new-todolist-item-fieldset'>
             <Label    {...properties} />
             <Textarea {...properties} />
           </div>
@@ -99,7 +99,7 @@ export function Notes (props) {
   return (
     <>
       {props.label
-        ? <div className='new-task-form-fieldset'>
+        ? <div className='new-todolist-item-fieldset'>
             <Label    {...properties} />
             <Textarea {...properties} />
           </div>
@@ -118,17 +118,29 @@ export function Status (props) {
     value   : props.status
   }
 
+  const options = [
+    'Active',
+    'Overdue',
+    'Failed',
+    'Finished'
+  ]
+
+
   return (
     <>
       {props.label && <Label {...properties} type={'task'} />}
       <select
         {...properties}
       >
-        <option value='Active'  > Active   </option>
-        <option value='Overdue' > Overdue  </option>
-        <option value='Failed'  > Failed   </option>
-        <option value='Finished'> Finished </option>
-
+        {options.map(o => {
+          return (
+            <option 
+              value={o}
+            > 
+              {o} 
+            </option>
+          )
+        })}
       </select>
     </>
   )
@@ -150,7 +162,7 @@ export function DueDate (props) {
   return (
     <>
       {props.label
-        ? <div className='new-task-form-fieldset'>
+        ? <div className='new-todolist-item-fieldset'>
             <Label          {...properties} type={'task'} />
             <ImportantInput {...properties} />
           </div>
@@ -171,3 +183,8 @@ export function Submit () {
     </button>
   );
 }
+
+document.querySelectorAll('select').forEach(s => {
+  let bg = s.style.backgroundColor;
+  s.options.forEach(o => o.style.backgroundColor = bg);
+});

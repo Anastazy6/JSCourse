@@ -45,8 +45,9 @@ function Contents () {
     dispatchView({
       type: "switched_view",
       nextView: {
-        type  : type,
-        itemId: itemId
+        type              : type,
+        itemId            : itemId,
+        newItemFormVisible: false
       }
     });
   }

@@ -9,16 +9,16 @@ import ProjectsRow    from "./Components/ProjectsRow";
 import ViewSwitch     from "../Shared/ViewSwitch";
 
 import * as Storage from "../Storage/projects";
-import { useViewDispatch } from "../Contexts/ViewContext";
+import { useView, useViewDispatch } from "../Contexts/ViewContext";
 
 
 
 function AllProjects () {
   const [projects, setProjects] = useState(Storage.getProjects());
-  const [isNewProjectFormVisible, setIsNewProjectFormVisible] = useState(false);
   
   let  renderedProjects;
 
+  const View         = useView();
   const dispatchView = useViewDispatch();
 
 
@@ -29,7 +29,9 @@ function AllProjects () {
 
 
   function toggleForm () {
-    setIsNewProjectFormVisible(!isNewProjectFormVisible);
+    dispatchView({
+      type: 'toggled_form'
+    });
   }
 
 
@@ -64,18 +66,18 @@ function AllProjects () {
       
       <NewProject 
         onCreateProject={refresh} 
-        isVisible      ={isNewProjectFormVisible}
+        isVisible      ={View.newItemFormVisible}
       />
 
       <ProjectsView 
         projects        ={projects}
         renderedProjects={renderedProjects}
-        isVisible       ={!isNewProjectFormVisible}
+        isVisible       ={!View.newItemFormVisible}
       />
 
       <ViewSwitch 
         onSwitchView ={toggleForm}
-        isFormVisible={isNewProjectFormVisible}
+        isFormVisible={View.newItemFormVisible}
         viewName     ='Project'
       />
 

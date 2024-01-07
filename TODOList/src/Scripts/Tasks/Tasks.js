@@ -10,14 +10,17 @@ import NewTask    from "./Components/NewTask";
 import TasksView  from "./Components/TasksView";
 import ViewSwitch from "../Shared/ViewSwitch";
 import { getProject } from "../Storage/projects";
+import { useView, useViewDispatch } from "../Contexts/ViewContext";
 
 
 function Tasks () {
   const project  = useProject();
   const dispatch = useProjectDispatch();
+
+  const View         = useView();
+  const dispatchView = useViewDispatch();
   
   const [tasks, setTasks] = useState(Storage.getTasks(project));
-  const [isNewTaskFormVisible, setIsNewTaskFormVisible] = useState(false);
 
 
   function addTaskToProject (newTaskId) {
@@ -30,12 +33,16 @@ function Tasks () {
 
   function refresh () {
     setTasks(Storage.getTasks(getProject(project.id)));
-    setIsNewTaskFormVisible(false);
+    dispatchView({
+      type: 'closed_form'
+    });
   }
 
 
   function toggleForm () {
-    setIsNewTaskFormVisible(!isNewTaskFormVisible);
+    dispatchView({
+      type: 'toggled_form'
+    });
   }
 
 
@@ -44,18 +51,18 @@ function Tasks () {
       <NewTask 
         onCreateTask ={refresh}
         updateProject={addTaskToProject}
-        isVisible    ={isNewTaskFormVisible}
+        isVisible    ={View.newItemFormVisible}
       />
 
       <TasksView 
         tasks        ={tasks}
         onUpdate     ={refresh}
-        isVisible    ={!isNewTaskFormVisible}
+        isVisible    ={!View.newItemFormVisible}
       />
 
       <ViewSwitch
         onSwitchView ={toggleForm}
-        isFormVisible={isNewTaskFormVisible}
+        isFormVisible={View.newItemFormVisible}
         viewName     ='Task'
       />
 

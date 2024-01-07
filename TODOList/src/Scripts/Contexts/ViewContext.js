@@ -44,6 +44,18 @@ function viewReducer (view, action) {
       return action.nextView.type === 'default'
         ? getDefaultView()
         : action.nextView
+    }
+    case 'toggled_form': {
+      return {
+        ...view, 
+        newItemFormVisible: !view.newItemFormVisible
+      }
+    }
+    case 'closed_form': {
+      return {
+        ...view,
+        newItemFormVisible: false
+      }
     } default: {
       throw Error(`Invalid action type: ${action.type}`);
     }

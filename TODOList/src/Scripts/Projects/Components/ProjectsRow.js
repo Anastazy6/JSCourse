@@ -35,13 +35,13 @@ function ProjectsRow ({props, onUpdate, onVisitProject}) {
   }
 
 
-  function handleOpenForm () {
+  function handleOpenForm (e) {
     e.stopPropagation();
     setEdit(!edit);
   }
 
 
-  function handleDelete () {
+  function handleDelete (e) {
     e.stopPropagation();
     if (confirm(
       'Are you sure? Deleting a project is an action which cannot be reverted!'
@@ -52,7 +52,7 @@ function ProjectsRow ({props, onUpdate, onVisitProject}) {
   }
 
 
-  function handleMarkAsDefault () {
+  function handleMarkAsDefault (e) {
     e.stopPropagation();
     if (isDefault()) return;
 

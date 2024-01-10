@@ -13,11 +13,6 @@ function Contents () {
   const view         = useView();
   const dispatchView = useViewDispatch();
 
-  console.log("Logging view item ---------------------------------")
-  console.log(view);
-  console.log("Logging view item ---------------------------------")
-
-
   function renderView (view) {
     switch (view.type) {
       case 'singleProject': {

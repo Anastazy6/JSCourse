@@ -35,10 +35,6 @@ export function useViewDispatch () {
 
 
 function viewReducer (view, action) {
-  console.log("Logging action ***********************")
-  console.log(action);
-  console.log("Logging action ***********************")
-
   switch (action.type) {
     case 'switched_view': {
       return action.nextView.type === 'default'

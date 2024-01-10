@@ -1,15 +1,11 @@
 import React from "react";
 
-import { useProject } from "../../Contexts/ProjectContext";
-
 import Header      from "../../Shared/Header";
 import TasksHeader from "./TasksHeader";
 import TasksRow    from "./TasksRow";
 
 
 function TasksView ({tasks, isVisible, onUpdate}) {
-  const project = useProject();
-
   function renderTasks (tasks) {
     if (tasks) {
       return tasks.map(t => {

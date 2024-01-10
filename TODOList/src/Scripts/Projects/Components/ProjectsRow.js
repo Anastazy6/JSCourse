@@ -63,7 +63,7 @@ function ProjectsRow ({props, onUpdate, onVisitProject}) {
 
   return (
     <tr
-      onClick={() => onVisitProject(project.id)}
+      onClick={() => edit ? null : onVisitProject(project.id)}
       className='clickable'
     >
         

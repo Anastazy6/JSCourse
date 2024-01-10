@@ -1,3 +1,6 @@
+$table-even: rgb(37, 64, 72);
+$table-odd:  rgb(20, 48, 56);
+
 table.moonlit-table {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -10,12 +13,14 @@ table.moonlit-table {
   }
 
   tbody {
-    tr{
-      background: map-get($map: $theme-colors, $key: 'full-moon-glass');
+    tr,
+    tr option {
+      background: $table-odd;
     }
     
-    tr:nth-child(even) {
-        background: map-get($map: $theme-colors, $key: 'full-moon-glass-thick');
+    tr:nth-child(even),
+    tr:nth-child(even) option {
+        background: $table-even; 
     }
   }
 

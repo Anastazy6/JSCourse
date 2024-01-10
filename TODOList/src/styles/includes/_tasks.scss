@@ -1,7 +1,3 @@
-.task-status-Active {
-  color: springgreen;
-}
-
 .task-status-Overdue {
   color: goldenrod;
 }
@@ -10,6 +6,10 @@
   color: red;
 }
 
-.task-status-Finished {
+.task-status-Active {
   color: cyan;
+}
+
+.task-status-Finished{
+  color: springgreen;
 }

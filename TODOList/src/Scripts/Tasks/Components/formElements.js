@@ -111,11 +111,12 @@ export function Notes (props) {
 
 
 export function Status (props) {
+  console.log(props);
   const properties = {
     id      : 'task-status-input',
     name    : 'status',
     onChange: props.onChange,
-    value   : props.status
+    value   : props.task.status
   }
 
   const options = [
@@ -134,8 +135,10 @@ export function Status (props) {
       >
         {options.map(o => {
           return (
-            <option 
+            <option
+              key={o}
               value={o}
+              className={`task-status-${o}`}
             > 
               {o} 
             </option>
@@ -184,7 +187,3 @@ export function Submit () {
   );
 }
 
-document.querySelectorAll('select').forEach(s => {
-  let bg = s.style.backgroundColor;
-  s.options.forEach(o => o.style.backgroundColor = bg);
-});

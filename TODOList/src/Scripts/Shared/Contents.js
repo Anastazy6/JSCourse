@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Navbar from "./Navbar";
 
-import AllProjects      from "../Projects/AllProjects";
+import AllProjects   from "../Projects/AllProjects";
 import SingleProject from "../Projects/SingleProject";
+import SingleTask    from "../Tasks/SingleTask";
 
 import { useView }         from "../Contexts/ViewContext";
 import { useViewDispatch } from "../Contexts/ViewContext";
@@ -22,8 +23,12 @@ function Contents () {
         return <AllProjects />
       }
       case 'singleTask': {
-        console.warn("Single task view is not yet implemented. Rendering all projects instead.")
-        return <AllProjects />
+        return (
+          <SingleTask 
+            taskId={view.itemId.task} 
+            hostProjectId={view.itemId.host}
+          />
+        );
       }
       case 'about': {
         return <h1>ABOUT: section is not yet implemented</h1>

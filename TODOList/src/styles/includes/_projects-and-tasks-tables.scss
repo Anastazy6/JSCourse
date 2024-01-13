@@ -44,16 +44,18 @@ table.moonlit-table {
       hyphens: auto;
     } 
   }
-
-  td button {
-    margin-right: 10px;
-  }
 }
 
 #all-projects tr {
-  grid-template-columns: 50px 3fr 3fr 3fr 80px 4fr;  
+  grid-template-columns: 50px 3fr 3fr 3fr 80px 3fr 2fr;  
 }
 
 #all-tasks tr {
   grid-template-columns: 50px 3fr 3fr 3fr 2fr 80px 2fr 3fr;
+}
+
+.actions-column {
+  display: flex;
+  justify-content: space-around; 
+  align-items: baseline;
 }

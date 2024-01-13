@@ -38,6 +38,18 @@ function Tasks () {
     });
   }
 
+  function handleClickTask (taskId) {
+    dispatchView({
+      type    : 'switched_view',
+      nextView: {
+        type  : 'singleTask',
+        itemId: {
+          task: taskId,
+          host: project.id
+        }
+      }
+    });
+  }
 
   function toggleForm () {
     dispatchView({
@@ -58,6 +70,7 @@ function Tasks () {
         tasks        ={tasks}
         onUpdate     ={refresh}
         isVisible    ={!View.newItemFormVisible}
+        onVisitTask  ={handleClickTask}
       />
 
       <ViewSwitch

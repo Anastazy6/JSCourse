@@ -79,31 +79,37 @@ function ProjectsRow ({props, onUpdate, onVisitProject}) {
             <td>{getExcerpt(35, project.description)}</td>
             <td>{getExcerpt(35, project.notes)}</td>
             <td>{project.priority}</td>
-            <td>
+            <td className="actions-column">
             
               <button 
-                className="btn btn-outline-success"
+                className="btn btn-outline-success item-action-btn"
                 onClick={handleOpenForm}
               >
                 Edit
               </button>
             
               <button 
-                className="btn btn-outline-danger"  
+                className="btn btn-outline-danger item-action-btn"  
                 onClick={handleDelete}
               >
                 Delete
               </button>
-            
-              <button
-                className={`btn btn-outline-${isDefault() ? 'primary' : 'lleuad-lawn'}`}
-                onClick={handleMarkAsDefault}
-              >
-                {isDefault() ? 'Default' : 'Mark as default'}
-              </button>
             </td>
           </>
       )}
+
+      <td className="actions-column">
+        <button
+          className={`
+            btn
+            btn-outline-${isDefault() ? 'primary' : 'lleuad-lawn'}
+            item-action-btn
+          `}
+          onClick={handleMarkAsDefault}
+        >
+          {isDefault() ? 'Default' : 'Mark'}
+        </button>
+      </td>
 
     </tr>
   )

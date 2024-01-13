@@ -38,9 +38,12 @@ select {
 .new-todolist-item-form {
   margin: auto;
   max-width: 666px;
-  
+  display: flex;
+  justify-content: center;
+  flex-direction: column; 
 
   .new-todolist-item-fieldset {
+    margin-bottom: 20px;
     display: grid;
     grid-template-columns: 80px 1fr;
 

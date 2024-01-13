@@ -83,20 +83,20 @@ function EditTask ({task, setTask, onCloseForm}) {
         <td><DueDate     {...inputProps} /></td>
         <td><Priority    {...inputProps} /></td>
         <td><Status      {...inputProps} /></td>
-        <td>
+        <td className="actions-column">
 
             <button 
-              onClick={handleSave}
+              onClick={(e) => handleSave(e)}
               role='button'
-              className='btn btn-outline-info'
+              className='btn btn-outline-info item-action-btn'
             >
               Save
             </button>
             
             <button 
-              onClick={handleDiscard}
+              onClick={(e) => handleDiscard(e)}
               role='button'
-              className='btn btn-outline-warning'
+              className='btn btn-outline-warning item-action-btn'
             >
               Discard
             </button>

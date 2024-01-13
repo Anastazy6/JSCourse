@@ -13,3 +13,8 @@
 .task-status-Finished{
   color: springgreen;
 }
+
+#task-additional-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

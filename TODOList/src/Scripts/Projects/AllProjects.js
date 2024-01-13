@@ -24,7 +24,9 @@ function AllProjects () {
 
   function refresh () {
     setProjects(Storage.getProjects());
-    setIsNewProjectFormVisible(false);
+    dispatchView({
+      type: 'closed_form'
+    });
   }
 
 

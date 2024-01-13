@@ -10,6 +10,7 @@ function ProjectsHeader() {
         <th>Notes</th>
         <th>Priority</th>
         <th>Actions</th>
+        <th>Mark as default</th>
       </tr>
     </thead>
   )

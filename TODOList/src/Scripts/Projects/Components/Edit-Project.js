@@ -70,12 +70,14 @@ function EditProject ({project, setProject, onCloseForm}) {
         <td><Description {...inputProps} /></td>
         <td><Notes       {...inputProps} /></td>
         <td><Priority    {...inputProps} /></td>
-        <td>
+        <td
+          className="actions-column"
+        >
           
           <button 
             onClick={handleSave}
             role='button'
-            className='btn btn-outline-success'
+            className='btn btn-outline-success item-action-btn'
           >
             Save
           </button>
@@ -83,7 +85,7 @@ function EditProject ({project, setProject, onCloseForm}) {
           <button 
             onClick={handleDiscard}
             role='button'
-            className='btn btn-outline-danger'
+            className='btn btn-outline-danger item-action-btn'
           >
             Discard
           </button>

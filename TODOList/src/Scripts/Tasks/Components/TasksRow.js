@@ -53,18 +53,18 @@ function TasksRow ({props, onUpdate}) {
           <td>{ task.priority }</td>
           <td
             className={`task-status-${task.status}`}
-          >{ task.status   }</td>
-          <td>
+          >{ task.status }</td>
+          <td className="actions-column">
             <button
-              onClick={handleEdit}
-              className="btn btn-outline-success"
+              onClick={(e) => handleEdit(e)}
+              className="btn btn-outline-success item-action-btn"
             >
               Edit
             </button>
 
             <button
-              onClick={handleDelete}
-              className="btn btn-outline-danger"
+              onClick={(e) => handleDelete(e)}
+              className="btn btn-outline-danger item-action-btn"
             >
               Delete
             </button>

@@ -111,7 +111,6 @@ export function Notes (props) {
 
 
 export function Status (props) {
-  console.log(props);
   const properties = {
     id      : 'task-status-input',
     name    : 'status',

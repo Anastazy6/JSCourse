@@ -7,9 +7,11 @@ import * as Storage from '../../Storage/projects';
 
 import EditProject from "./Edit-Project";
 
+import { useEdits, useEditsDispatch } from "../../Contexts/EditsContext";
 
-function ProjectsRow ({props, onUpdate, onVisitProject}) {
-  const [project, setProject] = useState({
+
+function ProjectsRow ({ props, onUpdate, onVisitProject }) {
+  const [project, setProject] = useState({ 
     id         : props.id,
     title      : props.title,
     description: props.description,
@@ -18,40 +20,50 @@ function ProjectsRow ({props, onUpdate, onVisitProject}) {
     tasks      : props.tasks
   });
 
-  console.log(onVisitProject);
-
+  const activeEdits         = useEdits();
+  const dispatchActiveEdits = useEditsDispatch();
+  
   const [edit, setEdit] = useState(false);
 
 
-  function isDefault () {
+  function isDefault () { 
     return localStorage.getItem('defaultProject') && 
         project.id === Storage.getDefaultProject().id;
   }
 
 
-  function handleCloseForm () {
+  function handleCloseForm () { 
+    dispatchActiveEdits({
+      type: 'closed_edit'
+    });
+
     setEdit(false);
   }
 
 
-  function handleOpenForm (e) {
+  function handleOpenForm (e) { 
     e.stopPropagation();
+
+    dispatchActiveEdits({ 
+      type: 'opened_edit'
+    });
+
     setEdit(!edit);
   }
 
 
-  function handleDelete (e) {
+  function handleDelete (e) { 
     e.stopPropagation();
     if (confirm(
       'Are you sure? Deleting a project is an action which cannot be reverted!'
-    )) {
+    )) { 
       Storage.deleteProject(project.id);
       onUpdate();
     }
   }
 
 
-  function handleMarkAsDefault (e) {
+  function handleMarkAsDefault (e) { 
     e.stopPropagation();
     if (isDefault()) return;
 
@@ -62,34 +74,34 @@ function ProjectsRow ({props, onUpdate, onVisitProject}) {
 
   return (
     <tr
-      onClick={() => edit ? null : onVisitProject(project.id)}
+      onClick  = { () => activeEdits > 0 ? null : onVisitProject(project.id) }
       className='clickable'
     >
         
-    {edit 
+    { edit 
       ? ( <EditProject
-            project    ={project} 
-            setProject ={setProject}
-            onCloseForm={handleCloseForm}
+            project    ={ project } 
+            setProject ={ setProject }
+            onCloseForm={ handleCloseForm }
           /> ) 
       : ( <>
-            <td>{project.id}</td>
-            <td>{getExcerpt(35, project.title)}</td>
-            <td>{getExcerpt(35, project.description)}</td>
-            <td>{getExcerpt(35, project.notes)}</td>
-            <td>{project.priority}</td>
+            <td>{ project.id }</td>
+            <td>{ getExcerpt(35, project.title) }</td>
+            <td>{ getExcerpt(35, project.description) }</td>
+            <td>{ getExcerpt(35, project.notes) }</td>
+            <td>{ project.priority }</td>
             <td className="actions-column">
             
               <button 
                 className="btn btn-outline-success item-action-btn"
-                onClick={handleOpenForm}
+                onClick={ handleOpenForm }
               >
                 Edit
               </button>
             
               <button 
                 className="btn btn-outline-danger item-action-btn"  
-                onClick={handleDelete}
+                onClick={ handleDelete }
               >
                 Delete
               </button>
@@ -99,19 +111,19 @@ function ProjectsRow ({props, onUpdate, onVisitProject}) {
 
       <td className="actions-column">
         <button
-          className={`
+          className={ `
             btn
-            btn-outline-${isDefault() ? 'primary' : 'lleuad-lawn'}
+            btn-outline-${ isDefault() ? 'primary' : 'lleuad-lawn' }
             item-action-btn
-          `}
-          onClick={handleMarkAsDefault}
+          ` }
+          onClick={ handleMarkAsDefault }
         >
-          {isDefault() ? 'Default' : 'Mark'}
+          { isDefault() ? 'Default' : 'Mark' }
         </button>
       </td>
 
     </tr>
-  )
+  );
 }
 
 export default ProjectsRow;

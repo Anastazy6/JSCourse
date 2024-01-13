@@ -5,6 +5,8 @@ import EditTask from "./EditTask";
 import * as Storage from '../../Storage/tasks';
 import { getExcerpt } from "../../Shared/helpers";
 
+import { useEdits, useEditsDispatch } from "../../Contexts/EditsContext";
+
 function TasksRow ({props, onUpdate, onVisit}) {
   const [task, setTask] = useState({
     id         : props.id,
@@ -18,11 +20,19 @@ function TasksRow ({props, onUpdate, onVisit}) {
   });
 
 
+  const activeEdits         = useEdits();
+  const dispatchActiveEdits = useEditsDispatch();
+
   const [edit, setEdit] = useState(false);
 
 
   function handleEdit (e) {
     e.stopPropagation();
+
+    dispatchActiveEdits({
+      type: edit ? 'closed_edit' : 'opened_edit'
+    });
+
     setEdit(!edit);
   }
 
@@ -41,12 +51,12 @@ function TasksRow ({props, onUpdate, onVisit}) {
     <>
       {edit
         ? <EditTask 
-            task={task}
-            setTask={setTask}
-            onCloseForm={handleEdit}
+            task       ={ task }
+            setTask    ={ setTask }
+            onCloseForm={ handleEdit }
           />
         : <tr
-            onClick={() => edit ? null : onVisit(task.id)}
+            onClick={ () => activeEdits > 0 ? null : onVisit(task.id) }
           >
           <td>{ task.id}</td>
           <td>{ getExcerpt(60, task.title)       }</td>
@@ -55,18 +65,18 @@ function TasksRow ({props, onUpdate, onVisit}) {
           <td>{ task.dueDate  }</td>
           <td>{ task.priority }</td>
           <td
-            className={`task-status-${task.status}`}
+            className={ `task-status-${task.status}` }
           >{ task.status }</td>
           <td className="actions-column">
             <button
-              onClick={(e) => handleEdit(e)}
+              onClick  ={ (e) => handleEdit(e) }
               className="btn btn-outline-success item-action-btn"
             >
               Edit
             </button>
 
             <button
-              onClick={(e) => handleDelete(e)}
+              onClick  ={ (e) => handleDelete(e) }
               className="btn btn-outline-danger item-action-btn"
             >
               Delete

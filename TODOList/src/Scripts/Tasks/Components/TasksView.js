@@ -4,17 +4,24 @@ import Header      from "../../Shared/Header";
 import TasksHeader from "./TasksHeader";
 import TasksRow    from "./TasksRow";
 
+import { useEditsDispatch } from "../../Contexts/EditsContext";
 
-function TasksView ({tasks, isVisible, onUpdate, onVisitTask}) {
+function TasksView ({ tasks, isVisible, onUpdate, onVisitTask }) {
+  const dispatchActiveEdits = useEditsDispatch();
+
+  dispatchActiveEdits({ 
+    type: 'page_loaded'
+  });
+
   function renderTasks (tasks) {
     if (tasks) {
       return tasks.map(t => {
         return (
           <TasksRow
-            props   ={t}
-            onUpdate={onUpdate}
-            key     ={`task#${t.id}`}
-            onVisit ={onVisitTask}
+            props   ={ t }
+            onUpdate={ onUpdate }
+            key     ={ `task#${t.id}` }
+            onVisit ={ onVisitTask }
           />
         );
       });
@@ -25,7 +32,7 @@ function TasksView ({tasks, isVisible, onUpdate, onVisitTask}) {
 
   return (
     <section
-      style={{display: isVisible ? '' : 'none'}}
+      style={{ display: isVisible ? '' : 'none' }}
     >
     
     <Header level='h2' text='Tasks' />
@@ -38,13 +45,13 @@ function TasksView ({tasks, isVisible, onUpdate, onVisitTask}) {
         >
           <TasksHeader />
           <tbody>
-            {renderTasks(tasks)}
+            { renderTasks(tasks) }
           </tbody>
         </table>
       ) : (
         <Header
-          level={'h3'}
-          text={'You have no Tasks for this Project yet'}
+          level={ 'h3' }
+          text ={ 'You have no Tasks for this Project yet' }
         />
     )}
 

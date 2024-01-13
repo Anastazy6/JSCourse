@@ -48,17 +48,19 @@ function EditTask ({task, setTask, onCloseForm}) {
   }
 
 
-  function handleSave () {
+  function handleSave (e) {
+    e.stopPropagation();
     if (isTaskValid(updatedTask)) {
       saveTask(updatedTask, project);
       setTask(updatedTask);
-      onCloseForm()
+      onCloseForm(e)
     }
   }
 
 
-  function handleDiscard () {
-    onCloseForm();
+  function handleDiscard (e) {
+    e.stopPropagation();
+    onCloseForm(e);
   }
 
 

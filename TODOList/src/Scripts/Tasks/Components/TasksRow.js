@@ -21,7 +21,8 @@ function TasksRow ({props, onUpdate}) {
   const [edit, setEdit] = useState(false);
 
 
-  function handleEdit () {
+  function handleEdit (e) {
+    e.stopPropagation();
     setEdit(!edit);
   }
 

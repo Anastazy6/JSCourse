@@ -29,8 +29,7 @@ function ProjectsRow ({props, onUpdate, onVisitProject}) {
   }
 
 
-  function handleCloseForm (e) {
-    e.stopPropagation();
+  function handleCloseForm () {
     setEdit(false);
   }
 

@@ -5,7 +5,7 @@ import TasksHeader from "./TasksHeader";
 import TasksRow    from "./TasksRow";
 
 
-function TasksView ({tasks, isVisible, onUpdate}) {
+function TasksView ({tasks, isVisible, onUpdate, onVisitTask}) {
   function renderTasks (tasks) {
     if (tasks) {
       return tasks.map(t => {
@@ -14,6 +14,7 @@ function TasksView ({tasks, isVisible, onUpdate}) {
             props   ={t}
             onUpdate={onUpdate}
             key     ={`task#${t.id}`}
+            onVisit ={onVisitTask}
           />
         );
       });

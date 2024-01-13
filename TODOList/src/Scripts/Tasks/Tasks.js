@@ -11,6 +11,7 @@ import TasksView  from "./Components/TasksView";
 import ViewSwitch from "../Shared/ViewSwitch";
 import { getProject } from "../Storage/projects";
 import { useView, useViewDispatch } from "../Contexts/ViewContext";
+import SingleTask from "./SingleTask";
 
 
 function Tasks () {

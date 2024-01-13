@@ -5,7 +5,7 @@ import EditTask from "./EditTask";
 import * as Storage from '../../Storage/tasks';
 import { getExcerpt } from "../../Shared/helpers";
 
-function TasksRow ({props, onUpdate}) {
+function TasksRow ({props, onUpdate, onVisit}) {
   const [task, setTask] = useState({
     id         : props.id,
     title      : props.title,
@@ -45,7 +45,9 @@ function TasksRow ({props, onUpdate}) {
             setTask={setTask}
             onCloseForm={handleEdit}
           />
-        : <tr>
+        : <tr
+            onClick={() => edit ? null : onVisit(task.id)}
+          >
           <td>{ task.id}</td>
           <td>{ getExcerpt(60, task.title)       }</td>
           <td>{ getExcerpt(75, task.description) }</td>

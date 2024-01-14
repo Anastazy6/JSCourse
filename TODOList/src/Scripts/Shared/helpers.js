@@ -42,14 +42,3 @@ export function Textarea (props) {
   return <textarea {...props} />;
 }
 
-
-export function getDefaultView () {
-  const defaultProject = getDefaultProject();
-  return !!defaultProject 
-    ? { type  : 'singleProject',
-        itemId: defaultProject.id    
-      }
-    : { type  : 'allProjects',
-        itemId: null
-      }
-}

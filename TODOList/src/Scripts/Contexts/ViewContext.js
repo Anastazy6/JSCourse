@@ -4,7 +4,7 @@ import React, {
   useReducer
 } from "react";
 
-import { getDefaultView } from "../Shared/helpers";
+import { getDefaultProject } from "../Storage/projects";
 
 const ViewContext         = createContext(null);
 const ViewDispatchContext = createContext(null);
@@ -58,3 +58,14 @@ function viewReducer (view, action) {
   }
 }
 
+
+function getDefaultView () {
+  const defaultProject = getDefaultProject();
+  return !!defaultProject 
+    ? { type  : 'singleProject',
+        itemId: defaultProject.id    
+      }
+    : { type  : 'about',
+        itemId: null
+      }
+}

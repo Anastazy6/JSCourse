@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import AllProjects   from "../Projects/AllProjects";
 import SingleProject from "../Projects/SingleProject";
 import SingleTask    from "../Tasks/SingleTask";
+import About         from "../About/About";
 
 import { useView }         from "../Contexts/ViewContext";
 import { useViewDispatch } from "../Contexts/ViewContext";
@@ -31,7 +32,7 @@ function Contents () {
         );
       }
       case 'about': {
-        return <h1>ABOUT: section is not yet implemented</h1>
+        return <About />
       }
       default: {
         console.warn(`View "${view.type}" is invalid. Rendering all projects instead.`);

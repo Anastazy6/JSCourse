@@ -23,4 +23,5 @@ const VALID_INPUT_TYPES = [
   "week"
 ];
 
-export default VALID_INPUT_TYPES;
+// Removal under consideration
+// export default VALID_INPUT_TYPES;

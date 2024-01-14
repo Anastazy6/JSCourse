@@ -12,4 +12,6 @@ const VALID_FORM_CONTROLS = [
   "optgroup"
 ];
 
-export default VALID_FORM_CONTROLS;
+
+// Removal under consideration
+// export default VALID_FORM_CONTROLS;

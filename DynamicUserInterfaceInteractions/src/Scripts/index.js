@@ -1,10 +1,26 @@
 import '../Styles/styles.scss';
 
+import { getChildren } from "../Scripts/util/helpers";
+
 document.addEventListener('DOMContentLoaded', () => {
-  const body = document.querySelector('body');
+  const dropdownItems = Array.from(
+    document.getElementsByClassName('dropdown')
+  );
 
-  const test = document.createElement('h3');
-  test.innerText = 'JavaScript loaded successfully!';
+  dropdownItems.forEach(dropdown => {
+    dropdown.onclick = (e) => handleDropdownClick(e);
+  });
 
-  body.append(test);
+
+  function handleDropdownClick (e) {
+    dropdownItems.forEach(dropdown => {
+      if (!(getChildren(dropdown).includes(e.target))) {
+        dropdown.classList.remove('clicked'); // "Unclick" other dropdown menus
+      } else {
+        dropdown.classList.toggle('clicked');
+      }
+    });
+  }
 });
+
+

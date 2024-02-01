@@ -8,32 +8,35 @@ export function activateCarousels () {
 
   wrappers.forEach(wrapper => {
     const frame    = wrapper .firstElementChild;
-    const carousel = frame   .firstElementChild;
+    const carousel = {
+      container: frame.firstElementChild,
+      offset   : 0
+    }
     
     addCarouselNavigation(wrapper, carousel);
-    populateCounters(carousel);
+    populateCounters(carousel.container);
 
-    styleSlides(carousel);
+    styleSlides(carousel.container);
   });
 
 
 }
 
-function countItems (carousel) {
-  return carousel.children.length;
+function countItems (container) {
+  return container.children.length;
 }
 
 
-function getMaxOffset (carousel) {
-  return parseInt(getComputedStyle(carousel).width) - FRAME_WIDTH;
+function getMaxOffset (container) {
+  return parseInt(getComputedStyle(container).width) - FRAME_WIDTH;
 }
 
 
-function populateCounters (carousel) {
-  const itemsCount = countItems(carousel);
+function populateCounters (container) {
+  const itemsCount = countItems(container);
   let index = 1;
   
-  getChildren(carousel).forEach(slide => {
+  getChildren(container).forEach(slide => {
     const counter = slide.firstElementChild;
     counter.innerText = generateCounter(index, itemsCount);
     index++;
@@ -89,33 +92,33 @@ function handleCarouselNavigationClick (carousel, type) {
 
 
 function slideLeft (carousel) {
-  const position  = parseInt(getComputedStyle(carousel).left);
-  let newPosition = position + FRAME_WIDTH;
   
-  if (newPosition > 0) {
-    newPosition = 0;
+  carousel.offset = carousel.offset + FRAME_WIDTH;
+  
+  if (carousel.offset > 0) {
+    carousel.offset = 0;
   }
 
-  carousel.style.left = newPosition + 'px';
+  carousel.container.style.left = carousel.offset + 'px';
 }
 
 
 function slideRight (carousel) {
-  const position = parseInt(getComputedStyle(carousel).left);
-  const maxOffset = getMaxOffset(carousel);
+  //const position = parseInt(getComputedStyle(container).left);
+  const maxOffset = getMaxOffset(carousel.container);
 
-  let newPosition = position - FRAME_WIDTH;
+  carousel.offset = carousel.offset - FRAME_WIDTH;
 
-  if (newPosition < (maxOffset * -1)) {
-    newPosition = (maxOffset * -1);
+  if (carousel.offset < (maxOffset * -1)) {
+    carousel.offset = (maxOffset * -1);
   }
 
-  carousel.style.left = newPosition + 'px';
+  carousel.container.style.left = carousel.offset + 'px';
 }
 
 
-function styleSlides (carousel) {
-  const slides = getChildren(carousel);
+function styleSlides (container) {
+  const slides = getChildren(container);
 
   slides.forEach(slide => {
     const img = getChildren(slide)[1];

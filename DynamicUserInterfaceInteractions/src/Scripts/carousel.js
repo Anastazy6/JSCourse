@@ -10,8 +10,10 @@ export function activateCarousels () {
     const frame    = wrapper .firstElementChild;
     const carousel = {
       container: frame.firstElementChild,
-      offset   : 0
+      offset   : 0,
     }
+
+    resetCarouselInterval(carousel);
     
     addCarouselNavigation(wrapper, carousel);
     populateCounters(carousel.container);
@@ -21,6 +23,15 @@ export function activateCarousels () {
 
 
 }
+
+
+function resetCarouselInterval (carousel) {
+  if (carousel.interval) clearInterval(carousel.interval);
+
+  carousel.interval = setInterval(() => slideRight(carousel), 5000);
+}
+
+
 
 function countItems (container) {
   return container.children.length;
@@ -67,11 +78,19 @@ function createCarouselNavItem (carousel, type) {
     `nav-${type}`
   );
 
+
+  button.onclick = () => {
+    resetCarouselInterval(carousel);
+    handleCarouselNavigationClick(carousel, type);
+  }
+
   button.innerText = type;
-  button.onclick = () => handleCarouselNavigationClick(carousel, type);
 
   return button;
 }
+
+
+
 
 
 function handleCarouselNavigationClick (carousel, type) {
@@ -104,7 +123,6 @@ function slideLeft (carousel) {
 
 
 function slideRight (carousel) {
-  //const position = parseInt(getComputedStyle(container).left);
   const maxOffset = getMaxOffset(carousel.container);
 
   carousel.offset = carousel.offset - FRAME_WIDTH;
@@ -150,4 +168,5 @@ function addImagePadding (img) {
 
   img.style.padding = `${paddingY}px ${paddingX}px`;  
 }
+
 

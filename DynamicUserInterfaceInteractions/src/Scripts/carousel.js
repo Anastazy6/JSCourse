@@ -123,8 +123,8 @@ function styleSlides (container) {
   slides.forEach(slide => {
     const img = getChildren(slide)[1];
     
-    img.style.maxHeight = FRAME_HEIGHT + 'px';
-    img.style.maxWidth  = FRAME_WIDTH  + 'px';
+  //  img.style.maxHeight = FRAME_HEIGHT + 'px';
+  //  img.style.maxWidth  = FRAME_WIDTH  + 'px';
     
     addImagePadding(img);
   })
@@ -138,6 +138,8 @@ function addImagePadding (img) {
 
   let paddingX, paddingY = 0;
   
+  console.log(imgWidth, imgHeight);
+
   if (imgWidth < FRAME_WIDTH) {
     paddingX = (FRAME_WIDTH - imgWidth) / 2;
   }

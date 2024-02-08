@@ -1,52 +1,55 @@
 $dark-green: #004230;
 
+$frame-width : 535px;
+$frame-height: 420px;
+
 h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
 nav {
-  background-color: $dark-green;
-  overflow: hidden;
-  font-size: 16px;
-  color: ghostwhite;
-  display: flex;
+  background     : $dark-green;
+  color          : ghostwhite;
+  display        : flex;
+  font-size      : 16px;
   justify-content: center;
+  overflow       : hidden;
 
   a {
-    float: left;
-    text-align: center;
-    padding: 12px 16px;
+    color          : inherit;
+    float          : left;
+    padding        : 12px 16px;
+    text-align     : center;
     text-decoration: none;
-    color: inherit;
   }
 }
 
 .dropdown-items {
-  display: none;
-  background-color: $dark-green;
-  position: absolute;
-  min-width: 152px;
-  z-index: 2;
+  background: $dark-green;
   box-shadow: 0 6px 12px 0 #333;
+  display   : none;
+  min-width : 152px;
+  position  : absolute;
+  z-index   : 2;
 
   a {
-    display: block;
-    float: none;
+    display   : block;
+    float     : none;
     text-align: left;
   }
 }
 
 .dropdown {
-  float: left;
+  float   : left;
   overflow: hidden;
 
   .dropdown-trigger {
-    border: none;
-    outline: none;
-    padding: 12px 16px;
-    background-color: inherit;
+    background : inherit;
+    border     : none;
     font-family: inherit;
-    margin: 0;
+    margin     : 0;
+    outline    : none;
+    padding    : 12px 16px;
   }
 
   &.clicked {
@@ -59,40 +62,39 @@ nav {
 nav a:hover,
 .dropdown:hover .dropdown-trigger,
 .dropdown-items a:hover {
-  background-color: forestgreen;
+  background: forestgreen;
 }
 
 
 .carousel-wrapper {
-  display: grid;
+  align-items    : center;
+  display        : grid;
+  gap            : 10px;
   justify-content: center;
-  align-items: center;
-  width: min-content;
-  margin: auto;
+  margin         : auto;
+  width          : min-content;
 
-  gap: 10px;
   grid-template-columns: 50px 1fr 50px;
-  grid-template-areas: 'prev frame next';
+  grid-template-areas  : 'prev frame next';
 
   .nav-Prev { grid-area: prev; }
   .nav-Next { grid-area: next; }
 }
 
 .carousel-nav {
+  background   : rgba($color: #000000, $alpha: 0.0);
+  border       : 3px solid darkcyan;
   border-radius: 100%;
-  height: 50px;
-  width : 50px;
-  background-color: rgba($color: #000000, $alpha: 0.0);
-  color: darkcyan;
-  border: 3px solid darkcyan;
-  cursor: pointer;
-
-  transition: ease-in-out 200ms;
+  color        : darkcyan;
+  cursor       : pointer;
+  height       : 50px;
+  transition   : ease-in-out 200ms;
+  width        : 50px;
 
   &:hover {
-    color: ghostwhite;
-    border: 3px solid cadetblue;
-    background-color: darkcyan;
+    background: darkcyan;
+    border    : 3px solid cadetblue;
+    background: darkcyan;
   }
 
   &:active {
@@ -101,53 +103,56 @@ nav a:hover,
 }
 
 .carousel-frame {
-  grid-area: frame;
+  grid-area : frame;
 
-  background-color: black;
-  margin: auto;
-  position: relative;
-  width: 535px;
-  height: 418px;
-  overflow: hidden;
-
-  border: 2px solid springgreen;
+  background: black;
+  margin    : auto;
+  position  : relative;
+  width     : $frame-width;
+  height    : $frame-height;
+  overflow  : hidden;
+  border    : 2px solid springgreen;
   box-shadow: 0 0 20px 0 black;
-
-
 }
 
 .carousel-container {
-  position: absolute;
-  display: inline-flex;
-  width  : max-content;
-  left: 0px;
+  position  : absolute;
+  display   : inline-flex;
+  width     : max-content;
+  left      : 0px;
   transition: 300ms;
 }
 
 .slide {
+  display : inline-flex;
+  height  : $frame-height;
   position: relative;
-  display: inline-flex;
+  width   : $frame-width;
 
   img {
-    max-height: 400px;
-    max-width: 200px;
+    //max-height: $frame-height;
+    max-width : $frame-width;
   }
 
   .slide-counter,
   .slide-caption {
-    position: absolute;
-    color: ghostwhite;
-    text-shadow: 0 0 1px black, 0 0 2.5px black, 0 0 5px black;
+    position   : absolute;
+    color      : ghostwhite;
+    text-shadow: 
+      0 0 1px   black,
+      0 0 2.5px black,
+      0 0 5px   black;
   }
 
   .slide-counter { 
-    top: 20px;
+    top : 20px;
     left: 20px;
   }
 
   .slide-caption {
     bottom: 20px;
-    left: 46%;
+    text-align: center;
+    width: 100%;
   }
 }
 

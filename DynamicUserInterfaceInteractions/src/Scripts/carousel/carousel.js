@@ -1,15 +1,19 @@
 import { getChildren } from "../util/helpers";
 
 import { FRAME_WIDTH, FRAME_HEIGHT } from "./constants";
-import carouselFactory from "./factory";
+import  carouselFactory from "./factory";
 
 
+const defaultFrame = {
+  width : FRAME_WIDTH,
+  height: FRAME_HEIGHT
+}
 
 export function activateCarousels () {
   const wrappers  = Array.from(document.getElementsByClassName('carousel-wrapper'));
 
   wrappers.forEach(wrapper => {
-    const carousel = carouselFactory(wrapper);
+    const carousel = carouselFactory(wrapper, defaultFrame);
 
 
     resetCarouselInterval(carousel);
@@ -25,9 +29,10 @@ function createBubbles (wrapper, carousel) {
   const bubbles = document.createElement('div');
   bubbles.classList.add('bubbles')
 
-  Array.from(carousel.container.children).forEach(_slide => {
+  Array.from(carousel.container.children).forEach((_, index) => {
     const bubble = document.createElement('div');
     bubble.classList.add('bubble');
+    bubble.onclick = () => carousel.jump(index);
     bubbles.append(bubble);
   });
 
@@ -38,14 +43,10 @@ function createBubbles (wrapper, carousel) {
 function resetCarouselInterval (carousel) {
   if (carousel.interval) clearInterval(carousel.interval);
 
-  carousel.interval = setInterval(() => slideRight(carousel), 5000);
+  carousel.interval = setInterval(() => carousel.slideRight(), 5000);
 }
 
 
-
-function getMaxOffset (container) {
-  return parseInt(getComputedStyle(container).width) - FRAME_WIDTH;
-}
 
 
 function populateCounters (carousel) {
@@ -101,11 +102,11 @@ function createCarouselNavItem (carousel, type) {
 function handleCarouselNavigationClick (carousel, type) {
   switch (type) {
     case 'Prev': {
-      slideLeft(carousel);
+      carousel.slideLeft();
       break;
     }
     case 'Next': {
-      slideRight(carousel);
+      carousel.slideRight();
       break;
     }
     default: {
@@ -115,29 +116,29 @@ function handleCarouselNavigationClick (carousel, type) {
 }
 
 
-function slideLeft (carousel) {
+// function slideLeft (carousel) {
   
-  carousel.offset = carousel.offset + FRAME_WIDTH;
+//   carousel.offset = carousel.offset + FRAME_WIDTH;
   
-  if (carousel.offset > 0) {
-    carousel.offset = 0;
-  }
+//   if (carousel.offset > 0) {
+//     carousel.offset = 0;
+//   }
 
-  carousel.container.style.left = carousel.offset + 'px';
-}
+//   carousel.container.style.left = carousel.offset + 'px';
+// }
 
 
-function slideRight (carousel) {
-  const maxOffset = getMaxOffset(carousel.container);
+// function slideRight (carousel) {
+//   const maxOffset = getMaxOffset(carousel.container);
 
-  carousel.offset = carousel.offset - FRAME_WIDTH;
+//   carousel.offset = carousel.offset - FRAME_WIDTH;
 
-  if (carousel.offset < (maxOffset * -1)) {
-    carousel.offset = (maxOffset * -1);
-  }
+//   if (carousel.offset < (maxOffset * -1)) {
+//     carousel.offset = (maxOffset * -1);
+//   }
 
-  carousel.container.style.left = carousel.offset + 'px';
-}
+//   carousel.container.style.left = carousel.offset + 'px';
+// }
 
 
 function styleSlides (carousel) {

@@ -1,28 +1,38 @@
-import { getChildren } from "./util/helpers";
+import { getChildren } from "../util/helpers";
 
-const FRAME_WIDTH  = 535; // px
-const FRAME_HEIGHT = 420; // px
+import { FRAME_WIDTH, FRAME_HEIGHT } from "./constants";
+import carouselFactory from "./factory";
+
+
 
 export function activateCarousels () {
   const wrappers  = Array.from(document.getElementsByClassName('carousel-wrapper'));
 
   wrappers.forEach(wrapper => {
-    const frame    = wrapper .firstElementChild;
-    const carousel = {
-      container: frame.firstElementChild,
-      offset   : 0,
-    }
+    const carousel = carouselFactory(wrapper);
+
 
     resetCarouselInterval(carousel);
-    
     addCarouselNavigation(wrapper, carousel);
-    populateCounters(carousel.container);
+    populateCounters     (carousel);
+    createBubbles        (wrapper, carousel);
+    styleSlides          (carousel);
+  });
+}
 
-    styleSlides(carousel.container);
+
+function createBubbles (wrapper, carousel) {
+  const bubbles = document.createElement('div');
+  bubbles.classList.add('bubbles')
+
+  Array.from(carousel.container.children).forEach(_slide => {
+    const bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+    bubbles.append(bubble);
   });
 
-
-}
+  wrapper.append(bubbles);
+} 
 
 
 function resetCarouselInterval (carousel) {
@@ -33,21 +43,16 @@ function resetCarouselInterval (carousel) {
 
 
 
-function countItems (container) {
-  return container.children.length;
-}
-
-
 function getMaxOffset (container) {
   return parseInt(getComputedStyle(container).width) - FRAME_WIDTH;
 }
 
 
-function populateCounters (container) {
-  const itemsCount = countItems(container);
+function populateCounters (carousel) {
+  const itemsCount = carousel.count();
   let index = 1;
   
-  getChildren(container).forEach(slide => {
+  getChildren(carousel.container).forEach(slide => {
     const counter = slide.firstElementChild;
     counter.innerText = generateCounter(index, itemsCount);
     index++;
@@ -135,17 +140,13 @@ function slideRight (carousel) {
 }
 
 
-function styleSlides (container) {
-  const slides = getChildren(container);
+function styleSlides (carousel) {
+  const slides = getChildren(carousel.container);
 
   slides.forEach(slide => {
     const img = getChildren(slide)[1];
-    
-  //  img.style.maxHeight = FRAME_HEIGHT + 'px';
-  //  img.style.maxWidth  = FRAME_WIDTH  + 'px';
-    
     addImagePadding(img);
-  })
+  });
 }
 
 

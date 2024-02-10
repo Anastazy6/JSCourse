@@ -75,7 +75,10 @@ nav a:hover,
   width          : min-content;
 
   grid-template-columns: 50px 1fr 50px;
-  grid-template-areas  : 'prev frame next';
+  grid-template-rows   : 1fr 20px;
+  grid-template-areas  : 
+    'prev  frame next'
+    'bubbl bubbl bubbl';
 
   .nav-Prev { grid-area: prev; }
   .nav-Next { grid-area: next; }
@@ -159,3 +162,31 @@ nav a:hover,
 
 
 
+.bubbles {
+  display: flex;
+  grid-area: bubbl;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.bubble {
+  width: 12px;
+  height: 12px;
+
+  border: 1px solid black;
+  border-radius: 100%;
+  background-color: gray;
+  margin: 0 5px;
+
+  &.bubble-active {
+    background-color: ghostwhite;
+  }
+
+  &:hover {
+    width: 14px;
+    height: 14px;
+    margin: 0 4px;
+    cursor: pointer;
+  }
+}

@@ -1,8 +1,12 @@
-const carouselFactory = function (wrapper, frameSize) {
+import { getChildren } from "../util/helpers";
+
+const CarouselFactory = function (wrapper, frameSize) {
   const frame     = wrapper.firstElementChild;
   const container = frame  .firstElementChild;
+  const slides    = getChildren(container);
 
   let current = 0;
+  let bubbles = null;
 
   function count () {
     return container.children.length;
@@ -17,6 +21,20 @@ const carouselFactory = function (wrapper, frameSize) {
 
     current = slide;
     _applySlide()
+  }
+
+
+  function plugInBubbles (bubblesContainer) {
+    bubbles = getChildren(bubblesContainer);
+    _connectBubbles();
+    _styleBubbles();
+  }
+
+
+  function _connectBubbles () {
+    bubbles.forEach((bubble, index) => {
+      bubble.onclick = () => jump(index);
+    });
   }
 
 
@@ -37,20 +55,46 @@ const carouselFactory = function (wrapper, frameSize) {
   }
 
 
+  function _styleBubbles () {
+    bubbles.forEach((bubble, index) => {
+      bubble.classList.remove('bubble-active');
+
+      if (index === current) bubble.classList.add('bubble-active');
+    });
+  }
+
   function _applySlide () {
     let offset = current * frameSize.width * -1;
 
     container.style.left = offset + 'px';
+
+    if (bubbles) _styleBubbles();
+  }
+
+
+
+  function populateCounters () {
+    slides.forEach((slide, index) => {
+      const counter = slide.firstElementChild;
+      counter.innerText = _generateCounter(index);
+    });
+  }
+
+
+  function _generateCounter (index) {
+    return `${index + 1} / ${count()}`;
   }
 
   return {
-    container : container,
-    count     : count,
-    current   : () => current,
-    jump      : jump,
-    slideLeft : slideLeft,
-    slideRight: slideRight,
+    container       : container,
+    count           : count,
+    current         : () => current,
+    jump            : jump,
+    plugInBubbles   : plugInBubbles,
+    populateCounters: populateCounters,
+    slideLeft       : slideLeft,
+    slideRight      : slideRight,
   }
 }
 
-export default carouselFactory;
+export default CarouselFactory;

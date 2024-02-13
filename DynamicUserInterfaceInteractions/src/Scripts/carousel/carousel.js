@@ -1,7 +1,8 @@
 import { getChildren } from "../util/helpers";
+import BubblesFactory from "./bubbles";
 
 import { FRAME_WIDTH, FRAME_HEIGHT } from "./constants";
-import  carouselFactory from "./factory";
+import CarouselFactory from "./factory";
 
 
 const defaultFrame = {
@@ -13,55 +14,25 @@ export function activateCarousels () {
   const wrappers  = Array.from(document.getElementsByClassName('carousel-wrapper'));
 
   wrappers.forEach(wrapper => {
-    const carousel = carouselFactory(wrapper, defaultFrame);
+    const carousel = CarouselFactory(wrapper, defaultFrame);
+    const bubbles  = BubblesFactory(carousel);
 
+    wrapper.append(bubbles);
+    carousel.plugInBubbles(bubbles);
 
+    carousel.populateCounters();
     resetCarouselInterval(carousel);
     addCarouselNavigation(wrapper, carousel);
-    populateCounters     (carousel);
-    createBubbles        (wrapper, carousel);
     styleSlides          (carousel);
   });
 }
 
-
-function createBubbles (wrapper, carousel) {
-  const bubbles = document.createElement('div');
-  bubbles.classList.add('bubbles')
-
-  Array.from(carousel.container.children).forEach((_, index) => {
-    const bubble = document.createElement('div');
-    bubble.classList.add('bubble');
-    bubble.onclick = () => carousel.jump(index);
-    bubbles.append(bubble);
-  });
-
-  wrapper.append(bubbles);
-} 
 
 
 function resetCarouselInterval (carousel) {
   if (carousel.interval) clearInterval(carousel.interval);
 
   carousel.interval = setInterval(() => carousel.slideRight(), 5000);
-}
-
-
-
-
-function populateCounters (carousel) {
-  const itemsCount = carousel.count();
-  let index = 1;
-  
-  getChildren(carousel.container).forEach(slide => {
-    const counter = slide.firstElementChild;
-    counter.innerText = generateCounter(index, itemsCount);
-    index++;
-  });
-}
-
-function generateCounter (itemIndex, itemsCount) {
-  return `${itemIndex} / ${itemsCount}`;
 }
 
 
